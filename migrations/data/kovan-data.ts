@@ -1,0 +1,1 @@
+// Declare data used for Kovan migrations

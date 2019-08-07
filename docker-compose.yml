@@ -1,0 +1,29 @@
+version: '3.5'
+
+services:
+  contracts-env:
+    depends_on:
+      - ganache
+    build:
+      context: ./
+    volumes:
+      - ./:/src
+    restart: always
+    command: npm run sys:start-dev-container
+    environment:
+      TARGET: "development"
+      MNEMONIC_TRUFFLE_KOVAN: ""
+      PK_TRUFFLE_KOVAN: ""
+      MNEMONIC_TRUFFLE_MAIN: ""
+      PK_TRUFFLE_MAIN: ""
+      HDWALLET_ADDRESS_KOVAN: ""
+      HDWALLET_ADDRESS_MAIN: ""
+      URL_ETHEREUM_HTTP_PROVIDER: ""
+      URL_ETHEREUM_WS_PROVIDER: ""
+      GANACHE_URL: "http://ganache:8545"
+  
+  ganache:
+    image: trufflesuite/ganache-cli
+    ports:
+      - "8545:8545"
+    command: ["ganache-cli", "--gasLimit", "8000000"] #,"--blockTime", "1"] 

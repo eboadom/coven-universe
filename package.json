@@ -1,0 +1,71 @@
+{
+  "name": "coven-universe",
+  "version": "0.0.1",
+  "description": "An universe of Covens",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "dev:cleanDeploy": "npm run common:clean-contracts && npm run dev:compile && npm run dev:migrate",
+    "dev:test": "truffle test --migrations_directory=./dist/migrations/scripts/development --test_directory=./test/scripts/development --network development",
+    "dev:compile": "npm run common:clean-contracts && truffle compile --network development && npm run common:gen-contracts-types",
+    "dev:migrate": "npm run dev:ts-compile-migrations && truffle migrate --migrations_directory=./dist/migrations/scripts/development --reset --network development",
+    "dev:ts-compile-migrations": "npm run common:clean-compiled-ts && tsc --p ./tsconfig.migrations.dev.json",
+    "dev:ts-compile-tests": "common:clean-compiled-ts && tsc --p ./tsconfig.tests.dev.json",
+    "kovan:cleanDeploy": "npm run common:clean-contracts && npm run kovan:compile && npm run kovan:migrate",
+    "kovan:test": "truffle test --migrations_directory=./dist/migrations/scripts/kovan --network kovan",
+    "kovan:compile": "npm run common:clean-contracts && truffle compile --network kovan && npm run common:gen-contracts-types",
+    "kovan:migrate": "npm run kovan:ts-compile-migrations && truffle migrate --migrations_directory=./dist/migrations/scripts/kovan --reset --network kovan",
+    "kovan:ts-compile-migrations": "npm run common:clean-compiled-ts && tsc --p ./tsconfig.migrations.kovan.json",
+    "main:cleanDeploy": "npm run common:clean-contracts && npm run main:compile && npm run main:migrate",
+    "main:test": "truffle test --migrations_directory=./dist/migrations/scripts/main --network main",
+    "main:compile": "npm run common:clean-contracts && truffle compile --network main && npm run common:gen-contracts-types",
+    "main:migrate": "npm run main:ts-compile-migrations && truffle migrate --migrations_directory=./dist/migrations/scripts/main --reset --network main",
+    "main:ts-compile-migrations": "rm -rf dist && tsc --p ./tsconfig.migrations.main.json",
+    "common:clean-compiled-ts": "rm -rf dist",
+    "common:clean-contracts": "rm -rf build",
+    "common:gen-contracts-types": "typechain --target truffle './build/**/*.json'",
+    "sys:start-dev-container": "npm i && tail -f /dev/null",
+    "prettier": "prettier --write ./contracts/*.sol"
+  },
+  "author": "eboado <ernesto.boado.moreira@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@types/chai": "4.1.7",
+    "@types/mocha": "5.2.7",
+    "@types/node": "12.6.8",
+    "@types/web3": "1.0.19",
+    "bignumber.js": "9.0.0",
+    "husky": "3.0.1",
+    "lint-staged": "9.2.0",
+    "openzeppelin-solidity": "2.3.0",
+    "prettier": "1.18.2",
+    "prettier-plugin-solidity": "1.0.0-alpha.27",
+    "truffle-hdwallet-provider": "1.0.6",
+    "web3": "1.2.0",
+    "web3-core-helpers": "1.2.0",
+    "xhr2": "0.2.0",
+    "truffle-assertions": "0.9.1",
+    "truffle-typings": "1.0.8",
+    "truffle-artifactor": "4.0.24",
+    "ts-node": "8.3.0",
+    "typechain": "0.3.19",
+    "typescript": "3.5.3",
+    "@daostack/arc": "0.0.1-rc.23",
+    "@daostack/infra": "0.0.1-rc.14",
+    "@openzeppelin/contracts": "2.3.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "export CI=true && lint-staged",
+      "pre-push": "export CI=true && lint-staged"
+    }
+  },
+  "lint-staged": {
+    "contracts/**/*.{sol}": [
+      "prettier --write",
+      "git add"
+    ]
+  }
+}
