@@ -1,6 +1,8 @@
 FROM node:11
 
-RUN npm install -g truffle typescript prettier
+RUN npm config set unsafe-perm true
+
+RUN npm install -g truffle typescript ts-node prettier @graphprotocol/graph-cli
 
 WORKDIR /src
 

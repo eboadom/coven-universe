@@ -1,6 +1,7 @@
 import BigNumber from "bignumber.js"
 import {EthereumNetwork} from "./types"
 import {promises} from "fs"
+import {exec as callbackExec, spawn as spawnNode} from "child_process"
 
 export const oneEther = new BigNumber(Math.pow(10, 18))
 export const oneRay = new BigNumber(Math.pow(10, 27))
@@ -57,3 +58,36 @@ const selectUrlEthereumProviderByNetwork = (
 
 export const writeObjectToFile = async (path: string, obj: object) =>
   await promises.writeFile(path, JSON.stringify(obj))
+
+export const writeTextToFile = async (path: string, text: string) => 
+  await promises.writeFile(path, text)
+
+export const spawn = (command: string[]) => {
+  return new Promise((resolve, reject) => {
+    const child = spawnNode(command[0], command.slice(1), {shell: true})
+
+    child.stdout.on("data", data => {
+      console.log("stdout: " + data.toString())
+    })
+
+    child.stderr.on("data", data => {
+      console.log("stderr: " + data.toString())
+    })
+
+    child.on("exit", (code: number) => {
+      if (code !== 0) {
+        console.log(`child process exited correctly with code ${code}`)
+      }
+
+      resolve()
+    })
+  })
+}
+
+export const exec = (command: string) =>
+  new Promise((resolve, reject) => {
+    callbackExec(command, (error, stdout, stderr) => {
+      if (error) return reject(error)
+      resolve({out: stdout, err: stderr})
+    })
+  })

@@ -1,0 +1,16 @@
+{
+  "name": "cheeze-dao",
+  "license": "UNLICENSED",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ graph",
+    "create-local": "graph create --node http://localhost:8020/ graph",
+    "remove-local": "graph remove --node http://localhost:8020/ graph",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 graph"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "0.14.0",
+    "@graphprotocol/graph-ts": "0.13.0"
+  }
+}
