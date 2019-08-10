@@ -9,12 +9,19 @@
 </template>
 
 <style>
+body {
+  margin: 0;
+      overflow: hidden;
+      background: transparent url("./assets/background.svg") no-repeat fixed center;
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+      width: 100vw;
+    height: 100vh;
+    margin: 0;
+  
 }
 </style>
