@@ -1,14 +1,25 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/">Landing</router-link> |
+      <router-link to="/about">About</router-link> |
+      <router-link to="/home">Home</router-link>
     </div>
     <router-view/>
   </div>
 </template>
 
 <style>
+ @font-face { 
+       font-family: "exocet";
+       src: url("./assets/exocet.ttf"); 
+   }
+
+ @font-face { 
+       font-family: "codesaver";
+       src: url("./assets/codesaver.otf"); 
+ }
+
 body {
   margin: 0;
       overflow: hidden;
