@@ -1,25 +1,34 @@
 <template>
-    <vuetable ref="vuetable"
-    api-url="https://vuetable.ratiw.net/api/users"
-    :fields="['name', 'nickname', 'email', 'gender']"
-    data-path=""
-    pagination-path=""
-  ></vuetable>
-    <!-- :api-mode="false"
-    :data="localData" -->
+  <div id="main-container">
+    <div class="topnav">
+      <img src alt />
+      <div class="button-container">
+        <button>Sanctuary</button>
+        <button>My Wizards</button>
+      </div>
+    </div>
+
+    <div class="leaderboard">
+      <h1>Home of the Grates</h1>
+      <div class="table">
+        <div class="heading"></div>
+      </div>
+    </div>
+
+    <div class="create-coven">
+      <h2>Create Coven</h2>
+      <div>
+        <img src alt />
+        <p>Summon your Coven! Gather your wizard homies and rule together the cheesiest coven of the hood.</p>
+        <button>Summon</button>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
-import Vuetable from 'vuetable-2'
-
-export default {
-    name: 'landing',
-  components: {
-      Vuetable
-  }
-}
+export default {};
 </script>
 <style scoped>
-
 </style>
 
 
