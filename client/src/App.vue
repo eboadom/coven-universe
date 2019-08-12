@@ -38,7 +38,7 @@ export default {
   })
 };
 </script>
-<style>
+<style lang="scss">
 @font-face {
   font-family: "exocet";
   src: url("./assets/exocet.ttf");
@@ -59,6 +59,35 @@ body {
   /* width: 100vw;
   height: 100vh;
   margin: 0; */
+}
+
+.button {
+  background: rgba(0, 0, 0, 0);
+  border: 1px solid #000;
+  padding: 8px 16px;
+  color: #000;
+  margin-top: 0;
+  box-shadow: 3px 4px 0px 0px rgba(0, 0, 0, 1);
+  width: 12rem;
+  height: 3rem;
+
+  a {
+    text-decoration: none;
+  }
+
+  &:hover,
+  &:focus {
+    background: #fff032;
+  }
+}
+
+h1 {
+  font-family: exocet;
+  text-align: center;
+}
+
+p {
+  font-family: codesaver;
 }
 </style>
 

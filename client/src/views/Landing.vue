@@ -22,76 +22,55 @@ export default {
   components: {}
 };
 </script>
-<style>
-.button {
-  background: rgba(0, 0, 0, 0);
-  border: 1px solid #000;
-  padding: 8px 16px;
-  color: #000;
-  margin-top: 0;
-  box-shadow: 3px 4px 0px 0px rgba(0, 0, 0, 1);
-  width: 12rem;
-  height: 3rem;
-}
+<style lang="scss" scoped>
+.landing {
+  .container {
+    /* background: transparent url("../assets/paper-banner.svg") no-repeat fixed center; */
+    width: 43%;
+    left: 20%;
+    top: 20%;
+    padding: 0 8rem;
+    position: absolute;
+    text-align: center;
 
-.button > a {
-  text-decoration: none;
-}
+    h1 {
+      font-size: 5rem;
+      width: 66%;
+      margin: auto;
+    }
 
-.button:hover,
-.button:focus {
-  background: #fff032;
-  /* color: #fff; */
-}
+    p {
+      margin: 4rem 0;
+    }
+  }
 
-.container {
-  /* background: transparent url("../assets/paper-banner.svg") no-repeat fixed center; */
-  width: 43%;
-  left: 20%;
-  top: 20%;
-  padding: 0 8rem;
-  position: absolute;
-  text-align: center;
-}
+  .paper-banner {
+    width: 60%;
+    left: 20%;
+    top: 28%;
+    position: absolute;
+  }
 
-.paper-banner {
-  width: 60%;
-  left: 20%;
-  top: 28%;
-  position: absolute;
-}
+  .left-cloud {
+    position: absolute;
+    left: -10rem;
+    width: 40rem;
+    top: 2rem;
+  }
 
-.left-cloud {
-  position: absolute;
-  left: -10rem;
-  width: 40rem;
-  top: 2rem;
-}
+  .right-cloud {
+    top: -10rem;
+    right: -44rem;
+    position: absolute;
+    width: 80rem;
+  }
 
-.right-cloud {
-  top: -10rem;
-  right: -44rem;
-  position: absolute;
-  width: 80rem;
-}
-
-.bottom-cheese,
-.bottom-cloud {
-  position: absolute;
-  bottom: 0;
-  width: 100vw;
-  left: 0;
-}
-
-h1 {
-  font-family: exocet;
-  font-size: 5rem;
-  width: 66%;
-  margin: auto;
-}
-
-p {
-  font-family: codesaver;
-  margin: 4rem 0;
+  .bottom-cheese,
+  .bottom-cloud {
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+    left: 0;
+  }
 }
 </style>
