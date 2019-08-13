@@ -239,6 +239,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 #main-container {
+  margin: 2rem 0 0 1rem;
   .topnav {
     display: flex;
     justify-content: space-between;
@@ -253,7 +254,7 @@ export default {
   .content-container {
     display: flex;
     flex-direction: row;
-    margin-top: 5rem;
+    margin-top: 2rem;
 
     .leaderboard {
       width: 100%;

@@ -7,7 +7,8 @@
 
     <!-- <img class="paper-banner" alt="Paper Banner" src="../assets/paper-banner.svg"> -->
     <div class="container">
-      <h1>Cheeze DAO</h1>
+      <!-- <h1>Cheeze DAO</h1> -->
+      <img src="../assets/cheezedao.svg" alt />
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       <button class="button">
         <router-link to="/home">Enter the Cheeze</router-link>
@@ -26,13 +27,16 @@ export default {
 .landing {
   .container {
     /* background: transparent url("../assets/paper-banner.svg") no-repeat fixed center; */
-    width: 43%;
-    left: 20%;
+    width: 50%;
+    left: 25%;
     top: 20%;
     padding: 0 8rem;
     position: absolute;
     text-align: center;
 
+    img {
+      width: 24rem;
+    }
     h1 {
       font-size: 5rem;
       width: 66%;
