@@ -12,7 +12,7 @@ import {
 import { Avatar } from '../../types/Controller/Avatar';
 import { DAOToken } from '../../types/Controller/DAOToken';
 import { Reputation } from '../../types/Controller/Reputation';
-import { GenesisProtocol } from '../../types/GenesisProtocol/GenesisProtocol';
+// import { GenesisProtocol } from '../../types/GenesisProtocol/GenesisProtocol';
 
 import * as domain from '../../domain';
 
@@ -29,7 +29,7 @@ import {
   ControllerUnregisterScheme,
   ControllerUpgradeController,
   GenericSchemeParam,
-  GenesisProtocolParam,
+  // GenesisProtocolParam,
   ReputationContract,
   SchemeRegistrarParam,
   TokenContract,
@@ -264,35 +264,35 @@ export function handleRemoveGlobalConstraint(
   store.set('ControllerRemoveGlobalConstraint', ent.id, ent);
 }
 
-export function setGPParams(gpAddress: Address,
-                            gpParamsHash: Bytes): void {
-    let gp = GenesisProtocol.bind(gpAddress);
-    let gpParams = GenesisProtocolParam.load(gpParamsHash.toHex());
-    if (gpParams == null && !equalsBytes(gpParamsHash, new Bytes(32))) {
-        gpParams = new  GenesisProtocolParam(gpParamsHash.toHex());
-        let params = gp.parameters(gpParamsHash);
-        gpParams.queuedVoteRequiredPercentage = params.value0; // queuedVoteRequiredPercentage
-        gpParams.queuedVotePeriodLimit = params.value1; // queuedVotePeriodLimit
-        gpParams.boostedVotePeriodLimit = params.value2; // boostedVotePeriodLimit
-        gpParams.preBoostedVotePeriodLimit = params.value3; // preBoostedVotePeriodLimit
-        gpParams.thresholdConst = params.value4; // thresholdConst
-        gpParams.limitExponentValue = params.value5; // limitExponentValue
-        gpParams.quietEndingPeriod = params.value6; // quietEndingPeriod
-        gpParams.proposingRepReward = params.value7;
-        gpParams.votersReputationLossRatio = params.value8; // votersReputationLossRatio
-        gpParams.minimumDaoBounty = params.value9; // minimumDaoBounty
-        gpParams.daoBountyConst = params.value10; // daoBountyConst
-        gpParams.activationTime = params.value11; // activationTime
-        gpParams.voteOnBehalf = params.value12 as Bytes; // voteOnBehalf
-        gpParams.save();
-  }
-}
+// export function setGPParams(gpAddress: Address,
+//                             gpParamsHash: Bytes): void {
+//     let gp = GenesisProtocol.bind(gpAddress);
+//     let gpParams = GenesisProtocolParam.load(gpParamsHash.toHex());
+//     if (gpParams == null && !equalsBytes(gpParamsHash, new Bytes(32))) {
+//         gpParams = new  GenesisProtocolParam(gpParamsHash.toHex());
+//         let params = gp.parameters(gpParamsHash);
+//         gpParams.queuedVoteRequiredPercentage = params.value0; // queuedVoteRequiredPercentage
+//         gpParams.queuedVotePeriodLimit = params.value1; // queuedVotePeriodLimit
+//         gpParams.boostedVotePeriodLimit = params.value2; // boostedVotePeriodLimit
+//         gpParams.preBoostedVotePeriodLimit = params.value3; // preBoostedVotePeriodLimit
+//         gpParams.thresholdConst = params.value4; // thresholdConst
+//         gpParams.limitExponentValue = params.value5; // limitExponentValue
+//         gpParams.quietEndingPeriod = params.value6; // quietEndingPeriod
+//         gpParams.proposingRepReward = params.value7;
+//         gpParams.votersReputationLossRatio = params.value8; // votersReputationLossRatio
+//         gpParams.minimumDaoBounty = params.value9; // minimumDaoBounty
+//         gpParams.daoBountyConst = params.value10; // daoBountyConst
+//         gpParams.activationTime = params.value11; // activationTime
+//         gpParams.voteOnBehalf = params.value12 as Bytes; // voteOnBehalf
+//         gpParams.save();
+//   }
+// }
 
 export function setContributionRewardParams(avatar: Address,
                                             scheme: Address,
                                             vmAddress: Address,
                                             vmParamsHash: Bytes): void {
-    setGPParams(vmAddress, vmParamsHash);
+    // setGPParams(vmAddress, vmParamsHash);
     let controllerScheme =  ControllerScheme.load(crypto.keccak256(concat(avatar, scheme)).toHex());
     let contributionRewardParams = new ContributionRewardParam(controllerScheme.paramsHash.toHex());
     contributionRewardParams.votingMachine = vmAddress;
@@ -307,8 +307,8 @@ export function setSchemeRegistrarParams(avatar: Address,
                                          vmAddress: Address,
                                          voteRegisterParams: Bytes,
                                          voteRemoveParams: Bytes): void {
-   setGPParams(vmAddress, voteRegisterParams);
-   setGPParams(vmAddress, voteRemoveParams);
+  //  setGPParams(vmAddress, voteRegisterParams);
+  //  setGPParams(vmAddress, voteRemoveParams);
    let controllerScheme =  ControllerScheme.load(crypto.keccak256(concat(avatar, scheme)).toHex());
    debug(controllerScheme.paramsHash.toHex());
    let schemeRegistrarParams = new SchemeRegistrarParam(controllerScheme.paramsHash.toHex());
@@ -326,7 +326,7 @@ export function setGenericSchemeParams(avatar: Address,
                                        vmAddress: Address,
                                        vmParamsHash: Bytes,
                                        contractToCall: Bytes): void {
-   setGPParams(vmAddress, vmParamsHash);
+  //  setGPParams(vmAddress, vmParamsHash);
    let controllerScheme =  ControllerScheme.load(crypto.keccak256(concat(avatar, scheme)).toHex());
    let genericSchemeParams = new GenericSchemeParam(controllerScheme.paramsHash.toHex());
    genericSchemeParams.votingMachine = vmAddress;
