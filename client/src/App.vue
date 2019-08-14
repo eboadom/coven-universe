@@ -20,11 +20,11 @@
   <!-- </v-content> -->
   <!-- </v-app> -->
   <div id="app">
-    <div id="nav">
+    <!-- <div id="nav">
       <router-link to="/">Landing</router-link>|
       <router-link to="/about">About</router-link>|
       <router-link to="/home">Home</router-link>
-    </div>
+    </div>-->
     <router-view />
   </div>
 </template>
