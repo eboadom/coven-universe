@@ -19,14 +19,14 @@
   <!-- <Home /> -->
   <!-- </v-content> -->
   <!-- </v-app> -->
-  <div id="app">
+  <v-app id="app">
     <!-- <div id="nav">
       <router-link to="/">Landing</router-link>|
       <router-link to="/about">About</router-link>|
       <router-link to="/home">Home</router-link>
     </div>-->
     <router-view />
-  </div>
+  </v-app>
 </template>
 
 <script>
@@ -39,6 +39,13 @@ export default {
 };
 </script>
 <style lang="scss">
+:root {
+  --purple: #b79afc;
+  --red: #ff809b;
+  --green: #8bea63;
+  --blue: #35d1e7;
+}
+
 @font-face {
   font-family: "exocet";
   src: url("./assets/exocet.ttf");
@@ -89,5 +96,6 @@ h1 {
 p {
   font-family: codesaver;
 }
+
 </style>
 

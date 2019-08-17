@@ -3,8 +3,12 @@
     <div class="topnav">
       <img src="../assets/cheezedao.svg" alt />
       <div class="button-container">
-        <button class="button">Sanctuary</button>
-        <button class="button">My Wizards</button>
+        <button class="button">
+          <router-link to="/home">Sanctuary</router-link>
+        </button>
+        <button class="button">
+          <router-link to="/mywizards">My Wizards</router-link>
+        </button>
       </div>
     </div>
 
@@ -23,12 +27,25 @@
               hide-details
             ></v-text-field>
           </v-card-title>
-          <v-data-table :headers="headers" :items="grates" :search="search">
+          <v-data-table
+            :headers="headers"
+            :items="grates"
+            :search="search"
+            :single-expand="true"
+            :expanded.sync="expanded"
+            item-key="name"
+            show-expand
+          >
             <template v-slot:item.god="{ item }">
               <!-- <v-icon small class="mr-2" @click="editItem(item)">edit</v-icon>
               <v-icon small @click="deleteItem(item)">delete</v-icon>-->
               <!-- <img v-bind:src="'/img/' + item.god + '.svg'" alt /> -->
               <img :src="require(`@/assets/${item.god}.svg`)" />
+            </template>
+            <template v-slot:expanded-item="{ headers }">
+              <td
+                :colspan="headers.length"
+              >This is the content area where the unique ‘tagline’ will be placed for each coven. Each coven can set a few lines of text for a unique distribution of their coven</td>
             </template>
           </v-data-table>
         </v-card>
@@ -37,9 +54,11 @@
       <div class="create-coven">
         <h1>Create Coven</h1>
         <div class="summon-container">
-          <img src="../assets/hat.png" alt />
+          <img src="../assets/utter.svg" alt />
           <p>Summon your Coven! Gather your wizard homies and rule together the cheesiest coven of the hood.</p>
-          <button class="button">Summon</button>
+          <button class="button">
+            <router-link to="/createcowven">Summon</router-link>
+          </button>
         </div>
       </div>
     </div>
@@ -51,6 +70,7 @@ export default {
   data() {
     return {
       search: "",
+      expanded: [],
       headers: [
         {
           text: "Rank",
