@@ -16,7 +16,7 @@
       <div class="create-coven">
         <h1>My Wizards</h1>
 
-        <v-data-table :headers="headers" :items="wizards" :search="search">
+        <v-data-table :headers="headers" :items="wizards" :search="search" :items-per-page="5">
           <template v-slot:item.wizard="{ item }">
             <img :src="require(`@/assets/${item.wizard}.png`)" />
           </template>
@@ -46,6 +46,78 @@ export default {
         { text: "Reputation", value: "reputation" }
       ],
       wizards: [
+        {
+          wizard: "fire-wizard",
+          id: "#0000",
+          type: "Fire",
+          score: "7865",
+          cowven: "Awesome Coven Name",
+          status: "In Cowven",
+          reputation: "6794"
+        },
+        {
+          wizard: "wind-wizard",
+          id: "#0001",
+          type: "Wind",
+          score: "1534",
+          cowven: "Awesome Coven Name",
+          status: "In Cowven",
+          reputation: "6866"
+        },
+        {
+          wizard: "water-wizard",
+          id: "#0002",
+          type: "Water",
+          score: "3576",
+          cowven: "Awesome Coven Name",
+          status: "Free Roaming",
+          reputation: "1678"
+        },
+        {
+          wizard: "neutral-wizard",
+          id: "#0003",
+          type: "Neutral",
+          score: "4679",
+          cowven: "Awesome Coven Name",
+          status: "Free Roaming",
+          reputation: "1534"
+        },
+        {
+          wizard: "fire-wizard",
+          id: "#0000",
+          type: "Fire",
+          score: "7865",
+          cowven: "Awesome Coven Name",
+          status: "In Cowven",
+          reputation: "6794"
+        },
+        {
+          wizard: "wind-wizard",
+          id: "#0001",
+          type: "Wind",
+          score: "1534",
+          cowven: "Awesome Coven Name",
+          status: "In Cowven",
+          reputation: "6866"
+        },
+        {
+          wizard: "water-wizard",
+          id: "#0002",
+          type: "Water",
+          score: "3576",
+          cowven: "Awesome Coven Name",
+          status: "Free Roaming",
+          reputation: "1678"
+        },
+        {
+          wizard: "neutral-wizard",
+          id: "#0003",
+          type: "Neutral",
+          score: "4679",
+          cowven: "Awesome Coven Name",
+          status: "Free Roaming",
+          reputation: "1534"
+        },
         {
           wizard: "fire-wizard",
           id: "#0000",

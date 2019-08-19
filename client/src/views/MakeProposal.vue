@@ -26,7 +26,7 @@
       </div>
 
       <button>
-        <router-link to="/cowvenhome">Active Proposals</router-link>
+        <router-link to="/cowvenhome">Active Spell Proposals</router-link>
       </button>
     </div>
 
@@ -42,30 +42,64 @@
       </div>
 
       <div class="make-proposal">
-        <h1>Make a Proposal</h1>
+        <h1>Cast a new spell</h1>
         <div class="proposal-container">
           <v-form ref="form" v-model="valid" lazy-validation>
-            <v-select
-              v-model="select"
-              :items="proposal"
-              :rules="[v => !!v || 'Item is required']"
-              label="What do you propose?"
-              required
-            ></v-select>
+            <div class="info-wrapper">
+              <v-select
+                v-model="select"
+                :items="proposal"
+                :rules="[v => !!v || 'Spell is required']"
+                label="Choose your Spell"
+                required
+              ></v-select>
+
+              <v-dialog v-model="dialogInfo" width="500">
+                <template v-slot:activator="{ on }">
+                  <img id="info-icon" src="../assets/info.svg" alt v-on="on" />
+                </template>
+
+                <v-card class="dialog" id="info-dialog">
+                  <h4>Cut the cheese?</h4>
+                  <p>Time to cut the cheeze with a Wizard ? Say no more, add its ID and we’ll take care of the rest</p>
+                  <h4>Change activity penalty length</h4>
+                  <p>Propose to increase or decrease the length of days a Wizards needs to be active.</p>
+                  <h4>Convert your Cowven</h4>
+                  <p>Cast a Spell which will change the Grate you all follow</p>
+                </v-card>
+              </v-dialog>
+            </div>
 
             <v-text-field
-              v-model="name"
-              :counter="10"
-              :rules="nameRules"
+              v-if="select =='Cut the cheese'"
+              v-model="wizardId"
+              :rules="[v => !!v || 'Wizard ID is required']"
               label="Enter Wizard ID"
               required
             ></v-text-field>
 
-            <v-textarea label="Reason" auto-grow outlined rows="9" row-height="15"></v-textarea>
+            <v-text-field
+              v-if="select =='Change activity penalty length'"
+              v-model="numDays"
+              :rules="[v => !!v || 'Number of Days is required']"
+              label="How many days?"
+              required
+            ></v-text-field>
+
+            <v-select
+              v-if="select =='Convert your Cowven'"
+              v-model="grateOne"
+              :items="grateOnes"
+              :rules="[v => !!v || 'Grate One is required']"
+              label="To which Grate One?"
+              required
+            ></v-select>
+
+            <v-textarea :counter="250" label="Reason" auto-grow outlined rows="9" row-height="15"></v-textarea>
           </v-form>
-          <v-dialog v-model="dialog" width="500">
+          <v-dialog v-model="dialogSpell" width="500">
             <template v-slot:activator="{ on }">
-              <button class="button" v-on="on">Make Proposal</button>
+              <button class="button" v-on="on">Cast spell</button>
             </template>
 
             <v-card class="dialog">
@@ -73,10 +107,8 @@
               <h1>Thank You</h1>
               <v-card-text>You just submitted your proposal, let’s see what the rest of the Cowven thinks of your proposal.</v-card-text>
 
-              <!-- <v-card-actions> -->
               <v-spacer></v-spacer>
               <button class="button" color="primary" text @click="dialog = false">Got it</button>
-              <!-- </v-card-actions> -->
             </v-card>
           </v-dialog>
         </div>
@@ -164,7 +196,8 @@ export default {
           id: "#0000"
         }
       ],
-      dialog: false,
+      dialogInfo: false,
+      dialogSpell: false,
       valid: true,
       name: "",
       nameRules: [
@@ -178,10 +211,17 @@ export default {
       ],
       select: null,
       proposal: [
-        "Kick a Wizard from the Cowven",
+        "Cut the cheese",
         "Change activity penalty length",
-        "Switch to a different Grate One"
-      ]
+        "Convert your Cowven"
+      ],
+      grateOnes: [
+        "The Grate Balance",
+        "The Grate Wave",
+        "The Grate Storm",
+        "The Grate Flames"
+      ],
+      grateOne: null
     };
   },
   methods: {
@@ -273,6 +313,15 @@ export default {
         img {
           width: 10rem;
         }
+
+        .info-wrapper {
+          display: flex;
+          flex-direction: row;
+
+          #info-icon {
+            width: 1.5rem;
+          }
+        }
       }
     }
   }
@@ -304,6 +353,18 @@ export default {
   button {
     margin: auto;
     margin-bottom: 2rem;
+  }
+}
+
+#info-dialog {
+  display: flex;
+  padding: 2rem;
+  justify-content: space-between;
+  text-align: left;
+
+  h4 {
+    text-decoration: underline;
+    font-family: codesaver;
   }
 }
 </style>

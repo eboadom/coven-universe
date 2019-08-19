@@ -41,17 +41,15 @@
         </v-card>
       </div>
 
-      <div class="active-proposals">
-        <h1>Active Proposals</h1>
-        <div class="proposal-container">
+      <div class="spell-proposals">
+        <h1>Spell Proposals</h1>
+        <div v-for="proposal in proposals" class="proposal-container">
           <div class="topline">
-            <p>Action: Kick</p>
-            <p>Wizard #0000</p>
+            <p>Spell: {{proposal.spell}}</p>
+            <p v-if="proposal.wizardId !== null">Wizard #{{proposal.wizardId}}</p>
           </div>
           <hr />
-          <p
-            class="description"
-          >This Wizard is cheap cheddar for for fast-food chains. Time to unload this dude!</p>
+          <p class="description">{{proposal.description}}</p>
           <button class="button vote">Nay</button>
 
           <v-dialog v-model="dialog" width="500">
@@ -82,6 +80,26 @@ export default {
     return {
       dialog: false,
       search: "",
+      proposals: [
+        {
+          spell: "Cut the cheese",
+          wizardId: "1380",
+          description:
+            "This Wizard is cheap cheddar for for fast-food chains. Time to unload this dude!"
+        },
+        {
+          spell: "Convert Cowven",
+          wizardId: null,
+          description:
+            "Let’s switch to the god of flames. This seems to be the best tactical move for next season. "
+        },
+        {
+          spell: "Length of Penalty",
+          wizardId: null,
+          description:
+            "There seem to be a lot of inactive Wizards. I propose to change the activity penalty to 7 days."
+        }
+      ],
       headers: [
         {
           text: "",
@@ -214,7 +232,7 @@ export default {
       }
     }
 
-    .active-proposals {
+    .spell-proposals {
       padding: 0 8rem;
       overflow: scroll;
       max-height: 49rem;
