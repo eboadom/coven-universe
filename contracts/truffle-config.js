@@ -16,27 +16,31 @@ module.exports = {
       provider: () =>
         new HDWalletProvider(
           process.env.MNEMONIC_TRUFFLE_KOVAN || process.env.PK_TRUFFLE_KOVAN,
-          process.env.URL_ETHEREUM_HTTP_PROVIDER,
+          process.env.URL_ETHEREUM_HTTP_PROVIDER_KOVAN,
         ),
       from: process.env.HDWALLET_ADDRESS_KOVAN,
       network_id: "42",
       gas: 7000000,
       gasPrice: 10000000000, // 10 GWei (in wei)
-      skipDryRun: true, // Skip dry run before migrations? (default: false for public nets )
+      // skipDryRun: true, // Skip dry run before migrations? (default: false for public nets )
       // confirmations: 2,    // # of confs to wait between deployments. (default: 0)
       // timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
     },
 
-    kovan: {
+    rinkeby: {
       provider: () =>
         new HDWalletProvider(
-          process.env.MNEMONIC_TRUFFLE_MAIN || process.env.PK_TRUFFLE_MAIN,
-          process.env.URL_ETHEREUM_HTTP_PROVIDER,
+          process.env.MNEMONIC_TRUFFLE_RINKEBY ||
+            process.env.PK_TRUFFLE_RINKEBY,
+          process.env.URL_ETHEREUM_HTTP_PROVIDER_RINKEBY,
         ),
-      from: process.env.HDWALLET_ADDRESS_MAIN,
-      network_id: "1",
+      from: process.env.HDWALLET_ADDRESS_RINKEBY,
+      network_id: "4",
       gas: 7000000,
       gasPrice: 10000000000, // 10 GWei (in wei)
+      // skipDryRun: true, // Skip dry run before migrations? (default: false for public nets )
+      // confirmations: 2,    // # of confs to wait between deployments. (default: 0)
+      // timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
     },
   },
 
