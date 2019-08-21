@@ -4,9 +4,11 @@ import Landing from "./views/Landing.vue";
 import Home from "./views/Home.vue";
 import CreateCowven from "./views/CreateCowven.vue";
 import MyWizards from "./views/MyWizards.vue";
-import TheSanctuary from "./views/TheSanctuary.vue";
+import CBD from "./views/CBD.vue";
 import CowvenHome from "./views/CowvenHome.vue";
+import CowvenJoin from "./views/CowvenJoin.vue";
 import MakeProposal from "./views/MakeProposal.vue";
+import UnlockDapper from "./views/UnlockDapper.vue";
 
 Vue.use(Router);
 
@@ -42,9 +44,9 @@ export default new Router({
       component: MyWizards
     },
     {
-      path: "/thesanctuary",
-      name: "thesanctuary",
-      component: TheSanctuary
+      path: "/cbd",
+      name: "cbd",
+      component: CBD
     },
     {
       path: "/cowvenhome",
@@ -52,9 +54,19 @@ export default new Router({
       component: CowvenHome
     },
     {
+      path: "/cowvenjoin",
+      name: "cowvenjoin",
+      component: CowvenJoin
+    },
+    {
       path: "/makeproposal",
       name: "makeproposal",
       component: MakeProposal
+    },
+    {
+      path: "/unlockdapper",
+      name: "unlockdapper",
+      component: UnlockDapper
     }
   ]
 });

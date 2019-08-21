@@ -4,7 +4,7 @@
       <img src="../assets/cheezedao.svg" alt />
       <div class="button-container">
         <button class="button">
-          <router-link to="/home">Sanctuary</router-link>
+          <router-link to="/cbd">CBD</router-link>
         </button>
         <button class="button">
           <router-link to="/mywizards">My Wizards</router-link>
@@ -25,9 +25,22 @@
         </div>
       </div>
 
-      <button>
-        <router-link to="/cowvenhome">Active Spell Proposals</router-link>
-      </button>
+      <v-dialog v-model="dialog" width="500">
+        <template v-slot:activator="{ on }">
+          <button class="button vote" v-on="on">Join +</button>
+        </template>
+
+        <v-card class="dialog">
+          <img src="../assets/wheel.svg" alt />
+          <h1>Thank You</h1>
+          <v-card-text>You applied. Sweet. This is the first step of a long bureacratic process within the CheezeWizarding world. Luckily for you, this world exists on a different timescale so… it’s really down to how long the Cheeze Wizards members of this Cowven take to accept or reject you, meh.</v-card-text>
+
+          <!-- <v-card-actions> -->
+          <v-spacer></v-spacer>
+          <button class="button" color="primary" text @click="dialog = false">Gouda'nough</button>
+          <!-- </v-card-actions> -->
+        </v-card>
+      </v-dialog>
     </div>
 
     <div class="content-container">
@@ -41,81 +54,31 @@
         </v-card>
       </div>
 
-      <div class="make-proposal">
-        <h1>Cast a new spell</h1>
-        <div class="proposal-container">
-          <v-form ref="form" v-model="valid" lazy-validation>
-            <div class="info-wrapper">
-              <v-select
-                v-model="select"
-                :items="proposal"
-                :rules="[v => !!v || 'Spell is required']"
-                label="Choose your Spell"
-                required
-              ></v-select>
+      <div class="spell-proposals">
+        <h1>Spell Proposals</h1>
+        <div v-for="proposal in proposals" class="proposal-container">
+          <div class="topline">
+            <p>Spell: {{proposal.spell}}</p>
+            <p v-if="proposal.wizardId !== null">Wizard #{{proposal.wizardId}}</p>
+          </div>
+          <hr />
+          <p class="description">{{proposal.description}}</p>
+          <button class="button vote">Nay</button>
 
-              <v-dialog v-model="dialogInfo" width="500">
-                <template v-slot:activator="{ on }">
-                  <img id="info-icon" src="../assets/info.svg" alt v-on="on" />
-                </template>
-
-                <v-card class="dialog" id="info-dialog">
-                  <h4>Cut the cheese?</h4>
-                  <p>Time to cut the cheeze with a Wizard ? Say no more, add its ID and we’ll take care of the rest</p>
-                  <h4>Change activity penalty length</h4>
-                  <p>Propose to increase or decrease the length of days a Wizards needs to be active.</p>
-                  <h4>Convert your Cowven</h4>
-                  <p>Cast a Spell which will change the Grate you all follow</p>
-                </v-card>
-              </v-dialog>
-            </div>
-
-            <v-text-field
-              v-if="select =='Cut the cheese'"
-              v-model="wizardId"
-              :rules="[v => !!v || 'Wizard ID is required']"
-              label="Enter Wizard ID"
-              required
-            ></v-text-field>
-
-            <v-text-field
-              v-if="select =='Change activity penalty length'"
-              v-model="numDays"
-              :rules="[v => !!v || 'Number of Days is required']"
-              label="How many days?"
-              required
-            ></v-text-field>
-
-            <v-select
-              v-if="select =='Convert your Cowven'"
-              v-model="grateOne"
-              :items="grateOnes"
-              :rules="[v => !!v || 'Grate One is required']"
-              label="Whom do you worship?"
-              required
-            ></v-select>
-
-            <v-textarea
-              :counter="250"
-              label="Oh but why?"
-              auto-grow
-              outlined
-              rows="9"
-              row-height="15"
-            ></v-textarea>
-          </v-form>
-          <v-dialog v-model="dialogSpell" width="500">
+          <v-dialog v-model="dialog" width="500">
             <template v-slot:activator="{ on }">
-              <button class="button" v-on="on">Cast spell</button>
+              <button class="button vote" v-on="on">Aye</button>
             </template>
 
             <v-card class="dialog">
               <img src="../assets/wheel.svg" alt />
               <h1>Thank You</h1>
-              <v-card-text>You have casted your spell proposal. It will now be reviewed by the Cowven, drink milk in the meantime.</v-card-text>
+              <v-card-text>You expressed yourself and that’s beautiful as a gallon of milk but let’s see if the majority agrees</v-card-text>
 
+              <!-- <v-card-actions> -->
               <v-spacer></v-spacer>
               <button class="button" color="primary" text @click="dialog = false">Got it</button>
+              <!-- </v-card-actions> -->
             </v-card>
           </v-dialog>
         </div>
@@ -128,7 +91,28 @@
 export default {
   data() {
     return {
+      dialog: false,
       search: "",
+      proposals: [
+        {
+          spell: "Cut the cheese",
+          wizardId: "1380",
+          description:
+            "This Wizard is cheap cheddar for for fast-food chains. Time to unload this dude!"
+        },
+        {
+          spell: "Convert Cowven",
+          wizardId: null,
+          description:
+            "Let’s switch to the god of flames. This seems to be the best tactical move for next season. "
+        },
+        {
+          spell: "Length of Penalty",
+          wizardId: null,
+          description:
+            "There seem to be a lot of inactive Wizards. I propose to change the activity penalty to 7 days."
+        }
+      ],
       headers: [
         {
           text: "",
@@ -202,47 +186,8 @@ export default {
           reputation: "000",
           id: "#0000"
         }
-      ],
-      dialogInfo: false,
-      dialogSpell: false,
-      valid: true,
-      name: "",
-      nameRules: [
-        v => !!v || "Name is required",
-        v => (v && v.length <= 10) || "Name must be less than 10 characters"
-      ],
-      email: "",
-      emailRules: [
-        v => !!v || "E-mail is required",
-        v => /.+@.+\..+/.test(v) || "E-mail must be valid"
-      ],
-      select: null,
-      proposal: [
-        "Cut the cheese",
-        "Change activity penalty length",
-        "Convert your Cowven"
-      ],
-      grateOnes: [
-        "The Grate Balance",
-        "The Grate Wave",
-        "The Grate Storm",
-        "The Grate Flames"
-      ],
-      grateOne: null
+      ]
     };
-  },
-  methods: {
-    validate() {
-      if (this.$refs.form.validate()) {
-        this.snackbar = true;
-      }
-    },
-    reset() {
-      this.$refs.form.reset();
-    },
-    resetValidation() {
-      this.$refs.form.resetValidation();
-    }
   }
 };
 </script>
@@ -300,9 +245,10 @@ export default {
       }
     }
 
-    .make-proposal {
+    .spell-proposals {
       padding: 0 8rem;
-      width: 60%;
+      overflow: scroll;
+      max-height: 49rem;
 
       h1 {
         padding: 1rem 0;
@@ -310,24 +256,26 @@ export default {
 
       .proposal-container {
         border: 1px solid black;
-        padding: 2rem;
-        height: 30rem;
+        padding: 1rem;
+        height: 13rem;
         text-align: center;
+        box-shadow: 3px 4px 0px 0px rgba(0, 0, 0, 1);
+        margin-bottom: 2rem;
 
-        p {
-          padding: 1rem 0 3rem 0;
+        .topline {
+          display: flex;
+          justify-content: space-between;
         }
+
+        .vote {
+          width: 7rem;
+          margin: 0 1rem;
+        }
+        // .description {
+        //   padding: 1rem 0 3rem 0;
+        // }
         img {
           width: 10rem;
-        }
-
-        .info-wrapper {
-          display: flex;
-          flex-direction: row;
-
-          #info-icon {
-            width: 1.5rem;
-          }
         }
       }
     }
@@ -360,18 +308,6 @@ export default {
   button {
     margin: auto;
     margin-bottom: 2rem;
-  }
-}
-
-#info-dialog {
-  display: flex;
-  padding: 2rem;
-  justify-content: space-between;
-  text-align: left;
-
-  h4 {
-    text-decoration: underline;
-    font-family: codesaver;
   }
 }
 </style>

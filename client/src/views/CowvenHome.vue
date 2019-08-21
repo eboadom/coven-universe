@@ -60,7 +60,7 @@
             <v-card class="dialog">
               <img src="../assets/wheel.svg" alt />
               <h1>Thank You</h1>
-              <v-card-text>We are super excited that you applied with our Cowven. Have some patience and maybe you will be part of our cheesy Cowven.</v-card-text>
+              <v-card-text>You expressed yourself and that’s beautiful as a gallon of milk but let’s see if the majority agrees</v-card-text>
 
               <!-- <v-card-actions> -->
               <v-spacer></v-spacer>
@@ -70,6 +70,23 @@
           </v-dialog>
         </div>
       </div>
+
+      <v-dialog v-model="dialog" width="500">
+        <template v-slot:activator="{ on }">
+          <button class="button vote" v-on="on">Aye</button>
+        </template>
+
+        <v-card class="dialog">
+          <img src="../assets/wheel.svg" alt />
+          <h1>Thank You</h1>
+          <v-card-text>You applied. Sweet. This is the first step of a long bureacratic process within the CheezeWizarding world. Luckily for you, this world exists on a different timescale so… it’s really down to how long the Cheeze Wizards members of this Cowven take to accept or reject you, meh.</v-card-text>
+
+          <!-- <v-card-actions> -->
+          <v-spacer></v-spacer>
+          <button class="button" color="primary" text @click="dialog = false">Gouda'nough</button>
+          <!-- </v-card-actions> -->
+        </v-card>
+      </v-dialog>
     </div>
   </div>
 </template>

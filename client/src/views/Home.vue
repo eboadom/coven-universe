@@ -4,7 +4,7 @@
       <img src="../assets/cheezedao.svg" alt />
       <div class="button-container">
         <button class="button">
-          <router-link to="/home">Sanctuary</router-link>
+          <router-link to="/cbd">CBD</router-link>
         </button>
         <button class="button">
           <router-link to="/mywizards">My Wizards</router-link>
@@ -14,7 +14,7 @@
 
     <div class="content-container">
       <div class="leaderboard">
-        <h1>Home of the Grates</h1>
+        <h1>G.O.A.T. Cheeze Board</h1>
         <v-card>
           <v-card-title>
             Leaderboard

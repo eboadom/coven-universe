@@ -4,7 +4,7 @@
       <img src="../assets/cheezedao.svg" alt />
       <div class="button-container">
         <button class="button">
-          <router-link to="/thesanctuary">Sanctuary</router-link>
+          <router-link to="/cbd">CBD</router-link>
         </button>
         <button class="button">
           <router-link to="/mywizards">My Wizards</router-link>
@@ -14,28 +14,33 @@
 
     <div class="content-container">
       <div class="the-sanctuary">
-        <h1>The Sanctuary</h1>
+        <h1>Cheezyverse Beliefs Distribution</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         <div class="elements">
           <div class="neutral">
             <img src="../assets/neutral-white.svg" alt />
             <h2>000000</h2>
-            <h3>The Balance</h3>
+            <h3>The Grate Balance</h3>
           </div>
           <div class="water">
             <img src="../assets/water-white.svg" alt />
             <h2>000000</h2>
-            <h3>The Ocean</h3>
+            <h3>The Grate Wave</h3>
           </div>
           <div class="wind">
             <img src="../assets/wind-white.svg" alt />
             <h2>000000</h2>
-            <h3>The Storm</h3>
+            <h3>The Grate Storm</h3>
           </div>
           <div class="fire">
             <img src="../assets/fire-white.svg" alt />
             <h2>000000</h2>
-            <h3>The Flames</h3>
+            <h3>The Grate Flames</h3>
+          </div>
+          <div class="mold">
+            <!-- <img src="../assets/mold-white.svg" alt /> -->
+            <h2>000000</h2>
+            <h3>The Grate Mold</h3>
           </div>
         </div>
       </div>

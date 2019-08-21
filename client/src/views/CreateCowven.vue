@@ -4,7 +4,7 @@
       <img src="../assets/cheezedao.svg" alt />
       <div class="button-container">
         <button class="button">
-          <router-link to="/home">Sanctuary</router-link>
+          <router-link to="/cbd">CBD</router-link>
         </button>
         <button class="button">
           <router-link to="/mywizards">My Wizards</router-link>
@@ -51,7 +51,7 @@
             <v-card class="dialog">
               <img src="../assets/wheel.svg" alt />
               <h1>Congoudalations!</h1>
-              <v-card-text>You have just created your own Cowven! Get all your Wizard homies to join and rule the cheese once and for ever.</v-card-text>
+              <v-card-text>Your Cowven has been summoned ! Convert Wizards to join your team and compete to hold the G.O.A.T. Cheeze title the longest</v-card-text>
 
               <!-- <v-card-actions> -->
               <!-- <v-spacer></v-spacer> -->
