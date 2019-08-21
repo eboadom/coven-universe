@@ -11,16 +11,22 @@ services:
     restart: always
     command: npm run sys:start-dev-container
     environment:
-      TARGET: "development"
+      # GANACHE
+      GANACHE_URL: "http://ganache:8545"
+      # RINKEBY
+      MNEMONIC_TRUFFLE_RINKEBY: ""
+      PK_TRUFFLE_RINKEBY: ""
+      HDWALLET_ADDRESS_RINKEBY: ""
+      URL_ETHEREUM_HTTP_PROVIDER_RINKEBY: ""
+      URL_ETHEREUM_WS_PROVIDER_RINKEBY: ""
+      # KOVAN
       MNEMONIC_TRUFFLE_KOVAN: ""
       PK_TRUFFLE_KOVAN: ""
-      MNEMONIC_TRUFFLE_MAIN: ""
-      PK_TRUFFLE_MAIN: ""
       HDWALLET_ADDRESS_KOVAN: ""
-      HDWALLET_ADDRESS_MAIN: ""
-      URL_ETHEREUM_HTTP_PROVIDER: ""
-      URL_ETHEREUM_WS_PROVIDER: ""
-      GANACHE_URL: "http://ganache:8545"
+      URL_ETHEREUM_HTTP_PROVIDER_KOVAN: ""
+      URL_ETHEREUM_WS_PROVIDER_KOVAN: ""
+    ports:
+      - "12040:12040"
   
   ganache:
     image: trufflesuite/ganache-cli
