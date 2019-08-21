@@ -1,7 +1,9 @@
 <template>
   <div id="main-container">
     <div class="topnav">
-      <img src="../assets/cheezedao.svg" alt />
+      <router-link to="/home">
+        <img src="../assets/cheezedao.svg" alt />
+      </router-link>
       <div class="button-container">
         <button class="button">
           <router-link to="/home">Sanctuary</router-link>
@@ -71,7 +73,7 @@
         </div>
       </div>
 
-      <v-dialog v-model="dialog" width="500">
+      <!-- <v-dialog v-model="dialog" width="500">
         <template v-slot:activator="{ on }">
           <button class="button vote" v-on="on">Aye</button>
         </template>
@@ -81,12 +83,10 @@
           <h1>Thank You</h1>
           <v-card-text>You applied. Sweet. This is the first step of a long bureacratic process within the CheezeWizarding world. Luckily for you, this world exists on a different timescale so… it’s really down to how long the Cheeze Wizards members of this Cowven take to accept or reject you, meh.</v-card-text>
 
-          <!-- <v-card-actions> -->
           <v-spacer></v-spacer>
           <button class="button" color="primary" text @click="dialog = false">Gouda'nough</button>
-          <!-- </v-card-actions> -->
         </v-card>
-      </v-dialog>
+      </v-dialog>-->
     </div>
   </div>
 </template>
@@ -197,6 +197,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 #main-container {
+  background: url("../assets/grid.svg");
+  height: 96vh;
+  background-position-y: -12vh;
   margin: 2rem 0 0 1rem;
   .topnav {
     display: flex;

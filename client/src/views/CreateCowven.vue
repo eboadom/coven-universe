@@ -1,7 +1,9 @@
 <template>
   <div id="main-container">
     <div class="topnav">
-      <img src="../assets/cheezedao.svg" alt />
+      <router-link to="/home">
+        <img src="../assets/cheezedao.svg" alt />
+      </router-link>
       <div class="button-container">
         <button class="button">
           <router-link to="/cbd">CBD</router-link>
@@ -64,7 +66,10 @@
         </div>
 
         <!-- //twitter button -->
-        <span>Twitter dat Wizzzzzzard stuff</span>
+        <a class="twitter" href="https://twitter.com/CheezeDao">
+          <img src="../assets/twitter.svg" alt />
+        </a>
+        <!-- <span>Twitter dat Wizzzzzzard stuff</span> -->
       </div>
     </div>
   </div>
@@ -143,6 +148,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 #main-container {
+  background: url("../assets/grid.svg");
+  height: 96vh;
+  background-position-y: -12vh;
   margin: 2rem 0 0 1rem;
   .topnav {
     display: flex;
@@ -187,6 +195,14 @@ export default {
         }
         img {
           width: 10rem;
+        }
+      }
+
+      .twitter {
+        img {
+          display: block;
+          margin: auto;
+          padding-top: 1rem;
         }
       }
     }

@@ -44,6 +44,7 @@ export default {
   --red: #ff809b;
   --green: #8bea63;
   --blue: #35d1e7;
+  --darkblue: #0f1f64;
 }
 
 @font-face {
@@ -77,6 +78,7 @@ body {
   box-shadow: 3px 4px 0px 0px rgba(0, 0, 0, 1);
   width: 12rem;
   height: 3rem;
+  background: white;
 
   a {
     text-decoration: none;
@@ -96,6 +98,5 @@ h1 {
 p {
   font-family: codesaver;
 }
-
 </style>
 

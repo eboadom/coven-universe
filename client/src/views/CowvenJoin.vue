@@ -1,7 +1,9 @@
 <template>
   <div id="main-container">
     <div class="topnav">
-      <img src="../assets/cheezedao.svg" alt />
+      <router-link to="/home">
+        <img src="../assets/cheezedao.svg" alt />
+      </router-link>
       <div class="button-container">
         <button class="button">
           <router-link to="/cbd">CBD</router-link>
@@ -193,6 +195,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 #main-container {
+  background: url("../assets/grid.svg");
+  height: 96vh;
+  background-position-y: -12vh;
   margin: 2rem 0 0 1rem;
   .topnav {
     display: flex;
@@ -261,6 +266,7 @@ export default {
         text-align: center;
         box-shadow: 3px 4px 0px 0px rgba(0, 0, 0, 1);
         margin-bottom: 2rem;
+        background: white;
 
         .topline {
           display: flex;

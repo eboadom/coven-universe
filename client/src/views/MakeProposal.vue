@@ -1,7 +1,9 @@
 <template>
   <div id="main-container">
     <div class="topnav">
-      <img src="../assets/cheezedao.svg" alt />
+      <router-link to="/home">
+        <img src="../assets/cheezedao.svg" alt />
+      </router-link>
       <div class="button-container">
         <button class="button">
           <router-link to="/home">Sanctuary</router-link>
@@ -115,7 +117,7 @@
               <v-card-text>You have casted your spell proposal. It will now be reviewed by the Cowven, drink milk in the meantime.</v-card-text>
 
               <v-spacer></v-spacer>
-              <button class="button" color="primary" text @click="dialog = false">Got it</button>
+              <button class="button" color="primary" text @click="dialog = false">Gouda'nough</button>
             </v-card>
           </v-dialog>
         </div>
@@ -248,6 +250,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 #main-container {
+  background: url("../assets/grid.svg");
+  height: 96vh;
+  background-position-y: -12vh;
   margin: 2rem 0 0 1rem;
   .topnav {
     display: flex;
@@ -313,6 +318,7 @@ export default {
         padding: 2rem;
         height: 30rem;
         text-align: center;
+        background: white;
 
         p {
           padding: 1rem 0 3rem 0;

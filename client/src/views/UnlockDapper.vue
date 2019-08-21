@@ -23,6 +23,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 .landing {
+  background: url("../assets/colored-grid.svg");
+  height: 96vh;
+  background-position-y: -12vh;
   .container {
     /* background: transparent url("../assets/paper-banner.svg") no-repeat fixed center; */
     width: 50%;

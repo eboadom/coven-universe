@@ -1,7 +1,9 @@
 <template>
   <div id="main-container">
     <div class="topnav">
-      <img src="../assets/cheezedao.svg" alt />
+      <router-link to="/home">
+        <img src="../assets/cheezedao.svg" alt />
+      </router-link>
       <div class="button-container">
         <button class="button">
           <router-link to="/cbd">CBD</router-link>
@@ -38,7 +40,7 @@
             <h3>The Grate Flames</h3>
           </div>
           <div class="mold">
-            <!-- <img src="../assets/mold-white.svg" alt /> -->
+            <img src="../assets/mold-white.svg" alt />
             <h2>000000</h2>
             <h3>The Grate Mold</h3>
           </div>
@@ -55,6 +57,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 #main-container {
+  background: url("../assets/grid.svg");
+  height: 96vh;
+  background-position-y: -12vh;
   margin: 2rem 0 0 1rem;
   .topnav {
     display: flex;
@@ -131,6 +136,12 @@ export default {
           background-color: var(--red);
           img {
             padding: 2rem 0;
+          }
+        }
+        .mold {
+          background-color: var(--darkblue);
+          img {
+            padding: 5.5rem 0;
           }
         }
       }

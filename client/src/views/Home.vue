@@ -14,6 +14,8 @@
 
     <div class="content-container">
       <div class="leaderboard">
+        <!-- <img class="bottom-left" src="../assets/bottom-left.svg" alt />
+        <img class="top-right" src="../assets/top-right.svg" alt />-->
         <h1>G.O.A.T. Cheeze Board</h1>
         <v-card>
           <v-card-title>
@@ -259,6 +261,10 @@ export default {
 </script>
 <style lang="scss" scoped>
 #main-container {
+  background: url("../assets/grid.svg");
+  height: 96vh;
+  background-position-y: -12vh;
+
   margin: 2rem 0 0 1rem;
   .topnav {
     display: flex;
@@ -279,6 +285,11 @@ export default {
     .leaderboard {
       width: 100%;
       padding: 0 8rem;
+
+      &::before {
+        background: url("../assets/bottom-left.svg");
+        width: 2rem;
+      }
       h1 {
         font-size: 3rem;
         padding: 1rem 0;
@@ -314,4 +325,11 @@ export default {
     }
   }
 }
+
+// .v-card {
+//   &:before {
+//     background: url("../assets/bottom-left.svg");
+//     width: 2rem;
+//   }
+// }
 </style>

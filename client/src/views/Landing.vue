@@ -1,33 +1,31 @@
 <template>
   <div class="landing">
-    <img class="left-cloud" alt="Left Cloud" src="../assets/cloud-left.svg">
-    <img class="right-cloud" alt="Right Cloud" src="../assets/cloud-right.svg">
+    <img class="left-cloud" alt="Left Cloud" src="../assets/cloud-left.svg" />
+    <img class="right-cloud" alt="Right Cloud" src="../assets/cloud-right.svg" />
     <!-- <img class="bottom-cheese" alt="Bottom Cheese" src="../assets/bottom-cheese.svg"> -->
-    <img class="bottom-cloud" alt="Bottom Cloud" src="../assets/bottom-cloud.svg">
+    <img class="bottom-cloud" alt="Bottom Cloud" src="../assets/bottom-cloud.svg" />
 
     <!-- <img class="paper-banner" alt="Paper Banner" src="../assets/paper-banner.svg"> -->
     <div class="container">
       <!-- <h1>Cheeze DAO</h1> -->
-<<<<<<< HEAD
-      <img src="../assets/cheezedao.svg" alt />
+      <img class="dao-logo" src="../assets/cheezedao.svg" alt />
       <p>The BigCheeze is still out there and already Wizards are sliding into each others DMs asking what’s next… Will the silent majority of the Neutral gain momentum…? Are Elementals able to keep order within their own ranks ? Will CheezeWizards realize that they all have a bit of Mold in them…? Did you drank enough water today?</p>
       <p>CheezeDAO is the political extension of the Cheezyverse, it’s games within a game on top of a game (wow Ethereum gaming lego :mindblown emoji:) enabling you to join or create a team, choose one of the Grate to follow and govern it based on your gaming skills !</p>
-=======
-      <img src="../assets/cheezedao.svg" alt>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
->>>>>>> fff9d0707e54da59a7b7194173552ecc00149fcd
-      <button class="button">
+      <button id="enter" class="button">
         <router-link to="/home">Enter the Cheeze</router-link>
       </button>
+      <a class="twitter" href="https://twitter.com/CheezeDao">
+        <img src="../assets/twitter.svg" alt />
+      </a>
     </div>
 
-    <v-dialog v-model="dialogSpell" width="500">
+    <v-dialog id="faq-dialog" width="50%">
       <template v-slot:activator="{ on }">
         <button id="faq" class="button" v-on="on">FAQ</button>
       </template>
 
       <v-card class="dialog">
-        <img id="X" src="../assets/X.svg" alt />
+        <!-- <img id="X" src="../assets/X.svg" alt /> -->
         <h1>Frequently Cheesed Questions</h1>
         <h2>What is CheezeDAO?</h2>
         <p>CheezeDAO the political extension of the Cheezyverse, it is a governance experiment looking to showcase the possibilities of liquid and skill based governance while bringing cross tournament ranking, team playing and engagement incentive to extensibles games.</p>
@@ -54,18 +52,29 @@ export default {
 </script>
 <style lang="scss" scoped>
 .landing {
+  background: url("../assets/colored-grid.svg");
+  height: 100vh;
   .container {
     /* background: transparent url("../assets/paper-banner.svg") no-repeat fixed center; */
     width: 50%;
     left: 25%;
-    top: 20%;
+    top: 15%;
     padding: 0 8rem;
     position: absolute;
     text-align: center;
 
-    img {
+    .dao-logo {
       width: 24rem;
     }
+
+    .twitter {
+      img {
+        display: block;
+        margin: auto;
+        padding-top: 1rem;
+      }
+    }
+
     h1 {
       font-size: 5rem;
       width: 66%;
@@ -73,8 +82,20 @@ export default {
     }
 
     p {
-      margin: 4rem 0;
+      margin: 2rem 0;
     }
+
+    #enter {
+      background: white;
+    }
+  }
+
+  #faq {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 2rem;
+    background: white;
   }
 
   .paper-banner {
@@ -104,6 +125,32 @@ export default {
     bottom: 0;
     width: 100vw;
     left: 0;
+  }
+}
+
+#faq-dialog {
+  width: 50% !important;
+}
+
+.v-dialog {
+  width: 50% !important;
+}
+
+.dialog {
+  height: 100%;
+  font-family: codesaver;
+  padding: 2rem;
+
+  h1 {
+    padding-bottom: 1rem;
+  }
+
+  h2 {
+    text-decoration: underline;
+    font-size: 20px;
+  }
+  #X {
+    float: right;
   }
 }
 </style>
