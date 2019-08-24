@@ -268,6 +268,7 @@ export default {
         text-align: center;
         box-shadow: 3px 4px 0px 0px rgba(0, 0, 0, 1);
         margin-bottom: 2rem;
+        background-color: white;
 
         .topline {
           display: flex;
@@ -315,6 +316,33 @@ export default {
   button {
     margin: auto;
     margin-bottom: 2rem;
+  }
+}
+
+.v-card {
+  &::before {
+    background: url("../assets/bottom-left.svg");
+    width: 4rem;
+    content: "";
+    position: absolute;
+    height: 5rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+    top: 91%;
+    left: -2%;
+  }
+
+  &::after {
+    background: url("../assets/top-right.svg");
+    width: 4rem;
+    content: "";
+    height: 6rem;
+    position: absolute;
+    height: 4rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+    top: -2%;
+    right: -2%;
   }
 }
 </style>

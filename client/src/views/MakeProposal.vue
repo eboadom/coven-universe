@@ -380,4 +380,31 @@ export default {
     font-family: codesaver;
   }
 }
+
+.v-card {
+  &::before {
+    background: url("../assets/bottom-left.svg");
+    width: 4rem;
+    content: "";
+    position: absolute;
+    height: 5rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+    top: 91%;
+    left: -2%;
+  }
+
+  &::after {
+    background: url("../assets/top-right.svg");
+    width: 4rem;
+    content: "";
+    height: 6rem;
+    position: absolute;
+    height: 4rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+    top: -2%;
+    right: -2%;
+  }
+}
 </style>

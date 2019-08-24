@@ -190,12 +190,42 @@ export default {
       h1 {
         padding: 1rem 0;
       }
-      v-data-table {
+      .v-data-table {
         .text-left {
           width: 10%;
+          img {
+            width: 5rem;
+          }
         }
       }
     }
+  }
+}
+
+.v-data-table {
+  &::before {
+    background: url("../assets/bottom-left.svg");
+    width: 4rem;
+    content: "";
+    position: absolute;
+    height: 5rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+    top: 71%;
+    left: 6.6%;
+  }
+
+  &::after {
+    background: url("../assets/top-right.svg");
+    width: 4rem;
+    content: "";
+    height: 6rem;
+    position: absolute;
+    height: 4rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+    top: 21.8%;
+    right: 5.9%;
   }
 }
 </style>

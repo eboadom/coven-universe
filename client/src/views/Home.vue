@@ -37,18 +37,35 @@
             :expanded.sync="expanded"
             item-key="name"
             show-expand
+            @click:row="expandRow()"
           >
             <template v-slot:item.god="{ item }">
-              <!-- <v-icon small class="mr-2" @click="editItem(item)">edit</v-icon>
-              <v-icon small @click="deleteItem(item)">delete</v-icon>-->
-              <!-- <img v-bind:src="'/img/' + item.god + '.svg'" alt /> -->
               <img :src="require(`@/assets/${item.god}.svg`)" />
             </template>
+
+            <!-- <template v-slot:item slot-scope="props">
+              <tr @click="showAlert(props.item)">
+                <td>{{ props.item.name }}</td>
+                <td class="text-xs-right">{{ props.item.calories }}</td>
+                <td class="text-xs-right">{{ props.item.fat }}</td>
+                <td class="text-xs-right">{{ props.item.carbs }}</td>
+                <td class="text-xs-right">{{ props.item.protein }}</td>
+                <td class="text-xs-right">{{ props.item.iron }}</td>
+              </tr>
+            </template>-->
+
             <template v-slot:expanded-item="{ headers }">
               <td
                 :colspan="headers.length"
               >This is the content area where the unique ‘tagline’ will be placed for each coven. Each coven can set a few lines of text for a unique distribution of their coven</td>
             </template>
+
+            <!-- <template v-slot:item.data-table-expand>
+              <v-icon
+                role="button"
+                class="v-icon notranslate v-data-table__expand-icon v-icon--link mdi mdi-chevron-down theme--light"
+              ></v-icon>
+            </template>-->
           </v-data-table>
         </v-card>
       </div>
@@ -141,121 +158,17 @@ export default {
           score: "420",
           members: "000",
           god: "wind"
-        },
-        {
-          rank: "#1",
-          name: "DragonBallCheeZ",
-          score: "9000+",
-          members: "000",
-          god: "fire"
-        },
-        {
-          rank: "#2",
-          name: "MainlandChina",
-          score: "1025",
-          members: "000",
-          god: "water"
-        },
-        {
-          rank: "#1",
-          name: "WeWillRoqueYourFort",
-          score: "900",
-          members: "000",
-          god: "wind"
-        },
-        {
-          rank: "#1",
-          name: "GoudaGang",
-          score: "600",
-          members: "000",
-          god: "earth"
-        },
-        {
-          rank: "#1",
-          name: "CheezZz_Aimbot",
-          score: "153",
-          members: "000",
-          god: "fire"
-        },
-        {
-          rank: "#1",
-          name: "EthIsMoney",
-          score: "354",
-          members: "000",
-          god: "water"
-        },
-        {
-          rank: "#1",
-          name: "ChezeGuevera",
-          score: "786",
-          members: "000",
-          god: "earth"
-        },
-        {
-          rank: "#1",
-          name: "MoldError",
-          score: "420",
-          members: "000",
-          god: "wind"
-        },
-        {
-          rank: "#1",
-          name: "DragonBallCheeZ",
-          score: "9000+",
-          members: "000",
-          god: "fire"
-        },
-        {
-          rank: "#2",
-          name: "MainlandChina",
-          score: "1025",
-          members: "000",
-          god: "water"
-        },
-        {
-          rank: "#1",
-          name: "WeWillRoqueYourFort",
-          score: "900",
-          members: "000",
-          god: "wind"
-        },
-        {
-          rank: "#1",
-          name: "GoudaGang",
-          score: "600",
-          members: "000",
-          god: "earth"
-        },
-        {
-          rank: "#1",
-          name: "CheezZz_Aimbot",
-          score: "153",
-          members: "000",
-          god: "fire"
-        },
-        {
-          rank: "#1",
-          name: "EthIsMoney",
-          score: "354",
-          members: "000",
-          god: "water"
-        },
-        {
-          rank: "#1",
-          name: "ChezeGuevera",
-          score: "786",
-          members: "000",
-          god: "earth"
-        },
-        {
-          rank: "#1",
-          name: "MoldError",
-          score: "420",
-          members: "000",
-          god: "wind"
         }
       ]
     };
+  },
+  methods: {
+    expandRow(e) {
+      console.log("hover!");
+    },
+    redirectToMyCoven() {
+      console.log("redirect!");
+    }
   }
 };
 </script>
@@ -315,6 +228,13 @@ export default {
         padding: 2rem;
         height: 30rem;
         text-align: center;
+
+        &::before {
+          background: url("../assets/bottom-left.svg");
+          width: 2rem;
+          content: "";
+        }
+
         p {
           padding: 1rem 0 3rem 0;
         }
@@ -326,10 +246,38 @@ export default {
   }
 }
 
-// .v-card {
-//   &:before {
-//     background: url("../assets/bottom-left.svg");
-//     width: 2rem;
-//   }
-// }
+.v-card {
+  &::before {
+    background: url("../assets/bottom-left.svg");
+    width: 4rem;
+    content: "";
+    position: absolute;
+    height: 5rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+    top: 91%;
+    left: -2%;
+  }
+
+  &::after {
+    background: url("../assets/top-right.svg");
+    width: 4rem;
+    content: "";
+    height: 6rem;
+    position: absolute;
+    height: 4rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+    top: -2%;
+    right: -2%;
+  }
+}
+
+.v-icon.v-icon.v-icon--link {
+  z-index: 10 !important;
+  background-color: transparent !important;
+  width: 3240% !important;
+  height: 92% !important;
+  position: relative !important;
+}
 </style>
