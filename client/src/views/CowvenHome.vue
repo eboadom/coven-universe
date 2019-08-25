@@ -130,56 +130,56 @@ export default {
           rank: "#1",
           score: "9000+",
           reputation: "000",
-          id: "#0000"
+          id: "#97587"
         },
         {
           wizard: "water-wizard",
           rank: "#2",
           score: "9000+",
           reputation: "000",
-          id: "#0000"
+          id: "#78567"
         },
         {
           wizard: "wind-wizard",
           rank: "#3",
           score: "9000+",
           reputation: "000",
-          id: "#0000"
+          id: "#14124"
         },
         {
           wizard: "neutral-wizard",
           rank: "#4",
           score: "9000+",
           reputation: "000",
-          id: "#0000"
+          id: "#42140"
         },
         {
           wizard: "fire-wizard",
           rank: "#1",
           score: "9000+",
           reputation: "000",
-          id: "#0000"
+          id: "#05400"
         },
         {
           wizard: "water-wizard",
           rank: "#2",
           score: "9000+",
           reputation: "000",
-          id: "#0000"
+          id: "#003400"
         },
         {
           wizard: "wind-wizard",
           rank: "#3",
           score: "9000+",
           reputation: "000",
-          id: "#0000"
+          id: "#0040"
         },
         {
           wizard: "neutral-wizard",
           rank: "#4",
           score: "9000+",
           reputation: "000",
-          id: "#0000"
+          id: "#00230"
         }
       ]
     };

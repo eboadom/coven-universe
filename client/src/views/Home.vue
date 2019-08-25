@@ -34,7 +34,10 @@
               <td :colspan="headers.length">
                 This is the content area where the unique ‘tagline’ will be placed for each coven. Each coven can set a few lines
                 of text for a unique distribution of their coven
-                <v-button class="redirectCowven button" @click="redirectToMyCowven">Go to Cowven</v-button>
+                <button
+                  class="redirectCowven button"
+                  @click="redirectToMyCowven"
+                >Go to Cowven</button>
               </td>
             </template>
           </v-data-table>
@@ -146,7 +149,6 @@ export default {
     );
     trs.map(el =>
       el.addEventListener("mouseover", e => {
-        console.log("HOVER", e);
         e.target.parentElement.firstElementChild.firstElementChild.click();
       })
     );
@@ -198,6 +200,7 @@ export default {
         padding: 2rem;
         height: 30rem;
         text-align: center;
+        background-color: white;
 
         &::before {
           background: url("../assets/bottom-left.svg");

@@ -77,7 +77,7 @@ export default {
         },
         {
           wizard: "fire-wizard",
-          id: "#0000",
+          id: "#0004",
           type: "Fire",
           score: "7865",
           cowven: "Awesome Coven Name",
@@ -86,7 +86,7 @@ export default {
         },
         {
           wizard: "wind-wizard",
-          id: "#0001",
+          id: "#0005",
           type: "Wind",
           score: "1534",
           cowven: "Awesome Coven Name",
@@ -95,7 +95,7 @@ export default {
         },
         {
           wizard: "water-wizard",
-          id: "#0002",
+          id: "#0006",
           type: "Water",
           score: "3576",
           cowven: "Awesome Coven Name",
@@ -104,7 +104,7 @@ export default {
         },
         {
           wizard: "neutral-wizard",
-          id: "#0003",
+          id: "#0007",
           type: "Neutral",
           score: "4679",
           cowven: "Awesome Coven Name",
@@ -113,7 +113,7 @@ export default {
         },
         {
           wizard: "fire-wizard",
-          id: "#0000",
+          id: "#0008",
           type: "Fire",
           score: "7865",
           cowven: "Awesome Coven Name",
@@ -122,7 +122,7 @@ export default {
         },
         {
           wizard: "wind-wizard",
-          id: "#0001",
+          id: "#0009",
           type: "Wind",
           score: "1534",
           cowven: "Awesome Coven Name",
@@ -131,7 +131,7 @@ export default {
         },
         {
           wizard: "water-wizard",
-          id: "#0002",
+          id: "#0012",
           type: "Water",
           score: "3576",
           cowven: "Awesome Coven Name",
@@ -140,7 +140,7 @@ export default {
         },
         {
           wizard: "neutral-wizard",
-          id: "#0003",
+          id: "#0023",
           type: "Neutral",
           score: "4679",
           cowven: "Awesome Coven Name",

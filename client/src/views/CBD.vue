@@ -43,7 +43,7 @@ import TopNav from "../components/TopNav.vue";
 
 export default {
   components: { TopNav },
-  data() {}
+  data: () => ({})
 };
 </script>
 <style lang="scss" scoped>

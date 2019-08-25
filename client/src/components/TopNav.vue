@@ -1,6 +1,8 @@
 <template>
   <div class="topnav">
-    <img src="../assets/cheezedao.svg" alt />
+    <router-link to="/home">
+      <img src="../assets/cheezedao.svg" alt />
+    </router-link>
     <div class="button-container">
       <button class="button">
         <router-link to="/cbd">CBD</router-link>
