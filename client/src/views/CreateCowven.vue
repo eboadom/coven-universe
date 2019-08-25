@@ -144,6 +144,10 @@ export default {
   background-position-y: -12vh;
   margin: 2rem 0 0 1rem;
 
+  @media screen and (max-width: 1020px) {
+    margin: 1rem;
+  }
+
   .content-container {
     display: flex;
     flex-direction: row;
@@ -153,6 +157,10 @@ export default {
       margin: auto;
       width: 25%;
 
+      @media screen and (max-width: 1020px) {
+        margin: 0;
+        width: 100%;
+      }
       .form-container {
         .dialog {
           display: flex;
@@ -167,6 +175,7 @@ export default {
         padding: 2rem;
         height: 34rem;
         text-align: center;
+        background: white;
 
         form {
           padding-bottom: 1rem;
@@ -199,6 +208,12 @@ export default {
 
   img {
     padding: 3rem 0;
+  }
+
+  h1 {
+    @media screen and (max-width: 1020px) {
+      font-size: 1.5rem;
+    }
   }
 
   .v-card__text {

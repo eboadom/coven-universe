@@ -53,13 +53,18 @@ export default {
   background-position-y: -12vh;
   margin: 2rem 0 0 1rem;
 
+  @media screen and (max-width: 1020px) {
+    margin: 1rem;
+  }
+
   .content-container {
     display: flex;
     flex-direction: row;
     margin-top: 2rem;
 
     .the-sanctuary {
-      h1 {
+      @media screen and (max-width: 1020px) {
+        width: 100%;
       }
 
       p {
@@ -75,6 +80,12 @@ export default {
         width: 100%;
         justify-content: space-evenly;
         padding: 0 20rem;
+
+        @media screen and (max-width: 1020px) {
+          flex-direction: column;
+          padding: 0;
+          align-items: center;
+        }
 
         div {
           width: 15rem;

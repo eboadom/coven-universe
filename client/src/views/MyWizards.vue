@@ -3,12 +3,12 @@
     <TopNav />
 
     <div class="content-container">
-      <div class="create-coven">
+      <div class="my-wizards">
         <h1>My Wizards</h1>
 
         <v-data-table :headers="headers" :items="wizards" :search="search" :items-per-page="5">
           <template v-slot:item.wizard="{ item }">
-            <img :src="require(`@/assets/${item.wizard}.png`)" />
+            <img class="wizard-img" :src="require(`@/assets/${item.wizard}.png`)" />
           </template>
         </v-data-table>
       </div>
@@ -159,19 +159,32 @@ export default {
   background-position-y: -12vh;
   margin: 2rem 0 0 1rem;
 
+  @media screen and (max-width: 1020px) {
+    margin: 1rem;
+  }
+
   .content-container {
     display: flex;
     flex-direction: row;
     margin-top: 2rem;
 
-    .create-coven {
+    .my-wizards {
       padding: 0 8rem;
       width: 100%;
+
+      @media screen and (max-width: 1020px) {
+        padding: 0;
+      }
 
       h1 {
         padding: 1rem 0;
       }
       .v-data-table {
+        .wizard-img {
+          @media screen and (max-width: 1020px) {
+            width: 2rem;
+          }
+        }
         .text-left {
           width: 10%;
           img {
@@ -180,33 +193,6 @@ export default {
         }
       }
     }
-  }
-}
-
-.v-data-table {
-  &::before {
-    background: url("../assets/bottom-left.svg");
-    width: 4rem;
-    content: "";
-    position: absolute;
-    height: 5rem;
-    background-size: cover;
-    background-repeat: no-repeat;
-    top: 71%;
-    left: 6.6%;
-  }
-
-  &::after {
-    background: url("../assets/top-right.svg");
-    width: 4rem;
-    content: "";
-    height: 6rem;
-    position: absolute;
-    height: 4rem;
-    background-size: cover;
-    background-repeat: no-repeat;
-    top: 21.8%;
-    right: 5.9%;
   }
 }
 </style>

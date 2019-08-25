@@ -45,7 +45,10 @@ export default {
   beforeCreate() {
     initDapper();
   },
-  components: {}
+  components: {},
+  created() {
+    // document.getElementsByTagName("body")[0].style.overflow = "hidden";
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -60,8 +63,18 @@ export default {
     position: absolute;
     text-align: center;
 
+    @media screen and (max-width: 1020px) {
+      width: 100%;
+      left: auto;
+      top: auto;
+      padding: 0;
+    }
+
     .dao-logo {
       width: 24rem;
+      @media screen and (max-width: 1020px) {
+        width: 14rem;
+      }
     }
 
     .twitter {
@@ -80,6 +93,10 @@ export default {
 
     p {
       margin: 2rem 0;
+
+      @media screen and (max-width: 1020px) {
+        margin: 2rem 1rem;
+      }
     }
 
     #enter {
@@ -107,6 +124,11 @@ export default {
     left: -10rem;
     width: 40rem;
     top: 2rem;
+    @media screen and (max-width: 1020px) {
+      left: 0;
+      width: 20rem;
+      top: 0rem;
+    }
   }
 
   .right-cloud {
@@ -114,6 +136,10 @@ export default {
     right: -44rem;
     position: absolute;
     width: 80rem;
+    @media screen and (max-width: 1020px) {
+      // display: none;
+      width: 40rem;
+    }
   }
 
   .bottom-cheese,

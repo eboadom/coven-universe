@@ -23,11 +23,24 @@ export default {
   display: flex;
   justify-content: space-between;
 
+  @media screen and (max-width: 1020px) {
+    margin-bottom: 1rem;
+  }
+  img {
+    @media screen and (max-width: 1020px) {
+      width: 6rem;
+    }
+  }
+
   .button-container {
     padding: 0 2rem;
     width: 30rem;
     display: flex;
     justify-content: space-between;
+    @media screen and (max-width: 1020px) {
+      width: 15rem;
+      padding: 0;
+    }
   }
 }
 </style>

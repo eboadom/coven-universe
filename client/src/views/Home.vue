@@ -45,10 +45,10 @@
       </div>
 
       <div class="create-coven">
-        <h1>Create Coven</h1>
+        <h1>Create Cowven</h1>
         <div class="summon-container">
           <img src="../assets/utter.svg" alt />
-          <p>Summon your Coven! Gather your wizard homies and rule together the cheesiest coven of the hood.</p>
+          <p>Summon your Cowven! Gather your wizard homies and rule together the cheesiest coven of the hood.</p>
           <button class="button">
             <router-link to="/createcowven">Summon</router-link>
           </button>
@@ -162,14 +162,27 @@ export default {
   background-position-y: -12vh;
   margin: 2rem 0 0 1rem;
 
+  @media screen and (max-width: 1020px) {
+    margin: 1rem;
+  }
+
   .content-container {
     display: flex;
     flex-direction: row;
     margin-top: 2rem;
 
+    @media screen and (max-width: 1020px) {
+      flex-direction: column;
+      margin-top: 0;
+    }
+
     .leaderboard {
       width: 100%;
       padding: 0 8rem;
+
+      @media screen and (max-width: 1020px) {
+        padding: 0;
+      }
 
       &::before {
         background: url("../assets/bottom-left.svg");
@@ -178,6 +191,9 @@ export default {
       h1 {
         font-size: 3rem;
         padding: 1rem 0;
+        @media screen and (max-width: 1020px) {
+          font-size: 2rem;
+        }
       }
 
       .v-card {
@@ -190,6 +206,10 @@ export default {
 
     .create-coven {
       padding: 0 8rem;
+
+      @media screen and (max-width: 1020px) {
+        padding: 0;
+      }
 
       h1 {
         padding: 1rem 0;
@@ -219,32 +239,40 @@ export default {
   }
 }
 
-.v-card {
-  &::before {
-    background: url("../assets/bottom-left.svg");
-    width: 4rem;
-    content: "";
-    position: absolute;
-    height: 5rem;
-    background-size: cover;
-    background-repeat: no-repeat;
-    top: 91%;
-    left: -2%;
-  }
-
-  &::after {
-    background: url("../assets/top-right.svg");
-    width: 4rem;
-    content: "";
-    height: 6rem;
-    position: absolute;
-    height: 4rem;
-    background-size: cover;
-    background-repeat: no-repeat;
-    top: -2%;
-    right: -2%;
+.expanded {
+  td {
+    @media screen and (max-width: 1020px) {
+      padding: 0;
+    }
   }
 }
+
+// .v-card {
+//   &::before {
+//     background: url("../assets/bottom-left.svg");
+//     width: 4rem;
+//     content: "";
+//     position: absolute;
+//     height: 5rem;
+//     background-size: cover;
+//     background-repeat: no-repeat;
+//     top: 91%;
+//     left: -2%;
+//   }
+
+//   &::after {
+//     background: url("../assets/top-right.svg");
+//     width: 4rem;
+//     content: "";
+//     height: 6rem;
+//     position: absolute;
+//     height: 4rem;
+//     background-size: cover;
+//     background-repeat: no-repeat;
+//     top: -2%;
+//     right: -2%;
+//   }
+// }
 
 .redirectCowven {
   display: block;

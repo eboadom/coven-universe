@@ -32,7 +32,6 @@ export default {
 }
 body {
   margin: 0;
-  overflow: hidden;
   background: transparent url("./assets/background.svg") no-repeat fixed center;
 }
 #app {

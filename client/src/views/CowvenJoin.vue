@@ -191,6 +191,10 @@ export default {
   background-position-y: -12vh;
   margin: 2rem 0 0 1rem;
 
+  @media screen and (max-width: 1020px) {
+    margin: 1rem;
+  }
+
   .header-container {
     display: flex;
     flex-direction: row;
@@ -271,6 +275,12 @@ export default {
 .v-sheet {
   img {
     width: 4rem;
+  }
+
+  h1 {
+    @media screen and (max-width: 1020px) {
+      font-size: 1.5rem;
+    }
   }
 }
 

@@ -246,16 +246,28 @@ export default {
   background-position-y: -12vh;
   margin: 2rem 0 0 1rem;
 
+  @media screen and (max-width: 1020px) {
+    margin: 1rem;
+  }
+
   .header-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
+    @media screen and (max-width: 1020px) {
+      flex-direction: column;
+    }
 
     h1 {
     }
     .center-container {
       display: flex;
       flex-direction: column;
+
+      @media screen and (max-width: 1020px) {
+        text-align: center;
+      }
 
       .stats {
         display: flex;
@@ -269,9 +281,18 @@ export default {
     flex-direction: row;
     margin-top: 2rem;
 
+    @media screen and (max-width: 1020px) {
+      flex-direction: column;
+    }
+
     .leaderboard {
       width: 100%;
       padding: 0 8rem;
+
+      @media screen and (max-width: 1020px) {
+        padding: 0;
+      }
+
       h1 {
         font-size: 3rem;
         padding: 1rem 0;
@@ -288,6 +309,11 @@ export default {
     .make-proposal {
       padding: 0 8rem;
       width: 60%;
+
+      @media screen and (max-width: 1020px) {
+        padding: 0;
+        width: 100%;
+      }
 
       h1 {
         padding: 1rem 0;
@@ -323,6 +349,15 @@ export default {
 .v-sheet {
   img {
     width: 4rem;
+    @media screen and (max-width: 1020px) {
+      width: 2rem;
+    }
+  }
+
+  h1 {
+    @media screen and (max-width: 1020px) {
+      font-size: 1.5rem;
+    }
   }
 }
 
@@ -358,33 +393,6 @@ export default {
   h4 {
     text-decoration: underline;
     font-family: codesaver;
-  }
-}
-
-.v-card {
-  &::before {
-    background: url("../assets/bottom-left.svg");
-    width: 4rem;
-    content: "";
-    position: absolute;
-    height: 5rem;
-    background-size: cover;
-    background-repeat: no-repeat;
-    top: 91%;
-    left: -2%;
-  }
-
-  &::after {
-    background: url("../assets/top-right.svg");
-    width: 4rem;
-    content: "";
-    height: 6rem;
-    position: absolute;
-    height: 4rem;
-    background-size: cover;
-    background-repeat: no-repeat;
-    top: -2%;
-    right: -2%;
   }
 }
 </style>
