@@ -1,18 +1,6 @@
 <template>
   <div id="main-container">
-    <div class="topnav">
-      <router-link to="/home">
-        <img src="../assets/cheezedao.svg" alt />
-      </router-link>
-      <div class="button-container">
-        <button class="button">
-          <router-link to="/home">Sanctuary</router-link>
-        </button>
-        <button class="button">
-          <router-link to="/mywizards">My Wizards</router-link>
-        </button>
-      </div>
-    </div>
+    <TopNav />
 
     <div class="header-container">
       <h1>Cowven Home</h1>
@@ -127,7 +115,10 @@
 </template>
 
 <script>
+import TopNav from "../components/TopNav.vue";
+
 export default {
+  components: { TopNav },
   data() {
     return {
       search: "",
@@ -254,17 +245,6 @@ export default {
   height: 96vh;
   background-position-y: -12vh;
   margin: 2rem 0 0 1rem;
-  .topnav {
-    display: flex;
-    justify-content: space-between;
-
-    .button-container {
-      padding: 0 2rem;
-      width: 30rem;
-      display: flex;
-      justify-content: space-between;
-    }
-  }
 
   .header-container {
     display: flex;

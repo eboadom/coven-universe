@@ -1,21 +1,9 @@
 <template>
   <div id="main-container">
-    <div class="topnav">
-      <img src="../assets/cheezedao.svg" alt />
-      <div class="button-container">
-        <button class="button">
-          <router-link to="/cbd">CBD</router-link>
-        </button>
-        <button class="button">
-          <router-link to="/mywizards">My Wizards</router-link>
-        </button>
-      </div>
-    </div>
+    <TopNav />
 
     <div class="content-container">
       <div class="leaderboard">
-        <!-- <img class="bottom-left" src="../assets/bottom-left.svg" alt />
-        <img class="top-right" src="../assets/top-right.svg" alt />-->
         <h1>G.O.A.T. Cheeze Board</h1>
         <v-card>
           <v-card-title>
@@ -37,35 +25,18 @@
             :expanded.sync="expanded"
             item-key="name"
             show-expand
-            @click:row="expandRow()"
           >
             <template v-slot:item.god="{ item }">
               <img :src="require(`@/assets/${item.god}.svg`)" />
             </template>
 
-            <!-- <template v-slot:item slot-scope="props">
-              <tr @click="showAlert(props.item)">
-                <td>{{ props.item.name }}</td>
-                <td class="text-xs-right">{{ props.item.calories }}</td>
-                <td class="text-xs-right">{{ props.item.fat }}</td>
-                <td class="text-xs-right">{{ props.item.carbs }}</td>
-                <td class="text-xs-right">{{ props.item.protein }}</td>
-                <td class="text-xs-right">{{ props.item.iron }}</td>
-              </tr>
-            </template>-->
-
             <template v-slot:expanded-item="{ headers }">
-              <td
-                :colspan="headers.length"
-              >This is the content area where the unique ‘tagline’ will be placed for each coven. Each coven can set a few lines of text for a unique distribution of their coven</td>
+              <td :colspan="headers.length">
+                This is the content area where the unique ‘tagline’ will be placed for each coven. Each coven can set a few lines
+                of text for a unique distribution of their coven
+                <v-button class="redirectCowven button" @click="redirectToMyCowven">Go to Cowven</v-button>
+              </td>
             </template>
-
-            <!-- <template v-slot:item.data-table-expand>
-              <v-icon
-                role="button"
-                class="v-icon notranslate v-data-table__expand-icon v-icon--link mdi mdi-chevron-down theme--light"
-              ></v-icon>
-            </template>-->
           </v-data-table>
         </v-card>
       </div>
@@ -85,6 +56,7 @@
 </template>
 
 <script>
+import TopNav from "../components/TopNav.vue";
 export default {
   data() {
     return {
@@ -162,13 +134,22 @@ export default {
       ]
     };
   },
+  components: { TopNav },
   methods: {
-    expandRow(e) {
-      console.log("hover!");
-    },
-    redirectToMyCoven() {
-      console.log("redirect!");
+    redirectToMyCowven() {
+      this.$router.push({ path: "cowvenhome", params: { cowvenId: "123" } });
     }
+  },
+  mounted() {
+    const trs = Array.from(
+      document.querySelectorAll(".v-data-table__wrapper tr")
+    );
+    trs.map(el =>
+      el.addEventListener("mouseover", e => {
+        console.log("HOVER", e);
+        e.target.parentElement.firstElementChild.firstElementChild.click();
+      })
+    );
   }
 };
 </script>
@@ -177,19 +158,8 @@ export default {
   background: url("../assets/grid.svg");
   height: 96vh;
   background-position-y: -12vh;
-
   margin: 2rem 0 0 1rem;
-  .topnav {
-    display: flex;
-    justify-content: space-between;
 
-    .button-container {
-      padding: 0 2rem;
-      width: 30rem;
-      display: flex;
-      justify-content: space-between;
-    }
-  }
   .content-container {
     display: flex;
     flex-direction: row;
@@ -273,11 +243,13 @@ export default {
   }
 }
 
-.v-icon.v-icon.v-icon--link {
-  z-index: 10 !important;
-  background-color: transparent !important;
-  width: 3240% !important;
-  height: 92% !important;
-  position: relative !important;
+.redirectCowven {
+  display: block;
+  margin: auto;
+  font-size: 1rem;
+  text-align: center;
+  line-height: 1.8rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 </style>

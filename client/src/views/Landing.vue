@@ -2,10 +2,8 @@
   <div class="landing">
     <img class="left-cloud" alt="Left Cloud" src="../assets/cloud-left.svg" />
     <img class="right-cloud" alt="Right Cloud" src="../assets/cloud-right.svg" />
-    <!-- <img class="bottom-cheese" alt="Bottom Cheese" src="../assets/bottom-cheese.svg"> -->
     <img class="bottom-cloud" alt="Bottom Cloud" src="../assets/bottom-cloud.svg" />
 
-    <!-- <img class="paper-banner" alt="Paper Banner" src="../assets/paper-banner.svg"> -->
     <div class="container">
       <!-- <h1>Cheeze DAO</h1> -->
       <img class="dao-logo" src="../assets/cheezedao.svg" alt />
@@ -55,7 +53,6 @@ export default {
   background: url("../assets/colored-grid.svg");
   height: 100vh;
   .container {
-    /* background: transparent url("../assets/paper-banner.svg") no-repeat fixed center; */
     width: 50%;
     left: 25%;
     top: 15%;
