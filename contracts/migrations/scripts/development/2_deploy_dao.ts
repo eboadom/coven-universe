@@ -1,4 +1,3 @@
-import {migrationHandler} from "../../utils/migration-handler"
 import {
   defaultInitialReputation,
   DAOName,
@@ -11,6 +10,7 @@ import {
   tempContractAddressesPath,
 } from "../../data/development-data"
 import {writeObjectToFile} from "../../../utils/common-utils"
+import {migrationHandler} from "../../../utils/truffle/cheezy-dao-migrations-env"
 
 export const deployDAOMigration = migrationHandler(
   "Deploy the initial Coven",
@@ -26,7 +26,6 @@ export const deployDAOMigration = migrationHandler(
     deployContributionRewardContract,
     getAvatarInstance,
     getControllerInstance,
-    getReputationInstance,
   }) => {
     // // Factory contract to deploy the organisation's Controller. No owner
     const controllerCreatorInstance = await deployControllerCreatorContract()

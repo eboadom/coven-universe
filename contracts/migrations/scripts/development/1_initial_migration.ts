@@ -1,4 +1,4 @@
-import {migrationHandler} from "../../utils/migration-handler"
+import {migrationHandler} from "../../../utils/truffle/cheezy-dao-migrations-env"
 
 export const initialMigration: Truffle.Migration = migrationHandler(
   "Deploying Migrations contract",

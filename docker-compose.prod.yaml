@@ -1,0 +1,46 @@
+version: '3.5'
+
+services:
+  contracts-env:
+    depends_on:
+      - ganache
+    build:
+      context: ./
+      dockerfile: ./contracts/Dockerfile
+    volumes:
+      - ./:/src
+    restart: always
+    command: npm --prefix ./contracts/ run sys:start-api-server
+    environment:
+      # GANACHE
+      GANACHE_URL: "http://ganache:8545"
+      # RINKEBY
+      MNEMONIC_TRUFFLE_RINKEBY: ""
+      PK_TRUFFLE_RINKEBY: ""
+      HDWALLET_ADDRESS_RINKEBY: ""
+      URL_ETHEREUM_HTTP_PROVIDER_RINKEBY: ""
+      URL_ETHEREUM_WS_PROVIDER_RINKEBY: ""
+      # KOVAN
+      MNEMONIC_TRUFFLE_KOVAN: ""
+      PK_TRUFFLE_KOVAN: ""
+      HDWALLET_ADDRESS_KOVAN: ""
+      URL_ETHEREUM_HTTP_PROVIDER_KOVAN: ""
+      URL_ETHEREUM_WS_PROVIDER_KOVAN: ""
+    ports:
+      - "12040:12040"
+
+  ganache:
+    image: trufflesuite/ganache-cli
+    ports:
+      - "8545:8545"
+    command: ["ganache-cli", "--gasLimit", "8000000"] #,"--blockTime", "1"] 
+
+  nginx:
+    depends_on:
+      - contracts-env
+    build:
+      context: ./client/
+      dockerfile: ./Dockerfile-prod
+    ports:
+      - 80:80
+      - 443:443
