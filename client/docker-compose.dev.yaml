@@ -2,12 +2,10 @@ version: '3.5'
 
 services:
   frontend:
-    build:
-      context: ./
-      dockerfile: Dockerfile-dev
+    image: node:12
+    working_dir: /app
     volumes:
       - ./:/app
-      - /app/node_modules
     restart: always
     command: npm run serve
     ports:
