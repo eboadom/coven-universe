@@ -1,10 +1,11 @@
 import Web3 from "web3"
+import {path as rootPath} from "app-root-path"
 
 export type tEthereumAddress = string
 export type tGetConfiguration = () => IConfiguration
 
 export const getPathDeployedWizardsContracts = (ethereumNetwork: string) =>
-  `migrations/data/wizards-${ethereumNetwork}-addresses.json`
+  `${rootPath}/migrations/data/wizards-${ethereumNetwork}-addresses.json`
 
 export default interface IWizardsAddresses {
   WizardWalletFactory: tEthereumAddress
@@ -21,12 +22,14 @@ export interface IConfiguration {
 
 export let configuration: IConfiguration
 
-export const initConfiguration = async (ethereumNetwork: string = "kovan") => {
+export const initConfiguration = async (
+  ethereumNetwork: string = "development",
+) => {
   const httpProvider = new Web3.providers.HttpProvider(<string>(
-    process.env.URL_ETHEREUM_HTTP_PROVIDER_KOVAN
+    process.env[`URL_ETHEREUM_HTTP_PROVIDER_${ethereumNetwork.toUpperCase()}`]
   ))
   const wsProvider = new Web3.providers.WebsocketProvider(<string>(
-    process.env.URL_ETHEREUM_WS_PROVIDER_KOVAN
+    process.env[`URL_ETHEREUM_HTTP_PROVIDER_${ethereumNetwork.toUpperCase()}`]
   ))
   configuration = {
     web3: new Web3(httpProvider),
@@ -34,7 +37,7 @@ export const initConfiguration = async (ethereumNetwork: string = "kovan") => {
     addresses: <IWizardsAddresses>(
       require(getPathDeployedWizardsContracts(ethereumNetwork))
     ),
-    network: <string>process.env.API_ETHEREUM_NETWORK,
+    network: ethereumNetwork,
   }
 }
 

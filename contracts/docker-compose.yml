@@ -18,6 +18,8 @@ x-contract-base: &contract-base
   environment:
     # GANACHE
     GANACHE_URL: "http://ganache:8545"
+    URL_ETHEREUM_HTTP_PROVIDER_DEVELOPMENT: "http://ganache:8545"
+    URL_ETHEREUM_WS_PROVIDER_DEVELOPMENT: "wss://ganache:8545"
     # RINKEBY
     MNEMONIC_TRUFFLE_RINKEBY: ""
     PK_TRUFFLE_RINKEBY: ""
@@ -30,7 +32,6 @@ x-contract-base: &contract-base
     HDWALLET_ADDRESS_KOVAN: ""
     URL_ETHEREUM_HTTP_PROVIDER_KOVAN: "https://kovan.infura.io/v3/3f9d1321a68b41a092b3b4e404d3e537"
     URL_ETHEREUM_WS_PROVIDER_KOVAN: "wss://kovan.infura.io/v3/3f9d1321a68b41a092b3b4e404d3e537"
-    API_ETHEREUM_NETWORK_WS_URL: "wss://ws.kovan-node.ethlend.io"
 
 
 services:

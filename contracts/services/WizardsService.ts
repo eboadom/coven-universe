@@ -8,6 +8,7 @@ import {WizardGuild} from "../types/web3-contracts/WizardGuild"
 import {bnToBigNumber} from "../utils/common-utils"
 import {WizardWalletFactory} from "../types/web3-contracts/WizardWalletFactory"
 import {WizardWallet} from "../types/web3-contracts/WizardWallet"
+import {path as rootPath} from "app-root-path"
 
 export const wizardAffinities = ["Neutral", "Fire", "Water", "Air"]
 
@@ -16,7 +17,7 @@ export enum WizardStatus {
   FREE = "FREE",
 }
 
-export interface WizardData {
+export interface IWizardData {
   id: number
   owner: tEthereumAddress
   innatePower: string
@@ -24,18 +25,23 @@ export interface WizardData {
   score?: string
   cowven?: tEthereumAddress
   status: WizardStatus
-  reputation: string
+  wizardWalletData: IWizardWalletData
+}
+
+export interface IWizardWalletData {
+  wizardWalletAddress: tEthereumAddress
+  genecheezeDaoReputation: string
 }
 
 export class WizardsService extends ContractService {
   private getWizardGuildABI = (): any[] =>
-    require(`../build/contracts/WizardGuild.json`).abi
+    require(`${rootPath}/build/contracts/WizardGuild.json`).abi
 
   private getWizardWalletABI = (): any[] =>
-    require(`../build/contracts/WizardWallet.json`).abi
+    require(`${rootPath}/build/contracts/WizardWallet.json`).abi
 
   private getWizardWalletFactoryABI = (): any[] =>
-    require(`../build/contracts/WizardWalletFactory.json`).abi
+    require(`${rootPath}/build/contracts/WizardWalletFactory.json`).abi
 
   private getWizardGuildAddress = (): tEthereumAddress =>
     getConfiguration().addresses.WizardGuild
@@ -74,11 +80,15 @@ export class WizardsService extends ContractService {
       wizardWalletAddress,
     )
 
-  getWizardData = async (wizardId: number): Promise<WizardData> => {
+  getWizardData = async (wizardId: number): Promise<IWizardData> => {
     const {getWizard} = this.getWizardGuildContract().methods
 
-    const [{owner, innatePower, affinity, metadata}] = await Promise.all([
+    const [
+      {owner, innatePower, affinity, metadata},
+      wizardWalletAddress,
+    ] = await Promise.all([
       getWizard(wizardId).call(),
+      this.getWizardWalletAddressByWizardId(wizardId),
     ])
 
     return {
@@ -87,7 +97,10 @@ export class WizardsService extends ContractService {
       innatePower: bnToBigNumber(innatePower).toString(),
       affinity: wizardAffinities[bnToBigNumber(affinity).toNumber()],
       status: WizardStatus.FREE, // TODO: unmock
-      reputation: "0", // TODO: unmock
+      wizardWalletData: {
+        wizardWalletAddress: wizardWalletAddress,
+        genecheezeDaoReputation: "0", // TODO: unmock
+      },
     }
   }
 
