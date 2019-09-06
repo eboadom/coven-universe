@@ -20,6 +20,14 @@ import {
   AvatarInstance,
   ControllerInstance,
   ReputationInstance,
+  WizardsERC721AddressesProviderContract,
+  WizardsERC721AddressesProviderInstance,
+  WizardWalletFactoryContract,
+  WizardWalletFactoryInstance,
+  WizardWalletContract,
+  WizardWalletInstance,
+  WizardGuildContract,
+  WizardGuildInstance,
 } from "../../types/truffle-contracts"
 import {
   setupMigrationEnv,
@@ -45,6 +53,12 @@ export interface MigratorExecutorParams {
   deployGlobalConstraintRegistrarContract(
     args?: any[],
   ): Promise<GlobalConstraintRegistrarInstance>
+  deployWizardGuild(args?: any[]): Promise<WizardGuildInstance>
+  deployWizardsERC721AddressesProvider(
+    args?: any[],
+  ): Promise<WizardsERC721AddressesProviderInstance>
+  deployWizardWalletFactory(args?: any[]): Promise<WizardWalletFactoryInstance>
+  deployWizardWallet(args?: any[]): Promise<WizardWalletInstance>
   linkLibraryToContract(
     libraryId: LibraryId,
     contractId: ContractId | LibraryId,
@@ -57,6 +71,7 @@ export interface MigratorExecutorParams {
     contractAddress?: string,
   ): Promise<ContractInstance>
   accounts: Truffle.Accounts
+  network: string
 }
 
 export const migrationHandler = (
@@ -151,6 +166,30 @@ export const migrationHandler = (
       ContributionRewardInstance
     >(ContractId.ContributionReward, args)
 
+  const deployWizardsERC721AddressesProvider = async (args?: any[]) =>
+    await deployContract<
+      WizardsERC721AddressesProviderContract,
+      WizardsERC721AddressesProviderInstance
+    >(ContractId.WizardsERC721AddressesProvider, args)
+
+  const deployWizardWalletFactory = async (args?: any[]) =>
+    await deployContract<
+      WizardWalletFactoryContract,
+      WizardWalletFactoryInstance
+    >(ContractId.WizardWalletFactory, args)
+
+  const deployWizardWallet = async (args?: any[]) =>
+    await deployContract<WizardWalletContract, WizardWalletInstance>(
+      ContractId.WizardWallet,
+      args,
+    )
+
+  const deployWizardGuild = async (args?: any[]) =>
+    await deployContract<WizardGuildContract, WizardGuildInstance>(
+      ContractId.WizardGuild,
+      args,
+    )
+
   const getAvatarInstance = async (contractAddress?: string) =>
     await getContractInstance<AvatarInstance>(
       ContractId.Avatar,
@@ -163,7 +202,7 @@ export const migrationHandler = (
       contractAddress,
     )
 
-    const getReputationInstance = async (contractAddress?: string) =>
+  const getReputationInstance = async (contractAddress?: string) =>
     await getContractInstance<ReputationInstance>(
       ContractId.Reputation,
       contractAddress,
@@ -171,6 +210,7 @@ export const migrationHandler = (
 
   const executorParams: MigratorExecutorParams = {
     accounts,
+    network,
     deployMigrationsContract,
     deployControllerCreatorContract,
     deployDaoCreatorContract,
@@ -180,11 +220,15 @@ export const migrationHandler = (
     deployUpgradeSchemeContract,
     deployGlobalConstraintRegistrarContract,
     deployContributionRewardContract,
+    deployWizardGuild,
+    deployWizardsERC721AddressesProvider,
+    deployWizardWalletFactory,
+    deployWizardWallet,
     linkLibraryToContract,
     getContractInstance,
     getAvatarInstance,
     getReputationInstance,
-    getControllerInstance
+    getControllerInstance,
   }
   await migrationExecutor(executorParams)
 }

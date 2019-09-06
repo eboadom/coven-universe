@@ -1,4 +1,5 @@
 import BigNumber from "bignumber.js"
+import BN from 'bn.js';
 import {EthereumNetwork} from "./types"
 import {promises} from "fs"
 import {exec as callbackExec, spawn as spawnNode} from "child_process"
@@ -91,3 +92,14 @@ export const exec = (command: string) =>
       resolve({out: stdout, err: stderr})
     })
   })
+
+  // TODO: review types
+export const bnToBigNumber = (amount: BN): BigNumber =>
+new BigNumber(<any>amount);
+export const stringToBigNumber = (amount: string): BigNumber =>
+new BigNumber(amount);
+
+export type tStringCurrencyUnits = string; // ex. 2.5
+export type tStringDecimalUnits = string; // ex 2500000000000000000
+export type tBigNumberCurrencyUnits = BigNumber;
+export type tBigNumberDecimalUnits = BigNumber;

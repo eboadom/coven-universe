@@ -28,8 +28,8 @@ x-contract-base: &contract-base
     MNEMONIC_TRUFFLE_KOVAN: ""
     PK_TRUFFLE_KOVAN: ""
     HDWALLET_ADDRESS_KOVAN: ""
-    URL_ETHEREUM_HTTP_PROVIDER_KOVAN: ""
-    URL_ETHEREUM_WS_PROVIDER_KOVAN: ""
+    URL_ETHEREUM_HTTP_PROVIDER_KOVAN: "https://kovan.infura.io/v3/3f9d1321a68b41a092b3b4e404d3e537"
+    URL_ETHEREUM_WS_PROVIDER_KOVAN: "wss://kovan.infura.io/v3/3f9d1321a68b41a092b3b4e404d3e537"
     API_ETHEREUM_NETWORK_WS_URL: "wss://ws.kovan-node.ethlend.io"
 
 
@@ -51,7 +51,6 @@ services:
       - overlay
     ports:
       - "8545:8545"
-
 
   redis:
     image: redis:latest

@@ -10,7 +10,11 @@ export const enum ContractId {
   GlobalConstraintRegistrar = "GlobalConstraintRegistrar",
   ContributionReward = "ContributionReward",
   Controller = "Controller",
-  Reputation = "Reputation"
+  Reputation = "Reputation",
+  WizardGuild = "WizardGuild",
+  WizardsERC721AddressesProvider = "WizardsERC721AddressesProvider",
+  WizardWalletFactory = "WizardWalletFactory",
+  WizardWallet = "WizardWallet",
 }
 
 export const enum LibraryId {}
