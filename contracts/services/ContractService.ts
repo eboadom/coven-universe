@@ -36,11 +36,11 @@ export class ContractService {
     abi: any[],
     contractAddress: tEthereumAddress,
   ): ContractType => {
-    const {web3, web3WS} = getConfiguration()
+    const {web3, web3WS} = getConfiguration();
     const {Contract} =
-      web3ProviderType === EWeb3ProviderType.HTTP ? web3.eth : web3WS.eth
+      web3ProviderType === EWeb3ProviderType.HTTP ? web3.eth : web3WS.eth;
     return (<any>new Contract(abi, contractAddress)) as ContractType
-  }
+  };
 
   protected txTo = async (
     to: tEthereumAddress,

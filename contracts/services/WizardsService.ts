@@ -34,7 +34,7 @@ export const wizardAffinities = [
   eWizardAffinity.Fire,
   eWizardAffinity.Water,
   eWizardAffinity.Wind,
-]
+];
 
 export interface IWizardData {
   id: number
@@ -74,22 +74,22 @@ export interface IWizardsService {
 // Allows to interact with the Wizards-related part: wizards nft, CheezeWizards tournaments, Wizards wallets
 export class WizardsService extends ContractService {
   private getWizardGuildABI = (): any[] =>
-    require(`${rootPath}/build/contracts/WizardGuild.json`).abi
+    require(`${rootPath}/build/contracts/WizardGuild.json`).abi;
 
   private getWizardWalletABI = (): any[] =>
-    require(`${rootPath}/build/contracts/WizardWallet.json`).abi
+    require(`${rootPath}/build/contracts/WizardWallet.json`).abi;
 
   private getWizardWalletFactoryABI = (): any[] =>
-    require(`${rootPath}/build/contracts/WizardWalletFactory.json`).abi
+    require(`${rootPath}/build/contracts/WizardWalletFactory.json`).abi;
 
   private getWizardGuildAddress = (): tEthereumAddress =>
-    getConfiguration().addresses.WizardGuild
+    getConfiguration().addresses.WizardGuild;
 
   private getWizardWalletFactoryAddress = (): tEthereumAddress =>
-    getConfiguration().addresses.WizardWalletFactory
+    getConfiguration().addresses.WizardWalletFactory;
 
   private getWizardsERC721AddressesProviderAddress = (): tEthereumAddress =>
-    getConfiguration().addresses.WizardsERC721AddressesProvider
+    getConfiguration().addresses.WizardsERC721AddressesProvider;
 
   private getWizardGuildContract = (
     web3ProviderType: EWeb3ProviderType = EWeb3ProviderType.HTTP,
@@ -98,7 +98,7 @@ export class WizardsService extends ContractService {
       web3ProviderType,
       this.getWizardGuildABI(),
       this.getWizardGuildAddress(),
-    )
+    );
 
   private getWizardWalletFactoryContract = (
     web3ProviderType: EWeb3ProviderType = EWeb3ProviderType.HTTP,
@@ -107,7 +107,7 @@ export class WizardsService extends ContractService {
       web3ProviderType,
       this.getWizardWalletFactoryABI(),
       this.getWizardWalletFactoryAddress(),
-    )
+    );
 
   private getWizardWalletContract = (
     wizardWalletAddress: tEthereumAddress,
@@ -117,13 +117,13 @@ export class WizardsService extends ContractService {
       web3ProviderType,
       this.getWizardWalletABI(),
       wizardWalletAddress,
-    )
+    );
 
   getAllTransferEventsOfWizards = async (): Promise<EventData[]> =>
     await this.getWizardGuildContract().getPastEvents(
       eWizardGuildEvent.Transfer,
       {fromBlock: 0},
-    )
+    );
 
   getAllTransferEventsByWizardId = async (
     wizardId: string,
@@ -134,16 +134,16 @@ export class WizardsService extends ContractService {
     )).filter(
       eventData =>
         bnToBigNumber(eventData.returnValues.wizardId).toFixed() === wizardId,
-    )
+    );
 
   getCurrentOwnerOfWizardId = async (
     wizardId: string,
   ): Promise<tEthereumAddress> => {
     const allWizardTransfers = await this.getAllTransferEventsByWizardId(
       wizardId,
-    )
+    );
     return allWizardTransfers[allWizardTransfers.length - 1].returnValues.to
-  }
+  };
 
   getAllWizardsByOwnerAddress = async (
     owner: tEthereumAddress,
@@ -151,36 +151,36 @@ export class WizardsService extends ContractService {
     return (await this.getAllTransferEventsOfWizards())
       .filter(eventData => eventData.returnValues.to === owner)
       .map(eventData => eventData.returnValues.wizardId.toString())
-  }
+  };
 
   getWizardsDataByOwner = async (
     owner: tEthereumAddress,
   ): Promise<IWizardData[]> => {
-    const allWizardsOwned = await this.getAllWizardsByOwnerAddress(owner)
-    const wizardsData: IWizardData[] = []
+    const allWizardsOwned = await this.getAllWizardsByOwnerAddress(owner);
+    const wizardsData: IWizardData[] = [];
     for (const wizardId of allWizardsOwned) {
       wizardsData.push(await this.getWizardData(Number(wizardId)))
     }
     return wizardsData
-  }
+  };
 
   getWizardData = async (wizardId: number): Promise<IWizardData> => {
-    const {getWizard} = this.getWizardGuildContract().methods
-    const daoService = new DaoService()
+    const {getWizard} = this.getWizardGuildContract().methods;
+    const daoService = new DaoService();
     const [
       {owner, innatePower, affinity, metadata},
       wizardWalletAddress,
     ] = await Promise.all([
       getWizard(wizardId).call(),
       this.getWizardWalletAddressByWizardId(wizardId),
-    ])
+    ]);
 
     const reputation =
       wizardWalletAddress !== ADDRESS_0x0
         ? await daoService.getReputationBalanceOf(wizardWalletAddress)
-        : "0"
+        : "0";
     const status =
-      reputation !== "0" ? eWizardStatus.IN_COWVEN : eWizardStatus.FREE
+      reputation !== "0" ? eWizardStatus.IN_COWVEN : eWizardStatus.FREE;
 
     return {
       id: wizardId,
@@ -195,14 +195,14 @@ export class WizardsService extends ContractService {
       cowvenName: DAOName, // TODO: adapt to multi daos
       cowvenAddress: daoService.getAvatarAddress(), // TODO: adapt to multidaos
     }
-  }
+  };
 
   getWizardWalletAddressByWizardId = async (
     wizardId: number,
   ): Promise<tEthereumAddress> =>
     await this.getWizardWalletFactoryContract()
       .methods.wizardsWallets(wizardId)
-      .call()
+      .call();
 
   createWalletForWizard = async (
     userWallet: tEthereumAddress,

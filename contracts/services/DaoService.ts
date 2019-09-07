@@ -89,29 +89,29 @@ export interface IDaoService {
 }
 
 export class DaoService extends ContractService implements IDaoService {
-  private REPUTATION_DECIMALS = 18
-  private DAO_TOKEN_DECIMALS = 18
+  private REPUTATION_DECIMALS = 18;
+  private DAO_TOKEN_DECIMALS = 18;
 
   private getAvatarABI = (): any[] =>
-    require(`${rootPath}/build/contracts/Avatar.json`).abi
+    require(`${rootPath}/build/contracts/Avatar.json`).abi;
 
   private getReputationABI = (): any[] =>
-    require(`${rootPath}/build/contracts/Reputation.json`).abi
+    require(`${rootPath}/build/contracts/Reputation.json`).abi;
 
   private getContributionRewardABI = (): any[] =>
-    require(`${rootPath}/build/contracts/ContributionReward.json`).abi
+    require(`${rootPath}/build/contracts/ContributionReward.json`).abi;
 
   private getQuorumVoteABI = (): any[] =>
-    require(`${rootPath}/build/contracts/QuorumVote.json`).abi
+    require(`${rootPath}/build/contracts/QuorumVote.json`).abi;
 
   private getReputationAddress = (): tEthereumAddress =>
-    getConfiguration().addresses.Reputation
+    getConfiguration().addresses.Reputation;
 
   private getContributionRewardAddress = (): tEthereumAddress =>
-    getConfiguration().addresses.ContributionReward
+    getConfiguration().addresses.ContributionReward;
 
   private getQuorumVoteAddress = (): tEthereumAddress =>
-    getConfiguration().addresses.QuorumVote
+    getConfiguration().addresses.QuorumVote;
 
   private getAvatarContract = (
     web3ProviderType: EWeb3ProviderType = EWeb3ProviderType.HTTP,
@@ -120,7 +120,7 @@ export class DaoService extends ContractService implements IDaoService {
       web3ProviderType,
       this.getAvatarABI(),
       this.getAvatarAddress(),
-    )
+    );
 
   private getReputationContract = (
     web3ProviderType: EWeb3ProviderType = EWeb3ProviderType.HTTP,
@@ -129,7 +129,7 @@ export class DaoService extends ContractService implements IDaoService {
       web3ProviderType,
       this.getReputationABI(),
       this.getReputationAddress(),
-    )
+    );
 
   private getContributionRewardContract = (
     web3ProviderType: EWeb3ProviderType = EWeb3ProviderType.HTTP,
@@ -138,7 +138,7 @@ export class DaoService extends ContractService implements IDaoService {
       web3ProviderType,
       this.getContributionRewardABI(),
       this.getContributionRewardAddress(),
-    )
+    );
 
   private getQuorumVoteContract = (
     web3ProviderType: EWeb3ProviderType = EWeb3ProviderType.HTTP,
@@ -147,7 +147,7 @@ export class DaoService extends ContractService implements IDaoService {
       web3ProviderType,
       this.getQuorumVoteABI(),
       this.getQuorumVoteAddress(),
-    )
+    );
 
   private getRawReputationBalanceOf = async (
     address: tEthereumAddress,
@@ -156,7 +156,7 @@ export class DaoService extends ContractService implements IDaoService {
       await this.getReputationContract()
         .methods.balanceOf(address)
         .call(),
-    )
+    );
 
   private getRawReputationTotalSupply = async (): Promise<
     tBigNumberDecimalUnits
@@ -165,16 +165,16 @@ export class DaoService extends ContractService implements IDaoService {
       await this.getReputationContract()
         .methods.totalSupply()
         .call(),
-    )
+    );
 
   getAvatarAddress = (): tEthereumAddress =>
-    getConfiguration().addresses.WizardGuild
+    getConfiguration().addresses.WizardGuild;
 
   getReputationTotalSupply = async (): Promise<tStringCurrencyUnits> =>
     decimalsToCurrencyUnits(
       await this.getRawReputationTotalSupply(),
       this.REPUTATION_DECIMALS,
-    )
+    );
 
   getReputationBalanceOf = async (
     address: tEthereumAddress,
@@ -182,7 +182,7 @@ export class DaoService extends ContractService implements IDaoService {
     decimalsToCurrencyUnits(
       await this.getRawReputationBalanceOf(address),
       this.REPUTATION_DECIMALS,
-    )
+    );
 
   getDaoInfo = async (
     daoId: string,
@@ -199,7 +199,7 @@ export class DaoService extends ContractService implements IDaoService {
       loses: 0, // TODO: unmock
       grate: eGrateType.MOLD, // TODO: unmock
     }
-  }
+  };
 
   getCreatedContributionsProposalsFromEvents = async (): Promise<
     EventData[]
@@ -208,7 +208,7 @@ export class DaoService extends ContractService implements IDaoService {
       eContributionRewardEvent.NewContributionProposal,
       {fromBlock: 0},
     )
-  }
+  };
 
   // TODO: Review parameters
   createProposalForReputationReward = async (
@@ -244,7 +244,7 @@ export class DaoService extends ContractService implements IDaoService {
         )
         .encodeABI(),
     }),
-  ]
+  ];
 
   voteProposal = async (
     sender: tEthereumAddress, // Who sends the vote transaction
@@ -259,7 +259,7 @@ export class DaoService extends ContractService implements IDaoService {
         : currencyUnitsToDecimals(
             stringToBigNumber(reputationToUse),
             this.REPUTATION_DECIMALS,
-          )
+          );
 
     return [
       await this.txTo(this.getQuorumVoteAddress(), {
@@ -269,7 +269,7 @@ export class DaoService extends ContractService implements IDaoService {
           .encodeABI(),
       }),
     ]
-  }
+  };
 
   redeemReputation = async (
     redeemer: tEthereumAddress, // Who is going to redeem the reputation

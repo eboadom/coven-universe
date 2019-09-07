@@ -8,7 +8,7 @@ import VueApollo from "vue-apollo";
 
 // Create the subscription websocket link
 const wsLink = new WebSocketLink({
-  uri: process.env.GRAPHQL_ENDPOINT_URL,
+  uri: process.env.VUE_APP_GRAPHQL_ENDPOINT_URL,
   options: {
     reconnect: true
   }
@@ -21,5 +21,4 @@ export const apolloClient = new ApolloClient({
   connectToDevTools: true
 });
 
-// Install the vue plugin like before
 Vue.use(VueApollo);
