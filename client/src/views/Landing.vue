@@ -29,8 +29,9 @@
         to follow and govern it based on your gaming skills !
       </p>
       <div class="button__inner">
-        <button id="enter" class="button" title="Coming soon">
-          <router-link :to="{ name: 'home' }">Enter the Cheeze</router-link>
+        <button id="enter" class="button" disabled title="Coming soon">
+          <!--          <router-link :to="{ name: 'home' }">Enter the Cheeze</router-link>-->
+          Enter the Cheeze
         </button>
         <a class="twitter" href="https://twitter.com/CheezeDao">
           <img src="../assets/twitter.svg" alt />
