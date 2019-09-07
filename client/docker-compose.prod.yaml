@@ -1,10 +1,49 @@
 version: '3.5'
 
+volumes:
+  traefik-ssl:
+    driver: local
+
+networks:
+  overlay:
+
 services:
-  nginx: 
+  traefik:
+    image: traefik:1.7
+    command:
+      - "--entrypoints=Name:http Address::80 Redirect.EntryPoint:https"
+      - "--entrypoints=Name:https Address::443 TLS"
+      - "--defaultentrypoints=http,https"
+      - "--acme"
+      - "--acme.storage=/etc/traefik/acme/acme.json"
+      - "--acme.entryPoint=https"
+      - "--acme.httpChallenge.entryPoint=http"
+      - "--acme.onHostRule=true"
+      - "--acme.onDemand=false"
+      - "--acme.acmeLogging=true"
+      - "--acme.email=andrey@ethlend.io"
+      - "--docker"
+      - "--docker.domain=aave.com"
+      - "--docker.watch"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - traefik-ssl:/etc/traefik/acme
+    networks:
+      -overlay
+    ports:
+      - target: 80
+        published: 80
+      - target: 443
+        published: 443
+
+  frontend:
     build:
       context: ./
       dockerfile: Dockerfile-prod
-    ports:
-      - 80:80
-      - 443:443
+    networks:
+      - overlay
+    labels:
+      traefik.frontend.rule: "Host:cheezedao.com,www.cheezedao.com"
+      traefik.frontend.redirect.regex: "^https?://www.cheezedao.com/(.*)"
+      traefik.frontend.redirect.replacement: "https://cheezedao.com/$${1}"
+      traefik.port: '80'
