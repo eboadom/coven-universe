@@ -1,11 +1,12 @@
 <template>
-  <div id="main-container">
-    <TopNav />
-
+  <div class="CowvenJoin">
     <div class="header-container">
       <h1>Cowven Home</h1>
       <div class="center-container">
-        <p>“Cowven unique description that the creator entered in the ‘create a cowven’ screen”</p>
+        <p>
+          “Cowven unique description that the creator entered in the ‘create a
+          cowven’ screen”
+        </p>
         <div class="stats">
           <p>Rank #000</p>
           <p>Score #000</p>
@@ -23,11 +24,19 @@
         <v-card class="dialog">
           <img src="../assets/wheel.svg" alt />
           <h1>Thank You</h1>
-          <v-card-text>You applied. Sweet. This is the first step of a long bureacratic process within the CheezeWizarding world. Luckily for you, this world exists on a different timescale so… it’s really down to how long the Cheeze Wizards members of this Cowven take to accept or reject you, meh.</v-card-text>
+          <v-card-text
+            >You applied. Sweet. This is the first step of a long bureacratic
+            process within the CheezeWizarding world. Luckily for you, this
+            world exists on a different timescale so… it’s really down to how
+            long the Cheeze Wizards members of this Cowven take to accept or
+            reject you, meh.</v-card-text
+          >
 
           <!-- <v-card-actions> -->
           <v-spacer></v-spacer>
-          <button class="button" color="primary" text @click="dialog = false">Gouda'nough</button>
+          <button class="button" color="primary" text @click="dialog = false">
+            Gouda'nough
+          </button>
           <!-- </v-card-actions> -->
         </v-card>
       </v-dialog>
@@ -48,11 +57,13 @@
         <h1>Spell Proposals</h1>
         <div v-for="proposal in proposals" class="proposal-container">
           <div class="topline">
-            <p>Spell: {{proposal.spell}}</p>
-            <p v-if="proposal.wizardId !== null">Wizard #{{proposal.wizardId}}</p>
+            <p>Spell: {{ proposal.spell }}</p>
+            <p v-if="proposal.wizardId !== null">
+              Wizard #{{ proposal.wizardId }}
+            </p>
           </div>
           <hr />
-          <p class="description">{{proposal.description}}</p>
+          <p class="description">{{ proposal.description }}</p>
           <button class="button vote">Nay</button>
 
           <v-dialog v-model="dialog" width="500">
@@ -63,11 +74,21 @@
             <v-card class="dialog">
               <img src="../assets/wheel.svg" alt />
               <h1>Thank You</h1>
-              <v-card-text>You expressed yourself and that’s beautiful as a gallon of milk but let’s see if the majority agrees</v-card-text>
+              <v-card-text
+                >You expressed yourself and that’s beautiful as a gallon of milk
+                but let’s see if the majority agrees</v-card-text
+              >
 
               <!-- <v-card-actions> -->
               <v-spacer></v-spacer>
-              <button class="button" color="primary" text @click="dialog = false">Got it</button>
+              <button
+                class="button"
+                color="primary"
+                text
+                @click="dialog = false"
+              >
+                Got it
+              </button>
               <!-- </v-card-actions> -->
             </v-card>
           </v-dialog>
@@ -78,10 +99,7 @@
 </template>
 
 <script>
-import TopNav from "../components/TopNav.vue";
-
 export default {
-  components: { TopNav },
   data() {
     return {
       dialog: false,
@@ -185,88 +203,74 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-#main-container {
-  background: url("../assets/grid.svg");
-  height: 96vh;
-  background-position-y: -12vh;
-  margin: 2rem 0 0 1rem;
+.header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 
-  @media screen and (max-width: 1020px) {
-    margin: 1rem;
+  h1 {
+  }
+  .center-container {
+    display: flex;
+    flex-direction: column;
+
+    .stats {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
+
+.content-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 2rem;
+
+  .leaderboard {
+    width: 100%;
+    padding: 0 8rem;
+    h1 {
+      font-size: 3rem;
+      padding: 1rem 0;
+    }
+
+    .v-card {
+      border: 1px solid black;
+      box-shadow: none;
+      padding: 0 2rem 2rem 2rem;
+      font-family: codesaver;
+    }
   }
 
-  .header-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  .spell-proposals {
+    padding: 0 8rem;
+    overflow: scroll;
+    max-height: 49rem;
 
     h1 {
+      padding: 1rem 0;
     }
-    .center-container {
-      display: flex;
-      flex-direction: column;
 
-      .stats {
+    .proposal-container {
+      border: 1px solid black;
+      padding: 1rem;
+      height: 13rem;
+      text-align: center;
+      box-shadow: 3px 4px 0px 0px rgba(0, 0, 0, 1);
+      margin-bottom: 2rem;
+      background: white;
+
+      .topline {
         display: flex;
         justify-content: space-between;
       }
-    }
-  }
 
-  .content-container {
-    display: flex;
-    flex-direction: row;
-    margin-top: 2rem;
-
-    .leaderboard {
-      width: 100%;
-      padding: 0 8rem;
-      h1 {
-        font-size: 3rem;
-        padding: 1rem 0;
+      .vote {
+        width: 7rem;
+        margin: 0 1rem;
       }
-
-      .v-card {
-        border: 1px solid black;
-        box-shadow: none;
-        padding: 0 2rem 2rem 2rem;
-        font-family: codesaver;
-      }
-    }
-
-    .spell-proposals {
-      padding: 0 8rem;
-      overflow: scroll;
-      max-height: 49rem;
-
-      h1 {
-        padding: 1rem 0;
-      }
-
-      .proposal-container {
-        border: 1px solid black;
-        padding: 1rem;
-        height: 13rem;
-        text-align: center;
-        box-shadow: 3px 4px 0px 0px rgba(0, 0, 0, 1);
-        margin-bottom: 2rem;
-        background: white;
-
-        .topline {
-          display: flex;
-          justify-content: space-between;
-        }
-
-        .vote {
-          width: 7rem;
-          margin: 0 1rem;
-        }
-        // .description {
-        //   padding: 1rem 0 3rem 0;
-        // }
-        img {
-          width: 10rem;
-        }
+      img {
+        width: 10rem;
       }
     }
   }

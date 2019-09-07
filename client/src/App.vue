@@ -6,13 +6,10 @@
 
 <script>
 export default {
-  name: "App",
-  components: {},
-  data: () => ({
-    //
-  })
+  name: "App"
 };
 </script>
+
 <style lang="scss">
 :root {
   --purple: #b79afc;
@@ -30,10 +27,13 @@ export default {
   font-family: "codesaver";
   src: url("./assets/codesaver.otf");
 }
+
 body {
   margin: 0;
   background: transparent url("./assets/background.svg") no-repeat fixed center;
+  overflow-x: hidden;
 }
+
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -46,18 +46,27 @@ body {
   padding: 8px 16px;
   color: #000;
   margin-top: 0;
-  box-shadow: 3px 4px 0px 0px rgba(0, 0, 0, 1);
+  box-shadow: 3px 4px 0 0 rgba(0, 0, 0, 1);
   width: 12rem;
   height: 3rem;
   background: white;
+  transition: all 0.3s ease;
 
   a {
     text-decoration: none;
+    color: #000 !important;
   }
 
   &:hover,
   &:focus {
-    background: #fff032;
+    background: #fff032 !important;
+  }
+  &:disabled {
+    background: #e1e1e1;
+    &:hover,
+    &:focus {
+      background: #e1e1e1 !important;
+    }
   }
 }
 
@@ -69,5 +78,10 @@ h1 {
 p {
   font-family: codesaver;
 }
-</style>
 
+.v-dialog:not(.v-dialog--fullscreen) {
+  @media screen and (max-width: 1020px) {
+    margin: 15px;
+  }
+}
+</style>

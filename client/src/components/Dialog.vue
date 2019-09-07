@@ -10,7 +10,9 @@
       <v-card-text>You just submitted your proposal, let’s see what the rest of the Cowven thinks of your proposal.</v-card-text>
 
       <v-spacer></v-spacer>
-      <button class="button" color="primary" text @click="dialog = false">Got it</button>
+      <button class="button" color="primary" text @click="dialog = false">
+        Got it
+      </button>
     </v-card>
   </v-dialog>
 </template>

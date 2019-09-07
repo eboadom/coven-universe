@@ -1,73 +1,78 @@
 <template>
-  <div id="main-container">
-    <TopNav />
+  <div class="content-container">
+    <div class="create-coven">
+      <h1>Create Cowven</h1>
+      <div class="form-container">
+        <v-form ref="form" v-model="valid" lazy-validation>
+          <v-text-field
+            v-model="name"
+            :counter="10"
+            :rules="nameRules"
+            label="Cowven Name"
+            required
+          ></v-text-field>
 
-    <div class="content-container">
-      <div class="create-coven">
-        <h1>Create Cowven</h1>
-        <div class="form-container">
-          <v-form ref="form" v-model="valid" lazy-validation>
-            <v-text-field
-              v-model="name"
-              :counter="10"
-              :rules="nameRules"
-              label="Cowven Name"
-              required
-            ></v-text-field>
+          <v-select
+            v-model="select"
+            :items="grates"
+            :rules="[v => !!v || 'Item is required']"
+            label="Choose your Grate One"
+            required
+          ></v-select>
 
-            <v-select
-              v-model="select"
-              :items="grates"
-              :rules="[v => !!v || 'Item is required']"
-              label="Choose your Grate One"
-              required
-            ></v-select>
+          <v-select
+            v-model="select"
+            :items="days"
+            :rules="[v => !!v || 'Item is required']"
+            label="Activity"
+            required
+          ></v-select>
 
-            <v-select
-              v-model="select"
-              :items="days"
-              :rules="[v => !!v || 'Item is required']"
-              label="Activity"
-              required
-            ></v-select>
+          <v-textarea
+            label="Cowven Description"
+            auto-grow
+            outlined
+            rows="9"
+            row-height="15"
+          ></v-textarea>
+        </v-form>
+        <v-dialog v-model="dialog" width="500">
+          <template v-slot:activator="{ on }">
+            <button class="button" v-on="on">Start the Ritual</button>
+          </template>
 
-            <v-textarea label="Cowven Description" auto-grow outlined rows="9" row-height="15"></v-textarea>
-          </v-form>
-          <v-dialog v-model="dialog" width="500">
-            <template v-slot:activator="{ on }">
-              <button class="button" v-on="on">Start the Ritual</button>
-            </template>
+          <v-card class="dialog">
+            <img src="../assets/wheel.svg" alt />
+            <h1>Congoudalations!</h1>
+            <v-card-text
+              >Your Cowven has been summoned ! Convert Wizards to join your team
+              and compete to hold the G.O.A.T. Cheeze title the
+              longest</v-card-text
+            >
 
-            <v-card class="dialog">
-              <img src="../assets/wheel.svg" alt />
-              <h1>Congoudalations!</h1>
-              <v-card-text>Your Cowven has been summoned ! Convert Wizards to join your team and compete to hold the G.O.A.T. Cheeze title the longest</v-card-text>
-
-              <!-- <v-card-actions> -->
-              <!-- <v-spacer></v-spacer> -->
-              <button class="button" color="primary" text @click="dialog = false">
-                <router-link to="/cowvenhome">Go to Cowven</router-link>
-              </button>
-              <!-- </v-card-actions> -->
-            </v-card>
-          </v-dialog>
-        </div>
-
-        <!-- //twitter button -->
-        <a class="twitter" href="https://twitter.com/CheezeDao">
-          <img src="../assets/twitter.svg" alt />
-        </a>
-        <!-- <span>Twitter dat Wizzzzzzard stuff</span> -->
+            <!-- <v-card-actions> -->
+            <!-- <v-spacer></v-spacer> -->
+            <button class="button" color="primary" text @click="dialog = false">
+              <router-link :to="{ name: 'cowvenhome' }"
+                >Go to Cowven</router-link
+              >
+            </button>
+            <!-- </v-card-actions> -->
+          </v-card>
+        </v-dialog>
       </div>
+
+      <!-- //twitter button -->
+      <a class="twitter" href="https://twitter.com/CheezeDao">
+        <img src="../assets/twitter.svg" alt />
+      </a>
+      <!-- <span>Twitter dat Wizzzzzzard stuff</span> -->
     </div>
   </div>
 </template>
 
 <script>
-import TopNav from "../components/TopNav.vue";
-
 export default {
-  components: { TopNav },
   data: () => ({
     dialog: false,
     valid: true,
@@ -138,62 +143,51 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-#main-container {
-  background: url("../assets/grid.svg");
-  height: 96vh;
-  background-position-y: -12vh;
-  margin: 2rem 0 0 1rem;
+.content-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 2rem;
 
-  @media screen and (max-width: 1020px) {
-    margin: 1rem;
-  }
+  .create-coven {
+    margin: auto;
+    width: 25%;
 
-  .content-container {
-    display: flex;
-    flex-direction: row;
-    margin-top: 2rem;
-
-    .create-coven {
-      margin: auto;
-      width: 25%;
-
-      @media screen and (max-width: 1020px) {
-        margin: 0;
-        width: 100%;
+    @media screen and (max-width: 1020px) {
+      margin: 0;
+      width: 100%;
+    }
+    .form-container {
+      .dialog {
+        display: flex;
       }
-      .form-container {
-        .dialog {
-          display: flex;
-        }
-      }
-      h1 {
-        padding: 1rem 0;
-      }
+    }
+    h1 {
+      padding: 1rem 0;
+    }
 
-      .form-container {
-        border: 1px solid black;
-        padding: 2rem;
-        height: 34rem;
-        text-align: center;
-        background: white;
+    .form-container {
+      border: 1px solid black;
+      padding: 2rem;
+      height: 34rem;
+      text-align: center;
+      background: white;
 
-        form {
-          padding-bottom: 1rem;
-        }
-        p {
-          padding: 1rem 0 3rem 0;
-        }
-        img {
-          width: 10rem;
-        }
+      form {
+        padding-bottom: 1rem;
       }
+      p {
+        padding: 1rem 0 3rem 0;
+      }
+      img {
+        width: 10rem;
+      }
+    }
 
-      .twitter {
-        img {
-          display: block;
-          margin: auto;
-          padding-top: 1rem;
-        }
+    .twitter {
+      img {
+        display: block;
+        margin: auto;
+        padding-top: 1rem;
       }
     }
   }
