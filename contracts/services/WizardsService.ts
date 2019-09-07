@@ -11,6 +11,7 @@ import {WizardWallet} from "../types/web3-contracts/WizardWallet"
 import {path as rootPath} from "app-root-path"
 import {DaoService} from "./DaoService"
 import {DAOName} from "../migrations/data/development-data"
+import {EventData} from "web3-eth-contract"
 
 export enum eWizardStatus {
   IN_COWVEN = "IN_COWVEN",
@@ -22,6 +23,10 @@ export enum eWizardAffinity {
   Wind = "Wind",
   Water = "Water",
   Neutral = "Neutral",
+}
+
+export enum eWizardGuildEvent {
+  Transfer = "Transfer",
 }
 
 export const wizardAffinities = [
@@ -46,6 +51,24 @@ export interface IWizardData {
 export interface IWizardWalletData {
   wizardWalletAddress: tEthereumAddress
   genecheezeDaoReputation: string
+}
+
+export interface IWizardsService {
+  // Info getters
+  getAllTransferEventsOfWizards: () => Promise<EventData[]>
+  getAllTransferEventsByWizardId: (wizardId: string) => Promise<EventData[]>
+  getCurrentOwnerOfWizardId: (wizardId: string) => Promise<tEthereumAddress>
+  getAllWizardsByOwnerAddress: (owner: tEthereumAddress) => Promise<string[]>
+  getWizardsDataByOwner: (owner: tEthereumAddress) => Promise<IWizardData[]>
+  getWizardData: (wizardId: number) => Promise<IWizardData>
+  getWizardWalletAddressByWizardId: (
+    wizardId: number,
+  ) => Promise<tEthereumAddress>
+  // Tx builders
+  createWalletForWizard: (
+    userWallet: tEthereumAddress,
+    wizardId: number,
+  ) => Promise<IEthereumTransactionModel>
 }
 
 // Allows to interact with the Wizards-related part: wizards nft, CheezeWizards tournaments, Wizards wallets
@@ -95,6 +118,51 @@ export class WizardsService extends ContractService {
       this.getWizardWalletABI(),
       wizardWalletAddress,
     )
+
+  getAllTransferEventsOfWizards = async (): Promise<EventData[]> =>
+    await this.getWizardGuildContract().getPastEvents(
+      eWizardGuildEvent.Transfer,
+      {fromBlock: 0},
+    )
+
+  getAllTransferEventsByWizardId = async (
+    wizardId: string,
+  ): Promise<EventData[]> =>
+    (await this.getWizardGuildContract().getPastEvents(
+      eWizardGuildEvent.Transfer,
+      {fromBlock: 0},
+    )).filter(
+      eventData =>
+        bnToBigNumber(eventData.returnValues.wizardId).toFixed() === wizardId,
+    )
+
+  getCurrentOwnerOfWizardId = async (
+    wizardId: string,
+  ): Promise<tEthereumAddress> => {
+    const allWizardTransfers = await this.getAllTransferEventsByWizardId(
+      wizardId,
+    )
+    return allWizardTransfers[allWizardTransfers.length - 1].returnValues.to
+  }
+
+  getAllWizardsByOwnerAddress = async (
+    owner: tEthereumAddress,
+  ): Promise<string[]> => {
+    return (await this.getAllTransferEventsOfWizards())
+      .filter(eventData => eventData.returnValues.to === owner)
+      .map(eventData => eventData.returnValues.wizardId.toString())
+  }
+
+  getWizardsDataByOwner = async (
+    owner: tEthereumAddress,
+  ): Promise<IWizardData[]> => {
+    const allWizardsOwned = await this.getAllWizardsByOwnerAddress(owner)
+    const wizardsData: IWizardData[] = []
+    for (const wizardId of allWizardsOwned) {
+      wizardsData.push(await this.getWizardData(Number(wizardId)))
+    }
+    return wizardsData
+  }
 
   getWizardData = async (wizardId: number): Promise<IWizardData> => {
     const {getWizard} = this.getWizardGuildContract().methods

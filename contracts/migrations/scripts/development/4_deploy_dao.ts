@@ -405,6 +405,12 @@ export const deployDAOMigration = migrationHandler(
     )
     console.log()
     console.log("---------------------------------\n")
+
+    console.log("---------------------------------")
+    console.log(`----- Wizards of ${accounts[0]} -----`)
+    console.log("---------------------------------")
+    console.log(await wizardsService.getWizardsDataByOwner(accounts[0]))
+    console.log("---------------------------------\n")
   },
 )
 
