@@ -29,7 +29,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - traefik-ssl:/etc/traefik/acme
     networks:
-      -overlay
+      - overlay
     ports:
       - target: 80
         published: 80
