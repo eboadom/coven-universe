@@ -76,18 +76,12 @@
 </template>
 
 <script>
-import { initDapper } from "../utils/dapper.js";
 export default {
   name: "landing",
-  beforeCreate() {
-    initDapper();
-  },
-  components: {},
-  created() {
-    // document.getElementsByTagName("body")[0].style.overflow = "hidden";
-  }
+  components: {}
 };
 </script>
+
 <style lang="scss" scoped>
 .landing {
   background: url("../assets/colored-grid.svg");
