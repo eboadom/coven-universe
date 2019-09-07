@@ -27,10 +27,13 @@ export default {
   font-family: "codesaver";
   src: url("./assets/codesaver.otf");
 }
+
 body {
   margin: 0;
   background: transparent url("./assets/background.svg") no-repeat fixed center;
+  overflow-x: hidden;
 }
+
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -47,14 +50,23 @@ body {
   width: 12rem;
   height: 3rem;
   background: white;
+  transition: all .3s ease;
 
   a {
     text-decoration: none;
+    color: #000 !important;
   }
 
   &:hover,
   &:focus {
-    background: #fff032;
+    background: #fff032 !important;
+  }
+  &:disabled {
+    background: #e1e1e1;
+    &:hover,
+    &:focus {
+      background: #e1e1e1 !important;
+    }
   }
 }
 
@@ -65,5 +77,11 @@ h1 {
 
 p {
   font-family: codesaver;
+}
+
+.v-dialog:not(.v-dialog--fullscreen) {
+  @media screen and (max-width: 1020px) {
+    margin: 15px;
+  }
 }
 </style>

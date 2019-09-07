@@ -1,6 +1,9 @@
 <template>
   <div v-if="dapperUnlocked" class="app">
-    <router-view />
+    <div id="main-container">
+      <TopNav />
+      <router-view />
+    </div>
   </div>
   <div v-else-if="loading">loading</div>
   <unlock-dapper v-else :onUnlockClick="unlockDapper" />
@@ -8,10 +11,12 @@
 
 <script>
 import UnlockDapper from "../views/UnlockDapper";
+import TopNav from "../components/TopNav.vue";
 export default {
   name: "AppLayout",
   components: {
-    UnlockDapper
+    UnlockDapper,
+    TopNav
   },
   mounted() {
     this.unlockDapper();
@@ -45,4 +50,15 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+#main-container {
+  background: url("../assets/grid.svg");
+  height: 96vh;
+  background-position-y: -12vh;
+  margin: 2rem 0 0 1rem;
+
+  @media screen and (max-width: 1020px) {
+    margin: 1rem;
+  }
+}
+</style>

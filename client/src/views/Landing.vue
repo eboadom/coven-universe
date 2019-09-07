@@ -28,15 +28,16 @@
         emoji:) enabling you to join or create a team, choose one of the Grate
         to follow and govern it based on your gaming skills !
       </p>
-      <button id="enter" class="button">
-        <router-link :to="{ name: 'home' }">Enter the Cheeze</router-link>
+      <button id="enter" class="button" disabled title="Coming soon">
+        <!--        <router-link :to="{ name: 'home' }">Enter the Cheeze</router-link>-->
+        Enter the Cheeze
       </button>
       <a class="twitter" href="https://twitter.com/CheezeDao">
         <img src="../assets/twitter.svg" alt />
       </a>
     </div>
 
-    <v-dialog id="faq-dialog" width="50%">
+    <v-dialog content-class="faq-dialog">
       <template v-slot:activator="{ on }">
         <button id="faq" class="button" v-on="on">FAQ</button>
       </template>
@@ -82,23 +83,45 @@ export default {
 };
 </script>
 
+<style lang="scss">
+.faq-dialog {
+  width: 50% !important;
+  @media screen and (max-width: 1020px) {
+    width: 100% !important;
+  }
+}
+</style>
+
 <style lang="scss" scoped>
 .landing {
   background: url("../assets/colored-grid.svg");
   height: 100vh;
+  position: relative;
+  min-height: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  @media screen and (max-width: 1020px) {
+    min-height: 100vh;
+    height: auto;
+  }
+
+  @media screen and (max-width: 450px) {
+    align-items: flex-end;
+  }
+
   .container {
-    width: 50%;
-    left: 25%;
-    top: 15%;
-    padding: 0 8rem;
-    position: absolute;
+    max-width: 700px;
     text-align: center;
+    position: relative;
+    z-index: 5;
+    padding: 1%;
 
     @media screen and (max-width: 1020px) {
       width: 100%;
-      left: auto;
-      top: auto;
-      padding: 0;
     }
 
     .dao-logo {
@@ -129,18 +152,20 @@ export default {
         margin: 2rem 1rem;
       }
     }
-
-    #enter {
-      background: white;
-    }
   }
 
   #faq {
     position: absolute;
-    bottom: 0;
-    right: 0;
-    margin: 2rem;
-    background: white;
+    z-index: 3;
+    bottom: 65px;
+    right: 25px;
+    width: 80px;
+    @media screen and (max-width: 450px) {
+      position: relative;
+      bottom: 0;
+      right: 0;
+      margin: 0 25px 25px 0;
+    }
   }
 
   .paper-banner {
@@ -182,18 +207,14 @@ export default {
   }
 }
 
-#faq-dialog {
-  width: 50% !important;
-}
-
-.v-dialog {
-  width: 50% !important;
-}
-
 .dialog {
   height: 100%;
   font-family: codesaver;
   padding: 2rem;
+
+  @media screen and (max-width: 1020px) {
+    padding: 1rem;
+  }
 
   h1 {
     padding-bottom: 1rem;

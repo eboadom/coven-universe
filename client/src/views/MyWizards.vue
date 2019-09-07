@@ -1,26 +1,27 @@
 <template>
-  <div id="main-container">
-    <TopNav />
+  <div class="content-container">
+    <div class="my-wizards">
+      <h1>My Wizards</h1>
 
-    <div class="content-container">
-      <div class="my-wizards">
-        <h1>My Wizards</h1>
-
-        <v-data-table :headers="headers" :items="wizards" :search="search" :items-per-page="5">
-          <template v-slot:item.wizard="{ item }">
-            <img class="wizard-img" :src="require(`@/assets/${item.wizard}.png`)" />
-          </template>
-        </v-data-table>
-      </div>
+      <v-data-table
+        :headers="headers"
+        :items="wizards"
+        :search="search"
+        :items-per-page="5"
+      >
+        <template v-slot:item.wizard="{ item }">
+          <img
+            class="wizard-img"
+            :src="require(`@/assets/${item.wizard}.png`)"
+          />
+        </template>
+      </v-data-table>
     </div>
   </div>
 </template>
 
 <script>
-import TopNav from "../components/TopNav.vue";
-
 export default {
-  components: { TopNav },
   data() {
     return {
       search: "",
@@ -153,43 +154,32 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-#main-container {
-  background: url("../assets/grid.svg");
-  height: 96vh;
-  background-position-y: -12vh;
-  margin: 2rem 0 0 1rem;
+.content-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 2rem;
 
-  @media screen and (max-width: 1020px) {
-    margin: 1rem;
-  }
+  .my-wizards {
+    padding: 0 8rem;
+    width: 100%;
 
-  .content-container {
-    display: flex;
-    flex-direction: row;
-    margin-top: 2rem;
+    @media screen and (max-width: 1020px) {
+      padding: 0;
+    }
 
-    .my-wizards {
-      padding: 0 8rem;
-      width: 100%;
-
-      @media screen and (max-width: 1020px) {
-        padding: 0;
-      }
-
-      h1 {
-        padding: 1rem 0;
-      }
-      .v-data-table {
-        .wizard-img {
-          @media screen and (max-width: 1020px) {
-            width: 2rem;
-          }
+    h1 {
+      padding: 1rem 0;
+    }
+    .v-data-table {
+      .wizard-img {
+        @media screen and (max-width: 1020px) {
+          width: 2rem;
         }
-        .text-left {
-          width: 10%;
-          img {
-            width: 5rem;
-          }
+      }
+      .text-left {
+        width: 10%;
+        img {
+          width: 5rem;
         }
       }
     }

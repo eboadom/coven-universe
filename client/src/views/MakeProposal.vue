@@ -1,11 +1,12 @@
 <template>
-  <div id="main-container">
-    <TopNav />
-
+  <div class="MakeProposal">
     <div class="header-container">
       <h1>Cowven Home</h1>
       <div class="center-container">
-        <p>“Cowven unique description that the creator entered in the ‘create a cowven’ screen”</p>
+        <p>
+          “Cowven unique description that the creator entered in the ‘create a
+          cowven’ screen”
+        </p>
         <div class="stats">
           <p>Rank #000</p>
           <p>Score #000</p>
@@ -16,7 +17,9 @@
       </div>
 
       <button>
-        <router-link :to="{ name: 'cowvenhome' }">Active Spell Proposals</router-link>
+        <router-link :to="{ name: 'cowvenhome' }"
+          >Active Spell Proposals</router-link
+        >
       </button>
     </div>
 
@@ -51,9 +54,15 @@
 
                 <v-card class="dialog" id="info-dialog">
                   <h4>Cut the cheese?</h4>
-                  <p>Time to cut the cheeze with a Wizard ? Say no more, add its ID and we’ll take care of the rest</p>
+                  <p>
+                    Time to cut the cheeze with a Wizard ? Say no more, add its
+                    ID and we’ll take care of the rest
+                  </p>
                   <h4>Change activity penalty length</h4>
-                  <p>Propose to increase or decrease the length of days a Wizards needs to be active.</p>
+                  <p>
+                    Propose to increase or decrease the length of days a Wizards
+                    needs to be active.
+                  </p>
                   <h4>Convert your Cowven</h4>
                   <p>Cast a Spell which will change the Grate you all follow</p>
                 </v-card>
@@ -61,7 +70,7 @@
             </div>
 
             <v-text-field
-              v-if="select =='Cut the cheese'"
+              v-if="select == 'Cut the cheese'"
               v-model="wizardId"
               :rules="[v => !!v || 'Wizard ID is required']"
               label="Enter Wizard ID"
@@ -69,7 +78,7 @@
             ></v-text-field>
 
             <v-text-field
-              v-if="select =='Change activity penalty length'"
+              v-if="select == 'Change activity penalty length'"
               v-model="numDays"
               :rules="[v => !!v || 'Number of Days is required']"
               label="How many days?"
@@ -77,7 +86,7 @@
             ></v-text-field>
 
             <v-select
-              v-if="select =='Convert your Cowven'"
+              v-if="select == 'Convert your Cowven'"
               v-model="grateOne"
               :items="grateOnes"
               :rules="[v => !!v || 'Grate One is required']"
@@ -102,10 +111,20 @@
             <v-card class="dialog">
               <img src="../assets/wheel.svg" alt />
               <h1>Thank You</h1>
-              <v-card-text>You have casted your spell proposal. It will now be reviewed by the Cowven, drink milk in the meantime.</v-card-text>
+              <v-card-text
+                >You have casted your spell proposal. It will now be reviewed by
+                the Cowven, drink milk in the meantime.</v-card-text
+              >
 
               <v-spacer></v-spacer>
-              <button class="button" color="primary" text @click="dialog = false">Gouda'nough</button>
+              <button
+                class="button"
+                color="primary"
+                text
+                @click="dialog = false"
+              >
+                Gouda'nough
+              </button>
             </v-card>
           </v-dialog>
         </div>
@@ -115,10 +134,7 @@
 </template>
 
 <script>
-import TopNav from "../components/TopNav.vue";
-
 export default {
-  components: { TopNav },
   data() {
     return {
       search: "",
@@ -240,106 +256,95 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-#main-container {
-  background: url("../assets/grid.svg");
-  height: 96vh;
-  background-position-y: -12vh;
-  margin: 2rem 0 0 1rem;
+.header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 
   @media screen and (max-width: 1020px) {
-    margin: 1rem;
+    flex-direction: column;
   }
 
-  .header-container {
+  h1 {
+  }
+  .center-container {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
 
     @media screen and (max-width: 1020px) {
-      flex-direction: column;
+      text-align: center;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
+
+.content-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 2rem;
+
+  @media screen and (max-width: 1020px) {
+    flex-direction: column;
+  }
+
+  .leaderboard {
+    width: 100%;
+    padding: 0 8rem;
+
+    @media screen and (max-width: 1020px) {
+      padding: 0;
     }
 
     h1 {
+      font-size: 3rem;
+      padding: 1rem 0;
     }
-    .center-container {
-      display: flex;
-      flex-direction: column;
 
-      @media screen and (max-width: 1020px) {
-        text-align: center;
-      }
-
-      .stats {
-        display: flex;
-        justify-content: space-between;
-      }
+    .v-card {
+      border: 1px solid black;
+      box-shadow: none;
+      padding: 0 2rem 2rem 2rem;
+      font-family: codesaver;
     }
   }
 
-  .content-container {
-    display: flex;
-    flex-direction: row;
-    margin-top: 2rem;
+  .make-proposal {
+    padding: 0 8rem;
+    width: 60%;
 
     @media screen and (max-width: 1020px) {
-      flex-direction: column;
-    }
-
-    .leaderboard {
+      padding: 0;
       width: 100%;
-      padding: 0 8rem;
-
-      @media screen and (max-width: 1020px) {
-        padding: 0;
-      }
-
-      h1 {
-        font-size: 3rem;
-        padding: 1rem 0;
-      }
-
-      .v-card {
-        border: 1px solid black;
-        box-shadow: none;
-        padding: 0 2rem 2rem 2rem;
-        font-family: codesaver;
-      }
     }
 
-    .make-proposal {
-      padding: 0 8rem;
-      width: 60%;
+    h1 {
+      padding: 1rem 0;
+    }
 
-      @media screen and (max-width: 1020px) {
-        padding: 0;
-        width: 100%;
+    .proposal-container {
+      border: 1px solid black;
+      padding: 2rem;
+      height: 30rem;
+      text-align: center;
+      background: white;
+
+      p {
+        padding: 1rem 0 3rem 0;
+      }
+      img {
+        width: 10rem;
       }
 
-      h1 {
-        padding: 1rem 0;
-      }
+      .info-wrapper {
+        display: flex;
+        flex-direction: row;
 
-      .proposal-container {
-        border: 1px solid black;
-        padding: 2rem;
-        height: 30rem;
-        text-align: center;
-        background: white;
-
-        p {
-          padding: 1rem 0 3rem 0;
-        }
-        img {
-          width: 10rem;
-        }
-
-        .info-wrapper {
-          display: flex;
-          flex-direction: row;
-
-          #info-icon {
-            width: 1.5rem;
-          }
+        #info-icon {
+          width: 1.5rem;
         }
       }
     }
