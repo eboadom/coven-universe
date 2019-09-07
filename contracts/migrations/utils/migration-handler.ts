@@ -36,6 +36,18 @@ import {
   getTruffleContractInstance,
 } from "../../utils/truffle/truffle-helpers"
 import {ContractId, LibraryId} from "../../utils/types"
+import {
+  tEthereumAddress,
+  IDaoAddresses,
+  getPathDeployedDaoContracts,
+} from "../../server/configuration"
+import {
+  tStringCurrencyUnits,
+  currencyUnitsToDecimals,
+  stringToBigNumber,
+  ADDRESS_0x0,
+} from "../../utils/common-utils"
+import {eProposalDescription, eVote} from "../../services/DaoService"
 
 export interface MigratorExecutorParams {
   deployMigrationsContract(args?: any[]): Promise<MigrationsInstance>
@@ -63,13 +75,26 @@ export interface MigratorExecutorParams {
     libraryId: LibraryId,
     contractId: ContractId | LibraryId,
   ): Promise<void>
-  getAvatarInstance(contractAddress?: string): Promise<AvatarInstance>
+  getAvatarInstance(contractAddress: string): Promise<AvatarInstance>
   getControllerInstance(contractAddress?: string): Promise<ControllerInstance>
   getReputationInstance(contractAddress?: string): Promise<ReputationInstance>
   getContractInstance<ContractInstance>(
     contractId: ContractId,
     contractAddress?: string,
   ): Promise<ContractInstance>
+  createProposal(
+    avatarAddress: tEthereumAddress,
+    benificiary: tEthereumAddress,
+    reputationChange: tStringCurrencyUnits,
+    daoTokenChange?: tStringCurrencyUnits,
+  ): Promise<Truffle.TransactionResponse>
+  voteProposal(
+    voter: tEthereumAddress, // The voter (it's possible to vote on behalf of someone)
+    proposalId: string,
+    vote: eVote,
+    reputationToUse: tStringCurrencyUnits, // If (-1), it will use all the owned reputation
+  ): Promise<Truffle.TransactionResponse>
+  redeemReputation(proposalId: string): Promise<any>
   accounts: Truffle.Accounts
   network: string
 }
@@ -190,7 +215,7 @@ export const migrationHandler = (
       args,
     )
 
-  const getAvatarInstance = async (contractAddress?: string) =>
+  const getAvatarInstance = async (contractAddress: string) =>
     await getContractInstance<AvatarInstance>(
       ContractId.Avatar,
       contractAddress,
@@ -207,6 +232,73 @@ export const migrationHandler = (
       ContractId.Reputation,
       contractAddress,
     )
+  const getContributionRewardInstance = async (contractAddress?: string) =>
+    await getContractInstance<ContributionRewardInstance>(
+      ContractId.ContributionReward,
+      contractAddress,
+    )
+
+  const getQuorumVoteInstance = async (contractAddress?: string) =>
+    await getContractInstance<QuorumVoteInstance>(
+      ContractId.QuorumVote,
+      contractAddress,
+    )
+
+  // TODO: review parameters
+  const createProposal = async (
+    avatarAddress: tEthereumAddress,
+    benificiary: tEthereumAddress,
+    reputationChange: tStringCurrencyUnits,
+    daoTokenChange?: tStringCurrencyUnits,
+  ) => {
+    const contributionRewardInstance = await getContributionRewardInstance()
+    return await contributionRewardInstance.proposeContributionReward(
+      avatarAddress,
+      eProposalDescription.MINT_REPUTATION,
+      currencyUnitsToDecimals(stringToBigNumber(reputationChange), 18),
+      [
+        daoTokenChange
+          ? currencyUnitsToDecimals(stringToBigNumber(daoTokenChange), 18)
+          : 0,
+        0,
+        0,
+        0,
+        1,
+      ],
+      ADDRESS_0x0,
+      benificiary,
+    )
+  }
+
+  const voteProposal = async (
+    voter: tEthereumAddress, // The voter (it's possible to vote on behalf of someone)
+    proposalId: string,
+    vote: eVote,
+    reputationToUse: tStringCurrencyUnits, // If (-1), it will use all the owned reputation
+  ) => {
+    const convertedReputation =
+      reputationToUse === "-1"
+        ? "0"
+        : currencyUnitsToDecimals(stringToBigNumber(reputationToUse), 18)
+    const quorumVoteInstance = await getQuorumVoteInstance()
+    return await quorumVoteInstance.vote(
+      proposalId,
+      vote,
+      convertedReputation,
+      voter,
+    )
+  }
+
+  const redeemReputation = async (proposalId: string) => {
+    const contributionRewardInstance = await getContributionRewardInstance()
+    const avatarInstance = await getAvatarInstance(
+      (<IDaoAddresses>require(getPathDeployedDaoContracts(network))).Avatar,
+    )
+    return await contributionRewardInstance.redeemReputation(
+      proposalId,
+      avatarInstance.address,
+    )
+  }
 
   const executorParams: MigratorExecutorParams = {
     accounts,
@@ -229,6 +321,9 @@ export const migrationHandler = (
     getAvatarInstance,
     getReputationInstance,
     getControllerInstance,
+    createProposal,
+    voteProposal,
+    redeemReputation,
   }
   await migrationExecutor(executorParams)
 }

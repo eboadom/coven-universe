@@ -5,17 +5,31 @@ import {
 } from "./ContractService"
 import {tEthereumAddress, getConfiguration} from "../server/configuration"
 import {WizardGuild} from "../types/web3-contracts/WizardGuild"
-import {bnToBigNumber} from "../utils/common-utils"
+import {bnToBigNumber, ADDRESS_0x0} from "../utils/common-utils"
 import {WizardWalletFactory} from "../types/web3-contracts/WizardWalletFactory"
 import {WizardWallet} from "../types/web3-contracts/WizardWallet"
 import {path as rootPath} from "app-root-path"
+import {DaoService} from "./DaoService"
+import {DAOName} from "../migrations/data/development-data"
 
-export const wizardAffinities = ["Neutral", "Fire", "Water", "Air"]
-
-export enum WizardStatus {
+export enum eWizardStatus {
   IN_COWVEN = "IN_COWVEN",
   FREE = "FREE",
 }
+
+export enum eWizardAffinity {
+  Fire = "Fire",
+  Wind = "Wind",
+  Water = "Water",
+  Neutral = "Neutral",
+}
+
+export const wizardAffinities = [
+  eWizardAffinity.Neutral,
+  eWizardAffinity.Fire,
+  eWizardAffinity.Water,
+  eWizardAffinity.Wind,
+]
 
 export interface IWizardData {
   id: number
@@ -23,8 +37,9 @@ export interface IWizardData {
   innatePower: string
   affinity: string
   score?: string
-  cowven?: tEthereumAddress
-  status: WizardStatus
+  cowvenName?: string
+  cowvenAddress?: tEthereumAddress
+  status: eWizardStatus
   wizardWalletData: IWizardWalletData
 }
 
@@ -33,6 +48,7 @@ export interface IWizardWalletData {
   genecheezeDaoReputation: string
 }
 
+// Allows to interact with the Wizards-related part: wizards nft, CheezeWizards tournaments, Wizards wallets
 export class WizardsService extends ContractService {
   private getWizardGuildABI = (): any[] =>
     require(`${rootPath}/build/contracts/WizardGuild.json`).abi
@@ -82,7 +98,7 @@ export class WizardsService extends ContractService {
 
   getWizardData = async (wizardId: number): Promise<IWizardData> => {
     const {getWizard} = this.getWizardGuildContract().methods
-
+    const daoService = new DaoService()
     const [
       {owner, innatePower, affinity, metadata},
       wizardWalletAddress,
@@ -91,16 +107,25 @@ export class WizardsService extends ContractService {
       this.getWizardWalletAddressByWizardId(wizardId),
     ])
 
+    const reputation =
+      wizardWalletAddress !== ADDRESS_0x0
+        ? await daoService.getReputationBalanceOf(wizardWalletAddress)
+        : "0"
+    const status =
+      reputation !== "0" ? eWizardStatus.IN_COWVEN : eWizardStatus.FREE
+
     return {
       id: wizardId,
       owner,
       innatePower: bnToBigNumber(innatePower).toString(),
       affinity: wizardAffinities[bnToBigNumber(affinity).toNumber()],
-      status: WizardStatus.FREE, // TODO: unmock
+      status: status,
       wizardWalletData: {
         wizardWalletAddress: wizardWalletAddress,
-        genecheezeDaoReputation: "0", // TODO: unmock
+        genecheezeDaoReputation: reputation,
       },
+      cowvenName: DAOName, // TODO: adapt to multi daos
+      cowvenAddress: daoService.getAvatarAddress(), // TODO: adapt to multidaos
     }
   }
 

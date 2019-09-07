@@ -1,22 +1,28 @@
 import {migrationHandler} from "../../utils/migration-handler"
 import {
-  defaultInitialReputation,
   DAOName,
-  ethereumNullAddress,
   TokenDAOName,
   TokenDAOSymbol,
-  defaultInitialTokens,
   TokenDAOCap,
   quorumVoteRequiredThreshold,
-  tempContractAddressesPath,
+  devFundTokens,
+  devFundReputation,
 } from "../../data/development-data"
-import {writeObjectToFile} from "../../../utils/common-utils"
+import {writeObjectToFile, ADDRESS_0x0} from "../../../utils/common-utils"
+import {
+  IDaoAddresses,
+  getPathDeployedDaoContracts,
+  initConfiguration,
+} from "../../../server/configuration"
+import {WizardsService} from "../../../services/WizardsService"
+import {DaoService, eVote} from "../../../services/DaoService"
 
 export const deployDAOMigration = migrationHandler(
-  "Deploy the initial Coven",
+  "Deploy the GeneCheeze Cowven",
   artifacts,
   async ({
     accounts,
+    network,
     deployControllerCreatorContract,
     deployDaoCreatorContract,
     deployQuorumVoteContract,
@@ -26,7 +32,9 @@ export const deployDAOMigration = migrationHandler(
     deployContributionRewardContract,
     getAvatarInstance,
     getControllerInstance,
-    getReputationInstance,
+    createProposal,
+    voteProposal,
+    redeemReputation,
   }) => {
     // // Factory contract to deploy the organisation's Controller. No owner
     const controllerCreatorInstance = await deployControllerCreatorContract()
@@ -36,12 +44,13 @@ export const deployDAOMigration = migrationHandler(
       controllerCreatorInstance.address,
     ])
 
-    // Forge params:
+    const devWalletAddress = accounts[0]
+    // Array Forge params:
     // - founders: entities who will receive reputation and tokens initially
     // - initialReputation: initial reputation amount received by each founder
     // - initialTokens: initial token amount received by each founder
     const initialFoundersRewards = [
-      [accounts[0], defaultInitialReputation, defaultInitialTokens],
+      [devWalletAddress, devFundReputation, devFundTokens],
     ]
     const founders = initialFoundersRewards.map(tuple => tuple[0])
     const initialReputation = initialFoundersRewards.map(tuple => tuple[1])
@@ -63,7 +72,7 @@ export const deployDAOMigration = migrationHandler(
       founders,
       initialTokens,
       initialReputation,
-      ethereumNullAddress,
+      ADDRESS_0x0,
       TokenDAOCap,
     )
     const newAvatarAddress = resTxForgeOrg.logs[0].args._avatar
@@ -92,7 +101,12 @@ export const deployDAOMigration = migrationHandler(
     // Used to generate a hash from some parameters that will be used afterwards
     const voteParametersHash = await votingMachineInstance.getParametersHash(
       quorumVoteRequiredThreshold,
-      ethereumNullAddress,
+      ADDRESS_0x0,
+    )
+
+    await votingMachineInstance.setParameters(
+      quorumVoteRequiredThreshold,
+      ADDRESS_0x0,
     )
 
     // Creates and sets voting and schemes configuration
@@ -171,26 +185,226 @@ export const deployDAOMigration = migrationHandler(
     const daoTokenAddress = await controllerInstance.nativeToken()
     const reputationAddress = await controllerInstance.nativeReputation()
 
-    const contractsDeployedByContracts = {
-      Avatar: {
-        address: avatarInstance.address,
-      },
-      Controller: {
-        address: controllerInstance.address,
-      },
-      DAOToken: {
-        address: daoTokenAddress,
-      },
-      Reputation: {
-        address: reputationAddress,
-      },
+    const deployedDaoContracts: IDaoAddresses = {
+      Avatar: avatarInstance.address,
+      Reputation: reputationAddress,
+      Controller: controllerInstance.address,
+      DAOToken: daoTokenAddress,
+      ContributionReward: contributionRewardInstance.address,
+      QuorumVote: votingMachineInstance.address,
     }
 
     // Persistence in a json file of the addresses of contracts deployed by other contracts
     await writeObjectToFile(
-      tempContractAddressesPath,
-      contractsDeployedByContracts,
+      getPathDeployedDaoContracts(network),
+      deployedDaoContracts,
     )
+
+    // "Testing" of contribution reward
+
+    await initConfiguration()
+    const wizardsService = new WizardsService()
+    const daoService = new DaoService()
+    const wizardId1 = 5975
+    const wizardId2 = 5976
+    const wizardId3 = 5977
+    const wizardWallet1 = await wizardsService.getWizardWalletAddressByWizardId(
+      wizardId1,
+    )
+    const wizardWallet2 = await wizardsService.getWizardWalletAddressByWizardId(
+      wizardId2,
+    )
+    const wizardWallet3 = await wizardsService.getWizardWalletAddressByWizardId(
+      wizardId3,
+    )
+    console.log("---------------------------------")
+    console.log("----- Initial state Wizards wallets -----")
+    console.log("---------------------------------")
+    console.log(
+      (await wizardsService.getWizardData(wizardId1)).wizardWalletData
+        .genecheezeDaoReputation + " reputation",
+    )
+    console.log(
+      (await wizardsService.getWizardData(wizardId2)).wizardWalletData
+        .genecheezeDaoReputation + " reputation",
+    )
+    console.log(
+      (await wizardsService.getWizardData(wizardId1)).wizardWalletData
+        .genecheezeDaoReputation + " reputation",
+    )
+    console.log()
+    console.log("---------------------------------\n")
+
+    const giveReputationToWizard1ProposalId = (await createProposal(
+      avatarInstance.address,
+      wizardWallet1,
+      "30000",
+    )).logs[0].args._proposalId
+    const giveReputationToWizard2ProposalId = (await createProposal(
+      avatarInstance.address,
+      wizardWallet2,
+      "20000",
+    )).logs[0].args._proposalId
+    const giveReputationToWizard3ProposalId = (await createProposal(
+      avatarInstance.address,
+      wizardWallet3,
+      "10000",
+    )).logs[0].args._proposalId
+    console.log(
+      "Give reputation to Wizard 1 Proposal ID- " +
+        giveReputationToWizard1ProposalId,
+    )
+    console.log(
+      "Give reputation to Wizard 2 Proposal ID- " +
+        giveReputationToWizard2ProposalId,
+    )
+    console.log(
+      "Give reputation to Wizard 3 Proposal ID- " +
+        giveReputationToWizard3ProposalId,
+    )
+
+    await voteProposal(
+      accounts[0],
+      giveReputationToWizard1ProposalId,
+      eVote.YES,
+      "-1",
+    )
+    await voteProposal(
+      accounts[0],
+      giveReputationToWizard2ProposalId,
+      eVote.YES,
+      "-1",
+    )
+    await voteProposal(
+      accounts[0],
+      giveReputationToWizard3ProposalId,
+      eVote.YES,
+      "-1",
+    )
+    await redeemReputation(giveReputationToWizard1ProposalId)
+    await redeemReputation(giveReputationToWizard2ProposalId)
+    await redeemReputation(giveReputationToWizard3ProposalId)
+
+    console.log("---------------------------------")
+    console.log(
+      "----- State Wizards wallets after redeem of first reputation grant-----",
+    )
+    console.log("---------------------------------")
+    console.log(
+      (await wizardsService.getWizardData(wizardId1)).wizardWalletData
+        .genecheezeDaoReputation + " reputation",
+    )
+    console.log(
+      (await wizardsService.getWizardData(wizardId2)).wizardWalletData
+        .genecheezeDaoReputation + " reputation",
+    )
+    console.log(
+      (await wizardsService.getWizardData(wizardId1)).wizardWalletData
+        .genecheezeDaoReputation + " reputation",
+    )
+    console.log()
+    console.log("---------------------------------\n")
+
+    const slashReputationWizard1ProposalId = (await createProposal(
+      avatarInstance.address,
+      wizardWallet1,
+      "-10000",
+    )).logs[0].args._proposalId
+    const slashReputationWizard2ProposalId = (await createProposal(
+      avatarInstance.address,
+      wizardWallet2,
+      "-10000",
+    )).logs[0].args._proposalId
+    const slashReputationWizard3ProposalId = (await createProposal(
+      avatarInstance.address,
+      wizardWallet3,
+      "-10000",
+    )).logs[0].args._proposalId
+
+    console.log(
+      "Slash reputation from Wizard wallet 1 Proposal ID - " +
+        slashReputationWizard1ProposalId,
+    )
+    console.log(
+      "Slash reputation from Wizard wallet 2 Proposal ID - " +
+        slashReputationWizard2ProposalId,
+    )
+    console.log(
+      "Slash reputation from Wizard wallet 3 Proposal ID - " +
+        slashReputationWizard3ProposalId,
+    )
+
+    await voteProposal(
+      accounts[0],
+      slashReputationWizard1ProposalId,
+      eVote.YES,
+      "-1",
+    )
+    await voteProposal(
+      accounts[0],
+      slashReputationWizard2ProposalId,
+      eVote.YES,
+      "-1",
+    )
+    await voteProposal(
+      accounts[0],
+      slashReputationWizard3ProposalId,
+      eVote.YES,
+      "-1",
+    )
+
+    // const slashProposalData = await votingMachineInstance.proposals(
+    //   slashReputationProposalId,
+    // )
+    // console.log(slashProposalData);
+    // console.log(
+    //   (await contributionRewardInstance.organizationsProposals(
+    //     avatarInstance.address,
+    //     slashReputationProposalId,
+    //   ))["1"].toString(),
+    // )
+
+    console.log("---------------------------------")
+    console.log("----- State Wizards wallets after slash of reputation-----")
+    console.log("---------------------------------")
+    console.log(
+      (await wizardsService.getWizardData(wizardId1)).wizardWalletData
+        .genecheezeDaoReputation + " reputation",
+    )
+    console.log(
+      (await wizardsService.getWizardData(wizardId2)).wizardWalletData
+        .genecheezeDaoReputation + " reputation",
+    )
+    console.log(
+      (await wizardsService.getWizardData(wizardId1)).wizardWalletData
+        .genecheezeDaoReputation + " reputation",
+    )
+    console.log()
+    console.log("---------------------------------\n")
+
+    await redeemReputation(slashReputationWizard1ProposalId)
+    await redeemReputation(slashReputationWizard2ProposalId)
+    await redeemReputation(slashReputationWizard3ProposalId)
+
+    console.log("---------------------------------")
+    console.log(
+      "----- State Wizards wallets after redeem of slash of reputation-----",
+    )
+    console.log("---------------------------------")
+    console.log(
+      (await wizardsService.getWizardData(wizardId1)).wizardWalletData
+        .genecheezeDaoReputation + " reputation",
+    )
+    console.log(
+      (await wizardsService.getWizardData(wizardId2)).wizardWalletData
+        .genecheezeDaoReputation + " reputation",
+    )
+    console.log(
+      (await wizardsService.getWizardData(wizardId1)).wizardWalletData
+        .genecheezeDaoReputation + " reputation",
+    )
+    console.log()
+    console.log("---------------------------------\n")
   },
 )
 

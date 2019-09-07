@@ -1,15 +1,10 @@
 import BigNumber from "bignumber.js"
-import BN from 'bn.js';
+import BN from "bn.js"
 import {EthereumNetwork} from "./types"
 import {promises} from "fs"
 import {exec as callbackExec, spawn as spawnNode} from "child_process"
 
-export const oneEther = new BigNumber(Math.pow(10, 18))
-export const oneRay = new BigNumber(Math.pow(10, 27))
-export const toCryptoBigUnits = (amount: BigNumber) =>
-  amount.dividedBy(new BigNumber(10).exponentiatedBy(18))
-export const toCryptoSmallUnits = (amount: BigNumber) =>
-  amount.multipliedBy(new BigNumber(10).exponentiatedBy(18))
+export const ADDRESS_0x0 = "0x0000000000000000000000000000000000000000"
 
 export const getHttpProviderUrlByNetwork = (
   network: EthereumNetwork,
@@ -60,7 +55,7 @@ const selectUrlEthereumProviderByNetwork = (
 export const writeObjectToFile = async (path: string, obj: object) =>
   await promises.writeFile(path, JSON.stringify(obj))
 
-export const writeTextToFile = async (path: string, text: string) => 
+export const writeTextToFile = async (path: string, text: string) =>
   await promises.writeFile(path, text)
 
 export const spawn = (command: string[]) => {
@@ -93,13 +88,25 @@ export const exec = (command: string) =>
     })
   })
 
-  // TODO: review types
-export const bnToBigNumber = (amount: BN): BigNumber =>
-new BigNumber(<any>amount);
-export const stringToBigNumber = (amount: string): BigNumber =>
-new BigNumber(amount);
+export const currencyUnitsToDecimals = (
+  value: BigNumber,
+  decimals: number,
+): tStringDecimalUnits =>
+  new BigNumber(value).multipliedBy(new BigNumber(10).pow(decimals)).toFixed()
 
-export type tStringCurrencyUnits = string; // ex. 2.5
-export type tStringDecimalUnits = string; // ex 2500000000000000000
-export type tBigNumberCurrencyUnits = BigNumber;
-export type tBigNumberDecimalUnits = BigNumber;
+export const decimalsToCurrencyUnits = (
+  value: BigNumber,
+  decimals: number,
+): tStringCurrencyUnits =>
+  new BigNumber(value).div(new BigNumber(10).pow(decimals)).toFixed()
+
+// TODO: review types
+export const bnToBigNumber = (amount: BN): BigNumber =>
+  new BigNumber(<any>amount)
+export const stringToBigNumber = (amount: string): BigNumber =>
+  new BigNumber(amount)
+
+export type tStringCurrencyUnits = string // ex. 2.5
+export type tStringDecimalUnits = string // ex 2500000000000000000
+export type tBigNumberCurrencyUnits = BigNumber
+export type tBigNumberDecimalUnits = BigNumber
