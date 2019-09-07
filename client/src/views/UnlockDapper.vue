@@ -1,15 +1,26 @@
 <template>
   <div class="landing">
     <img class="left-cloud" alt="Left Cloud" src="../assets/cloud-left.svg" />
-    <img class="right-cloud" alt="Right Cloud" src="../assets/cloud-right.svg" />
-    <img class="bottom-cloud" alt="Bottom Cloud" src="../assets/bottom-cloud.svg" />
+    <img
+      class="right-cloud"
+      alt="Right Cloud"
+      src="../assets/cloud-right.svg"
+    />
+    <img
+      class="bottom-cloud"
+      alt="Bottom Cloud"
+      src="../assets/bottom-cloud.svg"
+    />
     <div class="container">
       <img src="../assets/dapper-logo.png" alt />
-      <p>It seems you need to unlock or connect your browser wallet to Cheeze DAO.</p>
+      <p>
+        It seems you need to unlock or connect your browser wallet to Cheeze
+        DAO.
+      </p>
       <p>Please proceed to do so.</p>
 
-      <button class="button">
-        <router-link to="/">Unlock Dapper</router-link>
+      <button class="button" v-on:click="onUnlockClick">
+        Unlock Dapper
       </button>
     </div>
   </div>
@@ -17,10 +28,14 @@
 
 <script>
 export default {
-  name: "landing",
-  components: {}
+  name: "unlock-dapper",
+  components: {},
+  props: {
+    onUnlockClick: Function
+  }
 };
 </script>
+
 <style lang="scss" scoped>
 .landing {
   background: url("../assets/colored-grid.svg");

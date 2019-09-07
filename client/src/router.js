@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
+
 import Landing from "./views/Landing.vue";
 import Home from "./views/Home.vue";
 import CreateCowven from "./views/CreateCowven.vue";
