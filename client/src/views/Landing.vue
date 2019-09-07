@@ -9,7 +9,7 @@
     <img
       class="bottom-cloud"
       alt="Bottom Cloud"
-      src="../assets/bottom-cloud.svg"
+      src="../assets/bottom-cheese.svg"
     />
 
     <div class="container">
@@ -28,22 +28,25 @@
         emoji:) enabling you to join or create a team, choose one of the Grate
         to follow and govern it based on your gaming skills !
       </p>
-      <button id="enter" class="button" disabled title="Coming soon">
-        <!--        <router-link :to="{ name: 'home' }">Enter the Cheeze</router-link>-->
-        Enter the Cheeze
-      </button>
-      <a class="twitter" href="https://twitter.com/CheezeDao">
-        <img src="../assets/twitter.svg" alt />
-      </a>
+      <div class="button__inner">
+        <button id="enter" class="button" title="Coming soon">
+          <router-link :to="{ name: 'home' }">Enter the Cheeze</router-link>
+        </button>
+        <a class="twitter" href="https://twitter.com/CheezeDao">
+          <img src="../assets/twitter.svg" alt />
+        </a>
+      </div>
     </div>
 
-    <v-dialog content-class="faq-dialog">
+    <v-dialog v-model="dialog" content-class="faq-dialog">
       <template v-slot:activator="{ on }">
         <button id="faq" class="button" v-on="on">FAQ</button>
       </template>
 
       <v-card class="dialog">
-        <!-- <img id="X" src="../assets/X.svg" alt /> -->
+        <button class="close-modal" @click="dialog = false">
+          <img src="../assets/X.svg" alt />
+        </button>
         <h1>Frequently Cheesed Questions</h1>
         <h2>What is CheezeDAO?</h2>
         <p>
@@ -79,7 +82,11 @@
 <script>
 export default {
   name: "landing",
-  components: {}
+  data() {
+    return {
+      dialog: false
+    };
+  }
 };
 </script>
 
@@ -131,14 +138,6 @@ export default {
       }
     }
 
-    .twitter {
-      img {
-        display: block;
-        margin: auto;
-        padding-top: 1rem;
-      }
-    }
-
     h1 {
       font-size: 5rem;
       width: 66%;
@@ -152,12 +151,39 @@ export default {
         margin: 2rem 1rem;
       }
     }
+
+    .button__inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      @media screen and (max-width: 1020px) {
+        flex-direction: column;
+        margin-bottom: 15px;
+      }
+      button {
+        @media screen and (max-width: 1020px) {
+          margin-bottom: 15px;
+        }
+      }
+      .twitter {
+        line-height: 0;
+        position: absolute;
+        right: 15%;
+        top: 2px;
+        @media screen and (max-width: 1020px) {
+          position: relative;
+          top: 0;
+          right: 0;
+        }
+      }
+    }
   }
 
   #faq {
     position: absolute;
     z-index: 3;
-    bottom: 65px;
+    bottom: 25px;
     right: 25px;
     width: 80px;
     @media screen and (max-width: 450px) {
@@ -188,13 +214,12 @@ export default {
   }
 
   .right-cloud {
-    top: -10rem;
+    top: -10em;
     right: -44rem;
     position: absolute;
-    width: 80rem;
+    width: 85rem;
     @media screen and (max-width: 1020px) {
-      // display: none;
-      width: 40rem;
+      display: none;
     }
   }
 
@@ -218,14 +243,27 @@ export default {
 
   h1 {
     padding-bottom: 1rem;
+    @media screen and (max-width: 1020px) {
+      font-size: 28px;
+      text-align: left;
+      padding-right: 40px;
+    }
   }
 
   h2 {
     text-decoration: underline;
     font-size: 20px;
   }
-  #X {
-    float: right;
+
+  .close-modal {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    outline: none;
+    &:hover {
+      opacity: 0.7;
+      transition: all 0.3s ease;
+    }
   }
 }
 </style>

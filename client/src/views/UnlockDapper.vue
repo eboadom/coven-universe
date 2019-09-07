@@ -9,7 +9,7 @@
     <img
       class="bottom-cloud"
       alt="Bottom Cloud"
-      src="../assets/bottom-cloud.svg"
+      src="../assets/bottom-cheese.svg"
     />
     <div class="container">
       <img src="../assets/dapper-logo.png" alt />
@@ -39,20 +39,42 @@ export default {
 <style lang="scss" scoped>
 .landing {
   background: url("../assets/colored-grid.svg");
-  height: 96vh;
-  background-position-y: -12vh;
+  height: 100vh;
+  position: relative;
+  min-height: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  @media screen and (max-width: 1020px) {
+    min-height: 100vh;
+    height: auto;
+  }
+
+  @media screen and (max-width: 450px) {
+    align-items: flex-end;
+  }
+
   .container {
-    /* background: transparent url("../assets/paper-banner.svg") no-repeat fixed center; */
-    width: 50%;
-    left: 25%;
-    top: 20%;
-    padding: 0 8rem;
-    position: absolute;
+    max-width: 700px;
     text-align: center;
+    position: relative;
+    z-index: 5;
+    padding: 1%;
+
+    @media screen and (max-width: 1020px) {
+      width: 100%;
+    }
 
     img {
       width: 24rem;
+      @media screen and (max-width: 500px) {
+        width: 100%;
+      }
     }
+
     h1 {
       font-size: 5rem;
       width: 66%;
@@ -76,13 +98,21 @@ export default {
     left: -10rem;
     width: 40rem;
     top: 2rem;
+    @media screen and (max-width: 1020px) {
+      left: 0;
+      width: 20rem;
+      top: 0;
+    }
   }
 
   .right-cloud {
-    top: -10rem;
+    top: -10em;
     right: -44rem;
     position: absolute;
-    width: 80rem;
+    width: 85rem;
+    @media screen and (max-width: 1020px) {
+      display: none;
+    }
   }
 
   .bottom-cheese,

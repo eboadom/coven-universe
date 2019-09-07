@@ -50,7 +50,7 @@ body {
   width: 12rem;
   height: 3rem;
   background: white;
-  transition: all .3s ease;
+  transition: all 0.3s ease;
 
   a {
     text-decoration: none;
