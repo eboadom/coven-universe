@@ -4,6 +4,7 @@ WORKDIR /app
 COPY package.json package-lock.json /app/
 RUN npm i install
 COPY . /app
+
 RUN npm run build
 
 # Deliver the dist folder with Nginx

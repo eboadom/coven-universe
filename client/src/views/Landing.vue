@@ -29,10 +29,14 @@
         to follow and govern it based on your gaming skills !
       </p>
       <div class="button__inner">
-        <button id="enter" class="button" disabled title="Coming soon">
-          <!--          <router-link :to="{ name: 'home' }">Enter the Cheeze</router-link>-->
+        <button class="button" disabled title="Coming soon" v-if="isProduction">
           Enter the Cheeze
         </button>
+        <router-link :to="{ name: 'home' }" v-else>
+          <button class="button" title="Coming soon">
+            Enter the Cheeze
+          </button>
+        </router-link>
         <a class="twitter" href="https://twitter.com/CheezeDao">
           <img src="../assets/twitter.svg" alt />
         </a>
@@ -85,7 +89,8 @@ export default {
   name: "landing",
   data() {
     return {
-      dialog: false
+      dialog: false,
+      isProduction: process.env.NODE_ENV === "production"
     };
   }
 };
