@@ -1,15 +1,19 @@
 <template>
   <div class="topnav">
-    <router-link to="/home">
+    <router-link :to="{ name: 'home' }">
       <img src="../assets/cheezedao.svg" alt />
     </router-link>
     <div class="button-container">
-      <button class="button">
-        <router-link to="/cbd">CBD</router-link>
-      </button>
-      <button class="button">
-        <router-link to="/mywizards">My Wizards</router-link>
-      </button>
+      <router-link :to="{ name: 'cbd' }">
+        <button class="button">
+          CBD
+        </button>
+      </router-link>
+      <router-link :to="{ name: 'mywizards' }">
+        <button class="button">
+          My Wizards
+        </button>
+      </router-link>
     </div>
   </div>
 </template>

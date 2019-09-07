@@ -31,7 +31,13 @@
               required
             ></v-select>
 
-            <v-textarea label="Cowven Description" auto-grow outlined rows="9" row-height="15"></v-textarea>
+            <v-textarea
+              label="Cowven Description"
+              auto-grow
+              outlined
+              rows="9"
+              row-height="15"
+            ></v-textarea>
           </v-form>
           <v-dialog v-model="dialog" width="500">
             <template v-slot:activator="{ on }">
@@ -41,12 +47,23 @@
             <v-card class="dialog">
               <img src="../assets/wheel.svg" alt />
               <h1>Congoudalations!</h1>
-              <v-card-text>Your Cowven has been summoned ! Convert Wizards to join your team and compete to hold the G.O.A.T. Cheeze title the longest</v-card-text>
+              <v-card-text
+                >Your Cowven has been summoned ! Convert Wizards to join your
+                team and compete to hold the G.O.A.T. Cheeze title the
+                longest</v-card-text
+              >
 
               <!-- <v-card-actions> -->
               <!-- <v-spacer></v-spacer> -->
-              <button class="button" color="primary" text @click="dialog = false">
-                <router-link to="/cowvenhome">Go to Cowven</router-link>
+              <button
+                class="button"
+                color="primary"
+                text
+                @click="dialog = false"
+              >
+                <router-link :to="{ name: 'cowvenhome' }"
+                  >Go to Cowven</router-link
+                >
               </button>
               <!-- </v-card-actions> -->
             </v-card>

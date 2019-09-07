@@ -56,7 +56,7 @@
             cheesiest coven of the hood.
           </p>
           <button class="button">
-            <router-link to="/createcowven">Summon</router-link>
+            <router-link :to="{ name: 'createcowven' }">Summon</router-link>
           </button>
         </div>
       </div>

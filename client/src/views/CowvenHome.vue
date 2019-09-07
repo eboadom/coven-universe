@@ -16,7 +16,7 @@
       </div>
 
       <button>
-        <router-link to="/makeproposal">Make Proposal</router-link>
+        <router-link :to="{ name: 'makeproposal' }">Make Proposal</router-link>
       </button>
     </div>
 

@@ -16,7 +16,7 @@
       </div>
 
       <button>
-        <router-link to="/cowvenhome">Active Spell Proposals</router-link>
+        <router-link :to="{ name: 'cowvenhome' }">Active Spell Proposals</router-link>
       </button>
     </div>
 
