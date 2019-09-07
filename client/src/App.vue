@@ -6,13 +6,10 @@
 
 <script>
 export default {
-  name: "App",
-  components: {},
-  data: () => ({
-    //
-  })
+  name: "App"
 };
 </script>
+
 <style lang="scss">
 :root {
   --purple: #b79afc;
@@ -46,7 +43,7 @@ body {
   padding: 8px 16px;
   color: #000;
   margin-top: 0;
-  box-shadow: 3px 4px 0px 0px rgba(0, 0, 0, 1);
+  box-shadow: 3px 4px 0 0 rgba(0, 0, 0, 1);
   width: 12rem;
   height: 3rem;
   background: white;
@@ -70,4 +67,3 @@ p {
   font-family: codesaver;
 }
 </style>
-

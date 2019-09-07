@@ -27,17 +27,20 @@
             show-expand
           >
             <template v-slot:item.god="{ item }">
-              <img :src="require(`@/assets/${item.god}.svg`)" />
+              <img :src="require(`@/assets/${item.god}.svg`)" alt="" />
             </template>
 
             <template v-slot:expanded-item="{ headers }">
               <td :colspan="headers.length">
-                This is the content area where the unique ‘tagline’ will be placed for each coven. Each coven can set a few lines
-                of text for a unique distribution of their coven
+                This is the content area where the unique ‘tagline’ will be
+                placed for each coven. Each coven can set a few lines of text
+                for a unique distribution of their coven
                 <button
                   class="redirectCowven button"
                   @click="redirectToMyCowven"
-                >Go to Cowven</button>
+                >
+                  Go to Cowven
+                </button>
               </td>
             </template>
           </v-data-table>
@@ -48,7 +51,10 @@
         <h1>Create Cowven</h1>
         <div class="summon-container">
           <img src="../assets/utter.svg" alt />
-          <p>Summon your Cowven! Gather your wizard homies and rule together the cheesiest coven of the hood.</p>
+          <p>
+            Summon your Cowven! Gather your wizard homies and rule together the
+            cheesiest coven of the hood.
+          </p>
           <button class="button">
             <router-link to="/createcowven">Summon</router-link>
           </button>
