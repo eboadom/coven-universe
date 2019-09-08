@@ -8,7 +8,6 @@ import cors from "cors"
 import helmet from "helmet"
 
 import { initConfiguration } from './configuration';
-import router from "./routes/routes"
 import { getSchema } from './graphql';
 
 export const createServer = async () => {
@@ -20,7 +19,6 @@ export const createServer = async () => {
   app.use(helmet());
   app.use(cookieParser());
   app.use(bodyParser.json());
-  app.use(router);
 
   const apolloServer = new ApolloServer({
     schema: await getSchema(),
@@ -29,12 +27,12 @@ export const createServer = async () => {
   const httpServer = http.createServer(app);
   apolloServer.installSubscriptionHandlers(httpServer);
   httpServer.listen(PORT, () => {
-    console.log(`*  REST Server ready at http://localhost:${PORT}`);
+    // console.log(`*  REST Server ready at http://localhost:${PORT}`);
     console.log(
-      `🚀 Apollo Server ready at http://localhost:${PORT}${apolloServer.graphqlPath}`,
+      `🚀 Apollo Server ready at ws://localhost:${PORT}${apolloServer.graphqlPath}`,
     );
-    console.log(
-      `🚀 Apollo Subscriptions ready at ws://localhost:${PORT}${apolloServer.subscriptionsPath}`,
-    );
+    // console.log(
+    //   `🚀 Apollo Subscriptions ready at ws://localhost:${PORT}${apolloServer.subscriptionsPath}`,
+    // );
   });
 };

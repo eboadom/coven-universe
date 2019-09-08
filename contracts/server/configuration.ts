@@ -5,10 +5,10 @@ export type tEthereumAddress = string
 export type tGetConfiguration = () => IConfiguration
 
 export const getPathDeployedWizardsContracts = (ethereumNetwork: string) =>
-  `${rootPath}/migrations/data/wizards-${ethereumNetwork}-addresses.json`
+  `${rootPath}/migrations/data/wizards-${ethereumNetwork}-addresses.json`;
 
 export const getPathDeployedDaoContracts = (ethereumNetwork: string) =>
-  `${rootPath}/migrations/data/dao-${ethereumNetwork}-addresses.json`
+  `${rootPath}/migrations/data/dao-${ethereumNetwork}-addresses.json`;
 
 export interface IWizardsAddresses {
   WizardWalletFactory: tEthereumAddress
@@ -34,17 +34,17 @@ export interface IConfiguration {
   addresses: IContractsAddresses
 }
 
-export let configuration: IConfiguration
+export let configuration: IConfiguration;
 
 export const initConfiguration = async (
   ethereumNetwork: string = "development",
 ) => {
   const httpProvider = new Web3.providers.HttpProvider(<string>(
     process.env[`URL_ETHEREUM_HTTP_PROVIDER_${ethereumNetwork.toUpperCase()}`]
-  ))
+  ));
   const wsProvider = new Web3.providers.WebsocketProvider(<string>(
     process.env[`URL_ETHEREUM_HTTP_PROVIDER_${ethereumNetwork.toUpperCase()}`]
-  ))
+  ));
   configuration = {
     web3: new Web3(httpProvider),
     web3WS: new Web3(wsProvider),
@@ -56,8 +56,8 @@ export const initConfiguration = async (
     },
     network: ethereumNetwork,
   }
-}
+};
 
 export const getConfiguration = () => {
   return configuration
-}
+};
