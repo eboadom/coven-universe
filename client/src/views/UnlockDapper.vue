@@ -37,6 +37,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../style/screen-size";
+
 .landing {
   background: url("../assets/colored-grid.svg");
   height: 100vh;
@@ -47,13 +49,14 @@ export default {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+  overflow-x: hidden;
 
-  @media screen and (max-width: 1020px) {
+  @include respond-to(md) {
     min-height: 100vh;
     height: auto;
   }
 
-  @media screen and (max-width: 450px) {
+  @include respond-to(xs) {
     align-items: flex-end;
   }
 
@@ -64,13 +67,13 @@ export default {
     z-index: 5;
     padding: 1%;
 
-    @media screen and (max-width: 1020px) {
+    @include respond-to(md) {
       width: 100%;
     }
 
     img {
       width: 24rem;
-      @media screen and (max-width: 500px) {
+      @include respond-to(xs) {
         width: 100%;
       }
     }
@@ -98,7 +101,7 @@ export default {
     left: -10rem;
     width: 40rem;
     top: 2rem;
-    @media screen and (max-width: 1020px) {
+    @include respond-to(md) {
       left: 0;
       width: 20rem;
       top: 0;
@@ -110,7 +113,7 @@ export default {
     right: -44rem;
     position: absolute;
     width: 85rem;
-    @media screen and (max-width: 1020px) {
+    @include respond-to(md) {
       display: none;
     }
   }

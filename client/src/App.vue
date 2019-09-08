@@ -11,6 +11,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import "./style/screen-size";
+
 :root {
   --purple: #b79afc;
   --red: #ff809b;
@@ -28,10 +30,19 @@ export default {
   src: url("./assets/codesaver.otf");
 }
 
+* {
+  box-sizing: border-box;
+}
+
+html {
+  overflow: auto !important;
+  overflow-x: hidden !important;
+}
+
 body {
   margin: 0;
   background: transparent url("./assets/background.svg") no-repeat fixed center;
-  overflow-x: hidden;
+  min-width: 320px !important;
 }
 
 #app {
@@ -80,8 +91,26 @@ p {
 }
 
 .v-dialog:not(.v-dialog--fullscreen) {
-  @media screen and (max-width: 1020px) {
+  @include respond-to(md) {
     margin: 15px;
+  }
+}
+
+.my-container {
+  width: 1240px;
+  padding: 0 15px;
+  margin: 0 auto;
+  overflow-x: hidden;
+  position: relative;
+  @include respond-to(lg) {
+    width: 991px;
+  }
+  @include respond-to(md) {
+    width: 750px;
+  }
+  @include respond-to(sm) {
+    width: 100%;
+    padding: 0 10px;
   }
 }
 </style>

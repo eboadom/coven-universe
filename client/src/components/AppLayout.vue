@@ -51,14 +51,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../style/screen-size";
+
 #main-container {
   background: url("../assets/grid.svg");
-  height: 96vh;
-  background-position-y: -12vh;
-  margin: 2rem 0 0 1rem;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  position: relative;
+  min-height: 800px;
 
-  @media screen and (max-width: 1020px) {
-    margin: 1rem;
+  @include respond-to(lg) {
+    min-height: 100vh;
+    height: auto;
+    padding-bottom: 25px;
   }
 }
 </style>

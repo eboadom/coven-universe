@@ -23,27 +23,46 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import "../style/screen-size";
+
 .topnav {
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px 30px;
 
-  @media screen and (max-width: 1020px) {
-    margin-bottom: 1rem;
+  @include respond-to(sm) {
+    flex-direction: column;
   }
+
   img {
-    @media screen and (max-width: 1020px) {
-      width: 6rem;
-    }
+    width: 200px;
   }
 
   .button-container {
-    padding: 0 2rem;
-    width: 30rem;
-    display: flex;
-    justify-content: space-between;
-    @media screen and (max-width: 1020px) {
-      width: 15rem;
-      padding: 0;
+    @include respond-to(sm) {
+      margin-top: 15px;
+    }
+    @include respond-to(xs) {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+    }
+
+    a {
+      margin-left: 40px;
+      @include respond-to(sm) {
+        margin-left: 25px;
+      }
+      @include respond-to(xs) {
+        margin: 15px 0 0 0;
+      }
+
+      &:first-child {
+        margin: 0;
+      }
     }
   }
 }

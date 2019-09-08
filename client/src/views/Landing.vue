@@ -106,6 +106,8 @@ export default {
 </style>
 
 <style lang="scss" scoped>
+@import "../style/screen-size";
+
 .landing {
   background: url("../assets/colored-grid.svg");
   height: 100vh;
@@ -116,13 +118,14 @@ export default {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+  overflow-x: hidden;
 
-  @media screen and (max-width: 1020px) {
+  @include respond-to(md) {
     min-height: 100vh;
     height: auto;
   }
 
-  @media screen and (max-width: 450px) {
+  @include respond-to(xs) {
     align-items: flex-end;
   }
 
@@ -133,13 +136,13 @@ export default {
     z-index: 5;
     padding: 1%;
 
-    @media screen and (max-width: 1020px) {
+    @include respond-to(md) {
       width: 100%;
     }
 
     .dao-logo {
       width: 24rem;
-      @media screen and (max-width: 1020px) {
+      @include respond-to(md) {
         width: 14rem;
       }
     }
@@ -153,7 +156,7 @@ export default {
     p {
       margin: 2rem 0;
 
-      @media screen and (max-width: 1020px) {
+      @include respond-to(md) {
         margin: 2rem 1rem;
       }
     }
@@ -163,12 +166,12 @@ export default {
       align-items: center;
       justify-content: center;
       position: relative;
-      @media screen and (max-width: 1020px) {
+      @include respond-to(md) {
         flex-direction: column;
         margin-bottom: 15px;
       }
       button {
-        @media screen and (max-width: 1020px) {
+        @include respond-to(md) {
           margin-bottom: 15px;
         }
       }
@@ -177,7 +180,7 @@ export default {
         position: absolute;
         right: 15%;
         top: 2px;
-        @media screen and (max-width: 1020px) {
+        @include respond-to(md) {
           position: relative;
           top: 0;
           right: 0;
@@ -192,7 +195,7 @@ export default {
     bottom: 25px;
     right: 25px;
     width: 80px;
-    @media screen and (max-width: 450px) {
+    @include respond-to(xs) {
       position: relative;
       bottom: 0;
       right: 0;
@@ -212,7 +215,7 @@ export default {
     left: -10rem;
     width: 40rem;
     top: 2rem;
-    @media screen and (max-width: 1020px) {
+    @include respond-to(md) {
       left: 0;
       width: 20rem;
       top: 0;
@@ -224,7 +227,7 @@ export default {
     right: -44rem;
     position: absolute;
     width: 85rem;
-    @media screen and (max-width: 1020px) {
+    @include respond-to(md) {
       display: none;
     }
   }
@@ -243,13 +246,13 @@ export default {
   font-family: codesaver;
   padding: 2rem;
 
-  @media screen and (max-width: 1020px) {
+  @include respond-to(md) {
     padding: 1rem;
   }
 
   h1 {
     padding-bottom: 1rem;
-    @media screen and (max-width: 1020px) {
+    @include respond-to(md) {
       font-size: 28px;
       text-align: left;
       padding-right: 40px;

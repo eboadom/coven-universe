@@ -1,39 +1,57 @@
 <template>
-  <div class="content-container">
+  <div class="my-container">
     <div class="the-sanctuary">
-      <h1>Cheezyverse Beliefs Distribution</h1>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
-      </p>
+      <div class="title-inner">
+        <h1>Cheezyverse Beliefs Distribution</h1>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+      </div>
+
       <div class="elements">
-        <div class="neutral">
-          <img src="../assets/neutral-white.svg" alt />
+        <div class="item neutral">
+          <div class="image-inner">
+            <img src="../assets/neutral-white.svg" alt />
+          </div>
+
           <h2>000000</h2>
           <h3>The Grate Balance</h3>
         </div>
-        <div class="water">
-          <img src="../assets/water-white.svg" alt />
+        <div class="item water">
+          <div class="image-inner">
+            <img src="../assets/water-white.svg" alt />
+          </div>
+
           <h2>000000</h2>
           <h3>The Grate Wave</h3>
         </div>
-        <div class="wind">
-          <img src="../assets/wind-white.svg" alt />
+        <div class="item wind">
+          <div class="image-inner">
+            <img src="../assets/wind-white.svg" alt />
+          </div>
+
           <h2>000000</h2>
           <h3>The Grate Storm</h3>
         </div>
-        <div class="fire">
-          <img src="../assets/fire-white.svg" alt />
+        <div class="item fire">
+          <div class="image-inner">
+            <img src="../assets/fire-white.svg" alt />
+          </div>
+
           <h2>000000</h2>
           <h3>The Grate Flames</h3>
         </div>
-        <div class="mold">
-          <img src="../assets/mold-white.svg" alt />
+        <div class="item mold">
+          <div class="image-inner">
+            <img src="../assets/mold-white.svg" alt />
+          </div>
+
           <h2>000000</h2>
           <h3>The Grate Mold</h3>
         </div>
@@ -48,86 +66,97 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.content-container {
-  display: flex;
-  flex-direction: row;
-  margin-top: 2rem;
+@import "../style/screen-size";
+@import "../style/vars";
 
-  .the-sanctuary {
-    @media screen and (max-width: 1020px) {
-      width: 100%;
+.the-sanctuary {
+  .title-inner {
+    margin-bottom: 60px;
+    text-align: center;
+    @include respond-to(lg) {
+      margin-bottom: 40px;
     }
 
+    h1 {
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
     p {
       width: 60%;
-      margin: auto;
+      margin: 0 auto;
+      @include respond-to(lg) {
+        width: 70%;
+      }
+      @include respond-to(sm) {
+        width: 100%;
+      }
+    }
+  }
+
+  .elements {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    @include respond-to(lg) {
+      justify-content: center;
+    }
+
+    .item {
+      width: 220px;
+      border: solid 1px #000000;
       text-align: center;
-      padding: 3rem 0;
-    }
-    .elements {
-      font-family: codesaver;
-      color: white;
-      display: flex;
-      width: 100%;
-      justify-content: space-evenly;
-      padding: 0 20rem;
+      padding: 60px 10px 25px;
+      color: #fff;
+      @include respond-to(lg) {
+        margin: 10px;
+      }
 
-      @media screen and (max-width: 1020px) {
-        flex-direction: column;
-        padding: 0;
+      .image-inner {
+        height: 130px;
+        display: flex;
+        justify-content: center;
         align-items: center;
+        margin-bottom: 30px;
+        img {
+          width: 120px;
+          max-height: 130px;
+        }
       }
 
-      div {
-        width: 15rem;
-        height: 27rem;
-        text-align: center;
-        display: inline-block;
-        border: 1px solid black;
-        padding-top: 2rem;
+      h2 {
+        font-family: codesaver;
+        margin-bottom: 10px;
+        font-size: 45px;
+        font-weight: lighter;
+      }
 
-        h2 {
-          font-size: 3rem;
-          font-weight: lighter;
-          padding-bottom: 1rem;
-        }
-
-        h3 {
-          font-weight: lighter;
-          font-size: 1.5rem;
-        }
-      }
-      .neutral {
-        background-color: var(--purple);
-        img {
-          padding: 4rem 0;
-        }
-      }
-      .water {
-        background-color: var(--blue);
-        img {
-          padding: 4rem 0;
-        }
-      }
-      .wind {
-        background-color: var(--green);
-        img {
-          padding: 3rem 0;
-        }
-      }
-      .fire {
-        background-color: var(--red);
-        img {
-          padding: 2rem 0;
-        }
-      }
-      .mold {
-        background-color: var(--darkblue);
-        img {
-          padding: 5.5rem 0;
-        }
+      h3 {
+        font-family: codesaver;
+        font-size: 19px;
+        margin: 0;
+        font-weight: lighter;
       }
     }
+  }
+
+  .neutral {
+    background: $purple;
+  }
+
+  .water {
+    background: $blue;
+  }
+
+  .wind {
+    background: $green;
+  }
+
+  .fire {
+    background: $red;
+  }
+
+  .mold {
+    background: $darkblue;
   }
 }
 </style>
