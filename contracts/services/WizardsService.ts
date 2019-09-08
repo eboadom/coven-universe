@@ -9,7 +9,7 @@ import {bnToBigNumber, ADDRESS_0x0} from "../utils/common-utils"
 import {WizardWalletFactory} from "../types/web3-contracts/WizardWalletFactory"
 import {WizardWallet} from "../types/web3-contracts/WizardWallet"
 import {path as rootPath} from "app-root-path"
-import {DaoService} from "./DaoService"
+import {DaoService, IMembersDaoWithReputation} from "./DaoService"
 import {DAOName} from "../migrations/data/development-data"
 import {EventData} from "web3-eth-contract"
 
@@ -27,6 +27,10 @@ export enum eWizardAffinity {
 
 export enum eWizardGuildEvent {
   Transfer = "Transfer",
+}
+
+export enum eWizardWalletFactoryEvent {
+  WizardWalletCreated = "WizardWalletCreated",
 }
 
 export const wizardAffinities = [
@@ -51,6 +55,16 @@ export interface IWizardData {
 export interface IWizardWalletData {
   wizardWalletAddress: tEthereumAddress
   genecheezeDaoReputation: string
+}
+
+export interface IWizardIdWithWallet {
+  wizardId: string
+  wizardWallet: tEthereumAddress
+}
+
+export interface IWizardWalletDaoWithReputation
+  extends IMembersDaoWithReputation {
+  wizardId: string
 }
 
 export interface IWizardsService {
@@ -118,6 +132,15 @@ export class WizardsService extends ContractService {
       this.getWizardWalletABI(),
       wizardWalletAddress,
     )
+
+  getAllWizardWalletsCreated = async (): Promise<IWizardIdWithWallet[]> =>
+    (await this.getWizardWalletFactoryContract().getPastEvents(
+      eWizardWalletFactoryEvent.WizardWalletCreated,
+      {fromBlock: 0},
+    )).map(eventData => ({
+      wizardId: bnToBigNumber(eventData.returnValues.wizardId).toFixed(),
+      wizardWallet: eventData.returnValues.wizardWallet,
+    }))
 
   getAllTransferEventsOfWizards = async (): Promise<EventData[]> =>
     await this.getWizardGuildContract().getPastEvents(

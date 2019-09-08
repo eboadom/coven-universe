@@ -6,6 +6,16 @@ import {exec as callbackExec, spawn as spawnNode} from "child_process"
 
 export const ADDRESS_0x0 = "0x0000000000000000000000000000000000000000"
 
+export const timeBenchmark = async (f: Function): Promise<void> => {
+  const NS_PER_SEC = 1e9
+  const initTime = process.hrtime()
+  const result = await f()
+  const diff = process.hrtime(initTime)
+  console.log(
+    `Benchmark took ${(diff[0] * NS_PER_SEC + diff[1]) / NS_PER_SEC} seconds`,
+  )
+}
+
 export const getHttpProviderUrlByNetwork = (
   network: EthereumNetwork,
 ): string | undefined => {

@@ -8,7 +8,10 @@ import {
   devFundTokens,
   devFundReputation,
 } from "../../data/development-data"
-import {writeObjectToFile, ADDRESS_0x0} from "../../../utils/common-utils"
+import {
+  writeObjectToFile,
+  ADDRESS_0x0,
+} from "../../../utils/common-utils"
 import {
   IDaoAddresses,
   getPathDeployedDaoContracts,
@@ -299,7 +302,7 @@ export const deployDAOMigration = migrationHandler(
         .genecheezeDaoReputation + " reputation",
     )
     console.log(
-      (await wizardsService.getWizardData(wizardId1)).wizardWalletData
+      (await wizardsService.getWizardData(wizardId3)).wizardWalletData
         .genecheezeDaoReputation + " reputation",
     )
     console.log()
@@ -364,24 +367,6 @@ export const deployDAOMigration = migrationHandler(
     //   ))["1"].toString(),
     // )
 
-    console.log("---------------------------------")
-    console.log("----- State Wizards wallets after slash of reputation-----")
-    console.log("---------------------------------")
-    console.log(
-      (await wizardsService.getWizardData(wizardId1)).wizardWalletData
-        .genecheezeDaoReputation + " reputation",
-    )
-    console.log(
-      (await wizardsService.getWizardData(wizardId2)).wizardWalletData
-        .genecheezeDaoReputation + " reputation",
-    )
-    console.log(
-      (await wizardsService.getWizardData(wizardId1)).wizardWalletData
-        .genecheezeDaoReputation + " reputation",
-    )
-    console.log()
-    console.log("---------------------------------\n")
-
     await redeemReputation(slashReputationWizard1ProposalId)
     await redeemReputation(slashReputationWizard2ProposalId)
     await redeemReputation(slashReputationWizard3ProposalId)
@@ -400,7 +385,7 @@ export const deployDAOMigration = migrationHandler(
         .genecheezeDaoReputation + " reputation",
     )
     console.log(
-      (await wizardsService.getWizardData(wizardId1)).wizardWalletData
+      (await wizardsService.getWizardData(wizardId3)).wizardWalletData
         .genecheezeDaoReputation + " reputation",
     )
     console.log()
@@ -411,6 +396,17 @@ export const deployDAOMigration = migrationHandler(
     console.log("---------------------------------")
     console.log(await wizardsService.getWizardsDataByOwner(accounts[0]))
     console.log("---------------------------------\n")
+
+    console.log("----- Wallets in the 'test' -----")
+    console.log("Account 0 " + accounts[0])
+    console.log("Wizard 1 wallet " + wizardWallet1)
+    console.log("Wizard 2 wallet " + wizardWallet2)
+    console.log("Wizard 3 wallet " + wizardWallet3)
+    console.log("---------------------------------\n")
+
+    const allDaosInfo = await daoService.getAllDaosInfo()
+    console.log(allDaosInfo)
+    console.log(allDaosInfo[0].members)
   },
 )
 
