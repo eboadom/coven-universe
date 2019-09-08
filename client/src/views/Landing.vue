@@ -53,31 +53,94 @@
           <img src="../assets/X.svg" alt />
         </button>
         <h1>Frequently Cheesed Questions</h1>
-        <h2>What is CheezeDAO?</h2>
+        <h2>What is CheezeDAO ?</h2>
         <p>
           CheezeDAO the political extension of the Cheezyverse, it is a
           governance experiment looking to showcase the possibilities of liquid
           and skill based governance while bringing cross tournament ranking,
           team playing and engagement incentive to extensibles games.
         </p>
-        <h2>What is a Cowven (pronounced Cow-Ven) ?</h2>
+
+        <h2>What is a Cowven (Pronounced Cow-Ven) ?</h2>
         <p>
           Like a Coven but following the Holy Cow, a Cowven is an association of
           Cheeze Wizards. Join one or create your own to be that kind of cheese,
-          ya know 😏 Within your Cowven you will get points according to your
-          rank and will be able to take decisions with your team.
+          ya know 😏 <br />
+          Within your Cowven you will get points according to your rank and will
+          be able to take decisions with your team.
         </p>
+
         <h2>How to join or create a Cowven ?</h2>
         <p>
           On the homescreen of the Dapp, click “Create Cowven” to create it, you
           will then need to choose a name and a description for your team and
           the God you choose to follow.
         </p>
-        <h2>Question title here</h2>
+
+        <h2>Who are Grates Ones ?</h2>
         <p>
-          On the homescreen of the Dapp, click “Create Cowven” to create it, you
-          will then need to choose a name and a description for your team and
-          the God you choose to follow.
+          The Grates are entities followed by wizards across the country, the
+          majority of their followers is found is their respective territory but
+          as crusts are shrinking, their reach is now expanding into other
+          territory. <br />
+          They organized as follows: <br />
+          Grate Fire : This guy has no chill <br />
+          Grate Wave : She got more flows than melting ice, beware the seazure
+          <br />
+          Grate Neutral : BasedGod was already taken… Meh, I can’t even
+          <br />
+          Grate Wind : She is literally a big fan <br />
+          The Mold : The mold is a secret society something something something
+          long and weird blablablaba'a
+        </p>
+
+        <h2>
+          Hum, out of pure curiosity… Let's say I have a Water Wizard, can I
+          join a Cowven following the Grate Flame ?
+        </h2>
+        <p>
+          We encourage rebellion and deception, any type of wizard can melt for
+          any of the Grates Ones, maybe even more…
+        </p>
+
+        <h2>
+          What is the difference between my Milk Points and my Wizard Power ?
+        </h2>
+        <p></p>
+
+        <h2>I am in the Cowven, now what ?</h2>
+        <p>
+          Gg m8, You can vote to accept a new member or propose to kick an
+          existing one out of it, you can also make proposals to convert the
+          affinity of your Cowven to another God, but be careful as your actions
+          will have repercussions...
+        </p>
+
+        <h2>If I sell my wizard will it keep his ranking ?</h2>
+        <p>
+          Yes, your wizard really don’t need you. You are just an off chain
+          avatar eating his distant family with bread.
+        </p>
+
+        <h2>Who are the cheesy minds behind this project ?</h2>
+        <p>
+          This project is led by Rocamadour @JordanLzG, Ernesto 'Queixo Tetilla'
+          Boado, Gouda Gouda @Yarrrpirate, ""..."" Andrej, ""..."" Aleksander
+          and Cream Cheeze Andrew Akin
+        </p>
+
+        <h2>
+          I created a tournament how can the battles be reflected on CheezeDAO ?
+        </h2>
+        <p>
+          To broadcast data fron your tournament to the CheezeDAO, you need to
+        </p>
+
+        <h2>What is the Wizard wallet ?</h2>
+        <p>
+          The Wizard Wallet allows us to assign a reputation directly to your
+          Wizard, each wizards seat in an individual wallet to get reputation
+          and govern their Cowven.
         </p>
       </v-card>
     </v-dialog>

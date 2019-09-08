@@ -1,5 +1,5 @@
 <template>
-  <div class="content-container">
+  <div class="my-container">
     <div class="my-wizards">
       <h1>My Wizards</h1>
 
@@ -153,34 +153,47 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+.my-wizards {
+  th {
+    color: #000 !important;
+    text-transform: uppercase;
+  }
+  tr {
+    padding: 5px 0;
+  }
+  td {
+    font-family: "codesaver";
+    font-size: 16px;
+  }
+}
+</style>
+
 <style lang="scss" scoped>
-.content-container {
-  display: flex;
-  flex-direction: row;
-  margin-top: 2rem;
+.my-wizards {
+  width: 100%;
 
-  .my-wizards {
-    padding: 0 8rem;
-    width: 100%;
+  h1 {
+    margin-bottom: 40px;
+    text-align: left;
+    border-bottom: 1px solid rgba(#000, 0.2);
+  }
 
-    @media screen and (max-width: 1020px) {
-      padding: 0;
-    }
-
-    h1 {
-      padding: 1rem 0;
-    }
-    .v-data-table {
-      .wizard-img {
-        @media screen and (max-width: 1020px) {
-          width: 2rem;
-        }
+  .v-data-table {
+    background: transparent;
+    .wizard-img {
+      @media screen and (max-width: 1020px) {
+        width: 2rem;
       }
-      .text-left {
-        width: 10%;
-        img {
-          width: 5rem;
-        }
+    }
+    .text-left {
+      width: 10%;
+      img {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        margin-top: 8px;
       }
     }
   }

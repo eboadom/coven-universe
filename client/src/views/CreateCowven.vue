@@ -50,23 +50,23 @@
               longest</v-card-text
             >
 
-            <!-- <v-card-actions> -->
-            <!-- <v-spacer></v-spacer> -->
-            <button class="button" color="primary" text @click="dialog = false">
-              <router-link :to="{ name: 'cowvenhome' }"
-                >Go to Cowven</router-link
+            <router-link :to="{ name: 'cowvenhome' }">
+              <button
+                class="button"
+                color="primary"
+                text
+                @click="dialog = false"
               >
-            </button>
-            <!-- </v-card-actions> -->
+                Go to Cowven
+              </button>
+            </router-link>
           </v-card>
         </v-dialog>
       </div>
 
-      <!-- //twitter button -->
       <a class="twitter" href="https://twitter.com/CheezeDao">
         <img src="../assets/twitter.svg" alt />
       </a>
-      <!-- <span>Twitter dat Wizzzzzzard stuff</span> -->
     </div>
   </div>
 </template>

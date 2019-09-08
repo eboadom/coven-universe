@@ -1,57 +1,77 @@
 <template>
-  <div class="content-container">
-    <div class="leaderboard">
-      <h1>G.O.A.T. Cheeze Board</h1>
-      <v-card>
-        <v-card-title>
-          Leaderboard
-          <v-spacer></v-spacer>
-          <v-text-field
-            v-model="search"
-            append-icon="search"
-            label="Search"
-            single-line
-            hide-details
-          ></v-text-field>
-        </v-card-title>
-        <v-data-table
-          :headers="headers"
-          :items="grates"
-          :search="search"
-          :single-expand="true"
-          :expanded.sync="expanded"
-          item-key="name"
-          show-expand
-        >
-          <template v-slot:item.god="{ item }">
-            <img :src="require(`@/assets/${item.god}.svg`)" alt="" />
-          </template>
+  <div class="my-container">
+    <div class="Home">
+      <div class="leaderboard">
+        <div class="caption">
+          <h1>G.O.A.T.* Cheeze Board</h1>
+        </div>
 
-          <template v-slot:expanded-item="{ headers }">
-            <td :colspan="headers.length">
-              This is the content area where the unique ‘tagline’ will be placed
-              for each coven. Each coven can set a few lines of text for a
-              unique distribution of their coven
-              <button class="redirectCowven button" @click="redirectToMyCowven">
-                Go to Cowven
-              </button>
-            </td>
-          </template>
-        </v-data-table>
-      </v-card>
-    </div>
+        <v-card>
+          <v-card-title>
+            <v-text-field
+              v-model="search"
+              append-icon="search"
+              label="Search"
+              single-line
+              hide-details
+            ></v-text-field>
+            <v-spacer></v-spacer>
+            <v-spacer></v-spacer>
+          </v-card-title>
+          <v-data-table
+            :headers="headers"
+            :items="grates"
+            :search="search"
+            :single-expand="true"
+            :expanded.sync="expanded"
+            item-key="name"
+            show-expand
+          >
+            <!--            <template v-slot:item="{ item }">-->
+            <!--              <tr class="table-row" @click="redirectToMyCowven(item.id)">-->
+            <!--                <td>{{ item.rank }}</td>-->
+            <!--                <td>{{ item.name }}</td>-->
+            <!--                <td>{{ item.score }}</td>-->
+            <!--                <td>{{ item.members }}</td>-->
+            <!--                <td><img :src="require(`@/assets/${item.god}.svg`)" alt /></td>-->
+            <!--                <p class="description">{{ item.description }}</p>-->
+            <!--              </tr>-->
+            <!--            </template>-->
+            <template v-slot:item.god="{ item }">
+              <img :src="require(`@/assets/${item.god}.svg`)" alt />
+            </template>
 
-    <div class="create-coven">
-      <h1>Create Cowven</h1>
-      <div class="summon-container">
-        <img src="../assets/utter.svg" alt />
-        <p>
-          Summon your Cowven! Gather your wizard homies and rule together the
-          cheesiest coven of the hood.
-        </p>
-        <button class="button">
-          <router-link :to="{ name: 'createcowven' }">Summon</router-link>
-        </button>
+            <template v-slot:expanded-item="{ item }">
+              <td :colspan="headers.length + 1">
+                <p>{{ item.description }}</p>
+                <div class="button-inner">
+                  <button class="button" @click="redirectToMyCowven(item.id)">
+                    Go to Cowven
+                  </button>
+                </div>
+              </td>
+            </template>
+          </v-data-table>
+        </v-card>
+      </div>
+
+      <div class="create-coven">
+        <div class="caption">
+          <h1>Create Cowven</h1>
+        </div>
+
+        <div class="summon-container">
+          <img src="../assets/utter.svg" alt />
+          <p>
+            Summon your Cowven! Gather your wizard homies and rule together the
+            cheesiest coven of the hood.
+          </p>
+          <router-link :to="{ name: 'createcowven' }">
+            <button class="button">
+              Summon
+            </button>
+          </router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -77,169 +97,273 @@ export default {
       ],
       grates: [
         {
+          id: 1,
           rank: "#1",
           name: "DragonBallCheeZ",
           score: "9000+",
           members: "000",
-          god: "fire"
+          god: "fire",
+          description:
+            "This is the content area where the unique ‘tagline’ will be placed for each coven. Each coven can set a few lines of text for a unique distribution of their coven"
         },
         {
+          id: 2,
           rank: "#2",
           name: "MainlandChina",
           score: "1025",
           members: "000",
-          god: "water"
+          god: "water",
+          description:
+            "This is the content area where the unique ‘tagline’ will be placed for each coven. Each coven can set a few lines of text for a unique distribution of their coven"
         },
         {
+          id: 3,
           rank: "#1",
           name: "WeWillRoqueYourFort",
           score: "900",
           members: "000",
-          god: "wind"
+          god: "wind",
+          description:
+            "This is the content area where the unique ‘tagline’ will be placed for each coven. Each coven can set a few lines of text for a unique distribution of their coven"
         },
         {
+          id: 4,
           rank: "#1",
           name: "GoudaGang",
           score: "600",
           members: "000",
-          god: "earth"
+          god: "earth",
+          description:
+            "This is the content area where the unique ‘tagline’ will be placed for each coven. Each coven can set a few lines of text for a unique distribution of their coven"
         },
         {
+          id: 5,
           rank: "#1",
           name: "CheezZz_Aimbot",
           score: "153",
           members: "000",
-          god: "fire"
+          god: "fire",
+          description:
+            "This is the content area where the unique ‘tagline’ will be placed for each coven. Each coven can set a few lines of text for a unique distribution of their coven"
         },
         {
+          id: 6,
           rank: "#1",
           name: "EthIsMoney",
           score: "354",
           members: "000",
-          god: "water"
+          god: "water",
+          description:
+            "This is the content area where the unique ‘tagline’ will be placed for each coven. Each coven can set a few lines of text for a unique distribution of their coven"
         },
         {
+          id: 7,
           rank: "#1",
           name: "ChezeGuevera",
           score: "786",
           members: "000",
-          god: "earth"
+          god: "earth",
+          description:
+            "This is the content area where the unique ‘tagline’ will be placed for each coven. Each coven can set a few lines of text for a unique distribution of their coven"
         },
         {
+          id: 8,
           rank: "#1",
           name: "MoldError",
           score: "420",
           members: "000",
-          god: "wind"
+          god: "wind",
+          description:
+            "This is the content area where the unique ‘tagline’ will be placed for each coven. Each coven can set a few lines of text for a unique distribution of their coven"
         }
       ]
     };
   },
   methods: {
-    redirectToMyCowven() {
-      this.$router.push({ path: "cowvenhome", params: { cowvenId: "123" } });
+    redirectToMyCowven(id) {
+      this.$router.push({ path: "cowvenhome", params: { cowvenId: id } });
     }
-  },
-  mounted() {
-    const trs = Array.from(
-      document.querySelectorAll(".v-data-table__wrapper tr")
-    );
-    trs.map(el =>
-      el.addEventListener("mouseover", e => {
-        e.target.parentElement.firstElementChild.firstElementChild.click();
-      })
-    );
   }
 };
 </script>
+<style lang="scss">
+@import "../style/screen-size";
+@import "../style/vars";
+
+.leaderboard {
+  th {
+    color: #000 !important;
+    text-transform: uppercase;
+  }
+
+  tbody {
+    tr {
+      position: relative;
+      transform: scale(1);
+      transition: all 0.3s ease;
+      /*.description {*/
+      /*  position: absolute;*/
+      /*  opacity: 0;*/
+      /*  bottom: 15px;*/
+      /*  left: 35%;*/
+      /*  right: 10%;*/
+      /*  transition: all 0.3s ease;*/
+      /*  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);*/
+      /*  border: solid 1px #707070;*/
+      /*  background-color: #ffffff;*/
+      /*  font-size: 12px;*/
+      /*  padding: 5px !important;*/
+      /*  cursor: text;*/
+      /*  height: auto;*/
+      /*  transform: scale(0.9);*/
+      /*}*/
+      &:hover {
+        background: $primary !important;
+        border-bottom-color: #000 !important;
+        /*.description {*/
+        /*  opacity: 1;*/
+        /*  transform: scale(1);*/
+        /*  z-index: 1000;*/
+        /*}*/
+        @include respond-to(sm) {
+          background: #fff !important;
+        }
+      }
+      /*&:nth-child(1) {*/
+      /*  .description {*/
+      /*    bottom: auto;*/
+      /*    top: 30px;*/
+      /*  }*/
+      /*}*/
+      td {
+        font-family: 'codesaver';
+      }
+    }
+    .expanded__content {
+      width: 100%;
+      border-bottom: 1px solid #000 !important;
+      &:hover {
+        background-color: transparent !important;
+      }
+      td {
+        padding: 10px;
+        .button-inner {
+          margin: 10px 0;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+</style>
+
 <style lang="scss" scoped>
-.content-container {
+@import "../style/screen-size";
+@import "../style/vars";
+
+.Home {
+  width: 100%;
   display: flex;
-  flex-direction: row;
-  margin-top: 2rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
 
-  @media screen and (max-width: 1020px) {
-    flex-direction: column;
-    margin-top: 0;
-  }
-
-  .leaderboard {
+.leaderboard {
+  width: 60%;
+  @include respond-to(md) {
     width: 100%;
-    padding: 0 8rem;
-
-    @media screen and (max-width: 1020px) {
-      padding: 0;
+    margin-bottom: 25px;
+  }
+  .caption {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  h1 {
+    position: relative;
+    display: inline-block;
+    font-size: 30px;
+    &:before,
+    &:after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 70px;
+      height: 2px;
+      background: rgba(#000, 0.5);
     }
-
-    &::before {
-      background: url("../assets/bottom-left.svg");
-      width: 2rem;
+    &:before {
+      left: 102%;
     }
-    h1 {
-      font-size: 3rem;
-      padding: 1rem 0;
-      @media screen and (max-width: 1020px) {
-        font-size: 2rem;
-      }
-    }
-
-    .v-card {
-      border: 1px solid black;
-      box-shadow: none;
-      padding: 0 2rem 2rem 2rem;
-      font-family: codesaver;
+    &:after {
+      right: 102%;
     }
   }
+  .v-card {
+    box-shadow: none;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 0;
+  }
+  .v-card__title {
+    margin-bottom: 25px;
+  }
+}
 
-  .create-coven {
-    padding: 0 8rem;
-
-    @media screen and (max-width: 1020px) {
-      padding: 0;
-    }
-
+.create-coven {
+  width: 30%;
+  @include respond-to(md) {
+    width: 50%;
+    margin: 0 auto 20px;
+  }
+  @include respond-to(sm) {
+    width: 80%;
+  }
+  @include respond-to(xs) {
+    width: 100%;
+  }
+  .caption {
+    text-align: center;
+    margin-bottom: 20px;
     h1 {
-      padding: 1rem 0;
-    }
-
-    .summon-container {
-      border: 1px solid black;
-      padding: 2rem;
-      height: 30rem;
-      text-align: center;
-      background-color: white;
-
-      &::before {
-        background: url("../assets/bottom-left.svg");
-        width: 2rem;
+      position: relative;
+      display: inline-block;
+      font-size: 20px;
+      &:before,
+      &:after {
         content: "";
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 2px;
+        background: rgba(#000, 0.5);
       }
-
-      p {
-        padding: 1rem 0 3rem 0;
+      &:before {
+        left: 105%;
       }
-      img {
-        width: 10rem;
+      &:after {
+        right: 105%;
       }
     }
   }
-}
-
-.expanded {
-  td {
-    @media screen and (max-width: 1020px) {
-      padding: 0;
+  .summon-container {
+    padding: 40px 15px 35px;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    text-align: center;
+    position: relative;
+    &:after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      height: 2px;
+      width: 100%;
+      background: rgba(#000, 0.3);
+      left: 0;
+    }
+    p {
+      margin: 25px 0 40px;
     }
   }
-}
-
-.redirectCowven {
-  display: block;
-  margin: auto;
-  font-size: 1rem;
-  text-align: center;
-  line-height: 1.8rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
 }
 </style>

@@ -58,13 +58,11 @@ export default {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  height: 100vh;
   position: relative;
-  min-height: 800px;
+  min-height: 100vh;
+  height: auto;
 
   @include respond-to(lg) {
-    min-height: 100vh;
-    height: auto;
     padding-bottom: 25px;
   }
 }
