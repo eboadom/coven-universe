@@ -9,22 +9,25 @@
             :counter="10"
             :rules="nameRules"
             label="Cowven Name"
+            data-vv-name="name"
             required
           ></v-text-field>
 
           <v-select
-            v-model="select"
+            v-model="selectGrates"
             :items="grates"
             :rules="[v => !!v || 'Item is required']"
             label="Choose your Grate One"
+            data-vv-name="selectGrates"
             required
           ></v-select>
 
           <v-select
-            v-model="select"
+            v-model="selectDays"
             :items="days"
             :rules="[v => !!v || 'Item is required']"
             label="Activity"
+            data-vv-name="selectDays"
             required
           ></v-select>
 
@@ -34,13 +37,12 @@
             outlined
             rows="9"
             row-height="15"
+            data-vv-name="description"
           ></v-textarea>
+
+          <button class="button" @click="submit">Start the Ritual</button>
         </v-form>
         <v-dialog v-model="dialog" width="500">
-          <template v-slot:activator="{ on }">
-            <button class="button" v-on="on">Start the Ritual</button>
-          </template>
-
           <v-card class="dialog">
             <img src="../assets/wheel.svg" alt />
             <h1>Congoudalations!</h1>
@@ -52,7 +54,7 @@
 
             <router-link :to="{ name: 'cowvenhome' }">
               <button
-                class="button"
+                class="button modal-button"
                 color="primary"
                 text
                 @click="dialog = false"
@@ -86,13 +88,14 @@ export default {
       v => !!v || "E-mail is required",
       v => /.+@.+\..+/.test(v) || "E-mail must be valid"
     ],
-    select: null,
+    selectGrates: null,
     grates: [
       "The Grate One of The Balance",
       "The Grate One of The Ocean",
       "The Grate One of The Storm",
       "The Grate One of The Flames"
     ],
+    selectDays: null,
     days: [
       "1",
       "2",
@@ -131,6 +134,12 @@ export default {
     validate() {
       if (this.$refs.form.validate()) {
         this.snackbar = true;
+      }
+    },
+    submit() {
+      if (this.$refs.form.validate()) {
+        console.log('submit');
+        this.dialog = true;
       }
     },
     reset() {

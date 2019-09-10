@@ -27,16 +27,6 @@
             item-key="name"
             show-expand
           >
-            <!--            <template v-slot:item="{ item }">-->
-            <!--              <tr class="table-row" @click="redirectToMyCowven(item.id)">-->
-            <!--                <td>{{ item.rank }}</td>-->
-            <!--                <td>{{ item.name }}</td>-->
-            <!--                <td>{{ item.score }}</td>-->
-            <!--                <td>{{ item.members }}</td>-->
-            <!--                <td><img :src="require(`@/assets/${item.god}.svg`)" alt /></td>-->
-            <!--                <p class="description">{{ item.description }}</p>-->
-            <!--              </tr>-->
-            <!--            </template>-->
             <template v-slot:item.god="{ item }">
               <img :src="require(`@/assets/${item.god}.svg`)" alt />
             </template>
@@ -201,40 +191,13 @@ export default {
       position: relative;
       transform: scale(1);
       transition: all 0.3s ease;
-      /*.description {*/
-      /*  position: absolute;*/
-      /*  opacity: 0;*/
-      /*  bottom: 15px;*/
-      /*  left: 35%;*/
-      /*  right: 10%;*/
-      /*  transition: all 0.3s ease;*/
-      /*  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);*/
-      /*  border: solid 1px #707070;*/
-      /*  background-color: #ffffff;*/
-      /*  font-size: 12px;*/
-      /*  padding: 5px !important;*/
-      /*  cursor: text;*/
-      /*  height: auto;*/
-      /*  transform: scale(0.9);*/
-      /*}*/
       &:hover {
         background: $primary !important;
         border-bottom-color: #000 !important;
-        /*.description {*/
-        /*  opacity: 1;*/
-        /*  transform: scale(1);*/
-        /*  z-index: 1000;*/
-        /*}*/
         @include respond-to(sm) {
           background: #fff !important;
         }
       }
-      /*&:nth-child(1) {*/
-      /*  .description {*/
-      /*    bottom: auto;*/
-      /*    top: 30px;*/
-      /*  }*/
-      /*}*/
       td {
         font-family: 'codesaver';
       }

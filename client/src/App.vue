@@ -81,6 +81,10 @@ body {
   }
 }
 
+.modal-button {
+  margin-top: 40px !important;
+}
+
 h1 {
   font-family: exocet;
   text-align: center;
