@@ -24,9 +24,9 @@
       </p>
       <p>
         CheezeDAO is the political extension of the Cheezyverse, it’s games
-        within a game on top of a game (wow Ethereum gaming lego :mindblown
-        emoji:) enabling you to join or create a team, choose one of the Grate
-        to follow and govern it based on your gaming skills !
+        within a game on top of a game (wow Ethereum gaming lego : &#x1f92f;
+        enabling you to join or create a team, choose one of the Grate to follow
+        and govern it based on your gaming skills !
       </p>
       <div class="button__inner">
         <button class="button" disabled title="Coming soon" v-if="isProduction">
@@ -134,17 +134,11 @@
         <h2>Who are the cheesy minds behind this project ?</h2>
         <p>
           This project is led by
-          <a href="https://twitter.com/JordanLzG" target="_blank">twitter</a>
-          Jordan 'Rocamadour' Lazaro Gustave), Ernesto 'Queixo Tetilla' Boado,
-          Rowan 'Gouda Gouda' Van Ginkle, Andrey 'Пошехонский' Kozlov,
-          Aleksander 'Костромской' Ткач and Cream Cheeze Andrew
-        </p>
-
-        <h2>
-          I created a tournament how can the battles be reflected on CheezeDAO ?
-        </h2>
-        <p>
-          To broadcast data fron your tournament to the CheezeDAO, you need to
+          <a href="https://twitter.com/JordanLzG" target="_blank"
+            >Jordan 'Rocamadour' Lazaro Gustave</a
+          >, Ernesto 'Queixo Tetilla' Boado, Rowan 'Gouda Gouda' Van Ginkle,
+          Andrey 'Пошехонский' Kozlov, Aleksander 'Костромской' Tkach and Cream
+          Cheeze Andrew
         </p>
 
         <h2>What is the Wizard wallet ?</h2>
