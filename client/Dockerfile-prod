@@ -5,6 +5,8 @@ COPY package.json package-lock.json /app/
 RUN npm i install
 COPY . /app
 
+ARG VUE_APP_GRAPHQL_ENDPOINT_URL
+
 RUN npm run build
 
 # Deliver the dist folder with Nginx

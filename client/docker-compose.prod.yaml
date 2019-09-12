@@ -40,6 +40,8 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile-prod
+      args:
+        VUE_APP_GRAPHQL_ENDPOINT_URL: "wss://cheezedao.com/graphql"
     networks:
       - overlay
     labels:
