@@ -274,6 +274,7 @@ export default {
 
 .create-coven {
   width: 30%;
+  margin-bottom: 20px;
   @include respond-to(md) {
     width: 50%;
     margin: 0 auto 20px;
