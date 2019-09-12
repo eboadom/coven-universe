@@ -16,8 +16,8 @@ import {
   WizardsService
 } from "../../services/WizardsService";
 import { tEthereumAddress } from "../configuration";
-import { IEthereumTransactionModel } from "../../services/ContractService";
 import { IsEthAddress } from "./validators";
+import { EthereumTransactionModel } from "./common-models";
 
 registerEnumType(eWizardStatus, {
   name: 'eWizardStatus',
@@ -33,7 +33,7 @@ class WizardWalletData implements IWizardWalletData {
 
 }
 @ObjectType()
-class WizardData implements IWizardData {
+export class WizardData implements IWizardData {
   @Field()
   id: number;
   @Field()
@@ -50,27 +50,9 @@ class WizardData implements IWizardData {
   cowvenAddress?: tEthereumAddress;
   @Field()
   status: eWizardStatus;
-  @Field()
+  @Field(type => WizardWalletData)
   wizardWalletData: WizardWalletData
 
-}
-
-@ObjectType()
-export class EthereumTransactionModel implements IEthereumTransactionModel {
-  @Field()
-  from: string;
-
-  @Field()
-  to: string;
-
-  @Field({ defaultValue: '' })
-  data?: string;
-
-  @Field({ defaultValue: '' })
-  gas?: string;
-
-  @Field({ defaultValue: '' })
-  value?: string;
 }
 
 @InputType()

@@ -189,12 +189,12 @@ export class DaoService extends ContractService implements IDaoService {
   private getAllMintReputationEvents = async (): Promise<EventData[]> =>
     await this.getReputationContract().getPastEvents(eReputationEvents.Mint, {
       fromBlock: 0,
-    })
+    });
 
   private getAllBurnReputationEvents = async (): Promise<EventData[]> =>
     await this.getReputationContract().getPastEvents(eReputationEvents.Burn, {
       fromBlock: 0,
-    })
+    });
 
   private getCreatedContributionsProposalsFromEvents = async (): Promise<
     EventData[]
@@ -203,10 +203,10 @@ export class DaoService extends ContractService implements IDaoService {
       eContributionRewardEvent.NewContributionProposal,
       {fromBlock: 0},
     )
-  }
+  };
 
   getAvatarAddress = (): tEthereumAddress =>
-    getConfiguration().addresses.WizardGuild
+    getConfiguration().addresses.WizardGuild;
 
   getReputationBalanceOf = async (
     address: tEthereumAddress,
@@ -218,29 +218,29 @@ export class DaoService extends ContractService implements IDaoService {
 
   // All the ethereum addresses which currenctly hold reputation with their reputation
   getAllMembersOfDao = async (): Promise<IMembersDaoWithReputation[]> => {
-    const mintEvents = await this.getAllMintReputationEvents()
-    const burnEvents = await this.getAllBurnReputationEvents()
+    const mintEvents = await this.getAllMintReputationEvents();
+    const burnEvents = await this.getAllBurnReputationEvents();
     const uniqueReputationHoldersAddresses = Array.from(
       new Set(mintEvents.map(eventData => eventData.returnValues._to)),
-    )
-    const reputationHoldersAndReputation: IMembersDaoWithReputation[] = []
+    );
+    const reputationHoldersAndReputation: IMembersDaoWithReputation[] = [];
     for (const reputationHolder of uniqueReputationHoldersAddresses) {
       const mintedAmountsToHolder = mintEvents
         .filter(eventData => eventData.returnValues._to === reputationHolder)
-        .map(eventData => eventData.returnValues._amount)
+        .map(eventData => eventData.returnValues._amount);
       const totalMintedAmount: BigNumber = mintedAmountsToHolder.reduce(
         (accum: BigNumber, currentAmount: BigNumber) =>
           accum.plus(currentAmount),
         new BigNumber(0),
-      )
+      );
       const burnedAmountsFromHolder = burnEvents
         .filter(eventData => eventData.returnValues._from === reputationHolder)
-        .map(eventData => eventData.returnValues._amount)
+        .map(eventData => eventData.returnValues._amount);
       const totalBurnedAmount: BigNumber = burnedAmountsFromHolder.reduce(
         (accum: BigNumber, currentAmount: BigNumber) =>
           accum.plus(currentAmount),
         new BigNumber(0),
-      )
+      );
       reputationHoldersAndReputation.push({
         member: reputationHolder,
         reputation: decimalsToCurrencyUnits(
@@ -250,14 +250,14 @@ export class DaoService extends ContractService implements IDaoService {
       })
     }
     return reputationHoldersAndReputation
-  }
+  };
 
   // From all the ethereum addresses which currently hold reputation, get only those that are wizard wallets
   getAllWizardWalletsMembersOfDao = async (): Promise<
     IWizardWalletDaoWithReputation[]
   > => {
-    const allWizardWalletsCreated = await new WizardsService().getAllWizardWalletsCreated()
-    const allMembersOfDao = await this.getAllMembersOfDao()
+    const allWizardWalletsCreated = await new WizardsService().getAllWizardWalletsCreated();
+    const allMembersOfDao = await this.getAllMembersOfDao();
 
     return allMembersOfDao.reduce(
       (
@@ -266,7 +266,7 @@ export class DaoService extends ContractService implements IDaoService {
       ) => {
         const index = allWizardWalletsCreated.findIndex(
           wizardWallet => wizardWallet.wizardWallet === memberDao.member,
-        )
+        );
         if (index !== -1) {
           accum.push({
             ...memberDao,
@@ -277,24 +277,24 @@ export class DaoService extends ContractService implements IDaoService {
       },
       [],
     )
-  }
+  };
 
-  getAllDaosIds = async (): Promise<string[]> => [DAOName] // TODO: unmock
+  getAllDaosIds = async (): Promise<string[]> => [DAOName]; // TODO: unmock
 
   getAllDaosInfo = async (): Promise<ICowvenData[]> => {
-    const allDaosInfo: ICowvenData[] = []
+    const allDaosInfo: ICowvenData[] = [];
     for (const daoId of await this.getAllDaosIds()) {
       allDaosInfo.push(await this.getDaoInfo(daoId))
     }
     return allDaosInfo
-  }
+  };
 
   getDaoInfo = async (
     daoId: string,
     daoAddress?: tEthereumAddress,
   ): Promise<ICowvenData> => {
-    const wizardsService = new WizardsService()
-    const wizardsMembersOfDao: IWizardData[] = []
+    const wizardsService = new WizardsService();
+    const wizardsMembersOfDao: IWizardData[] = [];
     for (const wizardWallet of await this.getAllWizardWalletsMembersOfDao()) {
       wizardsMembersOfDao.push(
         await wizardsService.getWizardData(parseInt(wizardWallet.wizardId)),

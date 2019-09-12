@@ -140,7 +140,7 @@ export class WizardsService extends ContractService {
     )).map(eventData => ({
       wizardId: bnToBigNumber(eventData.returnValues.wizardId).toFixed(),
       wizardWallet: eventData.returnValues.wizardWallet,
-    }))
+    }));
 
   getAllTransferEventsOfWizards = async (): Promise<EventData[]> =>
     await this.getWizardGuildContract().getPastEvents(

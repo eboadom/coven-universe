@@ -2,12 +2,12 @@ import { buildSchema } from 'type-graphql';
 import { GraphQLSchema } from 'graphql';
 
 import { WizardResolver } from './wizard-resolver';
-import { ContractActions } from './actions-resolver';
 import { pubSub } from './pubsub';
+import { DaoResolver } from "./dao-resolver";
 
 export const getSchema = async (): Promise<GraphQLSchema> => {
   return  await buildSchema({
     pubSub,
-    resolvers: [ContractActions, WizardResolver],
+    resolvers: [WizardResolver, DaoResolver],
   });
 };
