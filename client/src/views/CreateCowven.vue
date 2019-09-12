@@ -66,7 +66,7 @@
         </v-dialog>
       </div>
 
-      <a class="twitter" href="https://twitter.com/CheezeDao">
+      <a class="twitter" href="https://twitter.com/CheezeDao" target="_blank">
         <img src="../assets/twitter.svg" alt />
       </a>
     </div>

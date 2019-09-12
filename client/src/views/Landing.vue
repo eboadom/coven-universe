@@ -37,7 +37,7 @@
             Enter the Cheeze
           </button>
         </router-link>
-        <a class="twitter" href="https://twitter.com/CheezeDao">
+        <a class="twitter" href="https://twitter.com/CheezeDao" target="_blank">
           <img src="../assets/twitter.svg" alt />
         </a>
       </div>
@@ -53,12 +53,18 @@
           <img src="../assets/X.svg" alt />
         </button>
         <h1>Frequently Cheesed Questions</h1>
+
         <h2>What is CheezeDAO ?</h2>
         <p>
-          CheezeDAO the political extension of the Cheezyverse, it is a
+          CheezeDAO is the political extension of the Cheezyverse, it is a
           governance experiment looking to showcase the possibilities of liquid
           and skill based governance while bringing cross tournament ranking,
           team playing and engagement incentive to extensibles games.
+          <br />
+          CheezeDAO lower the entry barrier to play around with DAO as voting
+          power is not defined by your identity nor your money but actually by
+          your in game win/loss ratio and the reputation given to it, and this
+          reputation is not attached to your wallet, but to your Cheeze wizards!
         </p>
 
         <h2>What is a Cowven (Pronounced Cow-Ven) ?</h2>
@@ -72,9 +78,9 @@
 
         <h2>How to join or create a Cowven ?</h2>
         <p>
-          On the homescreen of the Dapp, click “Create Cowven” to create it, you
-          will then need to choose a name and a description for your team and
-          the God you choose to follow.
+          On the homescreen, click “Create Cowven” to create it, you will then
+          need to choose a name and a description for your team and the God you
+          choose to worship.
         </p>
 
         <h2>Who are Grates Ones ?</h2>
@@ -84,14 +90,14 @@
           as crusts are shrinking, their reach is now expanding into other
           territory. <br />
           They organized as follows: <br />
-          Grate Fire : This guy has no chill <br />
-          Grate Wave : She got more flows than melting ice, beware the seazure
+          Grate Flame : This guy has no chill <br />
+          Grate Wave : She got more flow than melting ice
           <br />
-          Grate Neutral : BasedGod was already taken… Meh, I can’t even
+          Grate Balance : BasedGod was already taken
           <br />
-          Grate Wind : She is literally a big fan <br />
-          The Mold : The mold is a secret society something something something
-          long and weird blablablaba'a
+          Grate Storm : She is literally a big fan <br />
+          Grate Mold : They may or may not be <br />
+          Could there be more..?
         </p>
 
         <h2>
@@ -99,14 +105,17 @@
           join a Cowven following the Grate Flame ?
         </h2>
         <p>
-          We encourage rebellion and deception, any type of wizard can melt for
-          any of the Grates Ones, maybe even more…
+          We encourage rebellion, deception and lawlessness! Any type of Wizard
+          can melt for any of the Grates Ones.
         </p>
 
         <h2>
-          What is the difference between my Milk Points and my Wizard Power ?
+          What is the difference between my Score and my Reputation ?
         </h2>
-        <p></p>
+        <p>
+          The score is your cross tournament win/los ratio, once in a DAO, you
+          are assigned or removed reputation based on that score
+        </p>
 
         <h2>I am in the Cowven, now what ?</h2>
         <p>
@@ -124,9 +133,11 @@
 
         <h2>Who are the cheesy minds behind this project ?</h2>
         <p>
-          This project is led by Rocamadour @JordanLzG, Ernesto 'Queixo Tetilla'
-          Boado, Gouda Gouda @Yarrrpirate, ""..."" Andrej, ""..."" Aleksander
-          and Cream Cheeze Andrew Akin
+          This project is led by
+          <a href="https://twitter.com/JordanLzG" target="_blank">twitter</a>
+          Jordan 'Rocamadour' Lazaro Gustave), Ernesto 'Queixo Tetilla' Boado,
+          Rowan 'Gouda Gouda' Van Ginkle, Andrey 'Пошехонский' Kozlov,
+          Aleksander 'Костромской' Ткач and Cream Cheeze Andrew
         </p>
 
         <h2>
