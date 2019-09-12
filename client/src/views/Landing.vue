@@ -134,10 +134,11 @@
         <h2>Who are the cheesy minds behind this project ?</h2>
         <p>
           This project is led by
-          <a href="https://twitter.com/JordanLzG" target="_blank"
-            >Jordan 'Rocamadour' Lazaro Gustave</a
-          >, Ernesto 'Queixo Tetilla' Boado, Rowan 'Gouda Gouda' Van Ginkle,
-          Andrey 'Пошехонский' Kozlov, Aleksander 'Костромской' Tkach and Cream
+          <a href="https://twitter.com/JordanLzG" target="_blank">
+            Jordan 'Rocamadour' Lazaro Gustave
+          </a>, Ernesto 'Queixo Tetilla' Boado
+          , Rowan 'Gouda Gouda' Van Ginkel, Andrey 'Пошехонский' Kozlov
+          , Aleksander 'Костромской' Tkach and Cream
           Cheeze Andrew
         </p>
 
