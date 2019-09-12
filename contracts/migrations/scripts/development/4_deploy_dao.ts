@@ -8,10 +8,7 @@ import {
   devFundTokens,
   devFundReputation,
 } from "../../data/development-data"
-import {
-  writeObjectToFile,
-  ADDRESS_0x0,
-} from "../../../utils/common-utils"
+import {writeObjectToFile, ADDRESS_0x0} from "../../../utils/common-utils"
 import {
   IDaoAddresses,
   getPathDeployedDaoContracts,
@@ -407,6 +404,9 @@ export const deployDAOMigration = migrationHandler(
     const allDaosInfo = await daoService.getAllDaosInfo()
     console.log(allDaosInfo)
     console.log(allDaosInfo[0].members)
+
+    const allContributionRewards = await daoService.getAllContributionRewardProposals()
+    console.log(allContributionRewards.map(a => a.voters.map(a => a.voteData)))
   },
 )
 

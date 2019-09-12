@@ -9,6 +9,7 @@
   "scripts": {
     "dev:cleanDeploy": "npm run common:clean-contracts && npm run dev:migrate",
     "dev:test": "truffle test --migrations_directory=./dist/migrations/scripts/development --test_directory=./test/scripts/development --network development",
+    "dev:nakedTest": "truffle test --test_directory=./test/scripts/development --network development",
     "dev:compile": "npm run common:clean-contracts && truffle compile --network development && npm run common:gen-contracts-types",
     "dev:migrate": "npm run dev:ts-compile-migrations && truffle migrate --migrations_directory=./dist/migrations/scripts/development --reset --network development",
     "dev:ts-compile-migrations": "npm run common:clean-compiled-ts && tsc --p ./tsconfig.migrations.dev.json",
