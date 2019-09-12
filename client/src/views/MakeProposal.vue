@@ -1,7 +1,8 @@
 <template>
   <div class="MakeProposal">
     <div class="header-container">
-      <h1>Cowven Home</h1>
+      <h1>cowven name</h1>
+
       <div class="center-container">
         <p>
           “Cowven unique description that the creator entered in the ‘create a
@@ -16,26 +17,35 @@
         </div>
       </div>
 
-      <button>
-        <router-link :to="{ name: 'cowvenhome' }"
-          >Active Spell Proposals</router-link
-        >
-      </button>
+      <div class="link-wrapper">
+        <router-link class="change-link" :to="{ name: 'cowvenhome' }">
+          Active Spell Proposals
+        </router-link>
+      </div>
     </div>
 
     <div class="content-container">
       <div class="leaderboard">
         <v-card>
-          <v-data-table :headers="headers" :items="grates" :search="search">
+          <v-data-table
+            :headers="headers"
+            :items="grates"
+            :search="search"
+            :items-per-page="5"
+          >
             <template v-slot:item.wizard="{ item }">
-              <img :src="require(`@/assets/${item.wizard}.png`)" />
+              <img
+                class="table-image"
+                :src="require(`@/assets/${item.wizard}.png`)"
+                alt
+              />
             </template>
           </v-data-table>
         </v-card>
       </div>
 
       <div class="make-proposal">
-        <h1>Cast a new spell</h1>
+        <h2>Cast a new spell</h2>
         <div class="proposal-container">
           <v-form ref="form" v-model="valid" lazy-validation>
             <div class="info-wrapper">
@@ -47,7 +57,7 @@
                 required
               ></v-select>
 
-              <v-dialog v-model="dialogInfo" width="500">
+              <v-dialog v-model="dialogInfo" content-class="thank-dialog">
                 <template v-slot:activator="{ on }">
                   <img id="info-icon" src="../assets/info.svg" alt v-on="on" />
                 </template>
@@ -103,7 +113,7 @@
               row-height="15"
             ></v-textarea>
           </v-form>
-          <v-dialog v-model="dialogSpell" width="500">
+          <v-dialog v-model="dialogSpell" content-class="thank-dialog">
             <template v-slot:activator="{ on }">
               <button class="button" v-on="on">Cast spell</button>
             </template>
@@ -121,7 +131,7 @@
                 class="button"
                 color="primary"
                 text
-                @click="dialog = false"
+                @click="dialogSpell = false"
               >
                 Gouda'nough
               </button>
@@ -160,56 +170,56 @@ export default {
           rank: "#1",
           score: "9000+",
           reputation: "000",
-          id: "#0000"
+          id: "#1234000"
         },
         {
           wizard: "water-wizard",
           rank: "#2",
           score: "9000+",
           reputation: "000",
-          id: "#0000"
+          id: "#00123"
         },
         {
           wizard: "wind-wizard",
           rank: "#3",
           score: "9000+",
           reputation: "000",
-          id: "#0000"
+          id: "#12340"
         },
         {
           wizard: "neutral-wizard",
           rank: "#4",
           score: "9000+",
           reputation: "000",
-          id: "#0000"
+          id: "#01240"
         },
         {
           wizard: "fire-wizard",
           rank: "#1",
           score: "9000+",
           reputation: "000",
-          id: "#0000"
+          id: "#3200"
         },
         {
           wizard: "water-wizard",
           rank: "#2",
           score: "9000+",
           reputation: "000",
-          id: "#0000"
+          id: "#0100"
         },
         {
           wizard: "wind-wizard",
           rank: "#3",
           score: "9000+",
           reputation: "000",
-          id: "#0000"
+          id: "#0001"
         },
         {
           wizard: "neutral-wizard",
           rank: "#4",
           score: "9000+",
           reputation: "000",
-          id: "#0000"
+          id: "#0020"
         }
       ],
       dialogInfo: false,
@@ -256,79 +266,137 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import "../style/screen-size";
+@import "../style/vars";
+
 .header-container {
+  padding-bottom: 10px;
+  margin: 0 30px 40px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: row;
+  align-items: flex-end;
   justify-content: space-between;
-
-  @media screen and (max-width: 1020px) {
-    flex-direction: column;
+  flex-wrap: wrap;
+  @include respond-to(sm) {
+    margin: 0 10px 30px;
   }
-
   h1 {
+    font-size: 30px;
+    width: 25%;
+    text-align: left;
+    @include respond-to(sm) {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 10px;
+    }
   }
   .center-container {
-    display: flex;
-    flex-direction: column;
-
-    @media screen and (max-width: 1020px) {
-      text-align: center;
+    width: 35%;
+    text-align: center;
+    @include respond-to(lg) {
+      width: 45%;
     }
-
+    @include respond-to(sm) {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
     .stats {
       display: flex;
+      align-items: center;
       justify-content: space-between;
+    }
+  }
+  .link-wrapper {
+    width: 25%;
+    text-align: right;
+    @include respond-to(sm) {
+      width: 100%;
+    }
+    .change-link {
+      text-decoration: none;
+      position: relative;
+      color: #000;
+      padding: 0 2px 5px;
+      transition: all 0.3s ease;
+      &:hover {
+        color: $purple;
+        &:after {
+          width: 0;
+          background: $purple;
+        }
+      }
+      &:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        transition: all 0.3s ease;
+        background: #000;
+        width: 100%;
+        height: 1px;
+      }
     }
   }
 }
 
 .content-container {
   display: flex;
-  flex-direction: row;
-  margin-top: 2rem;
-
-  @media screen and (max-width: 1020px) {
-    flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 30px 40px;
+  @include respond-to(sm) {
+    margin: 0 10px 30px;
+    flex-direction: column-reverse;
   }
 
   .leaderboard {
-    width: 100%;
-    padding: 0 8rem;
-
-    @media screen and (max-width: 1020px) {
-      padding: 0;
+    width: 45%;
+    @include respond-to(lg) {
+      width: 55%;
     }
-
-    h1 {
-      font-size: 3rem;
-      padding: 1rem 0;
+    @include respond-to(sm) {
+      width: 100%;
+      margin-bottom: 15px;
     }
+  }
 
-    .v-card {
-      border: 1px solid black;
-      box-shadow: none;
-      padding: 0 2rem 2rem 2rem;
-      font-family: codesaver;
+  .table-image {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    margin-top: 8px;
+    @include respond-to(sm) {
+      width: 2rem;
+      height: 2rem;
     }
   }
 
   .make-proposal {
-    padding: 0 8rem;
-    width: 60%;
-
-    @media screen and (max-width: 1020px) {
-      padding: 0;
+    width: 35%;
+    @include respond-to(md) {
+      width: 40%;
+    }
+    @include respond-to(sm) {
       width: 100%;
+      margin-bottom: 50px;
     }
 
-    h1 {
-      padding: 1rem 0;
+    h2 {
+      font-size: 25px;
+      font-family: "exocet";
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 15px;
     }
 
     .proposal-container {
       border: 1px solid black;
       padding: 2rem;
-      height: 30rem;
       text-align: center;
       background: white;
 
@@ -344,7 +412,13 @@ export default {
         flex-direction: row;
 
         #info-icon {
-          width: 1.5rem;
+          width: 1.2rem;
+          margin-left: 15px;
+          transition: all 0.3s ease;
+          cursor: pointer;
+          &:hover {
+            transform: scale(1.1);
+          }
         }
       }
     }
@@ -370,7 +444,6 @@ export default {
   display: flex;
   flex-direction: column;
   vertical-align: center;
-  height: 25rem;
   text-align: center;
 
   img {

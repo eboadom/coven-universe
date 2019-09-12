@@ -45,7 +45,7 @@
 
     <v-dialog v-model="dialog" content-class="faq-dialog">
       <template v-slot:activator="{ on }">
-        <button id="faq" class="button" v-on="on">FAQ</button>
+        <button id="faq" class="button button-purpure" v-on="on">FAQ</button>
       </template>
 
       <v-card class="dialog">

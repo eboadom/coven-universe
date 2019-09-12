@@ -12,6 +12,7 @@ export default {
 
 <style lang="scss">
 @import "./style/screen-size";
+@import "./style/vars";
 
 :root {
   --purple: #b79afc;
@@ -61,7 +62,7 @@ body {
   width: 12rem;
   height: 3rem;
   background: white;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 
   a {
     text-decoration: none;
@@ -78,6 +79,15 @@ body {
     &:focus {
       background: #e1e1e1 !important;
     }
+  }
+  &:active {
+    box-shadow: 1px 2px 0 0 rgba(0, 0, 0, 1);
+  }
+}
+
+.button-purpure {
+  &:hover {
+    background: $purple !important;
   }
 }
 
@@ -115,6 +125,26 @@ p {
   @include respond-to(sm) {
     width: 100%;
     padding: 0 10px;
+  }
+}
+
+.v-card__text {
+  font-family: "codesaver";
+}
+
+.dialog {
+  height: auto !important;
+}
+
+.thank-dialog {
+  text-align: center;
+  max-width: 500px;
+  .dialog {
+    padding: 50px;
+    .v-card__text {
+      margin: 20px 0 50px;
+      padding: 0 !important;
+    }
   }
 }
 </style>
