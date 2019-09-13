@@ -43,6 +43,7 @@ html {
 body {
   margin: 0;
   background: transparent url("./assets/background.svg") no-repeat fixed center;
+  background-size: cover;
   min-width: 320px !important;
 }
 

@@ -5,18 +5,20 @@
       <router-view />
     </div>
   </div>
-  <div v-else-if="loading">loading</div>
+  <div v-else-if="loading"><Preloader /></div>
   <unlock-dapper v-else :onUnlockClick="unlockDapper" />
 </template>
 
 <script>
 import UnlockDapper from "../views/UnlockDapper";
 import TopNav from "../components/TopNav.vue";
+import Preloader from "../components/Preloader.vue";
 export default {
   name: "AppLayout",
   components: {
     UnlockDapper,
-    TopNav
+    TopNav,
+    Preloader
   },
   mounted() {
     this.unlockDapper();
