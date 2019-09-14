@@ -143,10 +143,7 @@ export default {
     submit(e) {
       if (this.$refs.form.validate()) {
         e.preventDefault();
-        const wizard = this.members.find(
-          m =>
-            m.id === this.wizardId
-        );
+        const wizard = this.members.find(m => m.id === this.wizardId);
         this.$apollo.mutate({
           mutation: createProposalMutation,
           variables: {

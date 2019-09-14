@@ -110,7 +110,10 @@ export default {
           value: "score"
         },
         { text: "Score", value: "score" },
-        { text: "Reputation", value: "reputation" },
+        {
+          text: "Reputation",
+          value: "wizardWalletData.genecheezeDaoReputation"
+        },
         { text: "ID", value: "id" }
       ]
     };
