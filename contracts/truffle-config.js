@@ -20,9 +20,9 @@ module.exports = {
         ),
       from: process.env.HDWALLET_ADDRESS_KOVAN,
       network_id: "42",
-      gas: 7000000,
+      gas: 6500000,
       gasPrice: 10000000000, // 10 GWei (in wei)
-      // skipDryRun: true, // Skip dry run before migrations? (default: false for public nets )
+      skipDryRun: true, // Skip dry run before migrations? (default: false for public nets )
       // confirmations: 2,    // # of confs to wait between deployments. (default: 0)
       // timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
     },
@@ -36,9 +36,9 @@ module.exports = {
         ),
       from: process.env.HDWALLET_ADDRESS_RINKEBY,
       network_id: "4",
-      gas: 7000000,
-      gasPrice: 10000000000, // 10 GWei (in wei)
-      // skipDryRun: true, // Skip dry run before migrations? (default: false for public nets )
+      gas: 6500000,
+      gasPrice: 40000000000, // 10 GWei (in wei)
+      skipDryRun: true, // Skip dry run before migrations? (default: false for public nets )
       // confirmations: 2,    // # of confs to wait between deployments. (default: 0)
       // timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
     },

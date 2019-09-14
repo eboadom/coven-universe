@@ -22,5 +22,6 @@ export const enum LibraryId {}
 export const enum EthereumNetwork {
   development = "development",
   kovan = "kovan",
+  rinkeby = "rinkeby",
   main = "main",
 }

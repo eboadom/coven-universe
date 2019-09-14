@@ -11,7 +11,7 @@ import { initConfiguration } from './configuration';
 import { getSchema } from './graphql';
 
 export const createServer = async () => {
-  await initConfiguration();
+  await initConfiguration("development");
   const PORT = 12040;
 
   const app = express();
