@@ -16,13 +16,14 @@
             <p>Score #{{cowven.score}}</p>
             <p>Wins #{{cowven.wins}}</p>
             <p>Loses #{{cowven.loses}}</p>
+            <p>Members #{{cowven.members.length}}</p>
           </div>
         </div>
 
         <div class="link-wrapper">
-          <router-link class="change-link" :to="{ name: 'makeproposal' }">
+          <span class="change-link" @click="showNewSpellForm">
             Cast new spell
-          </router-link>
+          </span>
         </div>
       </div>
 
@@ -46,56 +47,8 @@
           </v-card>
         </div>
 
-        <div class="spell-proposals">
-          <h2>Spell Proposals</h2>
-          <div
-            v-for="proposal in proposals"
-            :key="proposal.id"
-            class="proposal-container"
-          >
-            <div class="topline">
-              <p>
-                Spell: {{ proposal.spell }}
-                <span v-if="proposal.wizardId !== null"
-                  >Wizard #{{ proposal.wizardId }}</span
-                >
-              </p>
-            </div>
-
-            <p class="description">{{ proposal.description }}</p>
-
-            <div class="buttons-inner">
-              <button class="button vote">Nay</button>
-
-              <v-dialog v-model="dialog" content-class="thank-dialog">
-                <template v-slot:activator="{ on }">
-                  <button class="button vote vote2" v-on="on">Aye</button>
-                </template>
-
-                <v-card class="dialog">
-                  <img src="../assets/wheel.svg" alt />
-                  <h1>Thank You</h1>
-                  <v-card-text>
-                    You expressed yourself and that’s beautiful as a gallon of
-                    milk but let’s see if the majority agrees
-                  </v-card-text>
-
-                  <!-- <v-card-actions> -->
-                  <v-spacer></v-spacer>
-                  <button
-                    class="button"
-                    color="primary"
-                    text
-                    @click="dialog = false"
-                  >
-                    Got it
-                  </button>
-                  <!-- </v-card-actions> -->
-                </v-card>
-              </v-dialog>
-            </div>
-          </div>
-        </div>
+        <Spells v-if="!showCreateProposal" :proposals="cowven.proposals" />
+        <MakeProposal v-else/>
       </div>
     </div>
   </div>
@@ -104,13 +57,17 @@
 <script>
 import Preloader from "../components/Preloader.vue";
 import TopNav from "../components/TopNav.vue";
+import Spells from "../components/Spells.vue";
+import MakeProposal from "../components/MakeProposal.vue";
 import { allDaosData } from "../graphql/queries";
 
 export default {
   props: ['id'],
   components: {
     Preloader,
-    TopNav
+    TopNav,
+    Spells,
+    MakeProposal
   },
   apollo: {
     allDaosInfo: {
@@ -121,6 +78,7 @@ export default {
     return {
       allDaosInfo: [],
       dialog: false,
+      showCreateProposal: false,
       search: "",
       proposals: [
         {
@@ -224,6 +182,11 @@ export default {
   computed: {
     cowven() {
       return this.allDaosInfo.find(item => item.id === this.id);
+    }
+  },
+  methods: {
+    showNewSpellForm() {
+      this.showCreateProposal = !this.showCreateProposal
     }
   }
 };
@@ -339,56 +302,6 @@ export default {
       height: 2rem;
     }
   }
-
-  .spell-proposals {
-    width: 30%;
-    @include respond-to(md) {
-      width: 35%;
-    }
-    @include respond-to(sm) {
-      width: 100%;
-      margin-bottom: 50px;
-    }
-  }
 }
 
-.spell-proposals {
-  h2 {
-    font-size: 25px;
-    font-family: "exocet";
-    font-weight: 800;
-    text-align: center;
-    margin-bottom: 15px;
-  }
-}
-
-.proposal-container {
-  margin-bottom: 20px;
-  border: solid 1px #000000;
-  background-color: #ffffff;
-  padding: 15px 15px 25px;
-  box-shadow: 5px 5px 0 #000;
-  .topline {
-    p {
-      margin-bottom: 10px;
-      padding-bottom: 3px;
-      border-bottom: 1px solid #000;
-      width: 100%;
-    }
-  }
-}
-
-.buttons-inner {
-  text-align: right;
-  button {
-    width: 80px;
-    margin-left: 25px;
-  }
-  .vote2 {
-    background: $primary;
-    &:hover {
-      background: $purple !important;
-    }
-  }
-}
 </style>
