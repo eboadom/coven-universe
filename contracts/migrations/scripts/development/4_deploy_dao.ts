@@ -273,7 +273,7 @@ export const deployDAOMigration = migrationHandler(
       accounts[0],
       giveReputationToWizard2ProposalId,
       eVote.YES,
-      "-1",
+      "1",
     )
     await voteProposal(
       accounts[0],
@@ -281,8 +281,8 @@ export const deployDAOMigration = migrationHandler(
       eVote.YES,
       "-1",
     )
-    await redeemReputation(giveReputationToWizard1ProposalId)
-    await redeemReputation(giveReputationToWizard2ProposalId)
+    // await redeemReputation(giveReputationToWizard1ProposalId)
+    // await redeemReputation(giveReputationToWizard2ProposalId)
     await redeemReputation(giveReputationToWizard3ProposalId)
 
     console.log("---------------------------------")
@@ -337,15 +337,15 @@ export const deployDAOMigration = migrationHandler(
     await voteProposal(
       accounts[0],
       slashReputationWizard1ProposalId,
-      eVote.YES,
+      eVote.NO,
       "-1",
     )
-    await voteProposal(
-      accounts[0],
-      slashReputationWizard2ProposalId,
-      eVote.YES,
-      "-1",
-    )
+    // await voteProposal(
+    //   accounts[0],
+    //   slashReputationWizard2ProposalId,
+    //   eVote.YES,
+    //   "-1",
+    // )
     await voteProposal(
       accounts[0],
       slashReputationWizard3ProposalId,
@@ -364,8 +364,8 @@ export const deployDAOMigration = migrationHandler(
     //   ))["1"].toString(),
     // )
 
-    await redeemReputation(slashReputationWizard1ProposalId)
-    await redeemReputation(slashReputationWizard2ProposalId)
+    // await redeemReputation(slashReputationWizard1ProposalId)
+    // await redeemReputation(slashReputationWizard2ProposalId)
     await redeemReputation(slashReputationWizard3ProposalId)
 
     console.log("---------------------------------")

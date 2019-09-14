@@ -12,6 +12,7 @@
 import Web3 from 'web3';
 import UnlockDapper from "../views/UnlockDapper";
 import Preloader from "../components/Preloader.vue";
+import { getWeb3 } from "../helpers/web3-helpers";
 export default {
   name: "AppLayout",
   components: {
@@ -32,7 +33,7 @@ export default {
     async unlockDapper() {
       this.loading = true;
       if (typeof window.ethereum !== "undefined") {
-        const web3 = new Web3(window.ethereum);
+        const web3 = getWebl3();
         this.dapperAvailable = true;
         try {
           await web3.givenProvider.enable();
