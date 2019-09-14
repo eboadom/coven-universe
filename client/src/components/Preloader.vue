@@ -42,7 +42,7 @@
         <div class="Preloader__tip">
           <p>
             TIP:
-            <span contenteditable="true" v-html="get()" class="tip"></span>
+            <span contenteditable="true" v-html="random()" class="tip"></span>
           </p>
         </div>
       </div>
@@ -71,35 +71,7 @@ export default {
   methods: {
     random() {
       return this.tips[Math.floor(Math.random() * this.tips.length)];
-    },
-    get() {
-      let tip;
-      tip = this.random();
-      if (this.already.length >= 1) {
-        this.already = [];
-        return tip;
-      }
-      if (this.already.indexOf(tip) !== -1) {
-        return this.get();
-      } else {
-        this.already.push(tip);
-        return tip;
-      }
     }
-  },
-  mounted() {
-    let tipsCounter = 0;
-    const myInterval = setInterval(() => {
-      getTip();
-    }, 3500);
-    const getTip = () => {
-      if (tipsCounter < 10) {
-        this.get();
-        tipsCounter++;
-      } else {
-        clearInterval(myInterval);
-      }
-    };
   }
 };
 </script>
