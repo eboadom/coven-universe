@@ -1,7 +1,7 @@
 <template>
   <div class="my-container">
     <div class="Home">
-      <div class="leaderboard">
+      <div class="leaderboard leaderboard-home">
         <div class="caption">
           <h1>G.O.A.T.* Cheeze Board</h1>
         </div>
@@ -173,12 +173,28 @@ export default {
     redirectToMyCowven(id) {
       this.$router.push({ path: "cowvenhome", params: { cowvenId: id } });
     }
+  },
+  mounted() {
+    const trs = Array.from(
+      document.querySelectorAll(".v-data-table__wrapper tr")
+    );
+    trs.map(el =>
+      el.addEventListener("click", e => {
+        e.target.parentElement.firstElementChild.firstElementChild.click();
+      })
+    );
   }
 };
 </script>
 <style lang="scss">
 @import "../style/screen-size";
 @import "../style/vars";
+
+.leaderboard-home {
+  tr {
+    cursor: pointer !important;
+  }
+}
 
 .leaderboard {
   th {
@@ -199,12 +215,13 @@ export default {
         }
       }
       td {
-        font-family: 'codesaver';
+        font-family: "codesaver";
       }
     }
     .expanded__content {
       width: 100%;
       border-bottom: 1px solid #000 !important;
+      cursor: default !important;
       &:hover {
         background-color: transparent !important;
       }

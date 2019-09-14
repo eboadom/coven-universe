@@ -179,6 +179,9 @@ export default {
 
 .landing {
   background: url("../assets/colored-grid.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   height: 100vh;
   position: relative;
   min-height: 800px;
