@@ -46,4 +46,24 @@ export const allDaosData = gql`
             }
         }
     }
-`
+`;
+
+export const allWizardsByUserAddress = gql`
+  query AllWizardsByUserAddress($address: String!) {
+      allWizardsDataByOwner(data: {userWallet: $address}) {
+          id
+          owner
+          innatePower
+          affinity
+          score
+          cowvenName
+          cowvenAddress
+          status
+          wizardWalletData {
+              wizardWalletAddress
+              genecheezeDaoReputation
+          }
+      }
+  }
+`;
+

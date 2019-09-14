@@ -72,12 +72,13 @@ import { allDaosData } from "../graphql/queries";
 
 export default {
   apollo: {
-    allDaos: {
+    allDaosInfo: {
       query: allDaosData
     }
   },
   data() {
     return {
+      allDaosInfo: [],
       search: "",
       expanded: [],
       width: 0,
