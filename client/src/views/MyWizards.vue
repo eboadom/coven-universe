@@ -73,6 +73,7 @@ import Preloader from "../components/Preloader.vue";
 import TopNav from "../components/TopNav.vue";
 import { allWizardsByUserAddress } from "../graphql/queries";
 import { createWalletForWizard } from "../graphql/mutations";
+import { getWeb3 } from "../helpers/web3-helpers";
 
 export default {
   components: {
@@ -119,7 +120,8 @@ export default {
     },
     async createWallet(e, wizardId) {
       e.preventDefault();
-      await this.$apollo.mutate({
+      const web3 = getWeb3();
+      const {data: {createWalletForWizard: tx}} = await this.$apollo.mutate({
         mutation: createWalletForWizard,
         variables: {
           data: {
@@ -128,7 +130,8 @@ export default {
           }
         }
       });
-      await this.openModal();
+      await web3.eth.sendTransaction(tx);
+      this.openModal();
     }
   }
 };

@@ -37,7 +37,6 @@ export default {
         try {
           await web3.givenProvider.enable();
           const accounts = await web3.eth.getAccounts();
-          console.log(accounts);
           if (accounts && accounts.length) {
             this.dapperUnlocked = true;
             //TODO: replace with something Vue specific
