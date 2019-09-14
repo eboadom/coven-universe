@@ -1,6 +1,9 @@
 <template>
   <Preloader v-if="$apollo.queries.allDaosInfo.loading || $apollo.queries.allWizardsDataByOwner.loading" />
-  <div class="errorPage" v-else-if="!cowven">404</div>
+  <div class="errorPage" v-else-if="!cowven">
+    <img src="../assets/cheezedao.svg" alt="Cheeze" />
+    <p>404</p>
+  </div>
   <div v-else>
     <TopNav />
     <div class="CowvenHome">
@@ -54,7 +57,7 @@
         </div>
 
         <Spells v-if="!showCreateProposal" :proposals="cowven.proposals" :myWizards="allWizardsDataByOwner" />
-        <MakeProposal v-else />
+        <MakeProposal :members="cowven.members" v-else />
       </div>
     </div>
   </div>

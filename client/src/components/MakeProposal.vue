@@ -5,7 +5,7 @@
       <v-form ref="form" v-model="valid" lazy-validation>
         <div class="info-wrapper">
           <v-select
-            v-model="select"
+            v-model="spell"
             :items="proposal"
             :rules="[v => !!v || 'Spell is required']"
             label="Choose your Spell"
@@ -36,45 +36,44 @@
           </v-dialog>
         </div>
 
-        <v-text-field
-          v-if="select === 'Cut the cheese'"
-          v-model="wizardId"
-          :rules="[v => !!v || 'Wizard ID is required']"
-          label="Enter Wizard ID"
-          required
-        ></v-text-field>
-
-        <v-text-field
-          v-if="select === 'Change activity penalty length'"
-          v-model="numDays"
-          :rules="[v => !!v || 'Number of Days is required']"
-          label="How many days?"
-          required
-        ></v-text-field>
-
         <v-select
-          v-if="select === 'Convert your Cowven'"
-          v-model="grateOne"
-          :items="grateOnes"
-          :rules="[v => !!v || 'Grate One is required']"
-          label="Whom do you worship?"
+          v-model="wizardId"
+          :items="wizardsId"
+          :rules="[v => !!v || 'Wizard ID is required']"
+          label="Choose your Spell"
           required
         ></v-select>
 
+        <!--        <v-text-field-->
+        <!--          v-if="spell === 'Change activity penalty length'"-->
+        <!--          v-model="numDays"-->
+        <!--          :rules="[v => !!v || 'Number of Days is required']"-->
+        <!--          label="How many days?"-->
+        <!--          required-->
+        <!--        ></v-text-field>-->
+
+        <!--        <v-select-->
+        <!--          v-if="spell === 'Convert your Cowven'"-->
+        <!--          v-model="grateOne"-->
+        <!--          :items="grateOnes"-->
+        <!--          :rules="[v => !!v || 'Grate One is required']"-->
+        <!--          label="Whom do you worship?"-->
+        <!--          required-->
+        <!--        ></v-select>-->
+
         <v-textarea
           :counter="250"
+          v-model="description"
           label="Oh but why?"
           auto-grow
           outlined
           rows="9"
           row-height="15"
         ></v-textarea>
+
+        <button class="button" @click="submit">Cast spell</button>
       </v-form>
       <v-dialog v-model="dialogSpell" content-class="thank-dialog">
-        <template v-slot:activator="{ on }">
-          <button class="button" v-on="on">Cast spell</button>
-        </template>
-
         <v-card class="dialog">
           <img src="../assets/wheel.svg" alt />
           <h1>Thank You</h1>
@@ -99,42 +98,67 @@
 </template>
 
 <script>
+import { createProposalMutation } from "../graphql/mutations";
+
 export default {
   name: "MakeProposal",
-  data() {
+  props: ["members"],
+  data(props) {
     return {
       valid: true,
+
       name: "",
+      wizardId: null,
+      email: "",
+      numDays: "",
+      spell: null,
+      grateOne: null,
+      description: "",
+
       dialogInfo: false,
       dialogSpell: false,
       nameRules: [
         v => !!v || "Name is required",
         v => (v && v.length <= 10) || "Name must be less than 10 characters"
       ],
-      email: "",
       emailRules: [
         v => !!v || "E-mail is required",
         v => /.+@.+\..+/.test(v) || "E-mail must be valid"
       ],
-      select: null,
       proposal: [
-        "Cut the cheese",
-        "Change activity penalty length",
-        "Convert your Cowven"
+        "Reputation reword"
+        // "Change activity penalty length",
+        // "Convert your Cowven"
       ],
+      wizardsId: props.members.map(item => item.id),
       grateOnes: [
         "The Grate Balance",
         "The Grate Wave",
         "The Grate Storm",
         "The Grate Flames"
-      ],
-      grateOne: null
+      ]
     };
   },
   methods: {
-    validate() {
+    submit() {
       if (this.$refs.form.validate()) {
-        this.snackbar = true;
+        const wizard = this.members.find(
+          m =>
+            m.id === this.wizardId
+        );
+        this.$apollo.mutate({
+          mutation: createProposalMutation,
+          variables: {
+            data: {
+              proposer: window.userWallet,
+              beneficiary: wizard.wizardWalletData.wizardWalletAddress,
+              reputationChange: "50",
+              daoTokenChange: "50"
+            }
+          }
+        });
+        this.dialogSpell = true;
+        this.reset();
       }
     },
     reset() {

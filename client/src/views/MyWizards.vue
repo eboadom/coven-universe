@@ -1,5 +1,5 @@
 <template>
-  <Preloader v-if="$apollo.queries.allWizards.loading" />
+  <Preloader v-if="$apollo.queries.allWizardsDataByOwner.loading" />
   <div v-else>
     <TopNav />
     <div class="my-container">
@@ -8,14 +8,14 @@
 
         <v-data-table
           :headers="headers"
-          :items="allWizards"
+          :items="allWizardsDataByOwner"
           :search="search"
           :items-per-page="5"
         >
-          <template v-slot:item.affinity="{ item }">
+          <template v-slot:item.wizard="{ item }">
             <img
               class="wizard-img"
-              :src="require(`@/assets/${item.affinity}-wizard.png`)"
+              :src="require(`@/assets/${item.affinity.toLowerCase()}-wizard.png`)"
             />
           </template>
           <template v-slot:item.wallet="{ item }">
@@ -46,10 +46,12 @@ export default {
     TopNav
   },
   apollo: {
-    allWizards: {
+    allWizardsDataByOwner: {
       query: allWizardsByUserAddress,
-      variables: {
-        address: window.userWallet
+      variables() {
+        return {
+          address: window.userWallet
+        };
       }
     }
   },
@@ -61,7 +63,7 @@ export default {
           text: "Wizard",
           align: "left",
           sortable: false,
-          value: "affinity"
+          value: "wizard"
         },
         { text: "ID", value: "id" },
         { text: "Type", value: "affinity" },

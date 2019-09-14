@@ -169,4 +169,16 @@ p {
 .ps__thumb-y {
   background: $purple !important;
 }
+
+.errorPage {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  min-height: 300px;
+  font-size: 50px;
+  font-family: "codesaver";
+}
 </style>

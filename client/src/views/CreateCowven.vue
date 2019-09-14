@@ -49,8 +49,8 @@
               <img src="../assets/wheel.svg" alt />
               <h1>Congoudalations!</h1>
               <v-card-text
-              >Your Cowven has been summoned ! Convert Wizards to join your team
-                and compete to hold the G.O.A.T. Cheeze title the
+                >Your Cowven has been summoned ! Convert Wizards to join your
+                team and compete to hold the G.O.A.T. Cheeze title the
                 longest</v-card-text
               >
 
@@ -77,14 +77,14 @@
 </template>
 
 <script>
-  import Preloader from "../components/Preloader.vue";
-  import TopNav from "../components/TopNav.vue";
+import Preloader from "../components/Preloader.vue";
+import TopNav from "../components/TopNav.vue";
 
-  export default {
-    components: {
-      Preloader,
-      TopNav
-    },
+export default {
+  components: {
+    Preloader,
+    TopNav
+  },
   data: () => ({
     dialog: false,
     valid: true,
@@ -141,15 +141,10 @@
   }),
 
   methods: {
-    validate() {
-      if (this.$refs.form.validate()) {
-        this.snackbar = true;
-      }
-    },
     submit() {
       if (this.$refs.form.validate()) {
-        console.log('submit');
         this.dialog = true;
+        this.reset();
       }
     },
     reset() {
