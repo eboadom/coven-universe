@@ -1,59 +1,62 @@
 <template>
-  <div class="my-container">
-    <div class="the-sanctuary">
-      <div class="title-inner">
-        <h1>Cheezyverse Beliefs Distribution</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-      </div>
-
-      <div class="elements">
-        <div class="item neutral">
-          <div class="image-inner">
-            <img src="../assets/neutral-white.svg" alt />
-          </div>
-
-          <h2>000000</h2>
-          <h3>The Grate Balance</h3>
+  <div>
+    <TopNav />
+    <div class="my-container">
+      <div class="the-sanctuary">
+        <div class="title-inner">
+          <h1>Cheezyverse Beliefs Distribution</h1>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </p>
         </div>
-        <div class="item water">
-          <div class="image-inner">
-            <img src="../assets/water-white.svg" alt />
-          </div>
 
-          <h2>000000</h2>
-          <h3>The Grate Wave</h3>
-        </div>
-        <div class="item wind">
-          <div class="image-inner">
-            <img src="../assets/wind-white.svg" alt />
-          </div>
+        <div class="elements">
+          <div class="item neutral">
+            <div class="image-inner">
+              <img src="../assets/neutral-white.svg" alt />
+            </div>
 
-          <h2>000000</h2>
-          <h3>The Grate Storm</h3>
-        </div>
-        <div class="item fire">
-          <div class="image-inner">
-            <img src="../assets/fire-white.svg" alt />
+            <h2>000000</h2>
+            <h3>The Grate Balance</h3>
           </div>
+          <div class="item water">
+            <div class="image-inner">
+              <img src="../assets/water-white.svg" alt />
+            </div>
 
-          <h2>000000</h2>
-          <h3>The Grate Flames</h3>
-        </div>
-        <div class="item mold">
-          <div class="image-inner">
-            <img src="../assets/mold-white.svg" alt />
+            <h2>000000</h2>
+            <h3>The Grate Wave</h3>
           </div>
+          <div class="item wind">
+            <div class="image-inner">
+              <img src="../assets/wind-white.svg" alt />
+            </div>
 
-          <h2>000000</h2>
-          <h3>The Grate Mold</h3>
+            <h2>000000</h2>
+            <h3>The Grate Storm</h3>
+          </div>
+          <div class="item fire">
+            <div class="image-inner">
+              <img src="../assets/fire-white.svg" alt />
+            </div>
+
+            <h2>000000</h2>
+            <h3>The Grate Flames</h3>
+          </div>
+          <div class="item mold">
+            <div class="image-inner">
+              <img src="../assets/mold-white.svg" alt />
+            </div>
+
+            <h2>000000</h2>
+            <h3>The Grate Mold</h3>
+          </div>
         </div>
       </div>
     </div>
@@ -61,7 +64,14 @@
 </template>
 
 <script>
+import Preloader from "../components/Preloader.vue";
+import TopNav from "../components/TopNav.vue";
+
 export default {
+  components: {
+    Preloader,
+    TopNav
+  },
   data: () => ({})
 };
 </script>

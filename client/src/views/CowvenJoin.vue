@@ -1,122 +1,125 @@
 <template>
-  <div class="CowvenJoin">
-    <div class="header-container">
-      <h1>cowven name</h1>
+  <div>
+    <TopNav />
+    <div class="CowvenJoin">
+      <div class="header-container">
+        <h1>cowven name</h1>
 
-      <div class="center-container">
-        <p>
-          “Cowven unique description that the creator entered in the ‘create a
-          cowven’ screen”
-        </p>
-        <div class="stats">
-          <p>Rank #000</p>
-          <p>Score #000</p>
-          <p>Wins #000</p>
-          <p>Losses #000</p>
-          <p>Penalty #000</p>
+        <div class="center-container">
+          <p>
+            “Cowven unique description that the creator entered in the ‘create a
+            cowven’ screen”
+          </p>
+          <div class="stats">
+            <p>Rank #000</p>
+            <p>Score #000</p>
+            <p>Wins #000</p>
+            <p>Losses #000</p>
+            <p>Penalty #000</p>
+          </div>
+        </div>
+
+        <div class="link-wrapper">
+          <v-dialog v-model="joinDialog" content-class="thank-dialog">
+            <template v-slot:activator="{ on }">
+              <button class="button vote" v-on="on">Join +</button>
+            </template>
+
+            <v-card class="dialog">
+              <img src="../assets/wheel.svg" alt />
+              <h1>Thank You</h1>
+              <v-card-text>
+                You applied. Sweet. This is the first step of a long bureacratic
+                process within the CheezeWizarding world. Luckily for you, this
+                world exists on a different timescale so… it’s really down to
+                how long the Cheeze Wizards members of this Cowven take to
+                accept or reject you, meh.
+              </v-card-text>
+
+              <!-- <v-card-actions> -->
+              <v-spacer></v-spacer>
+              <button
+                class="button"
+                color="primary"
+                text
+                @click="joinDialog = false"
+              >
+                Gouda'nough
+              </button>
+              <!-- </v-card-actions> -->
+            </v-card>
+          </v-dialog>
         </div>
       </div>
 
-      <div class="link-wrapper">
-        <v-dialog v-model="joinDialog" content-class="thank-dialog">
-          <template v-slot:activator="{ on }">
-            <button class="button vote" v-on="on">Join +</button>
-          </template>
-
-          <v-card class="dialog">
-            <img src="../assets/wheel.svg" alt />
-            <h1>Thank You</h1>
-            <v-card-text>
-              You applied. Sweet. This is the first step of a long bureacratic
-              process within the CheezeWizarding world. Luckily for you, this
-              world exists on a different timescale so… it’s really down to how
-              long the Cheeze Wizards members of this Cowven take to accept or
-              reject you, meh.
-            </v-card-text>
-
-            <!-- <v-card-actions> -->
-            <v-spacer></v-spacer>
-            <button
-              class="button"
-              color="primary"
-              text
-              @click="joinDialog = false"
+      <div class="content-container">
+        <div class="leaderboard">
+          <v-card>
+            <v-data-table
+              :headers="headers"
+              :items="grates"
+              :search="search"
+              :items-per-page="5"
             >
-              Gouda'nough
-            </button>
-            <!-- </v-card-actions> -->
-          </v-card>
-        </v-dialog>
-      </div>
-    </div>
-
-    <div class="content-container">
-      <div class="leaderboard">
-        <v-card>
-          <v-data-table
-            :headers="headers"
-            :items="grates"
-            :search="search"
-            :items-per-page="5"
-          >
-            <template v-slot:item.wizard="{ item }">
-              <img
-                class="table-image"
-                :src="require(`@/assets/${item.wizard}.png`)"
-                alt
-              />
-            </template>
-          </v-data-table>
-        </v-card>
-      </div>
-
-      <div class="spell-proposals">
-        <h2>Spell Proposals</h2>
-        <div
-          v-for="proposal in proposals"
-          :key="proposal.id"
-          class="proposal-container"
-        >
-          <div class="topline">
-            <p>
-              Spell: {{ proposal.spell }}
-              <span v-if="proposal.wizardId !== null"
-                >Wizard #{{ proposal.wizardId }}</span
-              >
-            </p>
-          </div>
-
-          <p class="description">{{ proposal.description }}</p>
-
-          <div class="buttons-inner">
-            <button class="button vote">Nay</button>
-
-            <v-dialog v-model="dialog" content-class="thank-dialog">
-              <template v-slot:activator="{ on }">
-                <button class="button vote vote2" v-on="on">Aye</button>
+              <template v-slot:item.wizard="{ item }">
+                <img
+                  class="table-image"
+                  :src="require(`@/assets/${item.wizard}.png`)"
+                  alt
+                />
               </template>
+            </v-data-table>
+          </v-card>
+        </div>
 
-              <v-card class="dialog">
-                <img src="../assets/wheel.svg" alt />
-                <h1>Thank You</h1>
-                <v-card-text
-                  >You expressed yourself and that’s beautiful as a gallon of
-                  milk but let’s see if the majority agrees</v-card-text
+        <div class="spell-proposals">
+          <h2>Spell Proposals</h2>
+          <div
+            v-for="proposal in proposals"
+            :key="proposal.id"
+            class="proposal-container"
+          >
+            <div class="topline">
+              <p>
+                Spell: {{ proposal.spell }}
+                <span v-if="proposal.wizardId !== null"
+                  >Wizard #{{ proposal.wizardId }}</span
                 >
+              </p>
+            </div>
 
-                <!-- <v-card-actions> -->
-                <v-spacer></v-spacer>
-                <button
-                  class="button"
-                  color="primary"
-                  text
-                  @click="dialog = false"
-                >
-                  Got it
-                </button>
-                <!-- </v-card-actions> -->
-              </v-card>
-            </v-dialog>
+            <p class="description">{{ proposal.description }}</p>
+
+            <div class="buttons-inner">
+              <button class="button vote">Nay</button>
+
+              <v-dialog v-model="dialog" content-class="thank-dialog">
+                <template v-slot:activator="{ on }">
+                  <button class="button vote vote2" v-on="on">Aye</button>
+                </template>
+
+                <v-card class="dialog">
+                  <img src="../assets/wheel.svg" alt />
+                  <h1>Thank You</h1>
+                  <v-card-text
+                    >You expressed yourself and that’s beautiful as a gallon of
+                    milk but let’s see if the majority agrees</v-card-text
+                  >
+
+                  <!-- <v-card-actions> -->
+                  <v-spacer></v-spacer>
+                  <button
+                    class="button"
+                    color="primary"
+                    text
+                    @click="dialog = false"
+                  >
+                    Got it
+                  </button>
+                  <!-- </v-card-actions> -->
+                </v-card>
+              </v-dialog>
+            </div>
           </div>
         </div>
       </div>
@@ -125,7 +128,14 @@
 </template>
 
 <script>
+import Preloader from "../components/Preloader.vue";
+import TopNav from "../components/TopNav.vue";
+
 export default {
+  components: {
+    Preloader,
+    TopNav
+  },
   data() {
     return {
       dialog: false,

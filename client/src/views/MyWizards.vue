@@ -1,38 +1,48 @@
 <template>
-  <div class="my-container">
-    <div class="my-wizards">
-      <h1>My Wizards</h1>
+  <div>
+    <TopNav />
+    <div class="my-container">
+      <div class="my-wizards">
+        <h1>My Wizards</h1>
 
-      <v-data-table
-        :headers="headers"
-        :items="wizards"
-        :search="search"
-        :items-per-page="5"
-      >
-        <template v-slot:item.wizard="{ item }">
-          <img
-            class="wizard-img"
-            :src="require(`@/assets/${item.wizard}.png`)"
-          />
-        </template>
-        <template v-slot:item.wallet="{ item }">
-          <div class="wallet-inner" v-if="item.wallet !== ''">
-            <img src="../assets/purse.svg" alt="Purse" />
-            <a href="https://www.google.com/" target="_blank">{{
-              item.wallet
-            }}</a>
-          </div>
-          <div v-else>
-            <button class="button button-small">Create wallet</button>
-          </div>
-        </template>
-      </v-data-table>
+        <v-data-table
+          :headers="headers"
+          :items="wizards"
+          :search="search"
+          :items-per-page="5"
+        >
+          <template v-slot:item.wizard="{ item }">
+            <img
+              class="wizard-img"
+              :src="require(`@/assets/${item.wizard}.png`)"
+            />
+          </template>
+          <template v-slot:item.wallet="{ item }">
+            <div class="wallet-inner" v-if="item.wallet !== ''">
+              <img src="../assets/purse.svg" alt="Purse" />
+              <a href="https://www.google.com/" target="_blank">{{
+                item.wallet
+              }}</a>
+            </div>
+            <div v-else>
+              <button class="button button-small">Create wallet</button>
+            </div>
+          </template>
+        </v-data-table>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import Preloader from "../components/Preloader.vue";
+import TopNav from "../components/TopNav.vue";
+
 export default {
+  components: {
+    Preloader,
+    TopNav
+  },
   data() {
     return {
       search: "",

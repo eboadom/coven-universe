@@ -1,80 +1,90 @@
 <template>
-  <div class="content-container">
-    <div class="create-coven">
-      <h1>Create Cowven</h1>
-      <div class="form-container">
-        <v-form ref="form" v-model="valid" lazy-validation>
-          <v-text-field
-            v-model="name"
-            :counter="10"
-            :rules="nameRules"
-            label="Cowven Name"
-            data-vv-name="name"
-            required
-          ></v-text-field>
+  <div>
+    <TopNav />
+    <div class="content-container">
+      <div class="create-coven">
+        <h1>Create Cowven</h1>
+        <div class="form-container">
+          <v-form ref="form" v-model="valid" lazy-validation>
+            <v-text-field
+              v-model="name"
+              :counter="10"
+              :rules="nameRules"
+              label="Cowven Name"
+              data-vv-name="name"
+              required
+            ></v-text-field>
 
-          <v-select
-            v-model="selectGrates"
-            :items="grates"
-            :rules="[v => !!v || 'Item is required']"
-            label="Choose your Grate One"
-            data-vv-name="selectGrates"
-            required
-          ></v-select>
+            <v-select
+              v-model="selectGrates"
+              :items="grates"
+              :rules="[v => !!v || 'Item is required']"
+              label="Choose your Grate One"
+              data-vv-name="selectGrates"
+              required
+            ></v-select>
 
-          <v-select
-            v-model="selectDays"
-            :items="days"
-            :rules="[v => !!v || 'Item is required']"
-            label="Activity"
-            data-vv-name="selectDays"
-            required
-          ></v-select>
+            <v-select
+              v-model="selectDays"
+              :items="days"
+              :rules="[v => !!v || 'Item is required']"
+              label="Activity"
+              data-vv-name="selectDays"
+              required
+            ></v-select>
 
-          <v-textarea
-            label="Cowven Description"
-            auto-grow
-            outlined
-            rows="9"
-            row-height="15"
-            data-vv-name="description"
-          ></v-textarea>
+            <v-textarea
+              label="Cowven Description"
+              auto-grow
+              outlined
+              rows="9"
+              row-height="15"
+              data-vv-name="description"
+            ></v-textarea>
 
-          <button class="button" @click="submit">Start the Ritual</button>
-        </v-form>
-        <v-dialog v-model="dialog" width="500">
-          <v-card class="dialog">
-            <img src="../assets/wheel.svg" alt />
-            <h1>Congoudalations!</h1>
-            <v-card-text
+            <button class="button" @click="submit">Start the Ritual</button>
+          </v-form>
+          <v-dialog v-model="dialog" width="500">
+            <v-card class="dialog">
+              <img src="../assets/wheel.svg" alt />
+              <h1>Congoudalations!</h1>
+              <v-card-text
               >Your Cowven has been summoned ! Convert Wizards to join your team
-              and compete to hold the G.O.A.T. Cheeze title the
-              longest</v-card-text
-            >
-
-            <router-link :to="{ name: 'cowvenhome' }">
-              <button
-                class="button modal-button"
-                color="primary"
-                text
-                @click="dialog = false"
+                and compete to hold the G.O.A.T. Cheeze title the
+                longest</v-card-text
               >
-                Go to Cowven
-              </button>
-            </router-link>
-          </v-card>
-        </v-dialog>
-      </div>
 
-      <a class="twitter" href="https://twitter.com/CheezeDao" target="_blank">
-        <img src="../assets/twitter.svg" alt />
-      </a>
+              <router-link :to="{ name: 'cowvenhome' }">
+                <button
+                  class="button modal-button"
+                  color="primary"
+                  text
+                  @click="dialog = false"
+                >
+                  Go to Cowven
+                </button>
+              </router-link>
+            </v-card>
+          </v-dialog>
+        </div>
+
+        <a class="twitter" href="https://twitter.com/CheezeDao" target="_blank">
+          <img src="../assets/twitter.svg" alt />
+        </a>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {
+  import Preloader from "../components/Preloader.vue";
+  import TopNav from "../components/TopNav.vue";
+
+  export default {
+    components: {
+      Preloader,
+      TopNav
+    },
   data: () => ({
     dialog: false,
     valid: true,

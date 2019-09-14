@@ -1,66 +1,72 @@
 <template>
-  <div class="my-container">
-    <div class="Home">
-      <div class="leaderboard leaderboard-home">
-        <div class="caption">
-          <h1>G.O.A.T.* Cheeze Board</h1>
-        </div>
+  <div>
+    <div v-if="$apollo.queries.allDaosInfo.loading"><Preloader /></div>
+    <div v-else>
+      <TopNav />
+      <div class="my-container">
+        <div class="Home">
+          <div class="leaderboard leaderboard-home">
+            <div class="caption">
+              <h1>G.O.A.T.* Cheeze Board</h1>
+            </div>
 
-        <v-card>
-          <v-card-title>
-            <v-text-field
-              v-model="search"
-              append-icon="search"
-              label="Search"
-              single-line
-              hide-details
-            ></v-text-field>
-            <v-spacer></v-spacer>
-            <v-spacer></v-spacer>
-          </v-card-title>
-          <v-data-table
-            :headers="headers"
-            :items="grates"
-            :search="search"
-            :single-expand="true"
-            :expanded.sync="expanded"
-            item-key="name"
-            show-expand
-          >
-            <template v-slot:item.god="{ item }">
-              <img :src="require(`@/assets/${item.god}.svg`)" alt />
-            </template>
+            <v-card>
+              <v-card-title>
+                <v-text-field
+                  v-model="search"
+                  append-icon="search"
+                  label="Search"
+                  single-line
+                  hide-details
+                ></v-text-field>
+                <v-spacer></v-spacer>
+                <v-spacer></v-spacer>
+              </v-card-title>
+              <v-data-table
+                :headers="headers"
+                :items="allDaosInfo"
+                :search="search"
+                :single-expand="true"
+                :expanded.sync="expanded"
+                item-key="name"
+                show-expand
+              >
+                <template v-slot:item.grate="{ item }">
+                  <img :src="require(`@/assets/${item.grate}.svg`)" alt />
+                </template>
 
-            <template v-slot:expanded-item="{ item }">
-              <td :colspan="headers.length + 1">
-                <p>{{ item.description }}</p>
-                <div class="button-inner">
-                  <button class="button" @click="redirectToMyCowven(item.id)">
-                    Go to Cowven
-                  </button>
-                </div>
-              </td>
-            </template>
-          </v-data-table>
-        </v-card>
-      </div>
+                <template v-slot:expanded-item="{ item }">
+                  <td :colspan="headers.length + 1">
+                    <p>{{ item.description }}</p>
+                    <div class="button-inner">
+                      <button class="button" @click="redirectToMyCowven(item.id)">
+                        Go to Cowven
+                      </button>
+                    </div>
+                  </td>
+                </template>
+              </v-data-table>
+            </v-card>
+          </div>
 
-      <div class="create-coven">
-        <div class="caption">
-          <h1>Create Cowven</h1>
-        </div>
+          <div class="create-coven">
+            <div class="caption">
+              <h1>Create Cowven</h1>
+            </div>
 
-        <div class="summon-container">
-          <img src="../assets/utter.svg" alt />
-          <p>
-            Summon your Cowven! Gather your wizard homies and rule together the
-            cheesiest coven of the hood.
-          </p>
-          <router-link :to="{ name: 'createcowven' }">
-            <button class="button">
-              Summon
-            </button>
-          </router-link>
+            <div class="summon-container">
+              <img src="../assets/utter.svg" alt />
+              <p>
+                Summon your Cowven! Gather your wizard homies and rule together
+                the cheesiest coven of the hood.
+              </p>
+              <router-link :to="{ name: 'createcowven' }">
+                <button class="button">
+                  Summon
+                </button>
+              </router-link>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -69,8 +75,14 @@
 
 <script>
 import { allDaosData } from "../graphql/queries";
+import Preloader from "../components/Preloader.vue";
+import TopNav from "../components/TopNav.vue";
 
 export default {
+  components: {
+    Preloader,
+    TopNav
+  },
   apollo: {
     allDaosInfo: {
       query: allDaosData
@@ -92,7 +104,7 @@ export default {
         { text: "Name", value: "name" },
         { text: "Score", value: "score" },
         { text: "Members", value: "members" },
-        { text: "God", value: "god" }
+        { text: "God", value: "grate" }
       ],
       grates: [
         {
