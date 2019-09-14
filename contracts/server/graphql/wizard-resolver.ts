@@ -43,11 +43,11 @@ export class WizardData implements IWizardData {
   innatePower: string;
   @Field()
   affinity: eWizardAffinity;
-  @Field()
+  @Field({nullable: true})
   score?: string;
-  @Field()
+  @Field({nullable: true})
   cowvenName?: string;
-  @Field()
+  @Field({nullable: true})
   cowvenAddress?: tEthereumAddress;
   @Field()
   status: eWizardStatus;
@@ -59,16 +59,16 @@ export class WizardData implements IWizardData {
 @InputType()
 class WizardDataInput {
   @Field()
-  @Min(0)
-  @IsInt()
-  wizardId: number;
+  @IsEthAddress()
+  userWallet : string;
 }
 
 @InputType()
 class CreateWizardWalletInput extends WizardDataInput{
   @Field()
-  @IsEthAddress()
-  userWallet: tEthereumAddress;
+  @IsInt()
+  @Min(0)
+  wizardId: number;
 }
 
 @Resolver()
@@ -78,11 +78,11 @@ export class WizardResolver {
     this.wizardsService = new WizardsService();
   }
 
-  @Query(returns => WizardData)
-  async allWizardsByOwnerAddress(
-    @Arg('data') { wizardId }: WizardDataInput
-  ): Promise<WizardData> {
-    return await this.wizardsService.getWizardData(wizardId)
+  @Query(returns => [WizardData])
+  async allWizardsDataByOwner(
+    @Arg('data') { userWallet }: WizardDataInput
+  ): Promise<WizardData[]> {
+    return await this.wizardsService.getAllWizardsDataByOwner(userWallet)
   }
 
   @Mutation(returns => EthereumTransactionModel)

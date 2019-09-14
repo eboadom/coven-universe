@@ -33,7 +33,7 @@ export default {
   methods: {
     async unlockDapper() {
       this.loading = true;
-      if (typeof window.ethereum !== "undefined" && window.ethereum.isDapper) {
+      if (typeof window.ethereum !== "undefined") {
         this.dapperAvailable = true;
         try {
           const accounts = await window.ethereum.enable();

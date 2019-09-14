@@ -68,7 +68,14 @@
 </template>
 
 <script>
+import { allDaosData } from "../graphql/queries";
+
 export default {
+  apollo: {
+    allDaos: {
+      query: allDaosData
+    }
+  },
   data() {
     return {
       search: "",

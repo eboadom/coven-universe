@@ -18,7 +18,7 @@ export const deployDAOMigration = migrationHandler(
   }) => {
     const wizardGuild = await deployWizardGuild()
     await wizardGuild.openSeries(accounts[0], 5974)
-    await wizardGuild.mintWizards([50, 75, 100], [1, 2, 3], accounts[0])
+    await wizardGuild.mintWizards([50, 75, 100, 100], [1, 2, 3, 2], accounts[0])
     const wizardsERC721AddressesProvider = await deployWizardsERC721AddressesProvider(
       [wizardGuild.address],
     )
