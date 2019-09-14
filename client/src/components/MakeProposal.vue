@@ -142,11 +142,11 @@ export default {
   },
   methods: {
     async submit(e) {
+      e.preventDefault();
       const web3 = getWeb3();
       if (this.$refs.form.validate()) {
-        e.preventDefault();
         const wizard = this.members.find(m => m.id === this.wizardId);
-        this.$apollo.mutate({
+        const {data: {createProposalForReputationReward: txs}} = await this.$apollo.mutate({
           mutation: createProposalMutation,
           variables: {
             data: {
@@ -158,7 +158,6 @@ export default {
           }
         });
         await web3.eth.sendTransaction(txs[0]);
-        console.log('res', txs[0]);
         this.dialogSpell = true;
         this.reset();
       }
