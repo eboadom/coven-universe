@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import Web3 from 'web3';
 import UnlockDapper from "../views/UnlockDapper";
 import Preloader from "../components/Preloader.vue";
 import { getWeb3 } from "../helpers/web3-helpers";
@@ -33,7 +32,7 @@ export default {
     async unlockDapper() {
       this.loading = true;
       if (typeof window.ethereum !== "undefined") {
-        const web3 = getWebl3();
+        const web3 = getWeb3();
         this.dapperAvailable = true;
         try {
           await web3.givenProvider.enable();
