@@ -35,7 +35,8 @@
     "common:gen-contracts-types-web3": "typechain --target web3-1.0.0 './build/**/*.json' --outDir ./types/web3-contracts",
     "sys:start-dev-container": "tail -f /dev/null",
     "prettier": "prettier --write ./contracts/*.sol",
-    "sys:start-api-server": "npm i && nodemon"
+    "sys:start-api-server": "npm i && nodemon",
+    "sys:start-prod-api-server": "ts-node ./server/api.ts"
   },
   "author": "eboado <ernesto.boado.moreira@gmail.com>",
   "license": "MIT",
