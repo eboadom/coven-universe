@@ -56,7 +56,8 @@ export default new Router({
           component: CBD
         },
         {
-          path: "cowvenhome",
+          path: "cowvenhome/:id",
+          props: true,
           name: "cowvenhome",
           component: CowvenHome
         },

@@ -1,21 +1,21 @@
 <template>
-  <div>
+  <Preloader v-if="$apollo.queries.allDaosInfo.loading"/>
+  <div v-else-if="!cowven">404</div>
+  <div v-else>
     <TopNav />
     <div class="CowvenHome">
       <div class="header-container">
-        <h1>cowven name</h1>
+        <h1>{{cowven.id}}</h1>
 
         <div class="center-container">
           <p>
-            “Cowven unique description that the creator entered in the ‘create a
-            cowven’ screen”
+            “{{cowven.description || 'should be some funny cowen description, but no :('}}”
           </p>
           <div class="stats">
-            <p>Rank #000</p>
-            <p>Score #000</p>
-            <p>Wins #000</p>
-            <p>Losses #000</p>
-            <p>Penalty #000</p>
+            <p>Rank #{{cowven.rank}}</p>
+            <p>Score #{{cowven.score}}</p>
+            <p>Wins #{{cowven.wins}}</p>
+            <p>Loses #{{cowven.loses}}</p>
           </div>
         </div>
 
@@ -104,14 +104,22 @@
 <script>
 import Preloader from "../components/Preloader.vue";
 import TopNav from "../components/TopNav.vue";
+import { allDaosData } from "../graphql/queries";
 
 export default {
+  props: ['id'],
   components: {
     Preloader,
     TopNav
   },
+  apollo: {
+    allDaosInfo: {
+      query: allDaosData
+    }
+  },
   data() {
     return {
+      allDaosInfo: [],
       dialog: false,
       search: "",
       proposals: [
@@ -212,6 +220,11 @@ export default {
         }
       ]
     };
+  },
+  computed: {
+    cowven() {
+      return this.allDaosInfo.find(item => item.id === this.id);
+    }
   }
 };
 </script>
