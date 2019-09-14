@@ -2,72 +2,53 @@
   <div class="spell-proposals">
     <h2>Spell Proposals</h2>
     <VuePerfectScrollbar class="proposals-inner" v-once :settings="settings">
-      <div
-        v-for="proposal in proposals"
-        :key="proposal.id"
-        class="proposal-container"
-      >
-        <div class="topline">
-          <p>Type: {{ proposal.type }}</p>
-          <p>Wizard: {{ proposal.beneficiary }}</p>
-          <p>Reputation: {{ proposal.reputationReward }}</p>
-          <p>Status: {{ proposal.status }}</p>
-        </div>
-
-        <p class="description">{{ proposal.description }}</p>
-
-        <div class="buttons-inner">
-          <button class="button vote">Nay</button>
-
-          <v-dialog v-model="dialog" content-class="thank-dialog">
-            <template v-slot:activator="{ on }">
-              <button class="button vote vote2" v-on="on">Aye</button>
-            </template>
-
-            <v-card class="dialog">
-              <img src="../assets/wheel.svg" alt />
-              <h1>Thank You</h1>
-              <v-card-text>
-                You expressed yourself and that’s beautiful as a gallon of milk
-                but let’s see if the majority agrees
-              </v-card-text>
-
-              <!-- <v-card-actions> -->
-              <v-spacer></v-spacer>
-              <button
-                class="button"
-                color="primary"
-                text
-                @click="dialog = false"
-              >
-                Got it
-              </button>
-              <!-- </v-card-actions> -->
-            </v-card>
-          </v-dialog>
-        </div>
-      </div>
+      <Spell v-for="proposal in proposals" :key="proposal.id" :proposal="proposal" :myWizards="myWizards" />
     </VuePerfectScrollbar>
+    <v-dialog v-model="dialog" content-class="thank-dialog">
+      <v-card class="dialog">
+        <img src="../assets/wheel.svg" alt />
+        <h1>Thank You</h1>
+        <v-card-text>
+          You expressed yourself and that’s beautiful as a gallon of
+          milk but let’s see if the majority agrees
+        </v-card-text>
+
+        <!-- <v-card-actions> -->
+        <v-spacer></v-spacer>
+        <button
+          class="button"
+          color="primary"
+          text
+          @click="dialog = false"
+        >
+          Got it
+        </button>
+        <!-- </v-card-actions> -->
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
 <script>
-import VuePerfectScrollbar from "vue-perfect-scrollbar";
+  import VuePerfectScrollbar from "vue-perfect-scrollbar";
+  import Spell from '../components/Spell'
 
-export default {
-  components: {
-    VuePerfectScrollbar
-  },
-  name: "Spells",
-  props: ["proposals"],
-  data() {
-    return {
-      settings: {
-        maxScrollbarLength: 60
+  export default {
+    name: "Spells",
+    props: ['proposals', 'myWizards'],
+    components: {
+      Spell,
+      VuePerfectScrollbar
+    },
+    data() {
+      return {
+        dialog: false,
+        settings: {
+          maxScrollbarLength: 60
+        }
       }
-    };
-  }
-};
+    }
+  };
 </script>
 
 <style lang="scss" scoped>
@@ -95,40 +76,5 @@ export default {
   max-height: 500px;
   overflow-y: auto;
   padding-right: 25px;
-}
-
-.proposal-container {
-  margin-bottom: 20px;
-  border: solid 1px #000000;
-  background-color: #ffffff;
-  padding: 15px 15px 25px;
-  box-shadow: 5px 5px 0 #000;
-  .topline {
-    margin-bottom: 10px;
-    padding-bottom: 3px;
-    border-bottom: 1px solid #000;
-    p {
-      width: 100%;
-      margin-bottom: 10px;
-      word-break: break-all;
-      &:last-child {
-        margin: 0;
-      }
-    }
-  }
-}
-
-.buttons-inner {
-  text-align: right;
-  button {
-    width: 80px;
-    margin-left: 25px;
-  }
-  .vote2 {
-    background: $primary;
-    &:hover {
-      background: $purple !important;
-    }
-  }
 }
 </style>

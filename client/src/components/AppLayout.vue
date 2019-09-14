@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import Web3 from 'web3';
 import UnlockDapper from "../views/UnlockDapper";
 import Preloader from "../components/Preloader.vue";
 export default {
@@ -31,13 +32,14 @@ export default {
     async unlockDapper() {
       this.loading = true;
       if (typeof window.ethereum !== "undefined") {
+        const web3 = new Web3(window.ethereum);
         this.dapperAvailable = true;
         try {
-          const accounts = await window.ethereum.enable();
+          await web3.givenProvider.enable();
+          const accounts = await web3.eth.getAccounts();
           console.log(accounts);
           if (accounts && accounts.length) {
             this.dapperUnlocked = true;
-
             //TODO: replace with something Vue specific
             window.userWallet = accounts[0];
           }

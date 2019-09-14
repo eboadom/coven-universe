@@ -1,5 +1,5 @@
 <template>
-  <Preloader v-if="$apollo.queries.allDaosInfo.loading" />
+  <Preloader v-if="$apollo.queries.allDaosInfo.loading || $apollo.queries.allWizardsDataByOwner.loading" />
   <div class="errorPage" v-else-if="!cowven">404</div>
   <div v-else>
     <TopNav />
@@ -53,7 +53,7 @@
           </v-card>
         </div>
 
-        <Spells v-if="!showCreateProposal" :proposals="cowven.proposals" />
+        <Spells v-if="!showCreateProposal" :proposals="cowven.proposals" :myWizards="allWizardsDataByOwner" />
         <MakeProposal v-else />
       </div>
     </div>
@@ -65,7 +65,7 @@ import Preloader from "../components/Preloader.vue";
 import TopNav from "../components/TopNav.vue";
 import Spells from "../components/Spells.vue";
 import MakeProposal from "../components/MakeProposal.vue";
-import { allDaosData } from "../graphql/queries";
+import { allDaosData, allWizardsByUserAddress } from "../graphql/queries";
 
 export default {
   props: ["id"],
@@ -78,12 +78,20 @@ export default {
   apollo: {
     allDaosInfo: {
       query: allDaosData
+    },
+    allWizardsDataByOwner: {
+      query: allWizardsByUserAddress,
+      variables() {
+        return {
+          address: window.userWallet
+        }
+      }
     }
   },
   data() {
     return {
       allDaosInfo: [],
-      dialog: false,
+      allWizardsDataByOwner: [],
       showCreateProposal: false,
       search: "",
       headers: [

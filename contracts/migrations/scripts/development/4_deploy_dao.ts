@@ -266,7 +266,7 @@ export const deployDAOMigration = migrationHandler(
     await voteProposal(
       accounts[0],
       giveReputationToWizard1ProposalId,
-      eVote.YES,
+      eVote.NO,
       "-1",
     )
     await voteProposal(
