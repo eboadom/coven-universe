@@ -1,5 +1,10 @@
 <template>
-  <Preloader v-if="$apollo.queries.allDaosInfo.loading || $apollo.queries.allWizardsDataByOwner.loading" />
+  <Preloader
+    v-if="
+      $apollo.queries.allDaosInfo.loading ||
+        $apollo.queries.allWizardsDataByOwner.loading
+    "
+  />
   <div class="errorPage" v-else-if="!cowven">
     <img src="../assets/cheezedao.svg" alt="Cheeze" />
     <p>404</p>
@@ -56,7 +61,11 @@
           </v-card>
         </div>
 
-        <Spells v-if="!showCreateProposal" :proposals="cowven.proposals" :myWizards="allWizardsDataByOwner" />
+        <Spells
+          v-if="!showCreateProposal"
+          :proposals="cowven.proposals"
+          :myWizards="allWizardsDataByOwner"
+        />
         <MakeProposal :members="cowven.members" v-else />
       </div>
     </div>
@@ -87,7 +96,7 @@ export default {
       variables() {
         return {
           address: window.userWallet
-        }
+        };
       }
     }
   },

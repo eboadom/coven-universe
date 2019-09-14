@@ -2,25 +2,25 @@
   <div class="spell-proposals">
     <h2>Spell Proposals</h2>
     <VuePerfectScrollbar class="proposals-inner" v-once :settings="settings">
-      <Spell v-for="proposal in proposals" :key="proposal.id" :proposal="proposal" :myWizards="myWizards" />
+      <Spell
+        v-for="proposal in proposals"
+        :key="proposal.id"
+        :proposal="proposal"
+        :myWizards="myWizards"
+      />
     </VuePerfectScrollbar>
     <v-dialog v-model="dialog" content-class="thank-dialog">
       <v-card class="dialog">
         <img src="../assets/wheel.svg" alt />
         <h1>Thank You</h1>
         <v-card-text>
-          You expressed yourself and that’s beautiful as a gallon of
-          milk but let’s see if the majority agrees
+          You expressed yourself and that’s beautiful as a gallon of milk but
+          let’s see if the majority agrees
         </v-card-text>
 
         <!-- <v-card-actions> -->
         <v-spacer></v-spacer>
-        <button
-          class="button"
-          color="primary"
-          text
-          @click="dialog = false"
-        >
+        <button class="button" color="primary" text @click="dialog = false">
           Got it
         </button>
         <!-- </v-card-actions> -->
@@ -30,25 +30,25 @@
 </template>
 
 <script>
-  import VuePerfectScrollbar from "vue-perfect-scrollbar";
-  import Spell from '../components/Spell'
+import VuePerfectScrollbar from "vue-perfect-scrollbar";
+import Spell from "../components/Spell";
 
-  export default {
-    name: "Spells",
-    props: ['proposals', 'myWizards'],
-    components: {
-      Spell,
-      VuePerfectScrollbar
-    },
-    data() {
-      return {
-        dialog: false,
-        settings: {
-          maxScrollbarLength: 60
-        }
+export default {
+  name: "Spells",
+  props: ["proposals", "myWizards"],
+  components: {
+    Spell,
+    VuePerfectScrollbar
+  },
+  data() {
+    return {
+      dialog: false,
+      settings: {
+        maxScrollbarLength: 60
       }
-    }
-  };
+    };
+  }
+};
 </script>
 
 <style lang="scss" scoped>

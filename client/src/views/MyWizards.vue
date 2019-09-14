@@ -39,12 +39,32 @@
               </a>
             </div>
             <div v-else>
-              <button class="button button-small">Create wallet</button>
+              <button
+                class="button button-small"
+                @click="e => createWallet(e, item.id)"
+              >
+                Create wallet
+              </button>
             </div>
           </template>
         </v-data-table>
       </div>
     </div>
+
+    <v-dialog v-model="dialog" content-class="thank-dialog">
+      <v-card class="dialog">
+        <img src="../assets/wheel.svg" alt />
+        <h1>Thank You</h1>
+        <v-card-text>
+          Wallet successfully created
+        </v-card-text>
+
+        <v-spacer></v-spacer>
+        <button class="button" @click="dialog = false">
+          Got it
+        </button>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -52,6 +72,7 @@
 import Preloader from "../components/Preloader.vue";
 import TopNav from "../components/TopNav.vue";
 import { allWizardsByUserAddress } from "../graphql/queries";
+import { createWalletForWizard } from "../graphql/mutations";
 
 export default {
   components: {
@@ -71,6 +92,7 @@ export default {
   data() {
     return {
       search: "",
+      dialog: false,
       headers: [
         {
           text: "Wizard",
@@ -90,8 +112,25 @@ export default {
         { text: "Wallet", value: "wizardWalletData.wizardWalletAddress" }
       ]
     };
+  },
+  methods: {
+    openModal() {
+      this.dialog = true;
+    },
+    async createWallet(e, wizardId) {
+      e.preventDefault();
+      await this.$apollo.mutate({
+        mutation: createWalletForWizard,
+        variables: {
+          data: {
+            userWallet: window.userWallet,
+            wizardId
+          }
+        }
+      });
+      await this.openModal();
+    }
   }
-  
 };
 </script>
 
