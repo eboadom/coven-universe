@@ -1,0 +1,85 @@
+version: '3.5'
+
+volumes:
+  traefik-ssl:
+    driver: local
+
+networks:
+  overlay:
+
+services:
+  traefik:
+    image: traefik:1.7
+    command:
+      - "--entrypoints=Name:http Address::80 Redirect.EntryPoint:https"
+      - "--entrypoints=Name:https Address::443 TLS"
+      - "--defaultentrypoints=http,https"
+      - "--acme"
+      - "--acme.storage=/etc/traefik/acme/acme.json"
+      - "--acme.entryPoint=https"
+      - "--acme.httpChallenge.entryPoint=http"
+      - "--acme.onHostRule=true"
+      - "--acme.onDemand=false"
+      - "--acme.acmeLogging=true"
+      - "--acme.email=andrey@ethlend.io"
+      - "--docker"
+      - "--docker.domain=cheezedao.com"
+      - "--docker.watch"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - traefik-ssl:/etc/traefik/acme
+    networks:
+      - overlay
+    ports:
+      - target: 80
+        published: 80
+      - target: 443
+        published: 443
+
+  frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile-prod
+      args:
+        VUE_APP_GRAPHQL_ENDPOINT_URL: "wss://cheezedao.com/graphql"
+    networks:
+      - overlay
+    labels:
+      traefik.frontend.rule: "Host:cheezedao.com,www.cheezedao.com"
+      traefik.frontend.redirect.regex: "^https?://www.cheezedao.com/(.*)"
+      traefik.frontend.redirect.replacement: "https://cheezedao.com/$${1}"
+      traefik.port: '80'
+
+  api:
+    build:
+      context: ./contracts
+    restart: always
+    networks:
+      - overlay
+    environment:
+      ETH_NETWORK: "rinkeby"
+      # GANACHE
+      GANACHE_URL: "http://ganache:8545"
+      URL_ETHEREUM_HTTP_PROVIDER_DEVELOPMENT: "http://ganache:8545"
+      URL_ETHEREUM_WS_PROVIDER_DEVELOPMENT: "wss://ganache:8545"
+      # RINKEBY
+      MNEMONIC_TRUFFLE_RINKEBY: ""
+      PK_TRUFFLE_RINKEBY: ""
+      HDWALLET_ADDRESS_RINKEBY: ""
+      URL_ETHEREUM_HTTP_PROVIDER_RINKEBY: "https://rinkeby.infura.io/v3/3f9d1321a68b41a092b3b4e404d3e537"
+      URL_ETHEREUM_WS_PROVIDER_RINKEBY: "https://rinkeby.infura.io/v3/3f9d1321a68b41a092b3b4e404d3e537"
+      # KOVAN
+      MNEMONIC_TRUFFLE_KOVAN: ""
+      PK_TRUFFLE_KOVAN: ""
+      HDWALLET_ADDRESS_KOVAN: ""
+      URL_ETHEREUM_HTTP_PROVIDER_KOVAN: "https://kovan.infura.io/v3/3f9d1321a68b41a092b3b4e404d3e537"
+      URL_ETHEREUM_WS_PROVIDER_KOVAN: "wss://kovan.infura.io/v3/3f9d1321a68b41a092b3b4e404d3e537"
+
+  redis:
+    image: redis:latest
+    networks:
+      - overlay
+    volumes:
+      - type: volume
+        source: redis_data
+        target: /data

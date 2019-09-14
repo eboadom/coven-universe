@@ -1,0 +1,1446 @@
+{
+  "contractName": "UniversalScheme",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.6+commit.b259423e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"@daostack/arc/contracts/universalSchemes/UniversalScheme.sol\":\"UniversalScheme\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"@daostack/arc/contracts/controller/Avatar.sol\":{\"keccak256\":\"0x4e4fb9d3bc21f42fbfc6a01e9f8aa483a59e9f447b0d604f55b587a81ec09ef4\",\"urls\":[\"bzzr://b0af60e651a75274a028dc4b53d06091a46ca0efa3bfb4153879e76cf86a49dc\"]},\"@daostack/arc/contracts/controller/ControllerInterface.sol\":{\"keccak256\":\"0x933e92612c90f292c7b59908958b003f1a13d90b97bed0572b566353c20974dc\",\"urls\":[\"bzzr://e8050774c20b9b22636b47cdd353eaf5df72e0bca8f2b8569365be30f4eaef0c\"]},\"@daostack/arc/contracts/controller/DAOToken.sol\":{\"keccak256\":\"0x9b213e4e3ceeffcfc1c962a43b70b8d763d8091a2dd713fc1989b97bb68786e6\",\"urls\":[\"bzzr://7ba306fdbad344e01474e3ae9c37b27b64efdc1cb17ffc0f3ec1c4427fde359d\"]},\"@daostack/arc/contracts/globalConstraints/GlobalConstraintInterface.sol\":{\"keccak256\":\"0xc006c4591ec10b845a56e13f6791db2c428610953034686d52b2a934b6c8f36f\",\"urls\":[\"bzzr://d1f293a0bbaa292296a83977cb36a14048db404a32e3f6aa9bd79ea61ac3c4c3\"]},\"@daostack/arc/contracts/libs/SafeERC20.sol\":{\"keccak256\":\"0xf6727d432f67046145b078f40c1cc4f6be7b0d12a6678ecaf457edf7550d244c\",\"urls\":[\"bzzr://cd706a2dc7540d093b591a280b464256c596ddad598b68886e6db2e7958f9916\"]},\"@daostack/arc/contracts/universalSchemes/UniversalScheme.sol\":{\"keccak256\":\"0xcfdb7d336d21b3b16a31125d3bd8c88f7c4c944510f4488162247badb6411017\",\"urls\":[\"bzzr://6cd99ec0b19ae06f7845a3ca56d2dc43ec122cfa809969248e6742e0c56076ca\"]},\"@daostack/arc/contracts/universalSchemes/UniversalSchemeInterface.sol\":{\"keccak256\":\"0x956b0dbe20b6aeea74565a9204f72fba1580874d27cd63955f93e9491cabb6b1\",\"urls\":[\"bzzr://29eac5d525cc39129df30c5b8deada4350d40c5261a85ce0b29c12fe80b10b15\"]},\"@daostack/infra/contracts/Reputation.sol\":{\"keccak256\":\"0x3d226dac0fe7d758f0287fb28bc25fcec1f69d19888ae3a550fa49856d61c482\",\"urls\":[\"bzzr://7f219e1874d4f1aea860cc665b75015797f55f149e9bf490abab5d7ad2adfeb9\"]},\"openzeppelin-solidity/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x4ccf2d7b51873db1ccfd54ca2adae5eac3b184f9699911ed4490438419f1c690\",\"urls\":[\"bzzr://1604f5b6d6e916c154efd8c6720cda069e5ba32dfa0a9dedf2b42e5b02d07f89\"]},\"openzeppelin-solidity/contracts/ownership/Ownable.sol\":{\"keccak256\":\"0xf79fb10e8235770eb4aea7249034076a3cc9f9119ad944fc48705bae9c9d20dc\",\"urls\":[\"bzzr://d12a11272051eb6586de8f7e0a82c04a98c9984ce8b2a6cf1ee439f65aba29a9\"]},\"openzeppelin-solidity/contracts/token/ERC20/ERC20.sol\":{\"keccak256\":\"0x852793a3c2f86d336a683b30d688ec3dcfc57451af5a2bf5975cda3b7191a901\",\"urls\":[\"bzzr://07fb42206812a17c1f71e548cfa5cec6f9aa1ae0ca5df870718ca4aa9759d1a5\"]},\"openzeppelin-solidity/contracts/token/ERC20/ERC20Burnable.sol\":{\"keccak256\":\"0xa5ebf3344a36eb60e723e0764d85251c496e15e4b2d737b56415502b559a1765\",\"urls\":[\"bzzr://68812cb0a1d373d12c6986f5a9314c9bae7891a07a0e301d2317fcf409102f54\"]},\"openzeppelin-solidity/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0x90e8c2521653bbb1768b05889c5760031e688d9cd361f167489b89215e201b95\",\"urls\":[\"bzzr://aa8b45b57edafc3d67bc5d916327ea16807fae33f753ca163ae0c4061b789766\"]},\"openzeppelin-solidity/contracts/utils/Address.sol\":{\"keccak256\":\"0xf3358e5819ca73357abd6c90bdfffd0474af54364897f6b3e3234c4b71fbe9a1\",\"urls\":[\"bzzr://f7f6da60a184233fd666ac44e6fb2bd51ca6ebdc4867a310d368049aa4e62786\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3fe6080604052600080fdfea165627a7a72305820c2a746c1366e3be109c729844f44d635035fb90b64cdcdad337f88998b3127ef0029",
+  "deployedBytecode": "0x6080604052600080fdfea165627a7a72305820c2a746c1366e3be109c729844f44d635035fb90b64cdcdad337f88998b3127ef0029",
+  "sourceMap": "151:490:28:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;151:490:28;;;;;;;",
+  "deployedSourceMap": "151:490:28:-;;;;;",
+  "source": "pragma solidity ^0.5.4;\n\nimport \"./UniversalSchemeInterface.sol\";\nimport \"../controller/ControllerInterface.sol\";\nimport \"../controller/Avatar.sol\";\n\n\ncontract UniversalScheme is UniversalSchemeInterface {\n    /**\n    *  @dev get the parameters for the current scheme from the controller\n    */\n    function getParametersFromController(Avatar _avatar) internal view returns(bytes32) {\n        require(ControllerInterface(_avatar.owner()).isSchemeRegistered(address(this), address(_avatar)),\n        \"scheme is not registered\");\n        return ControllerInterface(_avatar.owner()).getSchemeParameters(address(this), address(_avatar));\n    }\n}\n",
+  "sourcePath": "@daostack/arc/contracts/universalSchemes/UniversalScheme.sol",
+  "ast": {
+    "absolutePath": "@daostack/arc/contracts/universalSchemes/UniversalScheme.sol",
+    "exportedSymbols": {
+      "UniversalScheme": [
+        11641
+      ]
+    },
+    "id": 11642,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 11596,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".4"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:28"
+      },
+      {
+        "absolutePath": "@daostack/arc/contracts/universalSchemes/UniversalSchemeInterface.sol",
+        "file": "./UniversalSchemeInterface.sol",
+        "id": 11597,
+        "nodeType": "ImportDirective",
+        "scope": 11642,
+        "sourceUnit": 11653,
+        "src": "25:40:28",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "@daostack/arc/contracts/controller/ControllerInterface.sol",
+        "file": "../controller/ControllerInterface.sol",
+        "id": 11598,
+        "nodeType": "ImportDirective",
+        "scope": 11642,
+        "sourceUnit": 6273,
+        "src": "66:47:28",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "@daostack/arc/contracts/controller/Avatar.sol",
+        "file": "../controller/Avatar.sol",
+        "id": 11599,
+        "nodeType": "ImportDirective",
+        "scope": 11642,
+        "sourceUnit": 4584,
+        "src": "114:34:28",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 11600,
+              "name": "UniversalSchemeInterface",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 11652,
+              "src": "179:24:28",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_UniversalSchemeInterface_$11652",
+                "typeString": "contract UniversalSchemeInterface"
+              }
+            },
+            "id": 11601,
+            "nodeType": "InheritanceSpecifier",
+            "src": "179:24:28"
+          }
+        ],
+        "contractDependencies": [
+          11652
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 11641,
+        "linearizedBaseContracts": [
+          11641,
+          11652
+        ],
+        "name": "UniversalScheme",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 11639,
+              "nodeType": "Block",
+              "src": "383:256:28",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "arguments": [
+                              {
+                                "argumentTypes": null,
+                                "id": 11616,
+                                "name": "this",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 18399,
+                                "src": "465:4:28",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_contract$_UniversalScheme_$11641",
+                                  "typeString": "contract UniversalScheme"
+                                }
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_contract$_UniversalScheme_$11641",
+                                  "typeString": "contract UniversalScheme"
+                                }
+                              ],
+                              "id": 11615,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "nodeType": "ElementaryTypeNameExpression",
+                              "src": "457:7:28",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_address_$",
+                                "typeString": "type(address)"
+                              },
+                              "typeName": "address"
+                            },
+                            "id": 11617,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "typeConversion",
+                            "lValueRequested": false,
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "457:13:28",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          {
+                            "argumentTypes": null,
+                            "arguments": [
+                              {
+                                "argumentTypes": null,
+                                "id": 11619,
+                                "name": "_avatar",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 11603,
+                                "src": "480:7:28",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_contract$_Avatar_$4583",
+                                  "typeString": "contract Avatar"
+                                }
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_contract$_Avatar_$4583",
+                                  "typeString": "contract Avatar"
+                                }
+                              ],
+                              "id": 11618,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "nodeType": "ElementaryTypeNameExpression",
+                              "src": "472:7:28",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_address_$",
+                                "typeString": "type(address)"
+                              },
+                              "typeName": "address"
+                            },
+                            "id": 11620,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "typeConversion",
+                            "lValueRequested": false,
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "472:16:28",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address_payable",
+                              "typeString": "address payable"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            },
+                            {
+                              "typeIdentifier": "t_address_payable",
+                              "typeString": "address payable"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": null,
+                            "arguments": [
+                              {
+                                "argumentTypes": null,
+                                "arguments": [],
+                                "expression": {
+                                  "argumentTypes": [],
+                                  "expression": {
+                                    "argumentTypes": null,
+                                    "id": 11610,
+                                    "name": "_avatar",
+                                    "nodeType": "Identifier",
+                                    "overloadedDeclarations": [],
+                                    "referencedDeclaration": 11603,
+                                    "src": "421:7:28",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_contract$_Avatar_$4583",
+                                      "typeString": "contract Avatar"
+                                    }
+                                  },
+                                  "id": 11611,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "memberName": "owner",
+                                  "nodeType": "MemberAccess",
+                                  "referencedDeclaration": 17522,
+                                  "src": "421:13:28",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_function_external_view$__$returns$_t_address_$",
+                                    "typeString": "function () view external returns (address)"
+                                  }
+                                },
+                                "id": 11612,
+                                "isConstant": false,
+                                "isLValue": false,
+                                "isPure": false,
+                                "kind": "functionCall",
+                                "lValueRequested": false,
+                                "names": [],
+                                "nodeType": "FunctionCall",
+                                "src": "421:15:28",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                }
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                }
+                              ],
+                              "id": 11609,
+                              "name": "ControllerInterface",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 6272,
+                              "src": "401:19:28",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_contract$_ControllerInterface_$6272_$",
+                                "typeString": "type(contract ControllerInterface)"
+                              }
+                            },
+                            "id": 11613,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "typeConversion",
+                            "lValueRequested": false,
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "401:36:28",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_ControllerInterface_$6272",
+                              "typeString": "contract ControllerInterface"
+                            }
+                          },
+                          "id": 11614,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "isSchemeRegistered",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 6226,
+                          "src": "401:55:28",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_external_view$_t_address_$_t_address_$returns$_t_bool_$",
+                            "typeString": "function (address,address) view external returns (bool)"
+                          }
+                        },
+                        "id": 11621,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "401:88:28",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "736368656d65206973206e6f742072656769737465726564",
+                        "id": 11622,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "499:26:28",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_f49accaed0fc85cca97fe84c1d1aed7770001ae630847b7bcf2d35045e44c8d1",
+                          "typeString": "literal_string \"scheme is not registered\""
+                        },
+                        "value": "scheme is not registered"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_f49accaed0fc85cca97fe84c1d1aed7770001ae630847b7bcf2d35045e44c8d1",
+                          "typeString": "literal_string \"scheme is not registered\""
+                        }
+                      ],
+                      "id": 11608,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        18352,
+                        18353
+                      ],
+                      "referencedDeclaration": 18353,
+                      "src": "393:7:28",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 11623,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "393:133:28",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 11624,
+                  "nodeType": "ExpressionStatement",
+                  "src": "393:133:28"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 11632,
+                            "name": "this",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 18399,
+                            "src": "608:4:28",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_UniversalScheme_$11641",
+                              "typeString": "contract UniversalScheme"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_contract$_UniversalScheme_$11641",
+                              "typeString": "contract UniversalScheme"
+                            }
+                          ],
+                          "id": 11631,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "nodeType": "ElementaryTypeNameExpression",
+                          "src": "600:7:28",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_address_$",
+                            "typeString": "type(address)"
+                          },
+                          "typeName": "address"
+                        },
+                        "id": 11633,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "600:13:28",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 11635,
+                            "name": "_avatar",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 11603,
+                            "src": "623:7:28",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_Avatar_$4583",
+                              "typeString": "contract Avatar"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_contract$_Avatar_$4583",
+                              "typeString": "contract Avatar"
+                            }
+                          ],
+                          "id": 11634,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "nodeType": "ElementaryTypeNameExpression",
+                          "src": "615:7:28",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_address_$",
+                            "typeString": "type(address)"
+                          },
+                          "typeName": "address"
+                        },
+                        "id": 11636,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "615:16:28",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "arguments": [],
+                            "expression": {
+                              "argumentTypes": [],
+                              "expression": {
+                                "argumentTypes": null,
+                                "id": 11626,
+                                "name": "_avatar",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 11603,
+                                "src": "563:7:28",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_contract$_Avatar_$4583",
+                                  "typeString": "contract Avatar"
+                                }
+                              },
+                              "id": 11627,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "memberName": "owner",
+                              "nodeType": "MemberAccess",
+                              "referencedDeclaration": 17522,
+                              "src": "563:13:28",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_function_external_view$__$returns$_t_address_$",
+                                "typeString": "function () view external returns (address)"
+                              }
+                            },
+                            "id": 11628,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "functionCall",
+                            "lValueRequested": false,
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "563:15:28",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          ],
+                          "id": 11625,
+                          "name": "ControllerInterface",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 6272,
+                          "src": "543:19:28",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_contract$_ControllerInterface_$6272_$",
+                            "typeString": "type(contract ControllerInterface)"
+                          }
+                        },
+                        "id": 11629,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "543:36:28",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_ControllerInterface_$6272",
+                          "typeString": "contract ControllerInterface"
+                        }
+                      },
+                      "id": 11630,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "getSchemeParameters",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 6235,
+                      "src": "543:56:28",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_view$_t_address_$_t_address_$returns$_t_bytes32_$",
+                        "typeString": "function (address,address) view external returns (bytes32)"
+                      }
+                    },
+                    "id": 11637,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "543:89:28",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "functionReturnParameters": 11607,
+                  "id": 11638,
+                  "nodeType": "Return",
+                  "src": "536:96:28"
+                }
+              ]
+            },
+            "documentation": " @dev get the parameters for the current scheme from the controller",
+            "id": 11640,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getParametersFromController",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 11604,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11603,
+                  "name": "_avatar",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11640,
+                  "src": "336:14:28",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_Avatar_$4583",
+                    "typeString": "contract Avatar"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 11602,
+                    "name": "Avatar",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4583,
+                    "src": "336:6:28",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Avatar_$4583",
+                      "typeString": "contract Avatar"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "335:16:28"
+            },
+            "returnParameters": {
+              "id": 11607,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11606,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11640,
+                  "src": "374:7:28",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 11605,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "374:7:28",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "373:9:28"
+            },
+            "scope": 11641,
+            "src": "299:340:28",
+            "stateMutability": "view",
+            "superFunction": 11651,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 11642,
+        "src": "151:490:28"
+      }
+    ],
+    "src": "0:642:28"
+  },
+  "legacyAST": {
+    "absolutePath": "@daostack/arc/contracts/universalSchemes/UniversalScheme.sol",
+    "exportedSymbols": {
+      "UniversalScheme": [
+        11641
+      ]
+    },
+    "id": 11642,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 11596,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".4"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:28"
+      },
+      {
+        "absolutePath": "@daostack/arc/contracts/universalSchemes/UniversalSchemeInterface.sol",
+        "file": "./UniversalSchemeInterface.sol",
+        "id": 11597,
+        "nodeType": "ImportDirective",
+        "scope": 11642,
+        "sourceUnit": 11653,
+        "src": "25:40:28",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "@daostack/arc/contracts/controller/ControllerInterface.sol",
+        "file": "../controller/ControllerInterface.sol",
+        "id": 11598,
+        "nodeType": "ImportDirective",
+        "scope": 11642,
+        "sourceUnit": 6273,
+        "src": "66:47:28",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "@daostack/arc/contracts/controller/Avatar.sol",
+        "file": "../controller/Avatar.sol",
+        "id": 11599,
+        "nodeType": "ImportDirective",
+        "scope": 11642,
+        "sourceUnit": 4584,
+        "src": "114:34:28",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 11600,
+              "name": "UniversalSchemeInterface",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 11652,
+              "src": "179:24:28",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_UniversalSchemeInterface_$11652",
+                "typeString": "contract UniversalSchemeInterface"
+              }
+            },
+            "id": 11601,
+            "nodeType": "InheritanceSpecifier",
+            "src": "179:24:28"
+          }
+        ],
+        "contractDependencies": [
+          11652
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 11641,
+        "linearizedBaseContracts": [
+          11641,
+          11652
+        ],
+        "name": "UniversalScheme",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": {
+              "id": 11639,
+              "nodeType": "Block",
+              "src": "383:256:28",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "arguments": [
+                              {
+                                "argumentTypes": null,
+                                "id": 11616,
+                                "name": "this",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 18399,
+                                "src": "465:4:28",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_contract$_UniversalScheme_$11641",
+                                  "typeString": "contract UniversalScheme"
+                                }
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_contract$_UniversalScheme_$11641",
+                                  "typeString": "contract UniversalScheme"
+                                }
+                              ],
+                              "id": 11615,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "nodeType": "ElementaryTypeNameExpression",
+                              "src": "457:7:28",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_address_$",
+                                "typeString": "type(address)"
+                              },
+                              "typeName": "address"
+                            },
+                            "id": 11617,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "typeConversion",
+                            "lValueRequested": false,
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "457:13:28",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          {
+                            "argumentTypes": null,
+                            "arguments": [
+                              {
+                                "argumentTypes": null,
+                                "id": 11619,
+                                "name": "_avatar",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 11603,
+                                "src": "480:7:28",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_contract$_Avatar_$4583",
+                                  "typeString": "contract Avatar"
+                                }
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_contract$_Avatar_$4583",
+                                  "typeString": "contract Avatar"
+                                }
+                              ],
+                              "id": 11618,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "nodeType": "ElementaryTypeNameExpression",
+                              "src": "472:7:28",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_address_$",
+                                "typeString": "type(address)"
+                              },
+                              "typeName": "address"
+                            },
+                            "id": 11620,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "typeConversion",
+                            "lValueRequested": false,
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "472:16:28",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address_payable",
+                              "typeString": "address payable"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            },
+                            {
+                              "typeIdentifier": "t_address_payable",
+                              "typeString": "address payable"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": null,
+                            "arguments": [
+                              {
+                                "argumentTypes": null,
+                                "arguments": [],
+                                "expression": {
+                                  "argumentTypes": [],
+                                  "expression": {
+                                    "argumentTypes": null,
+                                    "id": 11610,
+                                    "name": "_avatar",
+                                    "nodeType": "Identifier",
+                                    "overloadedDeclarations": [],
+                                    "referencedDeclaration": 11603,
+                                    "src": "421:7:28",
+                                    "typeDescriptions": {
+                                      "typeIdentifier": "t_contract$_Avatar_$4583",
+                                      "typeString": "contract Avatar"
+                                    }
+                                  },
+                                  "id": 11611,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "memberName": "owner",
+                                  "nodeType": "MemberAccess",
+                                  "referencedDeclaration": 17522,
+                                  "src": "421:13:28",
+                                  "typeDescriptions": {
+                                    "typeIdentifier": "t_function_external_view$__$returns$_t_address_$",
+                                    "typeString": "function () view external returns (address)"
+                                  }
+                                },
+                                "id": 11612,
+                                "isConstant": false,
+                                "isLValue": false,
+                                "isPure": false,
+                                "kind": "functionCall",
+                                "lValueRequested": false,
+                                "names": [],
+                                "nodeType": "FunctionCall",
+                                "src": "421:15:28",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                }
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                }
+                              ],
+                              "id": 11609,
+                              "name": "ControllerInterface",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 6272,
+                              "src": "401:19:28",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_contract$_ControllerInterface_$6272_$",
+                                "typeString": "type(contract ControllerInterface)"
+                              }
+                            },
+                            "id": 11613,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "typeConversion",
+                            "lValueRequested": false,
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "401:36:28",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_ControllerInterface_$6272",
+                              "typeString": "contract ControllerInterface"
+                            }
+                          },
+                          "id": 11614,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "isSchemeRegistered",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 6226,
+                          "src": "401:55:28",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_external_view$_t_address_$_t_address_$returns$_t_bool_$",
+                            "typeString": "function (address,address) view external returns (bool)"
+                          }
+                        },
+                        "id": 11621,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "401:88:28",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "736368656d65206973206e6f742072656769737465726564",
+                        "id": 11622,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "499:26:28",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_f49accaed0fc85cca97fe84c1d1aed7770001ae630847b7bcf2d35045e44c8d1",
+                          "typeString": "literal_string \"scheme is not registered\""
+                        },
+                        "value": "scheme is not registered"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_f49accaed0fc85cca97fe84c1d1aed7770001ae630847b7bcf2d35045e44c8d1",
+                          "typeString": "literal_string \"scheme is not registered\""
+                        }
+                      ],
+                      "id": 11608,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        18352,
+                        18353
+                      ],
+                      "referencedDeclaration": 18353,
+                      "src": "393:7:28",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 11623,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "393:133:28",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 11624,
+                  "nodeType": "ExpressionStatement",
+                  "src": "393:133:28"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 11632,
+                            "name": "this",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 18399,
+                            "src": "608:4:28",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_UniversalScheme_$11641",
+                              "typeString": "contract UniversalScheme"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_contract$_UniversalScheme_$11641",
+                              "typeString": "contract UniversalScheme"
+                            }
+                          ],
+                          "id": 11631,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "nodeType": "ElementaryTypeNameExpression",
+                          "src": "600:7:28",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_address_$",
+                            "typeString": "type(address)"
+                          },
+                          "typeName": "address"
+                        },
+                        "id": 11633,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "600:13:28",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 11635,
+                            "name": "_avatar",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 11603,
+                            "src": "623:7:28",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_Avatar_$4583",
+                              "typeString": "contract Avatar"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_contract$_Avatar_$4583",
+                              "typeString": "contract Avatar"
+                            }
+                          ],
+                          "id": 11634,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "nodeType": "ElementaryTypeNameExpression",
+                          "src": "615:7:28",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_address_$",
+                            "typeString": "type(address)"
+                          },
+                          "typeName": "address"
+                        },
+                        "id": 11636,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "615:16:28",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "arguments": [],
+                            "expression": {
+                              "argumentTypes": [],
+                              "expression": {
+                                "argumentTypes": null,
+                                "id": 11626,
+                                "name": "_avatar",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 11603,
+                                "src": "563:7:28",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_contract$_Avatar_$4583",
+                                  "typeString": "contract Avatar"
+                                }
+                              },
+                              "id": 11627,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "memberName": "owner",
+                              "nodeType": "MemberAccess",
+                              "referencedDeclaration": 17522,
+                              "src": "563:13:28",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_function_external_view$__$returns$_t_address_$",
+                                "typeString": "function () view external returns (address)"
+                              }
+                            },
+                            "id": 11628,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "functionCall",
+                            "lValueRequested": false,
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "563:15:28",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          ],
+                          "id": 11625,
+                          "name": "ControllerInterface",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 6272,
+                          "src": "543:19:28",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_contract$_ControllerInterface_$6272_$",
+                            "typeString": "type(contract ControllerInterface)"
+                          }
+                        },
+                        "id": 11629,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "543:36:28",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_ControllerInterface_$6272",
+                          "typeString": "contract ControllerInterface"
+                        }
+                      },
+                      "id": 11630,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "getSchemeParameters",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 6235,
+                      "src": "543:56:28",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_view$_t_address_$_t_address_$returns$_t_bytes32_$",
+                        "typeString": "function (address,address) view external returns (bytes32)"
+                      }
+                    },
+                    "id": 11637,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "543:89:28",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "functionReturnParameters": 11607,
+                  "id": 11638,
+                  "nodeType": "Return",
+                  "src": "536:96:28"
+                }
+              ]
+            },
+            "documentation": " @dev get the parameters for the current scheme from the controller",
+            "id": 11640,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getParametersFromController",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 11604,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11603,
+                  "name": "_avatar",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11640,
+                  "src": "336:14:28",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_Avatar_$4583",
+                    "typeString": "contract Avatar"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 11602,
+                    "name": "Avatar",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4583,
+                    "src": "336:6:28",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Avatar_$4583",
+                      "typeString": "contract Avatar"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "335:16:28"
+            },
+            "returnParameters": {
+              "id": 11607,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 11606,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 11640,
+                  "src": "374:7:28",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 11605,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "374:7:28",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "373:9:28"
+            },
+            "scope": 11641,
+            "src": "299:340:28",
+            "stateMutability": "view",
+            "superFunction": 11651,
+            "visibility": "internal"
+          }
+        ],
+        "scope": 11642,
+        "src": "151:490:28"
+      }
+    ],
+    "src": "0:642:28"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.6+commit.b259423e.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.14",
+  "updatedAt": "2019-09-14T15:39:59.393Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

@@ -16,6 +16,7 @@ x-contract-base: &contract-base
   networks:
     - overlay
   environment:
+    ETH_NETWORK: "development"
     # GANACHE
     GANACHE_URL: "http://ganache:8545"
     URL_ETHEREUM_HTTP_PROVIDER_DEVELOPMENT: "http://ganache:8545"

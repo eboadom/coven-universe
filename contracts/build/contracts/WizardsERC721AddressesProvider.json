@@ -1,0 +1,635 @@
+{
+  "contractName": "WizardsERC721AddressesProvider",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "wizardsERC721Address",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "_wizardsERC721ContractAddress",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_wizardsERC721ContractAddress",
+          "type": "address"
+        }
+      ],
+      "name": "setWizardsERC721Address",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.6+commit.b259423e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"name\":\"_wizardsERC721ContractAddress\",\"type\":\"address\"}],\"name\":\"setWizardsERC721Address\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"wizardsERC721Address\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"name\":\"_wizardsERC721ContractAddress\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/src/contracts/WizardsERC721AddressesProvider.sol\":\"WizardsERC721AddressesProvider\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/src/contracts/WizardsERC721AddressesProvider.sol\":{\"keccak256\":\"0xd179e125b43cbf8433ec3394f997b8cacea48458c1d39825c1465a58163ca28e\",\"urls\":[\"bzzr://0d0a5bd9bba1e62517a5ab1b84f3a19c3d41e582aaa713afef5ec52890e56952\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5060405160208061013c8339810180604052602081101561003057600080fd5b5051600080546001600160a01b039092166001600160a01b031990921691909117905560db806100616000396000f3fe6080604052348015600f57600080fd5b506004361060325760003560e01c8063c9f5764b146037578063f7cbe89b14605c575b600080fd5b605a60048036036020811015604b57600080fd5b50356001600160a01b0316607e565b005b606260a0565b604080516001600160a01b039092168252519081900360200190f35b600080546001600160a01b0319166001600160a01b0392909216919091179055565b6000546001600160a01b03168156fea165627a7a72305820d75da8a30fc3208c84aecd021d3ddc651a594cd8deaaa30f40b8cc7abef337300029",
+  "deployedBytecode": "0x6080604052348015600f57600080fd5b506004361060325760003560e01c8063c9f5764b146037578063f7cbe89b14605c575b600080fd5b605a60048036036020811015604b57600080fd5b50356001600160a01b0316607e565b005b606260a0565b604080516001600160a01b039092168252519081900360200190f35b600080546001600160a01b0319166001600160a01b0392909216919091179055565b6000546001600160a01b03168156fea165627a7a72305820d75da8a30fc3208c84aecd021d3ddc651a594cd8deaaa30f40b8cc7abef337300029",
+  "sourceMap": "25:374:15:-;;;113:127;8:9:-1;5:2;;;30:1;27;20:12;5:2;113:127:15;;;;;;;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;113:127:15;181:20;:52;;-1:-1:-1;;;;;181:52:15;;;-1:-1:-1;;;;;;181:52:15;;;;;;;;;25:374;;;;;;",
+  "deployedSourceMap": "25:374:15:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;25:374:15;;;;;;;;;;;;;;;;;;;;;;;;246:151;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;246:151:15;-1:-1:-1;;;;;246:151:15;;:::i;:::-;;71:35;;;:::i;:::-;;;;-1:-1:-1;;;;;71:35:15;;;;;;;;;;;;;;246:151;338:20;:52;;-1:-1:-1;;;;;;338:52:15;-1:-1:-1;;;;;338:52:15;;;;;;;;;;246:151::o;71:35::-;;;-1:-1:-1;;;;;71:35:15;;:::o",
+  "source": "pragma solidity ^0.5.4;\n\ncontract WizardsERC721AddressesProvider {\n    address public wizardsERC721Address;\n\n    constructor(address _wizardsERC721ContractAddress) public {\n        wizardsERC721Address = _wizardsERC721ContractAddress;\n    }\n\n    function setWizardsERC721Address(address _wizardsERC721ContractAddress) external  {\n        wizardsERC721Address = _wizardsERC721ContractAddress;\n    }\n}",
+  "sourcePath": "/src/contracts/WizardsERC721AddressesProvider.sol",
+  "ast": {
+    "absolutePath": "/src/contracts/WizardsERC721AddressesProvider.sol",
+    "exportedSymbols": {
+      "WizardsERC721AddressesProvider": [
+        4303
+      ]
+    },
+    "id": 4304,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 4280,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".4"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:15"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 4303,
+        "linearizedBaseContracts": [
+          4303
+        ],
+        "name": "WizardsERC721AddressesProvider",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 4282,
+            "name": "wizardsERC721Address",
+            "nodeType": "VariableDeclaration",
+            "scope": 4303,
+            "src": "71:35:15",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 4281,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "71:7:15",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 4291,
+              "nodeType": "Block",
+              "src": "171:69:15",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 4289,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 4287,
+                      "name": "wizardsERC721Address",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 4282,
+                      "src": "181:20:15",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 4288,
+                      "name": "_wizardsERC721ContractAddress",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 4284,
+                      "src": "204:29:15",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "src": "181:52:15",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 4290,
+                  "nodeType": "ExpressionStatement",
+                  "src": "181:52:15"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 4292,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 4285,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4284,
+                  "name": "_wizardsERC721ContractAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4292,
+                  "src": "125:37:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 4283,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "125:7:15",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "124:39:15"
+            },
+            "returnParameters": {
+              "id": 4286,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "171:0:15"
+            },
+            "scope": 4303,
+            "src": "113:127:15",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 4301,
+              "nodeType": "Block",
+              "src": "328:69:15",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 4299,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 4297,
+                      "name": "wizardsERC721Address",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 4282,
+                      "src": "338:20:15",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 4298,
+                      "name": "_wizardsERC721ContractAddress",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 4294,
+                      "src": "361:29:15",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "src": "338:52:15",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 4300,
+                  "nodeType": "ExpressionStatement",
+                  "src": "338:52:15"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 4302,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setWizardsERC721Address",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 4295,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4294,
+                  "name": "_wizardsERC721ContractAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4302,
+                  "src": "279:37:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 4293,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "279:7:15",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "278:39:15"
+            },
+            "returnParameters": {
+              "id": 4296,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "328:0:15"
+            },
+            "scope": 4303,
+            "src": "246:151:15",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 4304,
+        "src": "25:374:15"
+      }
+    ],
+    "src": "0:399:15"
+  },
+  "legacyAST": {
+    "absolutePath": "/src/contracts/WizardsERC721AddressesProvider.sol",
+    "exportedSymbols": {
+      "WizardsERC721AddressesProvider": [
+        4303
+      ]
+    },
+    "id": 4304,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 4280,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".4"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:15"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 4303,
+        "linearizedBaseContracts": [
+          4303
+        ],
+        "name": "WizardsERC721AddressesProvider",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 4282,
+            "name": "wizardsERC721Address",
+            "nodeType": "VariableDeclaration",
+            "scope": 4303,
+            "src": "71:35:15",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 4281,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "71:7:15",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 4291,
+              "nodeType": "Block",
+              "src": "171:69:15",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 4289,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 4287,
+                      "name": "wizardsERC721Address",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 4282,
+                      "src": "181:20:15",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 4288,
+                      "name": "_wizardsERC721ContractAddress",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 4284,
+                      "src": "204:29:15",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "src": "181:52:15",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 4290,
+                  "nodeType": "ExpressionStatement",
+                  "src": "181:52:15"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 4292,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 4285,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4284,
+                  "name": "_wizardsERC721ContractAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4292,
+                  "src": "125:37:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 4283,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "125:7:15",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "124:39:15"
+            },
+            "returnParameters": {
+              "id": 4286,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "171:0:15"
+            },
+            "scope": 4303,
+            "src": "113:127:15",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 4301,
+              "nodeType": "Block",
+              "src": "328:69:15",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 4299,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 4297,
+                      "name": "wizardsERC721Address",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 4282,
+                      "src": "338:20:15",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 4298,
+                      "name": "_wizardsERC721ContractAddress",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 4294,
+                      "src": "361:29:15",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address",
+                        "typeString": "address"
+                      }
+                    },
+                    "src": "338:52:15",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "id": 4300,
+                  "nodeType": "ExpressionStatement",
+                  "src": "338:52:15"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 4302,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setWizardsERC721Address",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 4295,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4294,
+                  "name": "_wizardsERC721ContractAddress",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4302,
+                  "src": "279:37:15",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 4293,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "279:7:15",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "278:39:15"
+            },
+            "returnParameters": {
+              "id": 4296,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "328:0:15"
+            },
+            "scope": 4303,
+            "src": "246:151:15",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 4304,
+        "src": "25:374:15"
+      }
+    ],
+    "src": "0:399:15"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.6+commit.b259423e.Emscripten.clang"
+  },
+  "networks": {
+    "1568448251029": {
+      "events": {},
+      "links": {},
+      "address": "0x67383b0Ecf991bA29D24F9031cB191cA4A9aAc4c",
+      "transactionHash": "0x7b526f3904b99964217e01f153763bc31fca1a6673e2c3f00000fd36604b6dad"
+    }
+  },
+  "schemaVersion": "3.0.14",
+  "updatedAt": "2019-09-14T15:40:01.921Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

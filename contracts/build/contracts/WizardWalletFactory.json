@@ -1,0 +1,1962 @@
+{
+  "contractName": "WizardWalletFactory",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "wizardsERC721AddressesProvider",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "wizardsWallets",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "_wizardsERC721AddressesProvider",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "wizardId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "name": "wizardWallet",
+          "type": "address"
+        }
+      ],
+      "name": "WizardWalletCreated",
+      "type": "event"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_wizardId",
+          "type": "uint256"
+        }
+      ],
+      "name": "createWallet",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.6+commit.b259423e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"wizardsERC721AddressesProvider\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_wizardId\",\"type\":\"uint256\"}],\"name\":\"createWallet\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"wizardsWallets\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"name\":\"_wizardsERC721AddressesProvider\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"wizardId\",\"type\":\"uint256\"},{\"indexed\":true,\"name\":\"wizardWallet\",\"type\":\"address\"}],\"name\":\"WizardWalletCreated\",\"type\":\"event\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/src/contracts/WizardWalletFactory.sol\":\"WizardWalletFactory\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/src/contracts/IERC165.sol\":{\"keccak256\":\"0x85343872dfa306edf013161196d880c026609acdb9faa83f154c58282e4703f3\",\"urls\":[\"bzzr://bcd544084633a4b8c4d53cdb26c1f946d0d8afbe3fe5bbd92226958c2bdf51c3\"]},\"/src/contracts/IERC721.sol\":{\"keccak256\":\"0x64f7f8913ab840cbd8577abf8572f2ba2e1c447c2495c1e6b07034dc3cbda4b8\",\"urls\":[\"bzzr://ee83195a8fe28a0bd9a465d6bce02bc0c04ac4db6fcce8e63754fd484cb0acba\"]},\"/src/contracts/WizardWallet.sol\":{\"keccak256\":\"0xb2aaefe04d935a3afa706cba5e0eb1de3824388785320230ce706cefa25546b0\",\"urls\":[\"bzzr://9b6dd897de74cff991304b25e6b41e48139dd84a0e06ecc4835cb0273082f541\"]},\"/src/contracts/WizardWalletFactory.sol\":{\"keccak256\":\"0x3fc510d89f6a07f27f41e4abe59466c25efaea7080fb0f20521a678a43463322\",\"urls\":[\"bzzr://acfa48ecbf2bf9ac18d230cdc462288dac750df9677ac90f1f93f50700ab8bae\"]},\"/src/contracts/WizardsERC721AddressesProvider.sol\":{\"keccak256\":\"0xd179e125b43cbf8433ec3394f997b8cacea48458c1d39825c1465a58163ca28e\",\"urls\":[\"bzzr://0d0a5bd9bba1e62517a5ab1b84f3a19c3d41e582aaa713afef5ec52890e56952\"]},\"openzeppelin-solidity/contracts/math/SafeMath.sol\":{\"keccak256\":\"0x4ccf2d7b51873db1ccfd54ca2adae5eac3b184f9699911ed4490438419f1c690\",\"urls\":[\"bzzr://1604f5b6d6e916c154efd8c6720cda069e5ba32dfa0a9dedf2b42e5b02d07f89\"]},\"openzeppelin-solidity/contracts/token/ERC20/ERC20.sol\":{\"keccak256\":\"0x852793a3c2f86d336a683b30d688ec3dcfc57451af5a2bf5975cda3b7191a901\",\"urls\":[\"bzzr://07fb42206812a17c1f71e548cfa5cec6f9aa1ae0ca5df870718ca4aa9759d1a5\"]},\"openzeppelin-solidity/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0x90e8c2521653bbb1768b05889c5760031e688d9cd361f167489b89215e201b95\",\"urls\":[\"bzzr://aa8b45b57edafc3d67bc5d916327ea16807fae33f753ca163ae0c4061b789766\"]},\"openzeppelin-solidity/contracts/token/ERC20/SafeERC20.sol\":{\"keccak256\":\"0xf6f89424e17870561dc23c5933c55c5726b66a68d51ad2a2c00c569a5f02f507\",\"urls\":[\"bzzr://28230529ef5e63b09eec01e3ca835ccb722533bc5379e6fdd04270c42157f8c3\"]},\"openzeppelin-solidity/contracts/utils/Address.sol\":{\"keccak256\":\"0xf3358e5819ca73357abd6c90bdfffd0474af54364897f6b3e3234c4b71fbe9a1\",\"urls\":[\"bzzr://f7f6da60a184233fd666ac44e6fb2bd51ca6ebdc4867a310d368049aa4e62786\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50604051602080610df68339810180604052602081101561003057600080fd5b5051600080546001600160a01b039092166001600160a01b0319909216919091179055610d94806100626000396000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c806341c70ea4146100465780637a675bb61461006a578063cdf41ba414610089575b600080fd5b61004e6100a6565b604080516001600160a01b039092168252519081900360200190f35b6100876004803603602081101561008057600080fd5b50356100b5565b005b61004e6004803603602081101561009f57600080fd5b50356101ba565b6000546001600160a01b031681565b6000818152600160205260409020546001600160a01b0316156101225760408051600160e51b62461bcd02815260206004820152601f60248201527f5468652077697a61726420616c72656164792068617320612077616c6c657400604482015290519081900360640190fd5b3081604051610130906101d5565b6001600160a01b0390921682526020820152604080519182900301906000f080158015610161573d6000803e3d6000fd5b5060008281526001602052604080822080546001600160a01b0319166001600160a01b039485161790819055905192169183917f8c5e157ed4bac1ab698ede3d5cb1421d204097e9c0a44d9e08fb3f2bafdd322b91a350565b6001602052600090815260409020546001600160a01b031681565b610b86806101e38339019056fe608060405234801561001057600080fd5b50604051604080610b868339810180604052604081101561003057600080fd5b508051602090910151600180546001600160a01b039093166001600160a01b031990931692909217909155600055610b198061006d6000396000f3fe60806040526004361061003f5760003560e01c806369fb0ede14610041578063807896d5146100565780639db5dbe414610092578063beabacc8146100d5575b005b34801561004d57600080fd5b5061003f610118565b34801561006257600080fd5b506100806004803603602081101561007957600080fd5b5035610304565b60408051918252519081900360200190f35b34801561009e57600080fd5b5061003f600480360360608110156100b557600080fd5b506001600160a01b038135811691602081013590911690604001356104cf565b3480156100e157600080fd5b5061003f600480360360608110156100f857600080fd5b506001600160a01b038135811691602081013590911690604001356106aa565b60015460408051600160e21b631071c3a902815290516000926001600160a01b0316916341c70ea4916004808301926020929190829003018186803b15801561016057600080fd5b505afa158015610174573d6000803e3d6000fd5b505050506040513d602081101561018a57600080fd5b505160408051600160e01b63f7cbe89b02815290516001600160a01b039092169163f7cbe89b91600480820192602092909190829003018186803b1580156101d157600080fd5b505afa1580156101e5573d6000803e3d6000fd5b505050506040513d60208110156101fb57600080fd5b505160005460408051600160e11b6331a9108f02815260048101929092525191925033916001600160a01b03841691636352211e916024808301926020929190829003018186803b15801561024f57600080fd5b505afa158015610263573d6000803e3d6000fd5b505050506040513d602081101561027957600080fd5b50516001600160a01b0316146102d35760408051600160e51b62461bcd0281526020600482015260146024820152600160611b7324b73b30b634b2103bb4bd30b9321037bbb732b902604482015290519081900360640190fd5b6040513390303180156108fc02916000818181858888f19350505050158015610300573d6000803e3d6000fd5b5050565b600080600160009054906101000a90046001600160a01b03166001600160a01b03166341c70ea46040518163ffffffff1660e01b815260040160206040518083038186803b15801561035557600080fd5b505afa158015610369573d6000803e3d6000fd5b505050506040513d602081101561037f57600080fd5b505160408051600160e01b63f7cbe89b02815290516001600160a01b039092169163f7cbe89b91600480820192602092909190829003018186803b1580156103c657600080fd5b505afa1580156103da573d6000803e3d6000fd5b505050506040513d60208110156103f057600080fd5b505160005460408051600160e11b6331a9108f02815260048101929092525191925033916001600160a01b03841691636352211e916024808301926020929190829003018186803b15801561044457600080fd5b505afa158015610458573d6000803e3d6000fd5b505050506040513d602081101561046e57600080fd5b50516001600160a01b0316146104c85760408051600160e51b62461bcd0281526020600482015260146024820152600160611b7324b73b30b634b2103bb4bd30b9321037bbb732b902604482015290519081900360640190fd5b5090919050565b60015460408051600160e21b631071c3a902815290516000926001600160a01b0316916341c70ea4916004808301926020929190829003018186803b15801561051757600080fd5b505afa15801561052b573d6000803e3d6000fd5b505050506040513d602081101561054157600080fd5b505160408051600160e01b63f7cbe89b02815290516001600160a01b039092169163f7cbe89b91600480820192602092909190829003018186803b15801561058857600080fd5b505afa15801561059c573d6000803e3d6000fd5b505050506040513d60208110156105b257600080fd5b505160005460408051600160e11b6331a9108f02815260048101929092525191925033916001600160a01b03841691636352211e916024808301926020929190829003018186803b15801561060657600080fd5b505afa15801561061a573d6000803e3d6000fd5b505050506040513d602081101561063057600080fd5b50516001600160a01b03161461068a5760408051600160e51b62461bcd0281526020600482015260146024820152600160611b7324b73b30b634b2103bb4bd30b9321037bbb732b902604482015290519081900360640190fd5b6106a46001600160a01b038516848463ffffffff6108a216565b50505050565b60015460408051600160e21b631071c3a902815290516000926001600160a01b0316916341c70ea4916004808301926020929190829003018186803b1580156106f257600080fd5b505afa158015610706573d6000803e3d6000fd5b505050506040513d602081101561071c57600080fd5b505160408051600160e01b63f7cbe89b02815290516001600160a01b039092169163f7cbe89b91600480820192602092909190829003018186803b15801561076357600080fd5b505afa158015610777573d6000803e3d6000fd5b505050506040513d602081101561078d57600080fd5b505160005460408051600160e11b6331a9108f02815260048101929092525191925033916001600160a01b03841691636352211e916024808301926020929190829003018186803b1580156107e157600080fd5b505afa1580156107f5573d6000803e3d6000fd5b505050506040513d602081101561080b57600080fd5b50516001600160a01b0316146108655760408051600160e51b62461bcd0281526020600482015260146024820152600160611b7324b73b30b634b2103bb4bd30b9321037bbb732b902604482015290519081900360640190fd5b6040516001600160a01b0384169083156108fc029084906000818181858888f1935050505015801561089b573d6000803e3d6000fd5b5050505050565b604080516001600160a01b038416602482015260448082018490528251808303909101815260649091019091526020810180516001600160e01b0316600160e01b63a9059cbb021790526108f79084906108fc565b505050565b61090e826001600160a01b0316610abd565b6109625760408051600160e51b62461bcd02815260206004820152601f60248201527f5361666545524332303a2063616c6c20746f206e6f6e2d636f6e747261637400604482015290519081900360640190fd5b60006060836001600160a01b0316836040518082805190602001908083835b602083106109a05780518252601f199092019160209182019101610981565b6001836020036101000a0380198251168184511680821785525050505050509050019150506000604051808303816000865af19150503d8060008114610a02576040519150601f19603f3d011682016040523d82523d6000602084013e610a07565b606091505b509150915081610a615760408051600160e51b62461bcd02815260206004820181905260248201527f5361666545524332303a206c6f772d6c6576656c2063616c6c206661696c6564604482015290519081900360640190fd5b8051156106a457808060200190516020811015610a7d57600080fd5b50516106a457604051600160e51b62461bcd02815260040180806020018281038252602a815260200180610ac4602a913960400191505060405180910390fd5b3b15159056fe5361666545524332303a204552433230206f7065726174696f6e20646964206e6f742073756363656564a165627a7a72305820e0a6d036ecc959ac7d275c357078d938e75607faea8cc60f40fb874bea79d7410029a165627a7a72305820c69b8742a23f61df8a418d22b467f5740c898e2890ea27315c40678407d518e50029",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100415760003560e01c806341c70ea4146100465780637a675bb61461006a578063cdf41ba414610089575b600080fd5b61004e6100a6565b604080516001600160a01b039092168252519081900360200190f35b6100876004803603602081101561008057600080fd5b50356100b5565b005b61004e6004803603602081101561009f57600080fd5b50356101ba565b6000546001600160a01b031681565b6000818152600160205260409020546001600160a01b0316156101225760408051600160e51b62461bcd02815260206004820152601f60248201527f5468652077697a61726420616c72656164792068617320612077616c6c657400604482015290519081900360640190fd5b3081604051610130906101d5565b6001600160a01b0390921682526020820152604080519182900301906000f080158015610161573d6000803e3d6000fd5b5060008281526001602052604080822080546001600160a01b0319166001600160a01b039485161790819055905192169183917f8c5e157ed4bac1ab698ede3d5cb1421d204097e9c0a44d9e08fb3f2bafdd322b91a350565b6001602052600090815260409020546001600160a01b031681565b610b86806101e38339019056fe608060405234801561001057600080fd5b50604051604080610b868339810180604052604081101561003057600080fd5b508051602090910151600180546001600160a01b039093166001600160a01b031990931692909217909155600055610b198061006d6000396000f3fe60806040526004361061003f5760003560e01c806369fb0ede14610041578063807896d5146100565780639db5dbe414610092578063beabacc8146100d5575b005b34801561004d57600080fd5b5061003f610118565b34801561006257600080fd5b506100806004803603602081101561007957600080fd5b5035610304565b60408051918252519081900360200190f35b34801561009e57600080fd5b5061003f600480360360608110156100b557600080fd5b506001600160a01b038135811691602081013590911690604001356104cf565b3480156100e157600080fd5b5061003f600480360360608110156100f857600080fd5b506001600160a01b038135811691602081013590911690604001356106aa565b60015460408051600160e21b631071c3a902815290516000926001600160a01b0316916341c70ea4916004808301926020929190829003018186803b15801561016057600080fd5b505afa158015610174573d6000803e3d6000fd5b505050506040513d602081101561018a57600080fd5b505160408051600160e01b63f7cbe89b02815290516001600160a01b039092169163f7cbe89b91600480820192602092909190829003018186803b1580156101d157600080fd5b505afa1580156101e5573d6000803e3d6000fd5b505050506040513d60208110156101fb57600080fd5b505160005460408051600160e11b6331a9108f02815260048101929092525191925033916001600160a01b03841691636352211e916024808301926020929190829003018186803b15801561024f57600080fd5b505afa158015610263573d6000803e3d6000fd5b505050506040513d602081101561027957600080fd5b50516001600160a01b0316146102d35760408051600160e51b62461bcd0281526020600482015260146024820152600160611b7324b73b30b634b2103bb4bd30b9321037bbb732b902604482015290519081900360640190fd5b6040513390303180156108fc02916000818181858888f19350505050158015610300573d6000803e3d6000fd5b5050565b600080600160009054906101000a90046001600160a01b03166001600160a01b03166341c70ea46040518163ffffffff1660e01b815260040160206040518083038186803b15801561035557600080fd5b505afa158015610369573d6000803e3d6000fd5b505050506040513d602081101561037f57600080fd5b505160408051600160e01b63f7cbe89b02815290516001600160a01b039092169163f7cbe89b91600480820192602092909190829003018186803b1580156103c657600080fd5b505afa1580156103da573d6000803e3d6000fd5b505050506040513d60208110156103f057600080fd5b505160005460408051600160e11b6331a9108f02815260048101929092525191925033916001600160a01b03841691636352211e916024808301926020929190829003018186803b15801561044457600080fd5b505afa158015610458573d6000803e3d6000fd5b505050506040513d602081101561046e57600080fd5b50516001600160a01b0316146104c85760408051600160e51b62461bcd0281526020600482015260146024820152600160611b7324b73b30b634b2103bb4bd30b9321037bbb732b902604482015290519081900360640190fd5b5090919050565b60015460408051600160e21b631071c3a902815290516000926001600160a01b0316916341c70ea4916004808301926020929190829003018186803b15801561051757600080fd5b505afa15801561052b573d6000803e3d6000fd5b505050506040513d602081101561054157600080fd5b505160408051600160e01b63f7cbe89b02815290516001600160a01b039092169163f7cbe89b91600480820192602092909190829003018186803b15801561058857600080fd5b505afa15801561059c573d6000803e3d6000fd5b505050506040513d60208110156105b257600080fd5b505160005460408051600160e11b6331a9108f02815260048101929092525191925033916001600160a01b03841691636352211e916024808301926020929190829003018186803b15801561060657600080fd5b505afa15801561061a573d6000803e3d6000fd5b505050506040513d602081101561063057600080fd5b50516001600160a01b03161461068a5760408051600160e51b62461bcd0281526020600482015260146024820152600160611b7324b73b30b634b2103bb4bd30b9321037bbb732b902604482015290519081900360640190fd5b6106a46001600160a01b038516848463ffffffff6108a216565b50505050565b60015460408051600160e21b631071c3a902815290516000926001600160a01b0316916341c70ea4916004808301926020929190829003018186803b1580156106f257600080fd5b505afa158015610706573d6000803e3d6000fd5b505050506040513d602081101561071c57600080fd5b505160408051600160e01b63f7cbe89b02815290516001600160a01b039092169163f7cbe89b91600480820192602092909190829003018186803b15801561076357600080fd5b505afa158015610777573d6000803e3d6000fd5b505050506040513d602081101561078d57600080fd5b505160005460408051600160e11b6331a9108f02815260048101929092525191925033916001600160a01b03841691636352211e916024808301926020929190829003018186803b1580156107e157600080fd5b505afa1580156107f5573d6000803e3d6000fd5b505050506040513d602081101561080b57600080fd5b50516001600160a01b0316146108655760408051600160e51b62461bcd0281526020600482015260146024820152600160611b7324b73b30b634b2103bb4bd30b9321037bbb732b902604482015290519081900360640190fd5b6040516001600160a01b0384169083156108fc029084906000818181858888f1935050505015801561089b573d6000803e3d6000fd5b5050505050565b604080516001600160a01b038416602482015260448082018490528251808303909101815260649091019091526020810180516001600160e01b0316600160e01b63a9059cbb021790526108f79084906108fc565b505050565b61090e826001600160a01b0316610abd565b6109625760408051600160e51b62461bcd02815260206004820152601f60248201527f5361666545524332303a2063616c6c20746f206e6f6e2d636f6e747261637400604482015290519081900360640190fd5b60006060836001600160a01b0316836040518082805190602001908083835b602083106109a05780518252601f199092019160209182019101610981565b6001836020036101000a0380198251168184511680821785525050505050509050019150506000604051808303816000865af19150503d8060008114610a02576040519150601f19603f3d011682016040523d82523d6000602084013e610a07565b606091505b509150915081610a615760408051600160e51b62461bcd02815260206004820181905260248201527f5361666545524332303a206c6f772d6c6576656c2063616c6c206661696c6564604482015290519081900360640190fd5b8051156106a457808060200190516020811015610a7d57600080fd5b50516106a457604051600160e51b62461bcd02815260040180806020018281038252602a815260200180610ac4602a913960400191505060405180910390fd5b3b15159056fe5361666545524332303a204552433230206f7065726174696f6e20646964206e6f742073756363656564a165627a7a72305820e0a6d036ecc959ac7d275c357078d938e75607faea8cc60f40fb874bea79d7410029a165627a7a72305820c69b8742a23f61df8a418d22b467f5740c898e2890ea27315c40678407d518e50029",
+  "sourceMap": "126:795:14:-;;;429:173;8:9:-1;5:2;;;30:1;27;20:12;5:2;429:173:14;;;;;;;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;429:173:14;499:30;:96;;-1:-1:-1;;;;;499:96:14;;;-1:-1:-1;;;;;;499:96:14;;;;;;;;;126:795;;;;;;",
+  "deployedSourceMap": "126:795:14:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;126:795:14;;;;;;;;;;;;;;;;;;;;;;;;;;;;;161:68;;;:::i;:::-;;;;-1:-1:-1;;;;;161:68:14;;;;;;;;;;;;;;608:311;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;608:311:14;;:::i;:::-;;279:55;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;279:55:14;;:::i;161:68::-;;;-1:-1:-1;;;;;161:68:14;;:::o;608:311::-;722:1;684:25;;;:14;:25;;;;;;-1:-1:-1;;;;;684:25:14;676:48;668:92;;;;;-1:-1:-1;;;;;668:92:14;;;;;;;;;;;;;;;;;;;;;;;;;;;;815:4;821:9;798:33;;;;;:::i;:::-;-1:-1:-1;;;;;798:33:14;;;;;;;;;;;;;;;;;;-1:-1:-1;798:33:14;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;-1:-1;770:25:14;;;;:14;:25;;;;;;:61;;-1:-1:-1;;;;;;770:61:14;-1:-1:-1;;;;;770:61:14;;;;;;;;846:66;;885:25;;;770;;846:66;;;608:311;:::o;279:55::-;;;;;;;;;;;;-1:-1:-1;;;;;279:55:14;;:::o;126:795::-;;;;;;;;:::o",
+  "source": "pragma solidity ^0.5.4;\n\nimport \"./IERC721.sol\";\nimport \"./WizardsERC721AddressesProvider.sol\";\nimport \"./WizardWallet.sol\";\n\ncontract WizardWalletFactory {\n    WizardsERC721AddressesProvider public wizardsERC721AddressesProvider;\n\n    // wizardId => address of WizardWallet\n    mapping (uint256 => WizardWallet) public wizardsWallets;\n\n    event WizardWalletCreated(uint256 indexed wizardId, address indexed wizardWallet);\n\n    constructor(address _wizardsERC721AddressesProvider) public {\n        wizardsERC721AddressesProvider = WizardsERC721AddressesProvider(_wizardsERC721AddressesProvider);\n    }\n\n    function createWallet(uint256 _wizardId) external {\n        require(address(wizardsWallets[_wizardId]) == address(0), \"The wizard already has a wallet\");\n        wizardsWallets[_wizardId] = new WizardWallet(this, _wizardId);\n        emit WizardWalletCreated(_wizardId, address(wizardsWallets[_wizardId]));\n    }\n}",
+  "sourcePath": "/src/contracts/WizardWalletFactory.sol",
+  "ast": {
+    "absolutePath": "/src/contracts/WizardWalletFactory.sol",
+    "exportedSymbols": {
+      "WizardWalletFactory": [
+        4278
+      ]
+    },
+    "id": 4279,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 4212,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".4"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:14"
+      },
+      {
+        "absolutePath": "/src/contracts/IERC721.sol",
+        "file": "./IERC721.sol",
+        "id": 4213,
+        "nodeType": "ImportDirective",
+        "scope": 4279,
+        "sourceUnit": 147,
+        "src": "25:23:14",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/src/contracts/WizardsERC721AddressesProvider.sol",
+        "file": "./WizardsERC721AddressesProvider.sol",
+        "id": 4214,
+        "nodeType": "ImportDirective",
+        "scope": 4279,
+        "sourceUnit": 4304,
+        "src": "49:46:14",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/src/contracts/WizardWallet.sol",
+        "file": "./WizardWallet.sol",
+        "id": 4215,
+        "nodeType": "ImportDirective",
+        "scope": 4279,
+        "sourceUnit": 4211,
+        "src": "96:28:14",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [
+          4210
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 4278,
+        "linearizedBaseContracts": [
+          4278
+        ],
+        "name": "WizardWalletFactory",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 4217,
+            "name": "wizardsERC721AddressesProvider",
+            "nodeType": "VariableDeclaration",
+            "scope": 4278,
+            "src": "161:68:14",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_WizardsERC721AddressesProvider_$4303",
+              "typeString": "contract WizardsERC721AddressesProvider"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 4216,
+              "name": "WizardsERC721AddressesProvider",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 4303,
+              "src": "161:30:14",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_WizardsERC721AddressesProvider_$4303",
+                "typeString": "contract WizardsERC721AddressesProvider"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 4221,
+            "name": "wizardsWallets",
+            "nodeType": "VariableDeclaration",
+            "scope": 4278,
+            "src": "279:55:14",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_contract$_WizardWallet_$4210_$",
+              "typeString": "mapping(uint256 => contract WizardWallet)"
+            },
+            "typeName": {
+              "id": 4220,
+              "keyType": {
+                "id": 4218,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "288:7:14",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "279:33:14",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_contract$_WizardWallet_$4210_$",
+                "typeString": "mapping(uint256 => contract WizardWallet)"
+              },
+              "valueType": {
+                "contractScope": null,
+                "id": 4219,
+                "name": "WizardWallet",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 4210,
+                "src": "299:12:14",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_contract$_WizardWallet_$4210",
+                  "typeString": "contract WizardWallet"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 4227,
+            "name": "WizardWalletCreated",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 4226,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4223,
+                  "indexed": true,
+                  "name": "wizardId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4227,
+                  "src": "367:24:14",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 4222,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "367:7:14",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 4225,
+                  "indexed": true,
+                  "name": "wizardWallet",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4227,
+                  "src": "393:28:14",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 4224,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "393:7:14",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "366:56:14"
+            },
+            "src": "341:82:14"
+          },
+          {
+            "body": {
+              "id": 4238,
+              "nodeType": "Block",
+              "src": "489:113:14",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 4236,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 4232,
+                      "name": "wizardsERC721AddressesProvider",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 4217,
+                      "src": "499:30:14",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_WizardsERC721AddressesProvider_$4303",
+                        "typeString": "contract WizardsERC721AddressesProvider"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "id": 4234,
+                          "name": "_wizardsERC721AddressesProvider",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 4229,
+                          "src": "563:31:14",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        ],
+                        "id": 4233,
+                        "name": "WizardsERC721AddressesProvider",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 4303,
+                        "src": "532:30:14",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_WizardsERC721AddressesProvider_$4303_$",
+                          "typeString": "type(contract WizardsERC721AddressesProvider)"
+                        }
+                      },
+                      "id": 4235,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "532:63:14",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_WizardsERC721AddressesProvider_$4303",
+                        "typeString": "contract WizardsERC721AddressesProvider"
+                      }
+                    },
+                    "src": "499:96:14",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_WizardsERC721AddressesProvider_$4303",
+                      "typeString": "contract WizardsERC721AddressesProvider"
+                    }
+                  },
+                  "id": 4237,
+                  "nodeType": "ExpressionStatement",
+                  "src": "499:96:14"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 4239,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 4230,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4229,
+                  "name": "_wizardsERC721AddressesProvider",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4239,
+                  "src": "441:39:14",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 4228,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "441:7:14",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "440:41:14"
+            },
+            "returnParameters": {
+              "id": 4231,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "489:0:14"
+            },
+            "scope": 4278,
+            "src": "429:173:14",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 4276,
+              "nodeType": "Block",
+              "src": "658:261:14",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "commonType": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        },
+                        "id": 4253,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "argumentTypes": null,
+                          "arguments": [
+                            {
+                              "argumentTypes": null,
+                              "baseExpression": {
+                                "argumentTypes": null,
+                                "id": 4246,
+                                "name": "wizardsWallets",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 4221,
+                                "src": "684:14:14",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_mapping$_t_uint256_$_t_contract$_WizardWallet_$4210_$",
+                                  "typeString": "mapping(uint256 => contract WizardWallet)"
+                                }
+                              },
+                              "id": 4248,
+                              "indexExpression": {
+                                "argumentTypes": null,
+                                "id": 4247,
+                                "name": "_wizardId",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 4241,
+                                "src": "699:9:14",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_uint256",
+                                  "typeString": "uint256"
+                                }
+                              },
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "nodeType": "IndexAccess",
+                              "src": "684:25:14",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_contract$_WizardWallet_$4210",
+                                "typeString": "contract WizardWallet"
+                              }
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_contract$_WizardWallet_$4210",
+                                "typeString": "contract WizardWallet"
+                              }
+                            ],
+                            "id": 4245,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "lValueRequested": false,
+                            "nodeType": "ElementaryTypeNameExpression",
+                            "src": "676:7:14",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_address_$",
+                              "typeString": "type(address)"
+                            },
+                            "typeName": "address"
+                          },
+                          "id": 4249,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "typeConversion",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "676:34:14",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address_payable",
+                            "typeString": "address payable"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "==",
+                        "rightExpression": {
+                          "argumentTypes": null,
+                          "arguments": [
+                            {
+                              "argumentTypes": null,
+                              "hexValue": "30",
+                              "id": 4251,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "kind": "number",
+                              "lValueRequested": false,
+                              "nodeType": "Literal",
+                              "src": "722:1:14",
+                              "subdenomination": null,
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_rational_0_by_1",
+                                "typeString": "int_const 0"
+                              },
+                              "value": "0"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_rational_0_by_1",
+                                "typeString": "int_const 0"
+                              }
+                            ],
+                            "id": 4250,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "lValueRequested": false,
+                            "nodeType": "ElementaryTypeNameExpression",
+                            "src": "714:7:14",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_address_$",
+                              "typeString": "type(address)"
+                            },
+                            "typeName": "address"
+                          },
+                          "id": 4252,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "typeConversion",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "714:10:14",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address_payable",
+                            "typeString": "address payable"
+                          }
+                        },
+                        "src": "676:48:14",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "5468652077697a61726420616c72656164792068617320612077616c6c6574",
+                        "id": 4254,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "726:33:14",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_687c68b63d6773ffc31f0e94b8f23d8d904ae9f4bfefa632bb86cbbb9c14aa3b",
+                          "typeString": "literal_string \"The wizard already has a wallet\""
+                        },
+                        "value": "The wizard already has a wallet"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_687c68b63d6773ffc31f0e94b8f23d8d904ae9f4bfefa632bb86cbbb9c14aa3b",
+                          "typeString": "literal_string \"The wizard already has a wallet\""
+                        }
+                      ],
+                      "id": 4244,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        18352,
+                        18353
+                      ],
+                      "referencedDeclaration": 18353,
+                      "src": "668:7:14",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 4255,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "668:92:14",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 4256,
+                  "nodeType": "ExpressionStatement",
+                  "src": "668:92:14"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 4265,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 4257,
+                        "name": "wizardsWallets",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 4221,
+                        "src": "770:14:14",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_uint256_$_t_contract$_WizardWallet_$4210_$",
+                          "typeString": "mapping(uint256 => contract WizardWallet)"
+                        }
+                      },
+                      "id": 4259,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 4258,
+                        "name": "_wizardId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 4241,
+                        "src": "785:9:14",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "IndexAccess",
+                      "src": "770:25:14",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_WizardWallet_$4210",
+                        "typeString": "contract WizardWallet"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "id": 4262,
+                          "name": "this",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 18503,
+                          "src": "815:4:14",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_WizardWalletFactory_$4278",
+                            "typeString": "contract WizardWalletFactory"
+                          }
+                        },
+                        {
+                          "argumentTypes": null,
+                          "id": 4263,
+                          "name": "_wizardId",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 4241,
+                          "src": "821:9:14",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_contract$_WizardWalletFactory_$4278",
+                            "typeString": "contract WizardWalletFactory"
+                          },
+                          {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        ],
+                        "id": 4261,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "NewExpression",
+                        "src": "798:16:14",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_creation_nonpayable$_t_contract$_WizardWalletFactory_$4278_$_t_uint256_$returns$_t_contract$_WizardWallet_$4210_$",
+                          "typeString": "function (contract WizardWalletFactory,uint256) returns (contract WizardWallet)"
+                        },
+                        "typeName": {
+                          "contractScope": null,
+                          "id": 4260,
+                          "name": "WizardWallet",
+                          "nodeType": "UserDefinedTypeName",
+                          "referencedDeclaration": 4210,
+                          "src": "802:12:14",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_WizardWallet_$4210",
+                            "typeString": "contract WizardWallet"
+                          }
+                        }
+                      },
+                      "id": 4264,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "798:33:14",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_WizardWallet_$4210",
+                        "typeString": "contract WizardWallet"
+                      }
+                    },
+                    "src": "770:61:14",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_WizardWallet_$4210",
+                      "typeString": "contract WizardWallet"
+                    }
+                  },
+                  "id": 4266,
+                  "nodeType": "ExpressionStatement",
+                  "src": "770:61:14"
+                },
+                {
+                  "eventCall": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 4268,
+                        "name": "_wizardId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 4241,
+                        "src": "866:9:14",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "baseExpression": {
+                              "argumentTypes": null,
+                              "id": 4270,
+                              "name": "wizardsWallets",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 4221,
+                              "src": "885:14:14",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_mapping$_t_uint256_$_t_contract$_WizardWallet_$4210_$",
+                                "typeString": "mapping(uint256 => contract WizardWallet)"
+                              }
+                            },
+                            "id": 4272,
+                            "indexExpression": {
+                              "argumentTypes": null,
+                              "id": 4271,
+                              "name": "_wizardId",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 4241,
+                              "src": "900:9:14",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              }
+                            },
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "nodeType": "IndexAccess",
+                            "src": "885:25:14",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_WizardWallet_$4210",
+                              "typeString": "contract WizardWallet"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_contract$_WizardWallet_$4210",
+                              "typeString": "contract WizardWallet"
+                            }
+                          ],
+                          "id": 4269,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "nodeType": "ElementaryTypeNameExpression",
+                          "src": "877:7:14",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_address_$",
+                            "typeString": "type(address)"
+                          },
+                          "typeName": "address"
+                        },
+                        "id": 4273,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "877:34:14",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      ],
+                      "id": 4267,
+                      "name": "WizardWalletCreated",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 4227,
+                      "src": "846:19:14",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_uint256_$_t_address_$returns$__$",
+                        "typeString": "function (uint256,address)"
+                      }
+                    },
+                    "id": 4274,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "846:66:14",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 4275,
+                  "nodeType": "EmitStatement",
+                  "src": "841:71:14"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 4277,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "createWallet",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 4242,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4241,
+                  "name": "_wizardId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4277,
+                  "src": "630:17:14",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 4240,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "630:7:14",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "629:19:14"
+            },
+            "returnParameters": {
+              "id": 4243,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "658:0:14"
+            },
+            "scope": 4278,
+            "src": "608:311:14",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 4279,
+        "src": "126:795:14"
+      }
+    ],
+    "src": "0:921:14"
+  },
+  "legacyAST": {
+    "absolutePath": "/src/contracts/WizardWalletFactory.sol",
+    "exportedSymbols": {
+      "WizardWalletFactory": [
+        4278
+      ]
+    },
+    "id": 4279,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 4212,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".4"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:14"
+      },
+      {
+        "absolutePath": "/src/contracts/IERC721.sol",
+        "file": "./IERC721.sol",
+        "id": 4213,
+        "nodeType": "ImportDirective",
+        "scope": 4279,
+        "sourceUnit": 147,
+        "src": "25:23:14",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/src/contracts/WizardsERC721AddressesProvider.sol",
+        "file": "./WizardsERC721AddressesProvider.sol",
+        "id": 4214,
+        "nodeType": "ImportDirective",
+        "scope": 4279,
+        "sourceUnit": 4304,
+        "src": "49:46:14",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/src/contracts/WizardWallet.sol",
+        "file": "./WizardWallet.sol",
+        "id": 4215,
+        "nodeType": "ImportDirective",
+        "scope": 4279,
+        "sourceUnit": 4211,
+        "src": "96:28:14",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [
+          4210
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 4278,
+        "linearizedBaseContracts": [
+          4278
+        ],
+        "name": "WizardWalletFactory",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 4217,
+            "name": "wizardsERC721AddressesProvider",
+            "nodeType": "VariableDeclaration",
+            "scope": 4278,
+            "src": "161:68:14",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_WizardsERC721AddressesProvider_$4303",
+              "typeString": "contract WizardsERC721AddressesProvider"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 4216,
+              "name": "WizardsERC721AddressesProvider",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 4303,
+              "src": "161:30:14",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_WizardsERC721AddressesProvider_$4303",
+                "typeString": "contract WizardsERC721AddressesProvider"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 4221,
+            "name": "wizardsWallets",
+            "nodeType": "VariableDeclaration",
+            "scope": 4278,
+            "src": "279:55:14",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_contract$_WizardWallet_$4210_$",
+              "typeString": "mapping(uint256 => contract WizardWallet)"
+            },
+            "typeName": {
+              "id": 4220,
+              "keyType": {
+                "id": 4218,
+                "name": "uint256",
+                "nodeType": "ElementaryTypeName",
+                "src": "288:7:14",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "279:33:14",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_contract$_WizardWallet_$4210_$",
+                "typeString": "mapping(uint256 => contract WizardWallet)"
+              },
+              "valueType": {
+                "contractScope": null,
+                "id": 4219,
+                "name": "WizardWallet",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 4210,
+                "src": "299:12:14",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_contract$_WizardWallet_$4210",
+                  "typeString": "contract WizardWallet"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 4227,
+            "name": "WizardWalletCreated",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 4226,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4223,
+                  "indexed": true,
+                  "name": "wizardId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4227,
+                  "src": "367:24:14",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 4222,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "367:7:14",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 4225,
+                  "indexed": true,
+                  "name": "wizardWallet",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4227,
+                  "src": "393:28:14",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 4224,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "393:7:14",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "366:56:14"
+            },
+            "src": "341:82:14"
+          },
+          {
+            "body": {
+              "id": 4238,
+              "nodeType": "Block",
+              "src": "489:113:14",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 4236,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 4232,
+                      "name": "wizardsERC721AddressesProvider",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 4217,
+                      "src": "499:30:14",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_WizardsERC721AddressesProvider_$4303",
+                        "typeString": "contract WizardsERC721AddressesProvider"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "id": 4234,
+                          "name": "_wizardsERC721AddressesProvider",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 4229,
+                          "src": "563:31:14",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        ],
+                        "id": 4233,
+                        "name": "WizardsERC721AddressesProvider",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 4303,
+                        "src": "532:30:14",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_WizardsERC721AddressesProvider_$4303_$",
+                          "typeString": "type(contract WizardsERC721AddressesProvider)"
+                        }
+                      },
+                      "id": 4235,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "532:63:14",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_WizardsERC721AddressesProvider_$4303",
+                        "typeString": "contract WizardsERC721AddressesProvider"
+                      }
+                    },
+                    "src": "499:96:14",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_WizardsERC721AddressesProvider_$4303",
+                      "typeString": "contract WizardsERC721AddressesProvider"
+                    }
+                  },
+                  "id": 4237,
+                  "nodeType": "ExpressionStatement",
+                  "src": "499:96:14"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 4239,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 4230,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4229,
+                  "name": "_wizardsERC721AddressesProvider",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4239,
+                  "src": "441:39:14",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 4228,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "441:7:14",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "440:41:14"
+            },
+            "returnParameters": {
+              "id": 4231,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "489:0:14"
+            },
+            "scope": 4278,
+            "src": "429:173:14",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 4276,
+              "nodeType": "Block",
+              "src": "658:261:14",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "commonType": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        },
+                        "id": 4253,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "argumentTypes": null,
+                          "arguments": [
+                            {
+                              "argumentTypes": null,
+                              "baseExpression": {
+                                "argumentTypes": null,
+                                "id": 4246,
+                                "name": "wizardsWallets",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 4221,
+                                "src": "684:14:14",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_mapping$_t_uint256_$_t_contract$_WizardWallet_$4210_$",
+                                  "typeString": "mapping(uint256 => contract WizardWallet)"
+                                }
+                              },
+                              "id": 4248,
+                              "indexExpression": {
+                                "argumentTypes": null,
+                                "id": 4247,
+                                "name": "_wizardId",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 4241,
+                                "src": "699:9:14",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_uint256",
+                                  "typeString": "uint256"
+                                }
+                              },
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "nodeType": "IndexAccess",
+                              "src": "684:25:14",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_contract$_WizardWallet_$4210",
+                                "typeString": "contract WizardWallet"
+                              }
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_contract$_WizardWallet_$4210",
+                                "typeString": "contract WizardWallet"
+                              }
+                            ],
+                            "id": 4245,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "lValueRequested": false,
+                            "nodeType": "ElementaryTypeNameExpression",
+                            "src": "676:7:14",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_address_$",
+                              "typeString": "type(address)"
+                            },
+                            "typeName": "address"
+                          },
+                          "id": 4249,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "kind": "typeConversion",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "676:34:14",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address_payable",
+                            "typeString": "address payable"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "==",
+                        "rightExpression": {
+                          "argumentTypes": null,
+                          "arguments": [
+                            {
+                              "argumentTypes": null,
+                              "hexValue": "30",
+                              "id": 4251,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "kind": "number",
+                              "lValueRequested": false,
+                              "nodeType": "Literal",
+                              "src": "722:1:14",
+                              "subdenomination": null,
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_rational_0_by_1",
+                                "typeString": "int_const 0"
+                              },
+                              "value": "0"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": [
+                              {
+                                "typeIdentifier": "t_rational_0_by_1",
+                                "typeString": "int_const 0"
+                              }
+                            ],
+                            "id": 4250,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "lValueRequested": false,
+                            "nodeType": "ElementaryTypeNameExpression",
+                            "src": "714:7:14",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_address_$",
+                              "typeString": "type(address)"
+                            },
+                            "typeName": "address"
+                          },
+                          "id": 4252,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "typeConversion",
+                          "lValueRequested": false,
+                          "names": [],
+                          "nodeType": "FunctionCall",
+                          "src": "714:10:14",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address_payable",
+                            "typeString": "address payable"
+                          }
+                        },
+                        "src": "676:48:14",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "5468652077697a61726420616c72656164792068617320612077616c6c6574",
+                        "id": 4254,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "726:33:14",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_687c68b63d6773ffc31f0e94b8f23d8d904ae9f4bfefa632bb86cbbb9c14aa3b",
+                          "typeString": "literal_string \"The wizard already has a wallet\""
+                        },
+                        "value": "The wizard already has a wallet"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_687c68b63d6773ffc31f0e94b8f23d8d904ae9f4bfefa632bb86cbbb9c14aa3b",
+                          "typeString": "literal_string \"The wizard already has a wallet\""
+                        }
+                      ],
+                      "id": 4244,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        18352,
+                        18353
+                      ],
+                      "referencedDeclaration": 18353,
+                      "src": "668:7:14",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 4255,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "668:92:14",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 4256,
+                  "nodeType": "ExpressionStatement",
+                  "src": "668:92:14"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 4265,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 4257,
+                        "name": "wizardsWallets",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 4221,
+                        "src": "770:14:14",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_uint256_$_t_contract$_WizardWallet_$4210_$",
+                          "typeString": "mapping(uint256 => contract WizardWallet)"
+                        }
+                      },
+                      "id": 4259,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 4258,
+                        "name": "_wizardId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 4241,
+                        "src": "785:9:14",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "IndexAccess",
+                      "src": "770:25:14",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_WizardWallet_$4210",
+                        "typeString": "contract WizardWallet"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "id": 4262,
+                          "name": "this",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 18503,
+                          "src": "815:4:14",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_WizardWalletFactory_$4278",
+                            "typeString": "contract WizardWalletFactory"
+                          }
+                        },
+                        {
+                          "argumentTypes": null,
+                          "id": 4263,
+                          "name": "_wizardId",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 4241,
+                          "src": "821:9:14",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_contract$_WizardWalletFactory_$4278",
+                            "typeString": "contract WizardWalletFactory"
+                          },
+                          {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        ],
+                        "id": 4261,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "nodeType": "NewExpression",
+                        "src": "798:16:14",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_creation_nonpayable$_t_contract$_WizardWalletFactory_$4278_$_t_uint256_$returns$_t_contract$_WizardWallet_$4210_$",
+                          "typeString": "function (contract WizardWalletFactory,uint256) returns (contract WizardWallet)"
+                        },
+                        "typeName": {
+                          "contractScope": null,
+                          "id": 4260,
+                          "name": "WizardWallet",
+                          "nodeType": "UserDefinedTypeName",
+                          "referencedDeclaration": 4210,
+                          "src": "802:12:14",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_WizardWallet_$4210",
+                            "typeString": "contract WizardWallet"
+                          }
+                        }
+                      },
+                      "id": 4264,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "functionCall",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "798:33:14",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_WizardWallet_$4210",
+                        "typeString": "contract WizardWallet"
+                      }
+                    },
+                    "src": "770:61:14",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_WizardWallet_$4210",
+                      "typeString": "contract WizardWallet"
+                    }
+                  },
+                  "id": 4266,
+                  "nodeType": "ExpressionStatement",
+                  "src": "770:61:14"
+                },
+                {
+                  "eventCall": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 4268,
+                        "name": "_wizardId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 4241,
+                        "src": "866:9:14",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "baseExpression": {
+                              "argumentTypes": null,
+                              "id": 4270,
+                              "name": "wizardsWallets",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 4221,
+                              "src": "885:14:14",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_mapping$_t_uint256_$_t_contract$_WizardWallet_$4210_$",
+                                "typeString": "mapping(uint256 => contract WizardWallet)"
+                              }
+                            },
+                            "id": 4272,
+                            "indexExpression": {
+                              "argumentTypes": null,
+                              "id": 4271,
+                              "name": "_wizardId",
+                              "nodeType": "Identifier",
+                              "overloadedDeclarations": [],
+                              "referencedDeclaration": 4241,
+                              "src": "900:9:14",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              }
+                            },
+                            "isConstant": false,
+                            "isLValue": true,
+                            "isPure": false,
+                            "lValueRequested": false,
+                            "nodeType": "IndexAccess",
+                            "src": "885:25:14",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_WizardWallet_$4210",
+                              "typeString": "contract WizardWallet"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_contract$_WizardWallet_$4210",
+                              "typeString": "contract WizardWallet"
+                            }
+                          ],
+                          "id": 4269,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "nodeType": "ElementaryTypeNameExpression",
+                          "src": "877:7:14",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_address_$",
+                            "typeString": "type(address)"
+                          },
+                          "typeName": "address"
+                        },
+                        "id": 4273,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "877:34:14",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      ],
+                      "id": 4267,
+                      "name": "WizardWalletCreated",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 4227,
+                      "src": "846:19:14",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_uint256_$_t_address_$returns$__$",
+                        "typeString": "function (uint256,address)"
+                      }
+                    },
+                    "id": 4274,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "846:66:14",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 4275,
+                  "nodeType": "EmitStatement",
+                  "src": "841:71:14"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 4277,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "createWallet",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 4242,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4241,
+                  "name": "_wizardId",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4277,
+                  "src": "630:17:14",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 4240,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "630:7:14",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "629:19:14"
+            },
+            "returnParameters": {
+              "id": 4243,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "658:0:14"
+            },
+            "scope": 4278,
+            "src": "608:311:14",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 4279,
+        "src": "126:795:14"
+      }
+    ],
+    "src": "0:921:14"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.6+commit.b259423e.Emscripten.clang"
+  },
+  "networks": {
+    "1568448251029": {
+      "events": {
+        "0x8c5e157ed4bac1ab698ede3d5cb1421d204097e9c0a44d9e08fb3f2bafdd322b": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "wizardId",
+              "type": "uint256"
+            },
+            {
+              "indexed": true,
+              "name": "wizardWallet",
+              "type": "address"
+            }
+          ],
+          "name": "WizardWalletCreated",
+          "type": "event",
+          "signature": "0x8c5e157ed4bac1ab698ede3d5cb1421d204097e9c0a44d9e08fb3f2bafdd322b"
+        }
+      },
+      "links": {},
+      "address": "0xEF6C2Be31a34067b77175A4512fa1aF28985c1FB",
+      "transactionHash": "0xba56fdc17b606d027dc35e81f339cc59b5d8804b17e4e31a1a51a7d299cce25f"
+    }
+  },
+  "schemaVersion": "3.0.14",
+  "updatedAt": "2019-09-14T15:40:01.922Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
