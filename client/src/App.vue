@@ -92,6 +92,14 @@ body {
   }
 }
 
+.button-small {
+  font-size: 12px;
+  padding: 5px 15px;
+  width: 120px;
+  height: 40px;
+  margin-bottom: 3px;
+}
+
 .modal-button {
   margin-top: 40px !important;
 }
@@ -147,5 +155,14 @@ p {
       padding: 0 !important;
     }
   }
+}
+
+.mdi-menu-down::before {
+  content: "";
+  background-image: url(./assets/triangle.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 14px;
+  height: 17px;
 }
 </style>

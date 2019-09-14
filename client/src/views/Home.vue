@@ -80,6 +80,7 @@ export default {
     return {
       search: "",
       expanded: [],
+      width: 0,
       headers: [
         {
           text: "Rank",
@@ -179,17 +180,36 @@ export default {
   methods: {
     redirectToMyCowven(id) {
       this.$router.push({ path: "cowvenhome", params: { cowvenId: id } });
+    },
+    handleResize() {
+      this.width = window.innerWidth;
     }
+  },
+  created() {
+    window.addEventListener("resize", this.handleResize);
+    this.handleResize();
+  },
+  destroyed() {
+    window.removeEventListener("resize", this.handleResize);
   },
   mounted() {
     const trs = Array.from(
       document.querySelectorAll(".v-data-table__wrapper tr")
     );
-    trs.map(el =>
-      el.addEventListener("click", e => {
-        e.target.parentElement.firstElementChild.firstElementChild.click();
-      })
-    );
+
+    if (this.width > 600) {
+      trs.map(el =>
+        el.addEventListener("click", e => {
+          e.target.parentElement.firstElementChild.firstElementChild.click();
+        })
+      );
+    } else {
+      trs.map(el =>
+        el.addEventListener("click", e => {
+          e.target.parentElement.parentElement.firstElementChild.firstElementChild.lastElementChild.firstElementChild.click();
+        })
+      );
+    }
   }
 };
 </script>
