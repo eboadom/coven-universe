@@ -3,6 +3,8 @@ version: '3.5'
 volumes:
   traefik-ssl:
     driver: local
+  redis_data:
+    driver: local
 
 networks:
   overlay:
@@ -74,3 +76,12 @@ services:
       HDWALLET_ADDRESS_KOVAN: ""
       URL_ETHEREUM_HTTP_PROVIDER_KOVAN: "https://kovan.infura.io/v3/3f9d1321a68b41a092b3b4e404d3e537"
       URL_ETHEREUM_WS_PROVIDER_KOVAN: "wss://kovan.infura.io/v3/3f9d1321a68b41a092b3b4e404d3e537"
+
+  redis:
+    image: redis:latest
+    networks:
+      - overlay
+    volumes:
+      - type: volume
+        source: redis_data
+        target: /data
