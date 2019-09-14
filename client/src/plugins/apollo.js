@@ -7,7 +7,7 @@ import { WebSocketLink } from "apollo-link-ws";
 import VueApollo from "vue-apollo";
 
 // Create the subscription websocket link
-const wsLink = new WebSocketLink({
+const link = new WebSocketLink({
   uri: process.env.VUE_APP_GRAPHQL_ENDPOINT_URL,
   options: {
     reconnect: true
@@ -15,10 +15,14 @@ const wsLink = new WebSocketLink({
 });
 
 // Create the apollo client
-export const apolloClient = new ApolloClient({
-  link: wsLink,
+const apolloClient = new ApolloClient({
+  link,
   cache: new InMemoryCache(),
   connectToDevTools: true
+});
+
+export const apolloProvider = new VueApollo({
+  defaultClient: apolloClient,
 });
 
 Vue.use(VueApollo);

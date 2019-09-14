@@ -1,7 +1,6 @@
 <template>
   <div v-if="dapperUnlocked" class="app">
     <div id="main-container">
-      <TopNav />
       <router-view />
     </div>
   </div>
@@ -11,13 +10,11 @@
 
 <script>
 import UnlockDapper from "../views/UnlockDapper";
-import TopNav from "../components/TopNav.vue";
 import Preloader from "../components/Preloader.vue";
 export default {
   name: "AppLayout",
   components: {
     UnlockDapper,
-    TopNav,
     Preloader
   },
   mounted() {

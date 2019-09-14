@@ -1,66 +1,78 @@
 <template>
-  <div class="my-container">
-    <div class="Home">
-      <div class="leaderboard leaderboard-home">
-        <div class="caption">
-          <h1>G.O.A.T.* Cheeze Board</h1>
+  <Preloader v-if="$apollo.queries.allDaosInfo.loading" />
+  <div v-else>
+    <TopNav />
+    <div class="my-container">
+      <div class="Home">
+        <div class="leaderboard leaderboard-home">
+          <div class="caption">
+            <h1>G.O.A.T.* Cheeze Board</h1>
+          </div>
+
+          <v-card>
+            <v-card-title>
+              <v-text-field
+                v-model="search"
+                append-icon="search"
+                label="Search"
+                single-line
+                hide-details
+              ></v-text-field>
+              <v-spacer></v-spacer>
+              <v-spacer></v-spacer>
+            </v-card-title>
+            <v-data-table
+              :headers="headers"
+              :items="allDaosInfo"
+              :search="search"
+              :single-expand="true"
+              :expanded.sync="expanded"
+              item-key="name"
+              show-expand
+            >
+              <template v-slot:item.grate="{ item }">
+                <img
+                  v-if="item.grate"
+                  :src="require(`@/assets/${item.grate.toLowerCase()}.svg`)"
+                  alt
+                />
+              </template>
+
+              <template v-slot:item.members="{ item }">
+                {{ item.members.length }}
+              </template>
+
+              <template v-slot:expanded-item="{ item }">
+                <td :colspan="headers.length + 1">
+                  <p>{{ item.description }}</p>
+                  <div class="button-inner">
+                    <button class="button" @click="redirectToMyCowven(item.id)">
+                      Go to Cowven
+                    </button>
+                  </div>
+                </td>
+              </template>
+            </v-data-table>
+          </v-card>
         </div>
 
-        <v-card>
-          <v-card-title>
-            <v-text-field
-              v-model="search"
-              append-icon="search"
-              label="Search"
-              single-line
-              hide-details
-            ></v-text-field>
-            <v-spacer></v-spacer>
-            <v-spacer></v-spacer>
-          </v-card-title>
-          <v-data-table
-            :headers="headers"
-            :items="grates"
-            :search="search"
-            :single-expand="true"
-            :expanded.sync="expanded"
-            item-key="name"
-            show-expand
-          >
-            <template v-slot:item.god="{ item }">
-              <img :src="require(`@/assets/${item.god}.svg`)" alt />
-            </template>
+        <div class="create-coven">
+          <div class="caption">
+            <h1>Create Cowven</h1>
+          </div>
 
-            <template v-slot:expanded-item="{ item }">
-              <td :colspan="headers.length + 1">
-                <p>{{ item.description }}</p>
-                <div class="button-inner">
-                  <button class="button" @click="redirectToMyCowven(item.id)">
-                    Go to Cowven
-                  </button>
-                </div>
-              </td>
-            </template>
-          </v-data-table>
-        </v-card>
-      </div>
-
-      <div class="create-coven">
-        <div class="caption">
-          <h1>Create Cowven</h1>
-        </div>
-
-        <div class="summon-container">
-          <img src="../assets/utter.svg" alt />
-          <p>
-            Summon your Cowven! Gather your wizard homies and rule together the
-            cheesiest coven of the hood.
-          </p>
-          <router-link :to="{ name: 'createcowven' }">
-            <button class="button">
-              Summon
-            </button>
-          </router-link>
+          <div class="summon-container">
+            <img src="../assets/utter.svg" alt />
+            <p>
+              Summon your Cowven! Gather your wizard homies and rule together
+              the cheesiest coven of the hood.
+            </p>
+            <router-link :to="{ name: 'createcowven' }">
+              <button class="button">
+                Summon
+              </button>
+            </router-link>
+          </div>
         </div>
       </div>
     </div>
@@ -69,147 +81,53 @@
 
 <script>
 import { allDaosData } from "../graphql/queries";
+import Preloader from "../components/Preloader.vue";
+import TopNav from "../components/TopNav.vue";
 
 export default {
+  components: {
+    Preloader,
+    TopNav
+  },
   apollo: {
-    allDaos: {
+    allDaosInfo: {
       query: allDaosData
     }
   },
   data() {
     return {
+      allDaosInfo: [],
       search: "",
       expanded: [],
-      width: 0,
       headers: [
         {
           text: "Rank",
           align: "left",
           sortable: false,
-          value: "name"
+          value: "rank"
         },
-        { text: "Name", value: "name" },
+        { text: "Name", value: "id" },
         { text: "Score", value: "score" },
         { text: "Members", value: "members" },
-        { text: "God", value: "god" }
-      ],
-      grates: [
-        {
-          id: 1,
-          rank: "#1",
-          name: "DragonBallCheeZ",
-          score: "9000+",
-          members: "000",
-          god: "fire",
-          description:
-            "This is the content area where the unique ‘tagline’ will be placed for each coven. Each coven can set a few lines of text for a unique distribution of their coven"
-        },
-        {
-          id: 2,
-          rank: "#2",
-          name: "MainlandChina",
-          score: "1025",
-          members: "000",
-          god: "water",
-          description:
-            "This is the content area where the unique ‘tagline’ will be placed for each coven. Each coven can set a few lines of text for a unique distribution of their coven"
-        },
-        {
-          id: 3,
-          rank: "#1",
-          name: "WeWillRoqueYourFort",
-          score: "900",
-          members: "000",
-          god: "wind",
-          description:
-            "This is the content area where the unique ‘tagline’ will be placed for each coven. Each coven can set a few lines of text for a unique distribution of their coven"
-        },
-        {
-          id: 4,
-          rank: "#1",
-          name: "GoudaGang",
-          score: "600",
-          members: "000",
-          god: "earth",
-          description:
-            "This is the content area where the unique ‘tagline’ will be placed for each coven. Each coven can set a few lines of text for a unique distribution of their coven"
-        },
-        {
-          id: 5,
-          rank: "#1",
-          name: "CheezZz_Aimbot",
-          score: "153",
-          members: "000",
-          god: "fire",
-          description:
-            "This is the content area where the unique ‘tagline’ will be placed for each coven. Each coven can set a few lines of text for a unique distribution of their coven"
-        },
-        {
-          id: 6,
-          rank: "#1",
-          name: "EthIsMoney",
-          score: "354",
-          members: "000",
-          god: "water",
-          description:
-            "This is the content area where the unique ‘tagline’ will be placed for each coven. Each coven can set a few lines of text for a unique distribution of their coven"
-        },
-        {
-          id: 7,
-          rank: "#1",
-          name: "ChezeGuevera",
-          score: "786",
-          members: "000",
-          god: "earth",
-          description:
-            "This is the content area where the unique ‘tagline’ will be placed for each coven. Each coven can set a few lines of text for a unique distribution of their coven"
-        },
-        {
-          id: 8,
-          rank: "#1",
-          name: "MoldError",
-          score: "420",
-          members: "000",
-          god: "wind",
-          description:
-            "This is the content area where the unique ‘tagline’ will be placed for each coven. Each coven can set a few lines of text for a unique distribution of their coven"
-        }
+        { text: "God", value: "grate" }
       ]
     };
   },
   methods: {
     redirectToMyCowven(id) {
-      this.$router.push({ path: "cowvenhome", params: { cowvenId: id } });
-    },
-    handleResize() {
-      this.width = window.innerWidth;
+      this.$router.push({ path: `cowvenhome/${id}` });
     }
-  },
-  created() {
-    window.addEventListener("resize", this.handleResize);
-    this.handleResize();
-  },
-  destroyed() {
-    window.removeEventListener("resize", this.handleResize);
   },
   mounted() {
     const trs = Array.from(
       document.querySelectorAll(".v-data-table__wrapper tr")
     );
 
-    if (this.width > 600) {
-      trs.map(el =>
-        el.addEventListener("click", e => {
-          e.target.parentElement.firstElementChild.firstElementChild.click();
-        })
-      );
-    } else {
-      trs.map(el =>
-        el.addEventListener("click", e => {
-          e.target.parentElement.parentElement.firstElementChild.firstElementChild.lastElementChild.firstElementChild.click();
-        })
-      );
-    }
+    trs.map(el =>
+      el.addEventListener("click", e => {
+        e.target.parentElement.firstElementChild.firstElementChild.click()
+      })
+    );
   }
 };
 </script>

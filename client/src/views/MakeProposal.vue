@@ -1,142 +1,152 @@
 <template>
-  <div class="MakeProposal">
-    <div class="header-container">
-      <h1>cowven name</h1>
+  <div>
+    <TopNav />
+    <div class="MakeProposal">
+      <div class="header-container">
+        <h1>cowven name</h1>
 
-      <div class="center-container">
-        <p>
-          “Cowven unique description that the creator entered in the ‘create a
-          cowven’ screen”
-        </p>
-        <div class="stats">
-          <p>Rank #000</p>
-          <p>Score #000</p>
-          <p>Wins #000</p>
-          <p>Losses #000</p>
-          <p>Penalty #000</p>
+        <div class="center-container">
+          <p>
+            “Cowven unique description that the creator entered in the ‘create a
+            cowven’ screen”
+          </p>
+          <div class="stats">
+            <p>Rank #000</p>
+            <p>Score #000</p>
+            <p>Wins #000</p>
+            <p>Losses #000</p>
+            <p>Penalty #000</p>
+          </div>
+        </div>
+
+        <div class="link-wrapper">
+          <router-link class="change-link" :to="{ name: 'cowvenhome' }">
+            Active Spell Proposals
+          </router-link>
         </div>
       </div>
 
-      <div class="link-wrapper">
-        <router-link class="change-link" :to="{ name: 'cowvenhome' }">
-          Active Spell Proposals
-        </router-link>
-      </div>
-    </div>
+      <div class="content-container">
+        <div class="leaderboard">
+          <v-card>
+            <v-data-table
+              :headers="headers"
+              :items="grates"
+              :search="search"
+              :items-per-page="5"
+            >
+              <template v-slot:item.wizard="{ item }">
+                <img
+                  class="table-image"
+                  :src="require(`@/assets/${item.wizard}.png`)"
+                  alt
+                />
+              </template>
+            </v-data-table>
+          </v-card>
+        </div>
 
-    <div class="content-container">
-      <div class="leaderboard">
-        <v-card>
-          <v-data-table
-            :headers="headers"
-            :items="grates"
-            :search="search"
-            :items-per-page="5"
-          >
-            <template v-slot:item.wizard="{ item }">
-              <img
-                class="table-image"
-                :src="require(`@/assets/${item.wizard}.png`)"
-                alt
-              />
-            </template>
-          </v-data-table>
-        </v-card>
-      </div>
+        <div class="make-proposal">
+          <h2>Cast a new spell</h2>
+          <div class="proposal-container">
+            <v-form ref="form" v-model="valid" lazy-validation>
+              <div class="info-wrapper">
+                <v-select
+                  v-model="select"
+                  :items="proposal"
+                  :rules="[v => !!v || 'Spell is required']"
+                  label="Choose your Spell"
+                  required
+                ></v-select>
 
-      <div class="make-proposal">
-        <h2>Cast a new spell</h2>
-        <div class="proposal-container">
-          <v-form ref="form" v-model="valid" lazy-validation>
-            <div class="info-wrapper">
+                <v-dialog v-model="dialogInfo" content-class="thank-dialog">
+                  <template v-slot:activator="{ on }">
+                    <img
+                      id="info-icon"
+                      src="../assets/info.svg"
+                      alt
+                      v-on="on"
+                    />
+                  </template>
+
+                  <v-card class="dialog" id="info-dialog">
+                    <h4>Cut the cheese?</h4>
+                    <p>
+                      Time to cut the cheeze with a Wizard ? Say no more, add
+                      its ID and we’ll take care of the rest
+                    </p>
+                    <h4>Change activity penalty length</h4>
+                    <p>
+                      Propose to increase or decrease the length of days a
+                      Wizards needs to be active.
+                    </p>
+                    <h4>Convert your Cowven</h4>
+                    <p>
+                      Cast a Spell which will change the Grate you all follow
+                    </p>
+                  </v-card>
+                </v-dialog>
+              </div>
+
+              <v-text-field
+                v-if="select == 'Cut the cheese'"
+                v-model="wizardId"
+                :rules="[v => !!v || 'Wizard ID is required']"
+                label="Enter Wizard ID"
+                required
+              ></v-text-field>
+
+              <v-text-field
+                v-if="select == 'Change activity penalty length'"
+                v-model="numDays"
+                :rules="[v => !!v || 'Number of Days is required']"
+                label="How many days?"
+                required
+              ></v-text-field>
+
               <v-select
-                v-model="select"
-                :items="proposal"
-                :rules="[v => !!v || 'Spell is required']"
-                label="Choose your Spell"
+                v-if="select == 'Convert your Cowven'"
+                v-model="grateOne"
+                :items="grateOnes"
+                :rules="[v => !!v || 'Grate One is required']"
+                label="Whom do you worship?"
                 required
               ></v-select>
 
-              <v-dialog v-model="dialogInfo" content-class="thank-dialog">
-                <template v-slot:activator="{ on }">
-                  <img id="info-icon" src="../assets/info.svg" alt v-on="on" />
-                </template>
+              <v-textarea
+                :counter="250"
+                label="Oh but why?"
+                auto-grow
+                outlined
+                rows="9"
+                row-height="15"
+              ></v-textarea>
+            </v-form>
+            <v-dialog v-model="dialogSpell" content-class="thank-dialog">
+              <template v-slot:activator="{ on }">
+                <button class="button" v-on="on">Cast spell</button>
+              </template>
 
-                <v-card class="dialog" id="info-dialog">
-                  <h4>Cut the cheese?</h4>
-                  <p>
-                    Time to cut the cheeze with a Wizard ? Say no more, add its
-                    ID and we’ll take care of the rest
-                  </p>
-                  <h4>Change activity penalty length</h4>
-                  <p>
-                    Propose to increase or decrease the length of days a Wizards
-                    needs to be active.
-                  </p>
-                  <h4>Convert your Cowven</h4>
-                  <p>Cast a Spell which will change the Grate you all follow</p>
-                </v-card>
-              </v-dialog>
-            </div>
+              <v-card class="dialog">
+                <img src="../assets/wheel.svg" alt />
+                <h1>Thank You</h1>
+                <v-card-text
+                  >You have casted your spell proposal. It will now be reviewed
+                  by the Cowven, drink milk in the meantime.</v-card-text
+                >
 
-            <v-text-field
-              v-if="select == 'Cut the cheese'"
-              v-model="wizardId"
-              :rules="[v => !!v || 'Wizard ID is required']"
-              label="Enter Wizard ID"
-              required
-            ></v-text-field>
-
-            <v-text-field
-              v-if="select == 'Change activity penalty length'"
-              v-model="numDays"
-              :rules="[v => !!v || 'Number of Days is required']"
-              label="How many days?"
-              required
-            ></v-text-field>
-
-            <v-select
-              v-if="select == 'Convert your Cowven'"
-              v-model="grateOne"
-              :items="grateOnes"
-              :rules="[v => !!v || 'Grate One is required']"
-              label="Whom do you worship?"
-              required
-            ></v-select>
-
-            <v-textarea
-              :counter="250"
-              label="Oh but why?"
-              auto-grow
-              outlined
-              rows="9"
-              row-height="15"
-            ></v-textarea>
-          </v-form>
-          <v-dialog v-model="dialogSpell" content-class="thank-dialog">
-            <template v-slot:activator="{ on }">
-              <button class="button" v-on="on">Cast spell</button>
-            </template>
-
-            <v-card class="dialog">
-              <img src="../assets/wheel.svg" alt />
-              <h1>Thank You</h1>
-              <v-card-text
-                >You have casted your spell proposal. It will now be reviewed by
-                the Cowven, drink milk in the meantime.</v-card-text
-              >
-
-              <v-spacer></v-spacer>
-              <button
-                class="button"
-                color="primary"
-                text
-                @click="dialogSpell = false"
-              >
-                Gouda'nough
-              </button>
-            </v-card>
-          </v-dialog>
+                <v-spacer></v-spacer>
+                <button
+                  class="button"
+                  color="primary"
+                  text
+                  @click="dialogSpell = false"
+                >
+                  Gouda'nough
+                </button>
+              </v-card>
+            </v-dialog>
+          </div>
         </div>
       </div>
     </div>
@@ -144,7 +154,14 @@
 </template>
 
 <script>
+import Preloader from "../components/Preloader.vue";
+import TopNav from "../components/TopNav.vue";
+
 export default {
+  components: {
+    Preloader,
+    TopNav
+  },
   data() {
     return {
       search: "",
