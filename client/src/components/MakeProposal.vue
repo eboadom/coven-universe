@@ -14,24 +14,19 @@
 
           <v-dialog v-model="dialogInfo" content-class="thank-dialog">
             <template v-slot:activator="{ on }">
-              <img
-                id="info-icon"
-                src="../assets/info.svg"
-                alt
-                v-on="on"
-              />
+              <img id="info-icon" src="../assets/info.svg" alt v-on="on" />
             </template>
 
             <v-card class="dialog" id="info-dialog">
               <h4>Cut the cheese?</h4>
               <p>
-                Time to cut the cheeze with a Wizard ? Say no more, add
-                its ID and we’ll take care of the rest
+                Time to cut the cheeze with a Wizard ? Say no more, add its ID
+                and we’ll take care of the rest
               </p>
               <h4>Change activity penalty length</h4>
               <p>
-                Propose to increase or decrease the length of days a
-                Wizards needs to be active.
+                Propose to increase or decrease the length of days a Wizards
+                needs to be active.
               </p>
               <h4>Convert your Cowven</h4>
               <p>
@@ -84,8 +79,8 @@
           <img src="../assets/wheel.svg" alt />
           <h1>Thank You</h1>
           <v-card-text
-          >You have casted your spell proposal. It will now be reviewed
-            by the Cowven, drink milk in the meantime.</v-card-text
+            >You have casted your spell proposal. It will now be reviewed by the
+            Cowven, drink milk in the meantime.</v-card-text
           >
 
           <v-spacer></v-spacer>
@@ -104,136 +99,135 @@
 </template>
 
 <script>
-  export default {
-    name: "MakeProposal",
-    data() {
-      return {
-        valid: true,
-        name: "",
-        dialogInfo: false,
-        dialogSpell: false,
-        nameRules: [
-          v => !!v || "Name is required",
-          v => (v && v.length <= 10) || "Name must be less than 10 characters"
-        ],
-        email: "",
-        emailRules: [
-          v => !!v || "E-mail is required",
-          v => /.+@.+\..+/.test(v) || "E-mail must be valid"
-        ],
-        select: null,
-        proposal: [
-          "Cut the cheese",
-          "Change activity penalty length",
-          "Convert your Cowven"
-        ],
-        grateOnes: [
-          "The Grate Balance",
-          "The Grate Wave",
-          "The Grate Storm",
-          "The Grate Flames"
-        ],
-        grateOne: null
+export default {
+  name: "MakeProposal",
+  data() {
+    return {
+      valid: true,
+      name: "",
+      dialogInfo: false,
+      dialogSpell: false,
+      nameRules: [
+        v => !!v || "Name is required",
+        v => (v && v.length <= 10) || "Name must be less than 10 characters"
+      ],
+      email: "",
+      emailRules: [
+        v => !!v || "E-mail is required",
+        v => /.+@.+\..+/.test(v) || "E-mail must be valid"
+      ],
+      select: null,
+      proposal: [
+        "Cut the cheese",
+        "Change activity penalty length",
+        "Convert your Cowven"
+      ],
+      grateOnes: [
+        "The Grate Balance",
+        "The Grate Wave",
+        "The Grate Storm",
+        "The Grate Flames"
+      ],
+      grateOne: null
+    };
+  },
+  methods: {
+    validate() {
+      if (this.$refs.form.validate()) {
+        this.snackbar = true;
       }
     },
-    methods: {
-      validate() {
-        if (this.$refs.form.validate()) {
-          this.snackbar = true;
-        }
-      },
-      reset() {
-        this.$refs.form.reset();
-      },
-      resetValidation() {
-        this.$refs.form.resetValidation();
-      }
+    reset() {
+      this.$refs.form.reset();
+    },
+    resetValidation() {
+      this.$refs.form.resetValidation();
     }
-  };
+  }
+};
 </script>
 
 <style lang="scss" scoped>
-  @import "../style/screen-size";
-  @import "../style/vars";
-  .make-proposal {
+@import "../style/screen-size";
+@import "../style/vars";
+.make-proposal {
+  width: 30%;
+  @include respond-to(md) {
     width: 35%;
-    @include respond-to(md) {
-      width: 40%;
+  }
+  @include respond-to(sm) {
+    width: 100%;
+    margin-bottom: 50px;
+  }
+
+  h2 {
+    font-size: 25px;
+    font-family: "exocet";
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .proposal-container {
+    border: 1px solid black;
+    padding: 2rem;
+    text-align: center;
+    background: white;
+
+    p {
+      padding: 1rem 0 3rem 0;
     }
-    @include respond-to(sm) {
-      width: 100%;
-      margin-bottom: 50px;
+    img {
+      width: 10rem;
     }
 
-    h2 {
-      font-size: 25px;
-      font-family: "exocet";
-      font-weight: 800;
-      text-align: center;
-      margin-bottom: 15px;
-    }
+    .info-wrapper {
+      display: flex;
+      flex-direction: row;
 
-    .proposal-container {
-      border: 1px solid black;
-      padding: 2rem;
-      text-align: center;
-      background: white;
-
-      p {
-        padding: 1rem 0 3rem 0;
-      }
-      img {
-        width: 10rem;
-      }
-
-      .info-wrapper {
-        display: flex;
-        flex-direction: row;
-
-        #info-icon {
-          width: 1.2rem;
-          margin-left: 15px;
-          transition: all 0.3s ease;
-          cursor: pointer;
-          &:hover {
-            transform: scale(1.1);
-          }
+      #info-icon {
+        width: 1.2rem;
+        margin-left: 15px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        &:hover {
+          transform: scale(1.1);
         }
       }
     }
   }
-  .dialog {
-    display: flex;
-    flex-direction: column;
-    vertical-align: center;
-    text-align: center;
+}
+.dialog {
+  display: flex;
+  flex-direction: column;
+  vertical-align: center;
+  text-align: center;
 
-    img {
-      padding: 2rem 0;
-      margin: auto;
-    }
-
-    .v-card__text {
-      padding: 3rem;
-      padding-bottom: 0;
-    }
-
-    button {
-      margin: auto;
-      margin-bottom: 2rem;
-    }
+  img {
+    padding: 2rem 0;
+    margin: auto;
   }
 
-  #info-dialog {
-    display: flex;
-    padding: 2rem;
-    justify-content: space-between;
-    text-align: left;
-
-    h4 {
-      text-decoration: underline;
-      font-family: codesaver;
-    }
+  .v-card__text {
+    padding: 3rem;
+    padding-bottom: 0;
   }
 
+  button {
+    margin: auto;
+    margin-bottom: 2rem;
+  }
+}
+
+#info-dialog {
+  display: flex;
+  padding: 2rem;
+  justify-content: space-between;
+  text-align: left;
+
+  h4 {
+    text-decoration: underline;
+    font-family: codesaver;
+  }
+}
 </style>

@@ -15,17 +15,18 @@
             }}”
           </p>
           <div class="stats">
-            <p>Rank #{{cowven.rank}}</p>
-            <p>Score #{{cowven.score}}</p>
-            <p>Wins #{{cowven.wins}}</p>
-            <p>Loses #{{cowven.loses}}</p>
-            <p>Members #{{cowven.members.length}}</p>
+            <p>Rank #{{ cowven.rank }}</p>
+            <p>Score #{{ cowven.score }}</p>
+            <p>Wins #{{ cowven.wins }}</p>
+            <p>Loses #{{ cowven.loses }}</p>
+            <p>Members #{{ cowven.members.length }}</p>
           </div>
         </div>
 
         <div class="link-wrapper">
           <span class="change-link" @click="showNewSpellForm">
-            Cast new spell
+            <span v-if="!showCreateProposal">Cast new spell</span>
+            <span v-else>Active Spell Proposals</span>
           </span>
         </div>
       </div>
@@ -53,7 +54,7 @@
         </div>
 
         <Spells v-if="!showCreateProposal" :proposals="cowven.proposals" />
-        <MakeProposal v-else/>
+        <MakeProposal v-else />
       </div>
     </div>
   </div>
@@ -110,7 +111,7 @@ export default {
   },
   methods: {
     showNewSpellForm() {
-      this.showCreateProposal = !this.showCreateProposal
+      this.showCreateProposal = !this.showCreateProposal;
     }
   }
 };
@@ -174,6 +175,7 @@ export default {
       color: #000;
       padding: 0 2px 5px;
       transition: all 0.3s ease;
+      cursor: pointer;
       &:hover {
         color: $purple;
         &:after {
@@ -227,5 +229,4 @@ export default {
     }
   }
 }
-
 </style>

@@ -33,7 +33,7 @@
           Enter the Cheeze
         </button>
         <router-link :to="{ name: 'home' }" v-else>
-          <button class="button" title="Coming soon">
+          <button class="button">
             Enter the Cheeze
           </button>
         </router-link>

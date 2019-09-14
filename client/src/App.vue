@@ -165,4 +165,8 @@ p {
   width: 14px;
   height: 17px;
 }
+
+.ps__thumb-y {
+  background: $purple !important;
+}
 </style>

@@ -67,7 +67,15 @@
               Summon your Cowven! Gather your wizard homies and rule together
               the cheesiest coven of the hood.
             </p>
-            <router-link :to="{ name: 'createcowven' }">
+            <button
+              class="button"
+              disabled
+              title="Coming soon"
+              v-if="isProduction"
+            >
+              Summon
+            </button>
+            <router-link :to="{ name: 'createcowven' }" v-else>
               <button class="button">
                 Summon
               </button>
@@ -96,6 +104,7 @@ export default {
   },
   data() {
     return {
+      isProduction: process.env.NODE_ENV === "production",
       allDaosInfo: [],
       search: "",
       expanded: [],

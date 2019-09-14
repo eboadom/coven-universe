@@ -7,7 +7,10 @@
     <v-card class="dialog">
       <img src="../assets/wheel.svg" alt />
       <h1>Thank You</h1>
-      <v-card-text>You just submitted your proposal, let’s see what the rest of the Cowven thinks of your proposal.</v-card-text>
+      <v-card-text
+        >You just submitted your proposal, let’s see what the rest of the Cowven
+        thinks of your proposal.</v-card-text
+      >
 
       <v-spacer></v-spacer>
       <button class="button" color="primary" text @click="dialog = false">
