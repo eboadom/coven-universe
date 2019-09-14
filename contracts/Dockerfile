@@ -7,4 +7,4 @@ RUN npm i
 
 COPY . /app
 
-CMD ['npm', 'run', 'sys:start-api-server']
+CMD ["npm", "run", "sys:start-api-server"]
