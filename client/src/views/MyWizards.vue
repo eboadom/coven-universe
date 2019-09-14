@@ -15,7 +15,9 @@
           <template v-slot:item.wizard="{ item }">
             <img
               class="wizard-img"
-              :src="require(`@/assets/${item.affinity.toLowerCase()}-wizard.png`)"
+              :src="
+                require(`@/assets/${item.affinity.toLowerCase()}-wizard.png`)
+              "
             />
           </template>
           <template v-slot:item.wizardWalletData.wizardWalletAddress="{ item }">
@@ -27,9 +29,14 @@
               "
             >
               <img src="../assets/purse.svg" alt="Purse" />
-              <a href="https://www.google.com/" target="_blank">{{
-                item.wizardWalletData.wizardWalletAddress
-              }}</a>
+              <a
+                :href="
+                  `https://rinkeby.etherscan.io/address/${item.wizardWalletData.wizardWalletAddress}`
+                "
+                target="_blank"
+              >
+                {{ item.wizardWalletData.wizardWalletAddress }}
+              </a>
             </div>
             <div v-else>
               <button class="button button-small">Create wallet</button>
@@ -81,131 +88,10 @@ export default {
           value: "wizardWalletData.genecheezeDaoReputation"
         },
         { text: "Wallet", value: "wizardWalletData.wizardWalletAddress" }
-      ],
-      wizards: [
-        {
-          wizard: "fire-wizard",
-          id: "#0000",
-          type: "Fire",
-          score: "7865",
-          cowven: "Awesome Coven Name",
-          status: "In Cowven",
-          reputation: "6794",
-          wallet: "Etherscan"
-        },
-        {
-          wizard: "wind-wizard",
-          id: "#0001",
-          type: "Wind",
-          score: "1534",
-          cowven: "Awesome Coven Name",
-          status: "In Cowven",
-          reputation: "6866",
-          wallet: ""
-        },
-        {
-          wizard: "water-wizard",
-          id: "#0002",
-          type: "Water",
-          score: "3576",
-          cowven: "Awesome Coven Name",
-          status: "Free Roaming",
-          reputation: "1678",
-          wallet: "Etherscan"
-        },
-        {
-          wizard: "neutral-wizard",
-          id: "#0003",
-          type: "Neutral",
-          score: "4679",
-          cowven: "Awesome Coven Name",
-          status: "Free Roaming",
-          reputation: "1534",
-          wallet: "Etherscan"
-        },
-        {
-          wizard: "fire-wizard",
-          id: "#0004",
-          type: "Fire",
-          score: "7865",
-          cowven: "Awesome Coven Name",
-          status: "In Cowven",
-          reputation: "6794",
-          wallet: "Etherscan"
-        },
-        {
-          wizard: "wind-wizard",
-          id: "#0005",
-          type: "Wind",
-          score: "1534",
-          cowven: "Awesome Coven Name",
-          status: "In Cowven",
-          reputation: "6866",
-          wallet: "Etherscan"
-        },
-        {
-          wizard: "water-wizard",
-          id: "#0006",
-          type: "Water",
-          score: "3576",
-          cowven: "Awesome Coven Name",
-          status: "Free Roaming",
-          reputation: "1678",
-          wallet: ""
-        },
-        {
-          wizard: "neutral-wizard",
-          id: "#0007",
-          type: "Neutral",
-          score: "4679",
-          cowven: "Awesome Coven Name",
-          status: "Free Roaming",
-          reputation: "1534",
-          wallet: ""
-        },
-        {
-          wizard: "fire-wizard",
-          id: "#0008",
-          type: "Fire",
-          score: "7865",
-          cowven: "Awesome Coven Name",
-          status: "In Cowven",
-          reputation: "6794",
-          wallet: ""
-        },
-        {
-          wizard: "wind-wizard",
-          id: "#0009",
-          type: "Wind",
-          score: "1534",
-          cowven: "Awesome Coven Name",
-          status: "In Cowven",
-          reputation: "6866",
-          wallet: "Etherscan"
-        },
-        {
-          wizard: "water-wizard",
-          id: "#0012",
-          type: "Water",
-          score: "3576",
-          cowven: "Awesome Coven Name",
-          status: "Free Roaming",
-          reputation: "1678",
-          wallet: "Etherscan"
-        },
-        {
-          wizard: "neutral-wizard",
-          id: "#0023",
-          type: "Neutral",
-          score: "4679",
-          cowven: "Awesome Coven Name",
-          status: "Free Roaming",
-          reputation: "1534",
-          wallet: "Etherscan"
-        }
       ]
     };
   }
+  
 };
 </script>
 
@@ -267,6 +153,7 @@ export default {
   a {
     color: #000;
     text-decoration: none;
+    word-break: break-all;
     &:hover {
       color: $purple;
     }

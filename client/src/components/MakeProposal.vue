@@ -145,11 +145,8 @@ export default {
       const web3 = getWeb3();
       if (this.$refs.form.validate()) {
         e.preventDefault();
-        const wizard = this.members.find(
-          m =>
-            m.id === this.wizardId
-        );
-        const {data: { createProposalForReputationReward: txs }} = await this.$apollo.mutate({
+        const wizard = this.members.find(m => m.id === this.wizardId);
+        this.$apollo.mutate({
           mutation: createProposalMutation,
           variables: {
             data: {
