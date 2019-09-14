@@ -15,6 +15,17 @@
             :src="require(`@/assets/${item.wizard}.png`)"
           />
         </template>
+        <template v-slot:item.wallet="{ item }">
+          <div class="wallet-inner" v-if="item.wallet !== ''">
+            <img src="../assets/purse.svg" alt="Purse" />
+            <a href="https://www.google.com/" target="_blank">{{
+              item.wallet
+            }}</a>
+          </div>
+          <div v-else>
+            <button class="button button-small">Create wallet</button>
+          </div>
+        </template>
       </v-data-table>
     </div>
   </div>
@@ -37,7 +48,8 @@ export default {
         { text: "Score", value: "score" },
         { text: "Cowven", value: "cowven" },
         { text: "Status", value: "status" },
-        { text: "Reputation", value: "reputation" }
+        { text: "Reputation", value: "reputation" },
+        { text: "Wallet", value: "wallet" }
       ],
       wizards: [
         {
@@ -47,7 +59,8 @@ export default {
           score: "7865",
           cowven: "Awesome Coven Name",
           status: "In Cowven",
-          reputation: "6794"
+          reputation: "6794",
+          wallet: "Etherscan"
         },
         {
           wizard: "wind-wizard",
@@ -56,7 +69,8 @@ export default {
           score: "1534",
           cowven: "Awesome Coven Name",
           status: "In Cowven",
-          reputation: "6866"
+          reputation: "6866",
+          wallet: ""
         },
         {
           wizard: "water-wizard",
@@ -65,7 +79,8 @@ export default {
           score: "3576",
           cowven: "Awesome Coven Name",
           status: "Free Roaming",
-          reputation: "1678"
+          reputation: "1678",
+          wallet: "Etherscan"
         },
         {
           wizard: "neutral-wizard",
@@ -74,7 +89,8 @@ export default {
           score: "4679",
           cowven: "Awesome Coven Name",
           status: "Free Roaming",
-          reputation: "1534"
+          reputation: "1534",
+          wallet: "Etherscan"
         },
         {
           wizard: "fire-wizard",
@@ -83,7 +99,8 @@ export default {
           score: "7865",
           cowven: "Awesome Coven Name",
           status: "In Cowven",
-          reputation: "6794"
+          reputation: "6794",
+          wallet: "Etherscan"
         },
         {
           wizard: "wind-wizard",
@@ -92,7 +109,8 @@ export default {
           score: "1534",
           cowven: "Awesome Coven Name",
           status: "In Cowven",
-          reputation: "6866"
+          reputation: "6866",
+          wallet: "Etherscan"
         },
         {
           wizard: "water-wizard",
@@ -101,7 +119,8 @@ export default {
           score: "3576",
           cowven: "Awesome Coven Name",
           status: "Free Roaming",
-          reputation: "1678"
+          reputation: "1678",
+          wallet: ""
         },
         {
           wizard: "neutral-wizard",
@@ -110,7 +129,8 @@ export default {
           score: "4679",
           cowven: "Awesome Coven Name",
           status: "Free Roaming",
-          reputation: "1534"
+          reputation: "1534",
+          wallet: ""
         },
         {
           wizard: "fire-wizard",
@@ -119,7 +139,8 @@ export default {
           score: "7865",
           cowven: "Awesome Coven Name",
           status: "In Cowven",
-          reputation: "6794"
+          reputation: "6794",
+          wallet: ""
         },
         {
           wizard: "wind-wizard",
@@ -128,7 +149,8 @@ export default {
           score: "1534",
           cowven: "Awesome Coven Name",
           status: "In Cowven",
-          reputation: "6866"
+          reputation: "6866",
+          wallet: "Etherscan"
         },
         {
           wizard: "water-wizard",
@@ -137,7 +159,8 @@ export default {
           score: "3576",
           cowven: "Awesome Coven Name",
           status: "Free Roaming",
-          reputation: "1678"
+          reputation: "1678",
+          wallet: "Etherscan"
         },
         {
           wizard: "neutral-wizard",
@@ -146,7 +169,8 @@ export default {
           score: "4679",
           cowven: "Awesome Coven Name",
           status: "Free Roaming",
-          reputation: "1534"
+          reputation: "1534",
+          wallet: "Etherscan"
         }
       ]
     };
@@ -171,6 +195,8 @@ export default {
 </style>
 
 <style lang="scss" scoped>
+@import "../style/vars";
+
 .my-wizards {
   width: 100%;
 
@@ -195,6 +221,23 @@ export default {
         object-fit: cover;
         margin-top: 8px;
       }
+    }
+  }
+}
+
+.wallet-inner {
+  display: flex;
+  align-items: center;
+  img {
+    width: 23px;
+    height: 20px;
+    margin-right: 7px;
+  }
+  a {
+    color: #000;
+    text-decoration: none;
+    &:hover {
+      color: $purple;
     }
   }
 }

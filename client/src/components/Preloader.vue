@@ -91,7 +91,7 @@ export default {
     let tipsCounter = 0;
     const myInterval = setInterval(() => {
       getTip();
-    }, 3000);
+    }, 3500);
     const getTip = () => {
       if (tipsCounter < 10) {
         this.get();
@@ -159,13 +159,13 @@ export default {
 
 .Preloader__animate-line {
   background: $primary;
-  width: 1%;
+  width: 70%;
   height: 100%;
   border-radius: 25px;
   border-right: 1px solid #000;
   border-left: 1px solid #000;
-  animation: loading 3s ease infinite;
-  -webkit-animation: loading 3s ease infinite;
+  animation: loading 5s ease infinite;
+  -webkit-animation: loading 5s ease infinite;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -222,10 +222,10 @@ export default {
 
 @keyframes loading {
   from {
-    width: 1%;
+    transform: translateX(-100%);
   }
   to {
-    width: 100%;
+    transform: translateX(150%);
   }
 }
 
@@ -249,6 +249,8 @@ export default {
   span {
     font-size: 20px;
     font-weight: 600;
+    outline: none !important;
+    cursor: default;
   }
 }
 </style>
