@@ -44,7 +44,7 @@
         return -1
       },
       isButtonDisabled() {
-        return this.voteStatus >= 0
+        return this.voteStatus >= 0 || this.proposal.status === 'Closed'
       },
       isAllowedToRedeem() {
         const wizard = this.myWizards.find(
