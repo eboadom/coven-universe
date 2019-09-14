@@ -18,11 +18,17 @@
               :src="require(`@/assets/${item.affinity.toLowerCase()}-wizard.png`)"
             />
           </template>
-          <template v-slot:item.wallet="{ item }">
-            <div class="wallet-inner" v-if="item.wallet !== ''">
+          <template v-slot:item.wizardWalletData.wizardWalletAddress="{ item }">
+            <div
+              class="wallet-inner"
+              v-if="
+                item.wizardWalletData.wizardWalletAddress !==
+                  '0x0000000000000000000000000000000000000000'
+              "
+            >
               <img src="../assets/purse.svg" alt="Purse" />
               <a href="https://www.google.com/" target="_blank">{{
-                item.wallet
+                item.wizardWalletData.wizardWalletAddress
               }}</a>
             </div>
             <div v-else>
@@ -68,10 +74,13 @@ export default {
         { text: "ID", value: "id" },
         { text: "Type", value: "affinity" },
         { text: "Score", value: "score" },
-        { text: "Cowven", value: "cowven" },
+        { text: "Cowven", value: "cowvenName" },
         { text: "Status", value: "status" },
-        { text: "Reputation", value: "reputation" },
-        { text: "Wallet", value: "wallet" }
+        {
+          text: "Reputation",
+          value: "wizardWalletData.genecheezeDaoReputation"
+        },
+        { text: "Wallet", value: "wizardWalletData.wizardWalletAddress" }
       ],
       wizards: [
         {

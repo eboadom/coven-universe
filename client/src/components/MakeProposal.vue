@@ -140,8 +140,9 @@ export default {
     };
   },
   methods: {
-    submit() {
+    submit(e) {
       if (this.$refs.form.validate()) {
+        e.preventDefault();
         const wizard = this.members.find(
           m =>
             m.id === this.wizardId
