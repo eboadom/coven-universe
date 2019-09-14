@@ -63,6 +63,10 @@ export enum eProposalDescription {
   MINT_REPUTATION = "MINT_REPUTATION",
 }
 
+export enum eProposalType {
+  REPUTATION_REWARD = "REPUTATION_REWARD",
+}
+
 export interface IMembersDaoWithReputation {
   member: tEthereumAddress
   reputation: tStringCurrencyUnits
@@ -80,6 +84,8 @@ export interface IVoterData {
 
 export interface IProposalVotingMachineData {
   id: string
+  type: eProposalType
+  description: string
   status: eProposalStatus
   totalVotes: number
   yesVotes: number
@@ -104,6 +110,7 @@ export interface ICowvenData {
   wins: number // Offchain calculation, from events from CheezeWizards tournaments
   loses: number // Offchain calculation, from events from CheezeWizards tournaments
   grate: eGrateType // Custom field in the Avatar contract (TODO)
+  proposals: IContributionRewardProposalData[]
 }
 
 export interface GrateData {
@@ -301,6 +308,8 @@ export class DaoService extends ContractService implements IDaoService {
     )
     return {
       id: proposalId,
+      type: eProposalType.REPUTATION_REWARD,
+      description: "Give/take some reputation to/from the beneficiary", // TODO unmock
       status: rawProposalVotingMachineData.open
         ? eProposalStatus.Open
         : eProposalStatus.Closed,
@@ -422,11 +431,12 @@ export class DaoService extends ContractService implements IDaoService {
       avatarAddress: daoAddress ? daoAddress : this.getAvatarAddress(), // TODO: adapt to multidao
       description: "", // TODO: unmock
       rank: 1, // TODO: unmock
-      score: -1, // TODO: unmock
+      score: 0, // TODO: unmock
       members: wizardsMembersOfDao, // TODO: adapt to multi dao
       wins: 0, // TODO: unmock
       loses: 0, // TODO: unmock
       grate: eGrateType.MOLD, // TODO: unmock
+      proposals: await this.getAllContributionRewardProposals(),
     }
   }
 

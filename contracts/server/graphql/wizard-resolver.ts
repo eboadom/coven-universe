@@ -13,7 +13,8 @@ import {
   eWizardStatus,
   IWizardData,
   IWizardWalletData,
-  WizardsService
+  WizardsService,
+  eWizardAffinity
 } from "../../services/WizardsService";
 import { tEthereumAddress } from "../configuration";
 import { IsEthAddress } from "./validators";
@@ -41,7 +42,7 @@ export class WizardData implements IWizardData {
   @Field()
   innatePower: string;
   @Field()
-  affinity: string;
+  affinity: eWizardAffinity;
   @Field()
   score?: string;
   @Field()
