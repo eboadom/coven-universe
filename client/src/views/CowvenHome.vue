@@ -107,7 +107,7 @@ export default {
         {
           text: "Rank",
           align: "left",
-          value: "score"
+          value: "score",
         },
         { text: "Score", value: "score" },
         { text: "Reputation", value: "reputation" },

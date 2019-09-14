@@ -40,7 +40,7 @@
           v-model="wizardId"
           :items="wizardsId"
           :rules="[v => !!v || 'Wizard ID is required']"
-          label="Choose your Spell"
+          label="Choose your Wizard"
           required
         ></v-select>
 
@@ -99,6 +99,7 @@
 
 <script>
 import { createProposalMutation } from "../graphql/mutations";
+import { getWeb3 } from "../helpers/web3-helpers";
 
 export default {
   name: "MakeProposal",
@@ -140,14 +141,15 @@ export default {
     };
   },
   methods: {
-    submit(e) {
+    async submit(e) {
+      const web3 = getWeb3();
       if (this.$refs.form.validate()) {
         e.preventDefault();
         const wizard = this.members.find(
           m =>
             m.id === this.wizardId
         );
-        this.$apollo.mutate({
+        const {data: { createProposalForReputationReward: txs }} = await this.$apollo.mutate({
           mutation: createProposalMutation,
           variables: {
             data: {
@@ -158,6 +160,8 @@ export default {
             }
           }
         });
+        await web3.eth.sendTransaction(txs[0]);
+        console.log('res', txs[0]);
         this.dialogSpell = true;
         this.reset();
       }

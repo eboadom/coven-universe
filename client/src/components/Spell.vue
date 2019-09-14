@@ -47,8 +47,6 @@
         return this.voteStatus >= 0
       },
       isAllowedToRedeem() {
-        console.log('userWallet', userWallet);
-        console.log(this.myWizards);
         const wizard = this.myWizards.find(
           w => w.wizardWalletData && w.wizardWalletData.wizardWalletAddress === this.proposal.beneficiary
         );
