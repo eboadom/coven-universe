@@ -125,7 +125,7 @@ export default {
 
     trs.map(el =>
       el.addEventListener("click", e => {
-        e.target.parentElement.firstElementChild.firstElementChild.click()
+        e.target.parentElement.firstElementChild.firstElementChild.click();
       })
     );
   }

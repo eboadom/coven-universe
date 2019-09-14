@@ -1,15 +1,18 @@
 <template>
-  <Preloader v-if="$apollo.queries.allDaosInfo.loading"/>
+  <Preloader v-if="$apollo.queries.allDaosInfo.loading" />
   <div v-else-if="!cowven">404</div>
   <div v-else>
     <TopNav />
     <div class="CowvenHome">
       <div class="header-container">
-        <h1>{{cowven.id}}</h1>
+        <h1>{{ cowven.id }}</h1>
 
         <div class="center-container">
           <p>
-            “{{cowven.description || 'should be some funny cowen description, but no :('}}”
+            “{{
+              cowven.description ||
+                "should be some funny cowen description, but no :("
+            }}”
           </p>
           <div class="stats">
             <p>Rank #{{cowven.rank}}</p>
@@ -32,14 +35,16 @@
           <v-card>
             <v-data-table
               :headers="headers"
-              :items="grates"
+              :items="cowven.members"
               :search="search"
               :items-per-page="5"
             >
-              <template v-slot:item.wizard="{ item }">
+              <template v-slot:item.affinity="{ item }">
                 <img
                   class="table-image"
-                  :src="require(`@/assets/${item.wizard}.png`)"
+                  :src="
+                    require(`@/assets/${item.affinity.toLowerCase()}-wizard.png`)
+                  "
                   alt
                 />
               </template>
@@ -62,7 +67,7 @@ import MakeProposal from "../components/MakeProposal.vue";
 import { allDaosData } from "../graphql/queries";
 
 export default {
-  props: ['id'],
+  props: ["id"],
   components: {
     Preloader,
     TopNav,
@@ -80,102 +85,21 @@ export default {
       dialog: false,
       showCreateProposal: false,
       search: "",
-      proposals: [
-        {
-          id: 1,
-          spell: "Cut the cheese",
-          wizardId: "1380",
-          description:
-            "This Wizard is cheap cheddar for for fast-food chains. Time to unload this dude!"
-        },
-        {
-          id: 2,
-          spell: "Convert Cowven",
-          wizardId: null,
-          description:
-            "Let’s switch to the god of flames. This seems to be the best tactical move for next season. "
-        },
-        {
-          id: 3,
-          spell: "Length of Penalty",
-          wizardId: null,
-          description:
-            "There seem to be a lot of inactive Wizards. I propose to change the activity penalty to 7 days."
-        }
-      ],
       headers: [
         {
           text: "",
           align: "left",
           sortable: false,
-          value: "wizard"
+          value: "affinity"
         },
         {
           text: "Rank",
           align: "left",
-          value: "rank"
+          value: "score"
         },
         { text: "Score", value: "score" },
         { text: "Reputation", value: "reputation" },
         { text: "ID", value: "id" }
-      ],
-      grates: [
-        {
-          wizard: "fire-wizard",
-          rank: "#1",
-          score: "9000+",
-          reputation: "000",
-          id: "#97587"
-        },
-        {
-          wizard: "water-wizard",
-          rank: "#2",
-          score: "9000+",
-          reputation: "000",
-          id: "#78567"
-        },
-        {
-          wizard: "wind-wizard",
-          rank: "#3",
-          score: "9000+",
-          reputation: "000",
-          id: "#14124"
-        },
-        {
-          wizard: "neutral-wizard",
-          rank: "#4",
-          score: "9000+",
-          reputation: "000",
-          id: "#42140"
-        },
-        {
-          wizard: "fire-wizard",
-          rank: "#1",
-          score: "9000+",
-          reputation: "000",
-          id: "#05400"
-        },
-        {
-          wizard: "water-wizard",
-          rank: "#2",
-          score: "9000+",
-          reputation: "000",
-          id: "#003400"
-        },
-        {
-          wizard: "wind-wizard",
-          rank: "#3",
-          score: "9000+",
-          reputation: "000",
-          id: "#0040"
-        },
-        {
-          wizard: "neutral-wizard",
-          rank: "#4",
-          score: "9000+",
-          reputation: "000",
-          id: "#00230"
-        }
       ]
     };
   },
