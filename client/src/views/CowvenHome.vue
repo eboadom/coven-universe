@@ -1,6 +1,6 @@
 <template>
   <Preloader v-if="$apollo.queries.allDaosInfo.loading" />
-  <div v-else-if="!cowven">404</div>
+  <div class="errorPage" v-else-if="!cowven">404</div>
   <div v-else>
     <TopNav />
     <div class="CowvenHome">

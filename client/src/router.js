@@ -8,7 +8,6 @@ import MyWizards from "./views/MyWizards.vue";
 import CBD from "./views/CBD.vue";
 import CowvenHome from "./views/CowvenHome.vue";
 import CowvenJoin from "./views/CowvenJoin.vue";
-import MakeProposal from "./views/MakeProposal.vue";
 import UnlockDapper from "./views/UnlockDapper.vue";
 import AppLayout from "./components/AppLayout";
 
@@ -30,15 +29,6 @@ export default new Router({
           path: "",
           name: "home",
           component: Home
-        },
-        {
-          path: "about",
-          name: "about",
-          // route level code-splitting
-          // this generates a separate chunk (about.[hash].js) for this route
-          // which is lazy-loaded when the route is visited.
-          component: () =>
-            import(/* webpackChunkName: "about" */ "./views/About.vue")
         },
         {
           path: "createcowven",
@@ -65,11 +55,6 @@ export default new Router({
           path: "cowvenjoin",
           name: "cowvenjoin",
           component: CowvenJoin
-        },
-        {
-          path: "makeproposal",
-          name: "makeproposal",
-          component: MakeProposal
         },
         {
           path: "unlockdapper",

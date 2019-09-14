@@ -37,6 +37,9 @@ export default {
           console.log(accounts);
           if (accounts && accounts.length) {
             this.dapperUnlocked = true;
+
+            //TODO: replace with something Vue specific
+            window.userWallet = accounts[0];
           }
         } catch (error) {
           // eslint-disable-next-line no-console

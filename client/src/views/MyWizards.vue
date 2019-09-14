@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <Preloader v-if="$apollo.queries.allWizards.loading" />
+  <div v-else>
     <TopNav />
     <div class="my-container">
       <div class="my-wizards">
@@ -7,14 +8,14 @@
 
         <v-data-table
           :headers="headers"
-          :items="wizards"
+          :items="allWizards"
           :search="search"
           :items-per-page="5"
         >
-          <template v-slot:item.wizard="{ item }">
+          <template v-slot:item.affinity="{ item }">
             <img
               class="wizard-img"
-              :src="require(`@/assets/${item.wizard}.png`)"
+              :src="require(`@/assets/${item.affinity}-wizard.png`)"
             />
           </template>
           <template v-slot:item.wallet="{ item }">
@@ -37,11 +38,20 @@
 <script>
 import Preloader from "../components/Preloader.vue";
 import TopNav from "../components/TopNav.vue";
+import { allWizardsByUserAddress } from "../graphql/queries";
 
 export default {
   components: {
     Preloader,
     TopNav
+  },
+  apollo: {
+    allWizards: {
+      query: allWizardsByUserAddress,
+      variables: {
+        address: window.userWallet
+      }
+    }
   },
   data() {
     return {
@@ -51,10 +61,10 @@ export default {
           text: "Wizard",
           align: "left",
           sortable: false,
-          value: "wizard"
+          value: "affinity"
         },
         { text: "ID", value: "id" },
-        { text: "Type", value: "type" },
+        { text: "Type", value: "affinity" },
         { text: "Score", value: "score" },
         { text: "Cowven", value: "cowven" },
         { text: "Status", value: "status" },
