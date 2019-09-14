@@ -159,7 +159,7 @@ export default {
   data() {
     return {
       dialog: false,
-      isProduction: process.env.NODE_ENV === "production"
+      isProduction: false
     };
   }
 };
