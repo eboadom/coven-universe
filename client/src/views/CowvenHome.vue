@@ -24,10 +24,10 @@
           </p>
           <div class="stats">
             <p>Rank #{{ cowven.rank }}</p>
-            <p>Score #{{ cowven.score }}</p>
-            <p>Wins #{{ cowven.wins }}</p>
-            <p>Loses #{{ cowven.loses }}</p>
-            <p>Members #{{ cowven.members.length }}</p>
+            <p>Score {{ cowven.score }}</p>
+            <p>Wins {{ cowven.wins }}</p>
+            <p>Loses {{ cowven.loses }}</p>
+            <p>Members {{ cowven.members.length }}</p>
           </div>
         </div>
 
