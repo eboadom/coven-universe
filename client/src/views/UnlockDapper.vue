@@ -13,14 +13,12 @@
     />
     <div class="container">
       <img src="../assets/dapper-logo.png" alt />
-      <p>
-        It seems you need to unlock or connect your browser wallet to Cheeze
-        DAO.
-      </p>
+      <p>It seems you need to unlock or connect your browser wallet to Cheeze DAO.</p>
       <p>Please proceed to do so.</p>
+      <p>Also, please don't forget, that our DAPP is only on rinkeby now!</p>
 
       <button class="button" v-on:click="onUnlockClick">
-        Unlock Dapper
+        Unlock wallet
       </button>
     </div>
   </div>
@@ -29,7 +27,6 @@
 <script>
 export default {
   name: "unlock-dapper",
-  components: {},
   props: {
     onUnlockClick: Function
   }

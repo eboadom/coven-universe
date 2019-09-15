@@ -34,17 +34,20 @@ export default {
       if (typeof window.ethereum !== "undefined") {
         const web3 = getWeb3();
         this.dapperAvailable = true;
-        try {
-          await web3.givenProvider.enable();
-          const accounts = await web3.eth.getAccounts();
-          if (accounts && accounts.length) {
-            this.dapperUnlocked = true;
-            //TODO: replace with something Vue specific
-            window.userWallet = accounts[0];
+        const currentNetwork = await web3.eth.net.getNetworkType();
+        if(process.env.VUE_APP_ETH_NETWORK  === currentNetwork) {
+          try {
+            await web3.givenProvider.enable();
+            const accounts = await web3.eth.getAccounts();
+            if (accounts && accounts.length) {
+              this.dapperUnlocked = true;
+              //TODO: replace with something Vue specific
+              window.userWallet = accounts[0];
+            }
+          } catch (error) {
+            // eslint-disable-next-line no-console
+            console.log(error);
           }
-        } catch (error) {
-          // eslint-disable-next-line no-console
-          console.log(error);
         }
       }
       this.loading = false;
