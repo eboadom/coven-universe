@@ -38,8 +38,8 @@
         </div>
 
         <v-select
-          v-model="wizardId"
-          :items="wizardsId"
+          v-model="wizard"
+          :items="wizardsList"
           :rules="[v => !!v || 'Wizard ID is required']"
           label="Choose your Wizard"
           required
@@ -91,7 +91,7 @@ export default {
       valid: true,
 
       name: "",
-      wizardId: null,
+      wizard: null,
       email: "",
       amount: null,
       spell: null,
@@ -114,7 +114,6 @@ export default {
         {"disabled": true, "text" : "TODO: Convert God", "value": "TODO: Convert God"},
         {"disabled": true, "text" : "TODO: Kick Wizard", "value": "TODO: Kick Wizard"},
       ],
-      wizardsId: props.members.map(item => item.id),
       grateOnes: [
         "The Grate Balance",
         "The Grate Wave",
@@ -122,6 +121,11 @@ export default {
         "The Grate Flames"
       ]
     };
+  },
+  computed: {
+    wizardsList() {
+      return this.members.map(item => ({text: item.wizardId, value: item.wizardWallet}));
+    }
   },
   methods: {
     checkSelectOptionDisabled(item) {
@@ -131,7 +135,6 @@ export default {
       e.preventDefault();
       const web3 = getWeb3();
       if (this.$refs.form.validate()) {
-        const wizard = this.members.find(m => m.id === this.wizardId);
         const {
           data: { createProposalForReputationReward: txs }
         } = await this.$apollo.mutate({
@@ -139,7 +142,7 @@ export default {
           variables: {
             data: {
               proposer: window.userWallet,
-              beneficiary: wizard.wizardWalletData.wizardWalletAddress,
+              beneficiary: this.wizard,
               reputationChange: this.amount,
               daoTokenChange: "0"
             }
@@ -147,7 +150,8 @@ export default {
         });
         await web3.eth.sendTransaction(txs[0]);
         await this.onSuccessSubmission();
-        this.dialogSpell = true;
+        // this.reset();
+        // this.dialogSpell = true;
       }
     },
     reset() {

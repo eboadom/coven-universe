@@ -2,7 +2,8 @@
   <Preloader
     v-if="
       $apollo.queries.allDaosInfo.loading ||
-        $apollo.queries.allWizardsDataByOwner.loading
+      $apollo.queries.allWizardsDataByOwner.loading ||
+      $apollo.queries.allWizardWalletsCreated.loading
     "
   />
   <div class="errorPage" v-else-if="!cowven">
@@ -70,7 +71,7 @@
           :myWizards="myWizardsInCowven"
           :onSuccessVote="handleSuccessSubmission"
         />
-        <MakeProposal :members="cowven.members" :onSuccessSubmission="handleSuccessSubmission" v-else />
+        <MakeProposal :members="allWizardWalletsCreated" :onSuccessSubmission="handleSuccessSubmission" v-else />
       </div>
     </div>
   </div>
@@ -81,7 +82,7 @@ import Preloader from "../components/Preloader.vue";
 import TopNav from "../components/TopNav.vue";
 import Spells from "../components/Spells.vue";
 import MakeProposal from "../components/MakeProposal.vue";
-import { allDaosData, allWizardsByUserAddress } from "../graphql/queries";
+import { allDaosData, allWizardsByUserAddress, allWizardWalletsCreated } from "../graphql/queries";
 
 export default {
   props: ["id"],
@@ -102,12 +103,16 @@ export default {
           address: window.userWallet
         };
       }
+    },
+    allWizardWalletsCreated: {
+      query: allWizardWalletsCreated,
     }
   },
   data() {
     return {
       allDaosInfo: [],
       allWizardsDataByOwner: [],
+      allWizardWalletsCreated: [],
       showCreateProposal: false,
       search: "",
       headers: [

@@ -67,3 +67,12 @@ export const allWizardsByUserAddress = gql`
     }
   }
 `;
+
+export const allWizardWalletsCreated = gql`
+  query AllWizardWalletsCreated {
+    allWizardWalletsCreated {
+      wizardId
+      wizardWallet
+    }
+  }
+`;
