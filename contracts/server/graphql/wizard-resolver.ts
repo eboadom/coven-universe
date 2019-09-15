@@ -16,6 +16,7 @@ import {
   IWizardWalletData,
   WizardsService,
   eWizardAffinity,
+  IWizardIdWithWallet,
 } from "../../services/WizardsService"
 import {tEthereumAddress} from "../configuration"
 import {IsEthAddress} from "./validators"
@@ -55,6 +56,14 @@ export class WizardData implements IWizardData {
   status: eWizardStatus
   @Field(type => WizardWalletData)
   wizardWalletData: WizardWalletData
+}
+
+@ObjectType()
+export class WizardIdWithWallet implements IWizardIdWithWallet {
+  @Field()
+  wizardId: string
+  @Field()
+  wizardWallet: tEthereumAddress
 }
 
 @InputType()
@@ -104,6 +113,11 @@ export class WizardResolver {
     userWallet,
   }: WizardDataInput): Promise<WizardData[]> {
     return await this.wizardsService.getAllWizardsDataByOwner(userWallet)
+  }
+
+  @Query(returns => [WizardIdWithWallet])
+  async allWizardWalletsCreated(): Promise<WizardIdWithWallet[]> {
+    return await this.wizardsService.getAllWizardWalletsCreated()
   }
 
   @Mutation(returns => EthereumTransactionModel)

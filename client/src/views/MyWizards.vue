@@ -48,7 +48,7 @@
                 class="button button-small"
                 @click="e => createWallet(e, item.id)"
               >
-                Create wallet
+                Create RepBag
               </button>
             </div>
           </template>
@@ -61,7 +61,7 @@
         <img src="../assets/wheel.svg" alt />
         <h1>Thank You</h1>
         <v-card-text>
-          Wallet successfully created
+          RepBag successfully created
         </v-card-text>
 
         <v-spacer></v-spacer>
@@ -114,7 +114,7 @@ export default {
           text: "Reputation",
           value: "reputation"
         },
-        { text: "Wallet", value: "wizardWalletData.wizardWalletAddress" }
+        { text: "RepBag", value: "wizardWalletData.wizardWalletAddress" }
       ]
     };
   },

@@ -142,11 +142,9 @@
           Cheeze Andrew
         </p>
 
-        <h2>What is the Wizard wallet ?</h2>
+        <h2>What is the Wizard's RepBag ?</h2>
         <p>
-          The Wizard Wallet allows us to assign a reputation directly to your
-          Wizard, each wizards seat in an individual wallet to get reputation
-          and govern their Cowven.
+          The RepBag allows the Wizard to hold reputation directly, so he will need to have one to participate in the governance of a Cowven.
         </p>
       </v-card>
     </v-dialog>

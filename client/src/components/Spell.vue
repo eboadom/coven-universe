@@ -1,7 +1,7 @@
 <template>
   <div class="proposal-container">
     <div class="topline">
-      <p>Type: {{ proposal.type }}</p>
+      <p>Type: {{ proposal.type === "REPUTATION_REWARD" ? "Reputation Reward" : "" }}</p>
       <p>Wizard: #{{ proposal.wizardIdBeneficiary }}</p>
       <p>Reputation: {{ proposal.reputationReward }}</p>
       <p>Status: {{ proposal.status }}</p>
