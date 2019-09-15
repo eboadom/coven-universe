@@ -1,75 +1,125 @@
 <template>
   <div class="proposal-container">
-    <div class="topline">
-      <p>Type: {{ proposal.type === "REPUTATION_REWARD" ? "Reputation Reward" : "" }}</p>
-      <p>Wizard: #{{ proposal.wizardIdBeneficiary }}</p>
-      <p>Reputation: {{ proposal.reputationReward }}</p>
-      <p>Status: {{ proposal.status }}</p>
-    </div>
-
-    <p class="description">{{ proposal.description }}</p>
-
-    <div class="buttons-inner">
-      <div v-if="isAllowedToRedeem">
-        <button :class="['button', 'vote']" @click.prevent="handleRedeem">
-          Redeem
-        </button>
+    <template v-if="!showVoteForm">
+      <div class="topline">
+        <p>Type: {{ proposal.type === "REPUTATION_REWARD" ? "Reputation Reward" : "" }}</p>
+        <p>Wizard: #{{ proposal.wizardIdBeneficiary }}</p>
+        <p>Reputation: {{ proposal.reputationReward }}</p>
+        <p>Status: {{ proposal.status }}</p>
       </div>
-      <div v-else>
-        <button
-          :class="['button', 'vote', voteStatus === 0 && 'active']"
-          :disabled="isButtonDisabled"
-        >
-          Nay
-          <span class="voteCounter voteCounter__no">
-            {{ proposal.noVotes }}
-          </span>
-        </button>
-        <button
-          :class="['button', 'vote', voteStatus === 1 && 'active']"
-          :disabled="isButtonDisabled"
-        >
-          Aye
-          <span class="voteCounter voteCounter__yes">
-            {{ proposal.yesVotes }}
-          </span>
-        </button>
+
+      <p class="description">{{ proposal.description }}</p>
+
+      <div class="buttons-inner">
+        <div v-if="isAllowedToRedeem">
+          <button :class="['button', 'vote']" @click.prevent="handleRedeem">
+            Redeem
+          </button>
+        </div>
+        <div v-else>
+          <button
+            :class="['button', 'vote']"
+            :disabled="isVoteDisabled"
+            @click.prevent="toggleVoteForm('2')"
+          >
+            Nay
+            <span class="voteCounter voteCounter__no">
+              {{ proposal.noVotes }}
+            </span>
+          </button>
+          <button
+            :class="['button', 'vote']"
+            :disabled="isVoteDisabled"
+            @click.prevent="toggleVoteForm('1')"
+          >
+            Aye
+            <span class="voteCounter voteCounter__yes">
+              {{ proposal.yesVotes }}
+            </span>
+          </button>
+        </div>
       </div>
-    </div>
+    </template>
+    <template v-else>
+      <h3>Your time to deside!</h3>
+      <v-form>
+        <v-select
+          v-model="pendingWizardWallet"
+          :items="notVotedWizards.map(v => ({text: v.id, value: v.wizardWalletData.wizardWalletAddress}))"
+          :rules="[v => !!v || 'Wizard ID is required']"
+          label="Choose your Wizard"
+          required
+        />
+        <p>
+          <button class="button" @click.prevent="handleVoteSubmit">Let's vote!</button>
+        </p>
+        <p>
+          <button class="button" @click.prevent="toggleVoteForm">Next time</button>
+        </p>
+      </v-form>
+    </template>
   </div>
 </template>
 
 <script>
-import { redeemReputation } from "../graphql/mutations";
+  import { redeemReputation, voteOnProposalMutation } from "../graphql/mutations";
 import { getWeb3 } from "../helpers/web3-helpers";
 
 export default {
   name: "Spell",
-  props: ["proposal", "myWizards"],
+  props: ["proposal", "myWizards", "onSuccessVote"],
+  data() {
+    return {
+      pendingWizardWallet: '',
+      showVoteForm: false,
+      pendingVote: '',
+    }
+  },
   computed: {
-    voteStatus() {
-      const userWallet = window.userWallet;
-      const vote = this.proposal.voters.find(
-        v => v.voterAddress.toLowerCase() === userWallet.toLowerCase()
-      );
-      if (vote) {
-        return Number(vote.voteData.vote);
-      }
-      return -1;
+    notVotedWizards() {
+      return this.myWizards.filter(wizard => {
+        for (const vote of this.proposal.voters) {
+          if(vote.voterAddress === wizard.wizardWalletData.wizardWalletAddress) {
+            return false
+          }
+        }
+        return true
+      })
     },
-    isButtonDisabled() {
-      return this.voteStatus >= 0 || this.proposal.status !== "Voting";
+    isVoteDisabled() {
+      return !this.notVotedWizards.length || this.proposal.status !== "Voting";
     },
     isAllowedToRedeem() {
-      // const wizard = this.myWizards.find(
-      //   w =>
-      //     w.wizardWalletData &&
-      //     w.wizardWalletData.wizardWalletAddress === this.proposal.beneficiary
-      // );
       return this.proposal.status === "Redeemable";
     }
   },
   methods: {
+    toggleVoteForm(vote = '') {
+      this.pendingVote = vote;
+      this.showVoteForm = !this.showVoteForm;
+    },
+    async handleVoteSubmit() {
+      const web3 = getWeb3();
+      const {
+        data: { voteProposal: txs }
+      } = await this.$apollo.mutate({
+        mutation: voteOnProposalMutation,
+        variables: {
+          data: {
+            sender: window.userWallet,
+            voter: this.pendingWizardWallet,
+            proposalId: this.proposal.id,
+            vote: Number(this.pendingVote),
+            reputationToUse: "-1",
+          }
+        }
+      });
+      await web3.eth.sendTransaction(txs[0]);
+      await this.onSuccessVote();
+      this.pendingWizardWallet = '';
+      this.pendingVote = '';
+      this.showVoteForm = false;
+    },
     async handleRedeem() {
       const {
         data: { redeemReputation: txs }
@@ -94,6 +144,7 @@ export default {
 @import "../style/vars";
 .proposal-container {
   margin-bottom: 20px;
+  min-height: 270px;
   border: solid 1px #000000;
   background-color: #ffffff;
   padding: 15px 15px 25px;

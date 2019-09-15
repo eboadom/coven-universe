@@ -7,6 +7,7 @@
         :key="proposal.id"
         :proposal="proposal"
         :myWizards="myWizards"
+        :onSuccessVote="onSuccessVote"
       />
     </VuePerfectScrollbar>
     <v-dialog v-model="dialog" content-class="thank-dialog">
@@ -35,7 +36,7 @@ import Spell from "../components/Spell";
 
 export default {
   name: "Spells",
-  props: ["proposals", "myWizards"],
+  props: ["proposals", "myWizards", "onSuccessVote"],
   components: {
     Spell,
     VuePerfectScrollbar

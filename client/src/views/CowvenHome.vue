@@ -67,7 +67,8 @@
         <Spells
           v-if="!showCreateProposal"
           :proposals="cowven.proposals"
-          :myWizards="allWizardsDataByOwner"
+          :myWizards="myWizardsInCowven"
+          :onSuccessVote="handleSuccessSubmission"
         />
         <MakeProposal :members="cowven.members" :onSuccessSubmission="handleSuccessSubmission" v-else />
       </div>
@@ -133,6 +134,12 @@ export default {
   computed: {
     cowven() {
       return this.allDaosInfo.find(item => item.id === this.id);
+    },
+    myWizardsInCowven() {
+      return this.allWizardsDataByOwner.filter(
+        wizard => wizard.cowvenAddress === this.cowven.avatarAddress &&
+        Number(wizard.wizardWalletData.genecheezeDaoReputation)
+      )
     }
   },
   methods: {
