@@ -33,8 +33,9 @@ export enum eVote {
 }
 
 export enum eProposalStatus {
-  Open = "Open",
-  Closed = "Closed",
+  Voting = "Voting",
+  Redeemable = "Redeemable",
+  Redeemed = "Redeemed",
 }
 
 export enum eGrateType {
@@ -47,6 +48,7 @@ export enum eGrateType {
 
 export enum eContributionRewardEvent {
   NewContributionProposal = "NewContributionProposal",
+  ProposalExecuted = "ProposalExecuted",
   RedeemReputation = "RedeemReputation",
 }
 
@@ -239,11 +241,23 @@ export class DaoService extends ContractService implements IDaoService {
       fromBlock: 0,
     })
 
-  private getCreatedContributionsProposalsFromEvents = async (): Promise<
+  private getAllNewContributionProposalEvents = async (): Promise<
     EventData[]
   > =>
     await this.getContributionRewardContract().getPastEvents(
       eContributionRewardEvent.NewContributionProposal,
+      {fromBlock: 0},
+    )
+
+  private getAllProposalExecutedEvents = async (): Promise<EventData[]> =>
+    await this.getContributionRewardContract().getPastEvents(
+      eContributionRewardEvent.ProposalExecuted,
+      {fromBlock: 0},
+    )
+
+  private getAllRedeemReputationEvents = async (): Promise<EventData[]> =>
+    await this.getContributionRewardContract().getPastEvents(
+      eContributionRewardEvent.RedeemReputation,
       {fromBlock: 0},
     )
 
@@ -270,12 +284,17 @@ export class DaoService extends ContractService implements IDaoService {
   private getProposalVotingMachineData = async (
     proposalId: string,
   ): Promise<IProposalVotingMachineData> => {
-    const rawProposalVotingMachineData = await this.getQuorumVoteContract()
-      .methods.proposals(proposalId)
-      .call()
-    const voteProposalEventsByProposal = await this.getVoteProposalEventsByProposal(
-      proposalId,
-    )
+    const [
+      rawProposalVotingMachineData,
+      voteProposalEventsByProposal,
+      allRedeemReputationEvents,
+    ] = await Promise.all([
+      this.getQuorumVoteContract()
+        .methods.proposals(proposalId)
+        .call(),
+      this.getVoteProposalEventsByProposal(proposalId),
+      this.getAllRedeemReputationEvents(),
+    ])
 
     const voters: IVoterData[] = voteProposalEventsByProposal.map(event => ({
       voterAddress: event.returnValues[2],
@@ -306,13 +325,20 @@ export class DaoService extends ContractService implements IDaoService {
           : [countYes, countNo, countAbstain + 1],
       [0, 0, 0],
     )
+
+    const status = rawProposalVotingMachineData.open
+      ? eProposalStatus.Voting
+      : allRedeemReputationEvents.find(
+          eventData => eventData.returnValues._proposalId === proposalId,
+        )
+      ? eProposalStatus.Redeemed
+      : eProposalStatus.Redeemable
+
     return {
       id: proposalId,
       type: eProposalType.REPUTATION_REWARD,
       description: "Give/take some reputation to/from the beneficiary", // TODO unmock
-      status: rawProposalVotingMachineData.open
-        ? eProposalStatus.Open
-        : eProposalStatus.Closed,
+      status,
       totalVotes: voteProposalEventsByProposal.length,
       yesVotes: countYes,
       noVotes: countNo,
@@ -323,7 +349,7 @@ export class DaoService extends ContractService implements IDaoService {
   getAllContributionRewardProposals = async (): Promise<
     IContributionRewardProposalData[]
   > => {
-    const allContributionRewardsProposalEvents = await this.getCreatedContributionsProposalsFromEvents()
+    const allContributionRewardsProposalEvents = await this.getAllNewContributionProposalEvents()
     const allContributionRewardsProposals: IContributionRewardProposalData[] = []
     for (const {returnValues} of allContributionRewardsProposalEvents) {
       const proposalVotingMachineData = await this.getProposalVotingMachineData(
