@@ -73,7 +73,7 @@ export default {
 }
 
 .proposals-inner {
-  max-height: 500px;
+  max-height: 580px;
   overflow-y: auto;
   padding-right: 25px;
 }

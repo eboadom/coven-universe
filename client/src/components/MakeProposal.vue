@@ -44,22 +44,13 @@
           required
         ></v-select>
 
-        <!--        <v-text-field-->
-        <!--          v-if="spell === 'Change activity penalty length'"-->
-        <!--          v-model="numDays"-->
-        <!--          :rules="[v => !!v || 'Number of Days is required']"-->
-        <!--          label="How many days?"-->
-        <!--          required-->
-        <!--        ></v-text-field>-->
-
-        <!--        <v-select-->
-        <!--          v-if="spell === 'Convert your Cowven'"-->
-        <!--          v-model="grateOne"-->
-        <!--          :items="grateOnes"-->
-        <!--          :rules="[v => !!v || 'Grate One is required']"-->
-        <!--          label="Whom do you worship?"-->
-        <!--          required-->
-        <!--        ></v-select>-->
+        <v-text-field
+          v-model="amount"
+          :rules="[v => !!v || 'Reputation amount is required']"
+          label="Reputation amount"
+          type="number"
+          required
+        ></v-text-field>
 
         <v-textarea
           :counter="250"
@@ -111,7 +102,7 @@ export default {
       name: "",
       wizardId: null,
       email: "",
-      numDays: "",
+      amount: null,
       spell: null,
       grateOne: null,
       description: "",
@@ -146,13 +137,15 @@ export default {
       const web3 = getWeb3();
       if (this.$refs.form.validate()) {
         const wizard = this.members.find(m => m.id === this.wizardId);
-        const {data: {createProposalForReputationReward: txs}} = await this.$apollo.mutate({
+        const {
+          data: { createProposalForReputationReward: txs }
+        } = await this.$apollo.mutate({
           mutation: createProposalMutation,
           variables: {
             data: {
               proposer: window.userWallet,
               beneficiary: wizard.wizardWalletData.wizardWalletAddress,
-              reputationChange: "50",
+              reputationChange: this.amount,
               daoTokenChange: "50"
             }
           }
