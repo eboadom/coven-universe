@@ -71,7 +71,27 @@
           :myWizards="myWizardsInCowven"
           :onSuccessVote="handleSuccessSubmission"
         />
-        <MakeProposal :members="allWizardWalletsCreated" :onSuccessSubmission="handleSuccessSubmission" v-else />
+        <MakeProposal :members="allWizardWalletsCreated" :onSuccessSubmission="handleSuccessProposalSubmission" v-else />
+        <v-dialog v-model="dialogProposalSuccess" content-class="thank-dialog">
+          <v-card class="dialog">
+            <img src="../assets/wheel.svg" alt />
+            <h1>Thank You</h1>
+            <v-card-text
+            >You have submitted your proposal. It will now be reviewed by the
+              Cowven, drink milk in the meantime.</v-card-text
+            >
+
+            <v-spacer />
+            <button
+              class="button"
+              color="primary"
+              text
+              @click.prevent="toggleDialogProposalSuccess"
+            >
+              Gouda'nough
+            </button>
+          </v-card>
+        </v-dialog>
       </div>
     </div>
   </div>
@@ -110,6 +130,7 @@ export default {
   },
   data() {
     return {
+      dialogProposalSuccess: false,
       allDaosInfo: [],
       allWizardsDataByOwner: [],
       allWizardWalletsCreated: [],
@@ -153,6 +174,14 @@ export default {
     },
     async handleSuccessSubmission() {
       await this.$apollo.queries.allDaosInfo.refetch();
+    },
+    toggleDialogProposalSuccess() {
+      this.dialogProposalSuccess = !this.dialogProposalSuccess;
+    },
+    async handleSuccessProposalSubmission() {
+      await this.handleSuccessSubmission();
+      this.showNewSpellForm();
+      this.toggleDialogProposalSuccess();
     }
   }
 };
@@ -271,4 +300,26 @@ export default {
     }
   }
 }
+.dialog {
+  display: flex;
+  flex-direction: column;
+  vertical-align: center;
+  text-align: center;
+
+  img {
+    padding: 2rem 0;
+    margin: auto;
+  }
+
+  .v-card__text {
+    padding: 3rem;
+    padding-bottom: 0;
+  }
+
+  button {
+    margin: auto;
+    margin-bottom: 2rem;
+  }
+}
+
 </style>

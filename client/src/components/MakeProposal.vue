@@ -55,26 +55,6 @@
 
         <button class="button" @click.prevent="submit">Aye!</button>
       </v-form>
-      <v-dialog v-model="dialogSpell" content-class="thank-dialog">
-        <v-card class="dialog">
-          <img src="../assets/wheel.svg" alt />
-          <h1>Thank You</h1>
-          <v-card-text
-            >You have submitted your proposal. It will now be reviewed by the
-            Cowven, drink milk in the meantime.</v-card-text
-          >
-
-          <v-spacer />
-          <button
-            class="button"
-            color="primary"
-            text
-            @click="dialogSpell = false"
-          >
-            Gouda'nough
-          </button>
-        </v-card>
-      </v-dialog>
     </div>
   </div>
 </template>
@@ -86,7 +66,7 @@ import { getWeb3 } from "../helpers/web3-helpers";
 export default {
   name: "MakeProposal",
   props: ["members", "onSuccessSubmission"],
-  data(props) {
+  data() {
     return {
       valid: true,
 
@@ -99,7 +79,6 @@ export default {
       description: "",
 
       dialogInfo: false,
-      dialogSpell: false,
       nameRules: [
         v => !!v || "Name is required",
         v => (v && v.length <= 10) || "Name must be less than 10 characters"
@@ -149,9 +128,8 @@ export default {
           }
         });
         await web3.eth.sendTransaction(txs[0]);
+        this.reset();
         await this.onSuccessSubmission();
-        // this.reset();
-        // this.dialogSpell = true;
       }
     },
     reset() {
