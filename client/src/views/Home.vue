@@ -189,6 +189,13 @@ export default {
     }
   }
 }
+
+.leaderboard tbody .expanded__content td {
+  @include respond-to(sm) {
+    width: 100%;
+    max-width: 160px;
+  }
+}
 </style>
 
 <style lang="scss" scoped>

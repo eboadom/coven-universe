@@ -41,7 +41,6 @@
       <div class="Preloader__tips">
         <div class="Preloader__tip">
           <p>
-            TIP:
             <span contenteditable="true" v-html="random()" class="tip"></span>
           </p>
         </div>

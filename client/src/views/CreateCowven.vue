@@ -42,7 +42,9 @@
               data-vv-name="description"
             ></v-textarea>
 
-            <button class="button" @click="submit">Start the Ritual</button>
+            <button class="button" @click.prevent="submit">
+              Start the Ritual
+            </button>
           </v-form>
           <v-dialog v-model="dialog" width="500">
             <v-card class="dialog">
