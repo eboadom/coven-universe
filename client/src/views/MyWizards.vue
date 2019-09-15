@@ -20,6 +20,11 @@
               "
             />
           </template>
+
+          <template v-slot:item.score="{ item }">
+            {{ item.score || 0 }}
+          </template>
+
           <template v-slot:item.wizardWalletData.wizardWalletAddress="{ item }">
             <div
               class="wallet-inner"
@@ -121,7 +126,9 @@ export default {
     async createWallet(e, wizardId) {
       e.preventDefault();
       const web3 = getWeb3();
-      const {data: {createWalletForWizard: tx}} = await this.$apollo.mutate({
+      const {
+        data: { createWalletForWizard: tx }
+      } = await this.$apollo.mutate({
         mutation: createWalletForWizard,
         variables: {
           data: {

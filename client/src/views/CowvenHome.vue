@@ -57,6 +57,9 @@
                   alt
                 />
               </template>
+              <template v-slot:item.score="{ item }">
+                {{ item.score || 0 }}
+              </template>
             </v-data-table>
           </v-card>
         </div>
@@ -114,9 +117,9 @@ export default {
           value: "affinity"
         },
         {
-          text: "Rank",
+          text: "Power",
           align: "left",
-          value: "score",
+          value: "innatePower"
         },
         { text: "Score", value: "score" },
         {
