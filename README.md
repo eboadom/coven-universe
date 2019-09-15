@@ -12,6 +12,8 @@ CheezeDAO lower the entry barrier to play around with DAO as voting power is not
 - [x] Voting of proposals
 - [x] Creation of Wizard's RepBag, smart contract to allow NFTs to hold reputation.
 - [ ] Creation of other Cowvens using a Cowven Demiurge smart contract.
+- [ ] CBD (Cheezyverse Beliefs Distribution).
+- [ ] G.O.A.T Cheeze board.
 - [ ] + proposal types (Cowvens voting on other DAOs?, DeFi interaction?)
 - [ ] + onchain metadata of the proposals and Cowvens.
 - [ ] + functionalities in the RepBag smart contract.
