@@ -1,14 +1,15 @@
 <template>
   <div class="make-proposal">
-    <h2>Cast a new proposals</h2>
+    <h2>Submit a proposal</h2>
     <div class="proposal-container">
       <v-form ref="form" v-model="valid" lazy-validation>
         <div class="info-wrapper">
           <v-select
             v-model="spell"
             :items="proposal"
-            :rules="[v => !!v || 'Spell is required']"
-            label="Choose your Spell"
+            :item-disabled="checkSelectOptionDisabled"
+            :rules="[v => !!v || 'Proposal type is required']"
+            label="Choose your proposal type"
             required
           ></v-select>
 
@@ -30,7 +31,7 @@
               </p>
               <h4>Convert your Cowven</h4>
               <p>
-                Cast a Spell which will change the Grate you all follow
+                Do a proposal which will change the Grate you all follow
               </p>
             </v-card>
           </v-dialog>
@@ -52,24 +53,14 @@
           required
         ></v-text-field>
 
-        <v-textarea
-          :counter="250"
-          v-model="description"
-          label="Oh but why?"
-          auto-grow
-          outlined
-          rows="9"
-          row-height="15"
-        ></v-textarea>
-
-        <button class="button" @click.prevent="submit">Cast spell</button>
+        <button class="button" @click.prevent="submit">Aye!</button>
       </v-form>
       <v-dialog v-model="dialogSpell" content-class="thank-dialog">
         <v-card class="dialog">
           <img src="../assets/wheel.svg" alt />
           <h1>Thank You</h1>
           <v-card-text
-            >You have casted your spell proposal. It will now be reviewed by the
+            >You have submitted your proposal. It will now be reviewed by the
             Cowven, drink milk in the meantime.</v-card-text
           >
 
@@ -118,12 +109,10 @@ export default {
         v => /.+@.+\..+/.test(v) || "E-mail must be valid"
       ],
       proposal: [
-        "Reputation reward",
-        "TODO: Remove reputation",
-        "TODO: Convert God",
-        "TODO: Kick Wizard",
-        // "Change activity penalty length",
-        // "Convert your Cowven"
+        {"disabled": false, "text" : "Reputation reward", "value": "Reputation reward"},
+        {"disabled": true, "text" : "TODO: Remove reputation", "value": "TODO: Remove reputation"},
+        {"disabled": true, "text" : "TODO: Convert God", "value": "TODO: Convert God"},
+        {"disabled": true, "text" : "TODO: Kick Wizard", "value": "TODO: Kick Wizard"},
       ],
       wizardsId: props.members.map(item => item.id),
       grateOnes: [
@@ -135,6 +124,9 @@ export default {
     };
   },
   methods: {
+    checkSelectOptionDisabled(item) {
+      return item.disabled;
+    },
     async submit(e) {
       e.preventDefault();
       const web3 = getWeb3();
@@ -149,7 +141,7 @@ export default {
               proposer: window.userWallet,
               beneficiary: wizard.wizardWalletData.wizardWalletAddress,
               reputationChange: this.amount,
-              daoTokenChange: "50"
+              daoTokenChange: "0"
             }
           }
         });
@@ -215,6 +207,9 @@ export default {
           transform: scale(1.1);
         }
       }
+    }
+    button {
+      margin-top: 20px;
     }
   }
 }
