@@ -33,7 +33,7 @@
 
         <div class="link-wrapper">
           <span class="change-link" @click="showNewSpellForm">
-            <span v-if="!showCreateProposal">Cast new proposals</span>
+            <span v-if="!showCreateProposal">Submit new proposals</span>
             <span v-else>Active Proposals</span>
           </span>
         </div>
