@@ -8,7 +8,7 @@
 
         <v-data-table
           :headers="headers"
-          :items="allWizardsDataByOwner"
+          :items="formattedWizards"
           :search="search"
           :items-per-page="5"
         >
@@ -110,7 +110,6 @@ export default {
         { text: "Type", value: "affinity" },
         { text: "Score", value: "score" },
         { text: "Cowven", value: "cowvenName" },
-        { text: "Status", value: "status" },
         {
           text: "Reputation",
           value: "wizardWalletData.genecheezeDaoReputation"
@@ -118,6 +117,15 @@ export default {
         { text: "Wallet", value: "wizardWalletData.wizardWalletAddress" }
       ]
     };
+  },
+  computed: {
+    formattedWizards() {
+      return this.allWizardsDataByOwner.map(wizard => ({
+        ...wizard,
+        cowvenName: wizard.cowvenName && wizard.status !== 'FREE' ? wizard.cowvenName : '-',
+        score: wizard.score || '-'
+      }))
+    }
   },
   methods: {
     openModal() {
@@ -138,6 +146,7 @@ export default {
         }
       });
       await web3.eth.sendTransaction(tx);
+      await this.$apollo.queries.allWizardsDataByOwner.refetch();
       this.openModal();
     }
   }

@@ -12,10 +12,13 @@
       src="../assets/bottom-cheese.svg"
     />
     <div class="container">
-      <img src="../assets/dapper-logo.png" alt />
-      <p>It seems you need to unlock or connect your browser wallet to Cheeze DAO.</p>
-      <p>Please proceed to do so.</p>
-      <p>Also, please don't forget, that our DAPP is only on rinkeby now!</p>
+      <img src="../assets/meta-mask.png" alt />
+      <p>It seems you need to unlock or connect your browser wallet to Cheeze DAO. Please proceed to do so.</p>
+      <p>
+        * Our DAPP is only available on the Rinkeby Test Network at this stage. Please change from ‘
+        Main Ethereum Network to ‘
+        Rinkeby Test Network. This can be done via the dropdown in the top of the MetaMask wallet *
+      </p>
 
       <button class="button" v-on:click="onUnlockClick">
         Unlock wallet
@@ -69,7 +72,7 @@ export default {
     }
 
     img {
-      width: 24rem;
+      width: 14rem;
       @include respond-to(xs) {
         width: 100%;
       }
@@ -82,7 +85,7 @@ export default {
     }
 
     p {
-      margin: 4rem 0;
+      margin: 3rem 0;
     }
   }
 
