@@ -72,28 +72,28 @@
           :onSuccessVote="handleSuccessSubmission"
         />
         <MakeProposal :members="allWizardWalletsCreated" :onSuccessSubmission="handleSuccessProposalSubmission" v-else />
-        <v-dialog v-model="dialogProposalSuccess" content-class="thank-dialog">
-          <v-card class="dialog">
-            <img src="../assets/wheel.svg" alt />
-            <h1>Thank You</h1>
-            <v-card-text
-            >You have submitted your proposal. It will now be reviewed by the
-              Cowven, drink milk in the meantime.</v-card-text
-            >
-
-            <v-spacer />
-            <button
-              class="button"
-              color="primary"
-              text
-              @click.prevent="toggleDialogProposalSuccess"
-            >
-              Gouda'nough
-            </button>
-          </v-card>
-        </v-dialog>
       </div>
     </div>
+    <v-dialog v-model="dialogProposalSuccess" content-class="thank-dialog">
+      <v-card class="dialog">
+        <img src="../assets/wheel.svg" alt />
+        <h1>Thank You</h1>
+        <v-card-text
+        >You have submitted your proposal. It will now be reviewed by the
+          Cowven, drink milk in the meantime.</v-card-text
+        >
+
+        <v-spacer />
+        <button
+          class="button"
+          color="primary"
+          text
+          @click.prevent="toggleDialogProposalSuccess"
+        >
+          Gouda'nough
+        </button>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
