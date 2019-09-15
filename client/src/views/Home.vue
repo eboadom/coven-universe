@@ -117,7 +117,7 @@ export default {
         { text: "Name", value: "id" },
         { text: "Score", value: "score" },
         { text: "Members", value: "members" },
-        { text: "God", value: "grate" }
+        { text: "Grate", value: "grate" }
       ]
     };
   },

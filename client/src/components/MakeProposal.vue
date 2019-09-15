@@ -90,7 +90,7 @@ export default {
       proposal: [
         {"disabled": false, "text" : "Reputation reward", "value": "Reputation reward"},
         {"disabled": true, "text" : "TODO: Remove reputation", "value": "TODO: Remove reputation"},
-        {"disabled": true, "text" : "TODO: Convert God", "value": "TODO: Convert God"},
+        {"disabled": true, "text" : "TODO: Change Grate", "value": "TODO: Change Grate"},
         {"disabled": true, "text" : "TODO: Kick Wizard", "value": "TODO: Kick Wizard"},
       ],
       grateOnes: [
