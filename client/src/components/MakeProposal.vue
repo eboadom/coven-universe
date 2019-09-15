@@ -85,7 +85,7 @@ import { getWeb3 } from "../helpers/web3-helpers";
 
 export default {
   name: "MakeProposal",
-  props: ["members"],
+  props: ["members", "onSuccessSubmission"],
   data(props) {
     return {
       valid: true,
@@ -146,8 +146,8 @@ export default {
           }
         });
         await web3.eth.sendTransaction(txs[0]);
+        await this.onSuccessSubmission();
         this.dialogSpell = true;
-        this.reset();
       }
     },
     reset() {

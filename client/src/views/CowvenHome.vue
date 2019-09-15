@@ -69,7 +69,7 @@
           :proposals="cowven.proposals"
           :myWizards="allWizardsDataByOwner"
         />
-        <MakeProposal :members="cowven.members" v-else />
+        <MakeProposal :members="cowven.members" :onSuccessSubmission="handleSuccessSubmission" v-else />
       </div>
     </div>
   </div>
@@ -138,6 +138,9 @@ export default {
   methods: {
     showNewSpellForm() {
       this.showCreateProposal = !this.showCreateProposal;
+    },
+    async handleSuccessSubmission() {
+      await this.$apollo.queries.allDaosInfo.refetch();
     }
   }
 };
