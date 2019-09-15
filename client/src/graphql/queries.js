@@ -42,6 +42,7 @@ export const allDaosData = gql`
         }
         reputationReward
         beneficiary
+        wizardIdBeneficiary
         executionTime
       }
     }

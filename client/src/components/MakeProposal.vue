@@ -62,7 +62,7 @@
           row-height="15"
         ></v-textarea>
 
-        <button class="button" @click="submit">Cast spell</button>
+        <button class="button" @click.prevent="submit">Cast spell</button>
       </v-form>
       <v-dialog v-model="dialogSpell" content-class="thank-dialog">
         <v-card class="dialog">
@@ -73,7 +73,7 @@
             Cowven, drink milk in the meantime.</v-card-text
           >
 
-          <v-spacer></v-spacer>
+          <v-spacer />
           <button
             class="button"
             color="primary"
@@ -118,7 +118,10 @@ export default {
         v => /.+@.+\..+/.test(v) || "E-mail must be valid"
       ],
       proposal: [
-        "Reputation reward"
+        "Reputation reward",
+        "TODO: Remove reputation",
+        "TODO: Convert God",
+        "TODO: Kick Wizard",
         // "Change activity penalty length",
         // "Convert your Cowven"
       ],

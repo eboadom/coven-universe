@@ -113,7 +113,7 @@
           What is the difference between my Score and my Reputation ?
         </h2>
         <p>
-          The score is your cross tournament win/los ratio, once in a DAO, you
+          The score is your cross tournament win/loss ratio, once in a DAO, you
           are assigned or removed reputation based on that score
         </p>
 

@@ -2,7 +2,7 @@
   <div class="proposal-container">
     <div class="topline">
       <p>Type: {{ proposal.type }}</p>
-      <p>Wizard: {{ proposal.beneficiary }}</p>
+      <p>Wizard: #{{ proposal.wizardIdBeneficiary }}</p>
       <p>Reputation: {{ proposal.reputationReward }}</p>
       <p>Status: {{ proposal.status }}</p>
     </div>
@@ -24,8 +24,8 @@
           :disabled="isButtonDisabled"
         >
           Nay
-          <span class="voteCounter voteCounter__no" v-if="!!nay">
-            {{ nay }}
+          <span class="voteCounter voteCounter__no">
+            {{ proposal.noVotes }}
           </span>
         </button>
         <button
@@ -33,8 +33,8 @@
           :disabled="isButtonDisabled"
         >
           Aye
-          <span class="voteCounter voteCounter__yes" v-if="!!aye">
-            {{ aye }}
+          <span class="voteCounter voteCounter__yes">
+            {{ proposal.yesVotes }}
           </span>
         </button>
       </div>
@@ -49,8 +49,6 @@ export default {
   data() {
     return {
       reedem: 0,
-      nay: 5,
-      aye: 100
     };
   },
   computed: {
@@ -65,7 +63,7 @@ export default {
       return -1;
     },
     isButtonDisabled() {
-      return this.voteStatus >= 0 || this.proposal.status === "Closed";
+      return this.voteStatus >= 0 || this.proposal.status !== "Voting";
     },
     isAllowedToRedeem() {
       const wizard = this.myWizards.find(
@@ -73,7 +71,7 @@ export default {
           w.wizardWalletData &&
           w.wizardWalletData.wizardWalletAddress === this.proposal.beneficiary
       );
-      return !!wizard && this.proposal.status === "Closed";
+      return !!wizard && this.proposal.status === "Redeemable";
     }
   }
 };
