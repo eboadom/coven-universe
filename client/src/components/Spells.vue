@@ -1,6 +1,6 @@
 <template>
   <div class="spell-proposals">
-    <h2>Spell Proposals</h2>
+    <h2>Proposals</h2>
     <VuePerfectScrollbar class="proposals-inner" v-once :settings="settings">
       <Spell
         v-for="proposal in proposals"

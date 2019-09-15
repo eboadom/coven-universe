@@ -80,6 +80,7 @@ export default {
 @import "../style/vars";
 
 .the-sanctuary {
+  margin-bottom: 30px;
   .title-inner {
     margin-bottom: 60px;
     text-align: center;
@@ -117,6 +118,10 @@ export default {
       text-align: center;
       padding: 60px 10px 25px;
       color: #fff;
+      @include respond-to(xl) {
+        padding: 40px 10px 15px;
+      }
+
       @include respond-to(lg) {
         margin: 10px;
       }
@@ -127,9 +132,16 @@ export default {
         justify-content: center;
         align-items: center;
         margin-bottom: 30px;
+        @include respond-to(xl) {
+          height: 100px;
+        }
         img {
           width: 120px;
           max-height: 130px;
+          @include respond-to(xl) {
+            max-height: 100px;
+            width: 95px;
+          }
         }
       }
 
@@ -138,6 +150,9 @@ export default {
         margin-bottom: 10px;
         font-size: 45px;
         font-weight: lighter;
+        @include respond-to(xl) {
+          font-size: 38px;
+        }
       }
 
       h3 {

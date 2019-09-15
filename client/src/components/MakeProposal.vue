@@ -1,6 +1,6 @@
 <template>
   <div class="make-proposal">
-    <h2>Cast a new spell</h2>
+    <h2>Cast a new proposals</h2>
     <div class="proposal-container">
       <v-form ref="form" v-model="valid" lazy-validation>
         <div class="info-wrapper">
@@ -118,7 +118,7 @@ export default {
         v => /.+@.+\..+/.test(v) || "E-mail must be valid"
       ],
       proposal: [
-        "Reputation reword"
+        "Reputation reward"
         // "Change activity penalty length",
         // "Convert your Cowven"
       ],

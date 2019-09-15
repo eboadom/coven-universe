@@ -19,7 +19,7 @@
           <p>
             “{{
               cowven.description ||
-                "should be some funny cowen description, but no :("
+                "This is what you get for playing with milk and mold on chain, even Pasteur can't stop us"
             }}”
           </p>
           <div class="stats">
@@ -33,8 +33,8 @@
 
         <div class="link-wrapper">
           <span class="change-link" @click="showNewSpellForm">
-            <span v-if="!showCreateProposal">Cast new spell</span>
-            <span v-else>Active Spell Proposals</span>
+            <span v-if="!showCreateProposal">Cast new proposals</span>
+            <span v-else>Active Proposals</span>
           </span>
         </div>
       </div>
@@ -149,7 +149,7 @@ export default {
 
 .header-container {
   padding-bottom: 10px;
-  margin: 0 30px 40px;
+  margin: 0 30px 25px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: row;
@@ -157,7 +157,7 @@ export default {
   justify-content: space-between;
   flex-wrap: wrap;
   @include respond-to(sm) {
-    margin: 0 10px 30px;
+    margin: 0 10px 20px;
   }
   h1 {
     font-size: 30px;
@@ -202,6 +202,7 @@ export default {
       padding: 0 2px 5px;
       transition: all 0.3s ease;
       cursor: pointer;
+      font-size: 18px;
       &:hover {
         color: $purple;
         &:after {

@@ -64,8 +64,7 @@
           <div class="summon-container">
             <img src="../assets/utter.svg" alt />
             <p>
-              Summon your Cowven! Gather your wizard homies and rule together
-              the cheesiest coven of the hood.
+              Create your Cowven! Gather your Wizards homies and rule together the cheesiest Cowven of the hood.
             </p>
             <button
               class="button"
@@ -73,11 +72,11 @@
               title="Coming soon"
               v-if="isProduction"
             >
-              Summon
+              Create
             </button>
             <router-link :to="{ name: 'createcowven' }" v-else>
               <button class="button">
-                Summon
+                Create
               </button>
             </router-link>
           </div>
