@@ -86,7 +86,7 @@
         <h2>Who are Grates Ones ?</h2>
         <p>
           The Grates are entities followed by wizards across the country, the
-          majority of their followers is found is their respective territory but
+          majority of their followers is found in their respective territory but
           as crusts are shrinking, their reach is now expanding into other
           territory. <br />
           They organized as follows: <br />
