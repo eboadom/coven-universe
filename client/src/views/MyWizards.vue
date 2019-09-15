@@ -112,7 +112,7 @@ export default {
         { text: "Cowven", value: "cowvenName" },
         {
           text: "Reputation",
-          value: "wizardWalletData.genecheezeDaoReputation"
+          value: "reputation"
         },
         { text: "Wallet", value: "wizardWalletData.wizardWalletAddress" }
       ]
@@ -123,7 +123,8 @@ export default {
       return this.allWizardsDataByOwner.map(wizard => ({
         ...wizard,
         cowvenName: wizard.cowvenName && wizard.status !== 'FREE' ? wizard.cowvenName : '-',
-        score: wizard.score || '-'
+        score: wizard.score || '-',
+        reputation: wizard.wizardWalletData.genecheezeDaoReputation === "0" ? "-" : wizard.wizardWalletData.genecheezeDaoReputation
       }))
     }
   },
