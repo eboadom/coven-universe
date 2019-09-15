@@ -41,13 +41,13 @@
       </div>
     </template>
     <template v-else>
-      <h3>Your time to deside!</h3>
+      <h3>Time to decide!</h3>
       <v-form>
         <v-select
           v-model="pendingWizardWallet"
           :items="notVotedWizards.map(v => ({text: v.id, value: v.wizardWalletData.wizardWalletAddress}))"
           :rules="[v => !!v || 'Wizard ID is required']"
-          label="Choose your Wizard"
+          label="Choose a Wizard"
           required
         />
         <p>
