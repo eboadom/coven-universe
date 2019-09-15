@@ -371,7 +371,7 @@ export const deployDAOMigration = migrationHandler(
     //   ))["1"].toString(),
     // )
 
-    await redeemReputation(slashReputationWizard1ProposalId)
+    // await redeemReputation(slashReputationWizard1ProposalId)
     // await redeemReputation(slashReputationWizard2ProposalId)
     // await redeemReputation(slashReputationWizard3ProposalId)
 

@@ -11,11 +11,8 @@
 
     <div class="buttons-inner">
       <div v-if="isAllowedToRedeem">
-        <button :class="['button', 'vote']">
+        <button :class="['button', 'vote']" @click.prevent="handleRedeem">
           Redeem
-          <span class="voteCounter" v-if="!!reedem">
-            {{ reedem }}
-          </span>
         </button>
       </div>
       <div v-else>
@@ -43,14 +40,12 @@
 </template>
 
 <script>
+import { redeemReputation } from "../graphql/mutations";
+import { getWeb3 } from "../helpers/web3-helpers";
+
 export default {
   name: "Spell",
   props: ["proposal", "myWizards"],
-  data() {
-    return {
-      reedem: 0,
-    };
-  },
   computed: {
     voteStatus() {
       const userWallet = window.userWallet;
@@ -66,12 +61,29 @@ export default {
       return this.voteStatus >= 0 || this.proposal.status !== "Voting";
     },
     isAllowedToRedeem() {
-      const wizard = this.myWizards.find(
-        w =>
-          w.wizardWalletData &&
-          w.wizardWalletData.wizardWalletAddress === this.proposal.beneficiary
-      );
-      return !!wizard && this.proposal.status === "Redeemable";
+      // const wizard = this.myWizards.find(
+      //   w =>
+      //     w.wizardWalletData &&
+      //     w.wizardWalletData.wizardWalletAddress === this.proposal.beneficiary
+      // );
+      return this.proposal.status === "Redeemable";
+    }
+  },
+  methods: {
+    async handleRedeem() {
+      const {
+        data: { redeemReputation: txs }
+      } = await this.$apollo.mutate({
+        mutation: redeemReputation,
+        variables: {
+          data: {
+            redeemer: window.userWallet,
+            proposalId: this.proposal.id
+          }
+        }
+      });
+      const web3 = getWeb3();
+      await web3.eth.sendTransaction(txs[0]);
     }
   }
 };
