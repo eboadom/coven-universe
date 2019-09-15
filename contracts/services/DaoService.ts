@@ -99,6 +99,7 @@ export interface IContributionRewardProposalData
   extends IProposalVotingMachineData {
   reputationReward: tStringCurrencyUnits
   beneficiary: tEthereumAddress
+  wizardIdBeneficiary: string
   executionTime: number
 }
 
@@ -350,10 +351,14 @@ export class DaoService extends ContractService implements IDaoService {
     IContributionRewardProposalData[]
   > => {
     const allContributionRewardsProposalEvents = await this.getAllNewContributionProposalEvents()
+    const allWizardWalletsCreated = await new WizardsService().getAllWizardWalletsCreated()
     const allContributionRewardsProposals: IContributionRewardProposalData[] = []
     for (const {returnValues} of allContributionRewardsProposalEvents) {
       const proposalVotingMachineData = await this.getProposalVotingMachineData(
         returnValues[1],
+      )
+      const wizardData = allWizardWalletsCreated.find(
+        wizard => wizard.wizardWallet === returnValues[7],
       )
       allContributionRewardsProposals.push({
         ...proposalVotingMachineData,
@@ -362,6 +367,7 @@ export class DaoService extends ContractService implements IDaoService {
           this.REPUTATION_DECIMALS,
         ),
         beneficiary: returnValues[7],
+        wizardIdBeneficiary: wizardData ? wizardData.wizardId : "-1",
         executionTime: 0, // TODO unmock
       })
     }

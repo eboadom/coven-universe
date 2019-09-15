@@ -97,6 +97,9 @@ class ContributionRewardProposalData implements IContributionRewardProposalData 
   beneficiary: tEthereumAddress;
 
   @Field()
+  wizardIdBeneficiary: string;
+
+  @Field()
   executionTime: number
 }
 
