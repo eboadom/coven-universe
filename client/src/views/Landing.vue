@@ -24,7 +24,7 @@
       </p>
       <p>
         CheezeDAO is the political extension of the Cheezyverse, it’s games
-        within a game on top of a game (Wow Ethereum gaming lego : &#x1f92f;
+        within a game on top of a game (Wow Ethereum gaming lego &#x1f92f;)
         enabling you to create teams, govern them and worship one of the Grate
         to rule over the Cheezyverse!
       </p>
