@@ -7224,10 +7224,36 @@ export interface WizardsERC721AddressesProviderInstance
 }
 
 export interface WizardWalletInstance extends Truffle.ContractInstance {
-  voteProposal(
-    _vote: number | BigNumber | string,
-    txDetails?: Truffle.TransactionDetails
-  ): Promise<BigNumber>;
+  voteProposal: {
+    (
+      _votingMachine: string | BigNumber,
+      _proposalId: string | BigNumber,
+      _vote: number | BigNumber | string,
+      _reputationToUse: number | BigNumber | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<Truffle.TransactionResponse>;
+    call(
+      _votingMachine: string | BigNumber,
+      _proposalId: string | BigNumber,
+      _vote: number | BigNumber | string,
+      _reputationToUse: number | BigNumber | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<void>;
+    sendTransaction(
+      _votingMachine: string | BigNumber,
+      _proposalId: string | BigNumber,
+      _vote: number | BigNumber | string,
+      _reputationToUse: number | BigNumber | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    estimateGas(
+      _votingMachine: string | BigNumber,
+      _proposalId: string | BigNumber,
+      _vote: number | BigNumber | string,
+      _reputationToUse: number | BigNumber | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<number>;
+  };
 
   withdrawEthFunds: {
     (txDetails?: Truffle.TransactionDetails): Promise<

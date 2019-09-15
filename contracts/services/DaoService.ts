@@ -122,6 +122,7 @@ export interface GrateData {
 export interface IDaoService {
   // Info getters
   getAvatarAddress: () => tEthereumAddress
+  getQuorumVoteAddress: () => tEthereumAddress
   getAllDaosIds: () => Promise<string[]>
   getAllDaosInfo: () => Promise<ICowvenData[]>
   getAllMembersOfDao: () => Promise<IMembersDaoWithReputation[]>
@@ -176,9 +177,6 @@ export class DaoService extends ContractService implements IDaoService {
 
   private getContributionRewardAddress = (): tEthereumAddress =>
     getConfiguration().addresses.ContributionReward
-
-  private getQuorumVoteAddress = (): tEthereumAddress =>
-    getConfiguration().addresses.QuorumVote
 
   private getReputationContract = (
     web3ProviderType: EWeb3ProviderType = EWeb3ProviderType.HTTP,
@@ -249,8 +247,10 @@ export class DaoService extends ContractService implements IDaoService {
       {fromBlock: 0},
     )
 
-  getAvatarAddress = (): tEthereumAddress =>
-    getConfiguration().addresses.WizardGuild
+  getQuorumVoteAddress = (): tEthereumAddress =>
+    getConfiguration().addresses.QuorumVote
+
+  getAvatarAddress = (): tEthereumAddress => getConfiguration().addresses.Avatar
 
   getReputationBalanceOf = async (
     address: tEthereumAddress,

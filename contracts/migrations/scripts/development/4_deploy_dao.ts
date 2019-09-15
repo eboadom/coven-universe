@@ -34,6 +34,7 @@ export const deployDAOMigration = migrationHandler(
     getControllerInstance,
     createProposal,
     voteProposal,
+    voteProposalWithWizardWallet,
     redeemReputation,
   }) => {
     // // Factory contract to deploy the organisation's Controller. No owner
@@ -238,7 +239,7 @@ export const deployDAOMigration = migrationHandler(
     const giveReputationToWizard1ProposalId = (await createProposal(
       avatarInstance.address,
       wizardWallet1,
-      "30000",
+      "60000",
     )).logs[0].args._proposalId
     const giveReputationToWizard2ProposalId = (await createProposal(
       avatarInstance.address,
@@ -266,24 +267,24 @@ export const deployDAOMigration = migrationHandler(
     await voteProposal(
       accounts[0],
       giveReputationToWizard1ProposalId,
-      eVote.NO,
-      "-1",
-    )
-    await voteProposal(
-      accounts[0],
-      giveReputationToWizard2ProposalId,
-      eVote.YES,
-      "1",
-    )
-    await voteProposal(
-      accounts[0],
-      giveReputationToWizard3ProposalId,
       eVote.YES,
       "-1",
     )
-    // await redeemReputation(giveReputationToWizard1ProposalId)
+    // await voteProposal(
+    //   accounts[0],
+    //   giveReputationToWizard2ProposalId,
+    //   eVote.YES,
+    //   "1",
+    // )
+    // await voteProposal(
+    //   accounts[0],
+    //   giveReputationToWizard3ProposalId,
+    //   eVote.YES,
+    //   "-1",
+    // )
+    await redeemReputation(giveReputationToWizard1ProposalId)
     // await redeemReputation(giveReputationToWizard2ProposalId)
-    await redeemReputation(giveReputationToWizard3ProposalId)
+    // await redeemReputation(giveReputationToWizard3ProposalId)
 
     console.log("---------------------------------")
     console.log(
@@ -310,48 +311,54 @@ export const deployDAOMigration = migrationHandler(
       wizardWallet1,
       "-10000",
     )).logs[0].args._proposalId
-    const slashReputationWizard2ProposalId = (await createProposal(
-      avatarInstance.address,
-      wizardWallet2,
-      "-10000",
-    )).logs[0].args._proposalId
-    const slashReputationWizard3ProposalId = (await createProposal(
-      avatarInstance.address,
-      wizardWallet3,
-      "-10000",
-    )).logs[0].args._proposalId
+    // const slashReputationWizard2ProposalId = (await createProposal(
+    //   avatarInstance.address,
+    //   wizardWallet2,
+    //   "-10000",
+    // )).logs[0].args._proposalId
+    // const slashReputationWizard3ProposalId = (await createProposal(
+    //   avatarInstance.address,
+    //   wizardWallet3,
+    //   "-10000",
+    // )).logs[0].args._proposalId
 
     console.log(
       "Slash reputation from Wizard wallet 1 Proposal ID - " +
         slashReputationWizard1ProposalId,
     )
-    console.log(
-      "Slash reputation from Wizard wallet 2 Proposal ID - " +
-        slashReputationWizard2ProposalId,
-    )
-    console.log(
-      "Slash reputation from Wizard wallet 3 Proposal ID - " +
-        slashReputationWizard3ProposalId,
-    )
+    // console.log(
+    //   "Slash reputation from Wizard wallet 2 Proposal ID - " +
+    //     slashReputationWizard2ProposalId,
+    // )
+    // console.log(
+    //   "Slash reputation from Wizard wallet 3 Proposal ID - " +
+    //     slashReputationWizard3ProposalId,
+    // )
 
-    await voteProposal(
-      accounts[0],
+    await voteProposalWithWizardWallet(
+      wizardWallet1,
       slashReputationWizard1ProposalId,
-      eVote.NO,
+      eVote.YES,
       "-1",
     )
+    // await voteProposal(
+    //   accounts[0],
+    //   slashReputationWizard1ProposalId,
+    //   eVote.NO,
+    //   "-1",
+    // )
     // await voteProposal(
     //   accounts[0],
     //   slashReputationWizard2ProposalId,
     //   eVote.YES,
     //   "-1",
     // )
-    await voteProposal(
-      accounts[0],
-      slashReputationWizard3ProposalId,
-      eVote.YES,
-      "-1",
-    )
+    // await voteProposal(
+    //   accounts[0],
+    //   slashReputationWizard3ProposalId,
+    //   eVote.YES,
+    //   "-1",
+    // )
 
     // const slashProposalData = await votingMachineInstance.proposals(
     //   slashReputationProposalId,
@@ -364,9 +371,9 @@ export const deployDAOMigration = migrationHandler(
     //   ))["1"].toString(),
     // )
 
-    // await redeemReputation(slashReputationWizard1ProposalId)
+    await redeemReputation(slashReputationWizard1ProposalId)
     // await redeemReputation(slashReputationWizard2ProposalId)
-    await redeemReputation(slashReputationWizard3ProposalId)
+    // await redeemReputation(slashReputationWizard3ProposalId)
 
     console.log("---------------------------------")
     console.log(
@@ -402,11 +409,13 @@ export const deployDAOMigration = migrationHandler(
     console.log("---------------------------------\n")
 
     const allDaosInfo = await daoService.getAllDaosInfo()
-    console.log(allDaosInfo)
-    console.log(allDaosInfo[0].members)
+    const allWizardsByOwner = await wizardsService.getAllWizardsDataByOwner(accounts[0])
+    // console.log(allWizardsByOwner)
+    // console.log(allDaosInfo)
+    // console.log(allDaosInfo[0].members)
 
-    const allContributionRewards = await daoService.getAllContributionRewardProposals()
-    console.log(allContributionRewards.map(a => a.voters.map(a => a.voteData)))
+    // const allContributionRewards = await daoService.getAllContributionRewardProposals()
+    // console.log(allContributionRewards.map(a => a.voters.map(a => a.voteData)))
   },
 )
 

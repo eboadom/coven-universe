@@ -5,11 +5,17 @@ import {
 } from "./ContractService"
 import {tEthereumAddress, getConfiguration} from "../server/configuration"
 import {WizardGuild} from "../types/web3-contracts/WizardGuild"
-import {bnToBigNumber, ADDRESS_0x0} from "../utils/common-utils"
+import {
+  bnToBigNumber,
+  ADDRESS_0x0,
+  tStringCurrencyUnits,
+  currencyUnitsToDecimals,
+  stringToBigNumber,
+} from "../utils/common-utils"
 import {WizardWalletFactory} from "../types/web3-contracts/WizardWalletFactory"
 import {WizardWallet} from "../types/web3-contracts/WizardWallet"
 import {path as rootPath} from "app-root-path"
-import {DaoService, IMembersDaoWithReputation} from "./DaoService"
+import {DaoService, IMembersDaoWithReputation, eVote} from "./DaoService"
 import {DAOName} from "../migrations/data/development-data"
 import {EventData} from "web3-eth-contract"
 
@@ -81,6 +87,13 @@ export interface IWizardsService {
     userWallet: tEthereumAddress,
     wizardId: number,
   ) => Promise<IEthereumTransactionModel>
+  voteProposalWithWizardWallet: (
+    sender: tEthereumAddress, // Who sends the vote transaction (needs to be the owner of the wizard)
+    wizardWallet: tEthereumAddress,
+    proposalId: string,
+    vote: eVote,
+    reputationToUse: tStringCurrencyUnits, // If (-1), it will use all the owned reputation
+  ) => Promise<IEthereumTransactionModel[]>
 }
 
 // Allows to interact with the Wizards-related part: wizards nft, CheezeWizards tournaments, Wizards wallets
@@ -235,4 +248,31 @@ export class WizardsService extends ContractService implements IWizardsService {
         .methods.createWallet(wizardId)
         .encodeABI(),
     })
+
+  voteProposalWithWizardWallet = async (
+    sender: tEthereumAddress, // Who sends the vote transaction (needs to be the owner of the wizard)
+    wizardWallet: tEthereumAddress,
+    proposalId: string,
+    vote: eVote,
+    reputationToUse: tStringCurrencyUnits, // If (-1), it will use all the owned reputation
+  ): Promise<IEthereumTransactionModel[]> => {
+    const convertedReputation =
+      reputationToUse === "-1"
+        ? "0"
+        : currencyUnitsToDecimals(stringToBigNumber(reputationToUse), 18)
+
+    return [
+      await this.txTo(wizardWallet, {
+        from: sender,
+        data: this.getWizardWalletContract(wizardWallet)
+          .methods.voteProposal(
+            new DaoService().getQuorumVoteAddress(),
+            proposalId,
+            vote,
+            convertedReputation,
+          )
+          .encodeABI(),
+      }),
+    ]
+  }
 }

@@ -14,7 +14,12 @@ export class WizardWallet extends Contract {
     options?: ContractOptions
   );
   methods: {
-    voteProposal(_vote: number | string): TransactionObject<BN>;
+    voteProposal(
+      _votingMachine: string,
+      _proposalId: string | number[],
+      _vote: number | string,
+      _reputationToUse: number | string
+    ): TransactionObject<void>;
 
     withdrawEthFunds(): TransactionObject<void>;
 

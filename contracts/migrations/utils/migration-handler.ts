@@ -78,6 +78,9 @@ export interface MigratorExecutorParams {
   getAvatarInstance(contractAddress: string): Promise<AvatarInstance>
   getControllerInstance(contractAddress?: string): Promise<ControllerInstance>
   getReputationInstance(contractAddress?: string): Promise<ReputationInstance>
+  getWizardWalletInstance(
+    contractAddress?: string,
+  ): Promise<WizardWalletInstance>
   getContractInstance<ContractInstance>(
     contractId: ContractId,
     contractAddress?: string,
@@ -90,6 +93,12 @@ export interface MigratorExecutorParams {
   ): Promise<Truffle.TransactionResponse>
   voteProposal(
     voter: tEthereumAddress, // The voter (it's possible to vote on behalf of someone)
+    proposalId: string,
+    vote: eVote,
+    reputationToUse: tStringCurrencyUnits, // If (-1), it will use all the owned reputation
+  ): Promise<Truffle.TransactionResponse>
+  voteProposalWithWizardWallet(
+    wizardWallet: tEthereumAddress,
     proposalId: string,
     vote: eVote,
     reputationToUse: tStringCurrencyUnits, // If (-1), it will use all the owned reputation
@@ -244,6 +253,12 @@ export const migrationHandler = (
       contractAddress,
     )
 
+  const getWizardWalletInstance = async (contractAddress?: string) =>
+    await getContractInstance<WizardWalletInstance>(
+      ContractId.WizardWallet,
+      contractAddress,
+    )
+
   // TODO: review parameters
   const createProposal = async (
     avatarAddress: tEthereumAddress,
@@ -289,6 +304,26 @@ export const migrationHandler = (
     )
   }
 
+  const voteProposalWithWizardWallet = async (
+    wizardWallet: tEthereumAddress,
+    proposalId: string,
+    vote: eVote,
+    reputationToUse: tStringCurrencyUnits, // If (-1), it will use all the owned reputation
+  ) => {
+    const convertedReputation =
+      reputationToUse === "-1"
+        ? "0"
+        : currencyUnitsToDecimals(stringToBigNumber(reputationToUse), 18)
+    const wizardWalletInstance = await getWizardWalletInstance(wizardWallet)
+    const votingMachine = await getQuorumVoteInstance()
+    return await wizardWalletInstance.voteProposal(
+      votingMachine.address,
+      proposalId,
+      vote,
+      convertedReputation,
+    )
+  }
+
   const redeemReputation = async (proposalId: string) => {
     const contributionRewardInstance = await getContributionRewardInstance()
     const avatarInstance = await getAvatarInstance(
@@ -321,8 +356,10 @@ export const migrationHandler = (
     getAvatarInstance,
     getReputationInstance,
     getControllerInstance,
+    getWizardWalletInstance,
     createProposal,
     voteProposal,
+    voteProposalWithWizardWallet,
     redeemReputation,
   }
   await migrationExecutor(executorParams)
