@@ -15,7 +15,7 @@
       <img src="../assets/dapper-logo.png" alt />
       <p>It seems you need to unlock or connect your browser wallet to Cheeze DAO. Please proceed to do so.</p>
       <p>
-        * Also, please don't forget, that our DAPP is only on rinkeby now so you need the Dapper Sandbox Extension! *
+        * Please mind that our Dapp is currently only on Rinkeby, you will need the Dapper Sandbox Extension to access it! *
       </p>
 
       <button class="button" v-on:click="onUnlockClick">
