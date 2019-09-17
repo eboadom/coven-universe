@@ -6,7 +6,7 @@
         <div class="title-inner">
           <h1>Cheezyverse Beliefs Distribution</h1>
           <p>
-            Once upon a Time, crusts were stronger and religions weren't moving through them. The Cheezyverse was unified but separated... But this was well before the Penicillum epidemy and the appearance of the Mold Wizards. They changed everything. They paved the way for a freedom of choice unheard before, Wizards from the Fire Island started to worship the Grate Mold, cult and tribalism appeared. Wizards needed an efficient way to defends their beliefs, Cowvens became the vehicule of self organisation (because they had no wheels nor wings it's the only type of vehicule they could be) ... and this is how a calm corner of the Cheezyverse became ground zero for a political battle between the Grates to rule the Cheezyverse.<br>
+            Once upon a Time, crusts were stronger and religions weren't moving through them. The Cheezyverse was unified but separated... But this was well before the Penicillum epidemy and the appearance of the Mold Wizards. They changed everything. They paved the way for a freedom of choice unheard before, Wizards from the Fire Island started to worship the Grate Mold, cult and tribalism appeared. Wizards needed an efficient way to defends their beliefs, Cowvens became the vehicle of self organisation (because they had no wheels nor wings it's the only type of vehicle they could be) ... and this is how a calm corner of the Cheezyverse became ground zero for a political battle between the Grates to rule the Cheezyverse.<br>
 The CBD is a glimpse into the glory and downfall of beliefs in the Cheezyverse, help the Grate you worship to take over the Cheeze!
           </p>
         </div>
