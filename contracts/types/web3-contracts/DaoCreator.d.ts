@@ -19,7 +19,6 @@ export class DaoCreator extends Contract {
     addFounders(
       _avatar: string,
       _founders: (string)[],
-      _foundersTokenAmount: (number | string)[],
       _foundersReputationAmount: (number | string)[]
     ): TransactionObject<boolean>;
 
@@ -28,10 +27,9 @@ export class DaoCreator extends Contract {
       _tokenName: string,
       _tokenSymbol: string,
       _founders: (string)[],
-      _foundersTokenAmount: (number | string)[],
       _foundersReputationAmount: (number | string)[],
-      _uController: string,
-      _cap: number | string
+      _cowvenGrate: string,
+      _cowvenDescription: string
     ): TransactionObject<string>;
 
     setSchemes(
@@ -43,7 +41,20 @@ export class DaoCreator extends Contract {
     ): TransactionObject<void>;
   };
   events: {
-    NewOrg: ContractEvent<string>;
+    NewOrg: ContractEvent<{
+      _avatar: string;
+      _cowvenId: string;
+      _grate: string;
+      _cowvenDescription: string;
+      _reputation: string;
+      _token: string;
+      0: string;
+      1: string;
+      2: string;
+      3: string;
+      4: string;
+      5: string;
+    }>;
     InitialSchemesSet: ContractEvent<string>;
     allEvents: (
       options?: EventOptions,

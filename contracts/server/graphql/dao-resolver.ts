@@ -29,27 +29,27 @@ import {tStringCurrencyUnits} from "../../utils/common-utils"
 registerEnumType(eGrateType, {
   name: "eGrateType",
   description: "Grate type options",
-});
+})
 
 registerEnumType(eVote, {
   name: "eVote",
   description: "Vote options",
-});
+})
 
 registerEnumType(eProposalType, {
   name: "eProposalType",
   description: "Proposal type options",
-});
+})
 
 registerEnumType(eProposalStatus, {
   name: "eProposalStatus",
   description: "Proposal status options",
-});
+})
 
 @ObjectType()
 class VoteData implements IVoteData {
   @Field()
-  vote: eVote;
+  vote: eVote
 
   @Field()
   reputation: tStringCurrencyUnits
@@ -58,46 +58,47 @@ class VoteData implements IVoteData {
 @ObjectType()
 class VoterData implements IVoterData {
   @Field()
-  voterAddress: tEthereumAddress;
+  voterAddress: tEthereumAddress
 
   @Field(type => VoteData)
   voteData: VoteData
 }
 
 @ObjectType()
-class ContributionRewardProposalData implements IContributionRewardProposalData {
+class ContributionRewardProposalData
+  implements IContributionRewardProposalData {
   @Field()
-  id: string;
+  id: string
 
   @Field()
-  type: eProposalType;
+  type: eProposalType
 
   @Field()
-  description: string;
+  description: string
 
   @Field()
-  status: eProposalStatus;
+  status: eProposalStatus
 
   @Field()
-  totalVotes: number;
+  totalVotes: number
 
   @Field()
-  yesVotes: number;
+  yesVotes: number
 
   @Field()
-  noVotes: number;
+  noVotes: number
 
   @Field(type => [VoterData])
-  voters: VoterData[];
+  voters: VoterData[]
 
   @Field()
-  reputationReward: tStringCurrencyUnits;
+  reputationReward: tStringCurrencyUnits
 
   @Field()
-  beneficiary: tEthereumAddress;
+  beneficiary: tEthereumAddress
 
   @Field()
-  wizardIdBeneficiary: string;
+  wizardIdBeneficiary: string
 
   @Field()
   executionTime: number
@@ -106,31 +107,34 @@ class ContributionRewardProposalData implements IContributionRewardProposalData 
 @ObjectType()
 class CowvenData implements ICowvenData {
   @Field()
-  avatarAddress: tEthereumAddress;
+  id: string
 
   @Field()
-  description: string;
+  avatarAddress: tEthereumAddress
 
   @Field()
-  grate: eGrateType;
+  description: string
 
   @Field()
-  id: string;
+  grate: eGrateType
+
+  reputationAddress: tEthereumAddress
+  tokenAddress: tEthereumAddress
 
   @Field()
-  loses: number;
+  loses: number
 
   @Field(type => [WizardData])
-  members: WizardData[];
+  members: WizardData[]
 
   @Field()
-  rank: number;
+  rank: number
 
   @Field()
-  score: number;
+  score: number
 
   @Field()
-  wins: number;
+  wins: number
 
   @Field(type => [ContributionRewardProposalData])
   proposals: ContributionRewardProposalData[]
@@ -139,7 +143,7 @@ class CowvenData implements ICowvenData {
 @InputType()
 class DaoInfoInput {
   @Field()
-  daoId: string;
+  daoId: string
 
   @Field()
   @IsEthAddress()
@@ -150,14 +154,18 @@ class DaoInfoInput {
 class ReputationProposalInput {
   @Field()
   @IsEthAddress()
-  proposer: tEthereumAddress;
+  avatarAddress: tEthereumAddress
 
   @Field()
   @IsEthAddress()
-  beneficiary: tEthereumAddress;
+  proposer: tEthereumAddress
 
   @Field()
-  reputationChange: tStringCurrencyUnits;
+  @IsEthAddress()
+  beneficiary: tEthereumAddress
+
+  @Field()
+  reputationChange: tStringCurrencyUnits
 
   @Field()
   daoTokenChange?: tStringCurrencyUnits
@@ -167,17 +175,17 @@ class ReputationProposalInput {
 class VoteProposalInput {
   @Field()
   @IsEthAddress()
-  sender: tEthereumAddress;
+  sender: tEthereumAddress
 
   @Field()
   @IsEthAddress()
-  voter: tEthereumAddress;
+  voter: tEthereumAddress
 
   @Field()
-  proposalId: string;
+  proposalId: string
 
   @Field(type => Int)
-  vote: eVote;
+  vote: eVote
 
   @Field()
   reputationToUse: tStringCurrencyUnits
@@ -187,7 +195,11 @@ class VoteProposalInput {
 class RedeemReputationInput {
   @Field()
   @IsEthAddress()
-  redeemer: tEthereumAddress;
+  avatarAddress: tEthereumAddress
+
+  @Field()
+  @IsEthAddress()
+  redeemer: tEthereumAddress
 
   @Field()
   proposalId: string
@@ -195,7 +207,7 @@ class RedeemReputationInput {
 
 @Resolver()
 export class DaoResolver {
-  private daoService: DaoService;
+  private daoService: DaoService
   constructor() {
     this.daoService = new DaoService()
   }
@@ -205,22 +217,25 @@ export class DaoResolver {
     return await this.daoService.getAllDaosInfo()
   }
 
-  @Query(returns => CowvenData)
-  async daoInfo(@Arg("data") {daoId, daoAddress}: DaoInfoInput): Promise<
-    CowvenData
-  > {
-    return await this.daoService.getDaoInfo(daoId, daoAddress)
-  }
+  // TODO: change because of the new params of getDaoInfo
+  // @Query(returns => CowvenData)
+  // async daoInfo(@Arg("data") {daoId, daoAddress}: DaoInfoInput): Promise<
+  //   CowvenData
+  // > {
+  //   return await this.daoService.getDaoInfo(daoId, daoAddress)
+  // }
 
   @Mutation(returns => [EthereumTransactionModel])
   async createProposalForReputationReward(@Arg("data")
   {
+    avatarAddress,
     proposer,
     beneficiary,
     reputationChange,
     daoTokenChange,
   }: ReputationProposalInput): Promise<EthereumTransactionModel[]> {
     return await this.daoService.createProposalForReputationReward(
+      avatarAddress,
       proposer,
       beneficiary,
       reputationChange,
@@ -249,9 +264,14 @@ export class DaoResolver {
   @Mutation(returns => [EthereumTransactionModel])
   async redeemReputation(@Arg("data")
   {
+    avatarAddress,
     redeemer,
     proposalId,
   }: RedeemReputationInput): Promise<EthereumTransactionModel[]> {
-    return await this.daoService.redeemReputation(redeemer, proposalId)
+    return await this.daoService.redeemReputation(
+      avatarAddress,
+      redeemer,
+      proposalId,
+    )
   }
 }

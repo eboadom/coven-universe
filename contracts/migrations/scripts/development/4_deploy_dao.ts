@@ -13,9 +13,17 @@ import {
   IDaoAddresses,
   getPathDeployedDaoContracts,
   initConfiguration,
+  getPathDaoDefaultParams,
+  IDaoDefaultParams,
+  configuration,
 } from "../../../server/configuration"
 import {WizardsService} from "../../../services/WizardsService"
-import {DaoService, eVote} from "../../../services/DaoService"
+import {
+  DaoService,
+  eGrateStringIndex,
+  eGrateType,
+  eVote,
+} from "../../../services/DaoService"
 
 export const deployDAOMigration = migrationHandler(
   "Deploy the GeneCheeze Cowven",
@@ -30,12 +38,14 @@ export const deployDAOMigration = migrationHandler(
     deployUpgradeSchemeContract,
     deployGlobalConstraintRegistrarContract,
     deployContributionRewardContract,
+    deployNewCowven,
     getAvatarInstance,
     getControllerInstance,
     createProposal,
     voteProposal,
     voteProposalWithWizardWallet,
     redeemReputation,
+    initCowvenSchemes,
   }) => {
     // // Factory contract to deploy the organisation's Controller. No owner
     const controllerCreatorInstance = await deployControllerCreatorContract()
@@ -56,6 +66,7 @@ export const deployDAOMigration = migrationHandler(
     const founders = initialFoundersRewards.map(tuple => tuple[0])
     const initialReputation = initialFoundersRewards.map(tuple => tuple[1])
     const initialTokens = initialFoundersRewards.map(tuple => tuple[2])
+    const grate = eGrateStringIndex.MOLD
 
     // Forge of the organisation:
     // - Creation of the Token of the organisation
@@ -71,10 +82,9 @@ export const deployDAOMigration = migrationHandler(
       TokenDAOName,
       TokenDAOSymbol,
       founders,
-      initialTokens,
       initialReputation,
-      ADDRESS_0x0,
-      TokenDAOCap,
+      grate,
+      "GenecheezeDAO, godfather of all cheezorganisations", // TODO put righ description
     )
     const newAvatarAddress = resTxForgeOrg.logs[0].args._avatar
     const avatarInstance = await getAvatarInstance(newAvatarAddress)
@@ -187,6 +197,7 @@ export const deployDAOMigration = migrationHandler(
     const reputationAddress = await controllerInstance.nativeReputation()
 
     const deployedDaoContracts: IDaoAddresses = {
+      DaoCreator: daoCreatorInstance.address,
       Avatar: avatarInstance.address,
       Reputation: reputationAddress,
       Controller: controllerInstance.address,
@@ -195,17 +206,46 @@ export const deployDAOMigration = migrationHandler(
       QuorumVote: votingMachineInstance.address,
     }
 
+    const daoDefaultParams: IDaoDefaultParams = {
+      DefaultSchemes: schemes,
+      SchemesParams: schemesParams,
+      DefaultPermissions: permissions,
+    }
+
     // Persistence in a json file of the addresses of contracts deployed by other contracts
     await writeObjectToFile(
       getPathDeployedDaoContracts(network),
       deployedDaoContracts,
     )
 
+    // Persistence in a json file of the default scheme-related params to create new daos
+    await writeObjectToFile(getPathDaoDefaultParams(network), daoDefaultParams)
+
     // "Testing" of contribution reward
 
     await initConfiguration()
     const wizardsService = new WizardsService()
     const daoService = new DaoService()
+
+    const txResultDeployNewCowven = await deployNewCowven(
+      "SecondCheeze",
+      "SCTK",
+      "Second Cheeze Token",
+      "The second, still important",
+      initialFoundersRewards,
+      eGrateType.FLAME,
+    )
+
+    const allDaosIds = await daoService.getAllCowvensBasicData()
+    console.log(allDaosIds)
+
+    console.log(configuration.defaultDaoParams)
+
+    const txResultInitCowvenSchemes = await initCowvenSchemes(
+      allDaosIds[1].avatarAddress,
+    )
+    console.log(txResultInitCowvenSchemes)
+
     const wizardId1 = 5975
     const wizardId2 = 5976
     const wizardId3 = 5977
@@ -222,16 +262,19 @@ export const deployDAOMigration = migrationHandler(
     console.log("----- Initial state Wizards wallets -----")
     console.log("---------------------------------")
     console.log(
-      (await wizardsService.getWizardData(wizardId1)).wizardWalletData
-        .genecheezeDaoReputation + " reputation",
+      JSON.stringify(
+        (await wizardsService.getWizardData(wizardId1)).wizardWalletData,
+      ),
     )
     console.log(
-      (await wizardsService.getWizardData(wizardId2)).wizardWalletData
-        .genecheezeDaoReputation + " reputation",
+      JSON.stringify(
+        (await wizardsService.getWizardData(wizardId2)).wizardWalletData,
+      ),
     )
     console.log(
-      (await wizardsService.getWizardData(wizardId1)).wizardWalletData
-        .genecheezeDaoReputation + " reputation",
+      JSON.stringify(
+        (await wizardsService.getWizardData(wizardId1)).wizardWalletData,
+      ),
     )
     console.log()
     console.log("---------------------------------\n")
@@ -292,16 +335,19 @@ export const deployDAOMigration = migrationHandler(
     )
     console.log("---------------------------------")
     console.log(
-      (await wizardsService.getWizardData(wizardId1)).wizardWalletData
-        .genecheezeDaoReputation + " reputation",
+      JSON.stringify(
+        (await wizardsService.getWizardData(wizardId1)).wizardWalletData,
+      ),
     )
     console.log(
-      (await wizardsService.getWizardData(wizardId2)).wizardWalletData
-        .genecheezeDaoReputation + " reputation",
+      JSON.stringify(
+        (await wizardsService.getWizardData(wizardId2)).wizardWalletData,
+      ),
     )
     console.log(
-      (await wizardsService.getWizardData(wizardId3)).wizardWalletData
-        .genecheezeDaoReputation + " reputation",
+      JSON.stringify(
+        (await wizardsService.getWizardData(wizardId3)).wizardWalletData,
+      ),
     )
     console.log()
     console.log("---------------------------------\n")
@@ -380,18 +426,9 @@ export const deployDAOMigration = migrationHandler(
       "----- State Wizards wallets after redeem of slash of reputation-----",
     )
     console.log("---------------------------------")
-    console.log(
-      (await wizardsService.getWizardData(wizardId1)).wizardWalletData
-        .genecheezeDaoReputation + " reputation",
-    )
-    console.log(
-      (await wizardsService.getWizardData(wizardId2)).wizardWalletData
-        .genecheezeDaoReputation + " reputation",
-    )
-    console.log(
-      (await wizardsService.getWizardData(wizardId3)).wizardWalletData
-        .genecheezeDaoReputation + " reputation",
-    )
+    console.log(JSON.stringify(await wizardsService.getWizardData(wizardId1)))
+    console.log(JSON.stringify(await wizardsService.getWizardData(wizardId2)))
+    console.log(JSON.stringify(await wizardsService.getWizardData(wizardId3)))
     console.log()
     console.log("---------------------------------\n")
 
@@ -409,13 +446,19 @@ export const deployDAOMigration = migrationHandler(
     console.log("---------------------------------\n")
 
     const allDaosInfo = await daoService.getAllDaosInfo()
-    const allWizardsByOwner = await wizardsService.getAllWizardsDataByOwner(accounts[0])
-    // console.log(allWizardsByOwner)
-    // console.log(allDaosInfo)
-    // console.log(allDaosInfo[0].members)
+    const allWizardsByOwner = await wizardsService.getAllWizardsDataByOwner(
+      accounts[0],
+    )
+    const allMembersOfDao = await daoService.getAllMembersOfDao(
+      allDaosInfo[0].reputationAddress,
+    )
+    console.log(allMembersOfDao)
+    console.log(allWizardsByOwner)
+    console.log(allDaosInfo)
+    console.log(allDaosInfo[0].members)
 
-    // const allContributionRewards = await daoService.getAllContributionRewardProposals()
-    // console.log(allContributionRewards.map(a => a.voters.map(a => a.voteData)))
+    const allContributionRewards = await daoService.getAllContributionRewardProposals()
+    console.log(allContributionRewards.map(a => a.voters.map(a => a.voteData)))
   },
 )
 

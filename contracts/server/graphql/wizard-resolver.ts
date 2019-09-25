@@ -17,6 +17,7 @@ import {
   WizardsService,
   eWizardAffinity,
   IWizardIdWithWallet,
+  IReputationOfWalletByCowven,
 } from "../../services/WizardsService"
 import {tEthereumAddress} from "../configuration"
 import {IsEthAddress} from "./validators"
@@ -30,11 +31,23 @@ registerEnumType(eWizardStatus, {
 })
 
 @ObjectType()
+class ReputationOfWalletByCowven implements IReputationOfWalletByCowven {
+  @Field()
+  cowvenId: string
+
+  @Field()
+  cowvenAddress: tEthereumAddress
+
+  @Field()
+  reputation: tEthereumAddress
+}
+
+@ObjectType()
 class WizardWalletData implements IWizardWalletData {
   @Field()
   wizardWalletAddress: tEthereumAddress
-  @Field()
-  genecheezeDaoReputation: string
+  @Field(type => [ReputationOfWalletByCowven])
+  reputationOfWalletByCowven: IReputationOfWalletByCowven[]
 }
 @ObjectType()
 export class WizardData implements IWizardData {
@@ -48,10 +61,6 @@ export class WizardData implements IWizardData {
   affinity: eWizardAffinity
   @Field({nullable: true})
   score?: string
-  @Field({nullable: true})
-  cowvenName?: string
-  @Field({nullable: true})
-  cowvenAddress?: tEthereumAddress
   @Field()
   status: eWizardStatus
   @Field(type => WizardWalletData)

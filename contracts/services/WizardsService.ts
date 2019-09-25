@@ -52,15 +52,19 @@ export interface IWizardData {
   innatePower: string
   affinity: eWizardAffinity
   score?: string
-  cowvenName?: string
-  cowvenAddress?: tEthereumAddress
   status: eWizardStatus
   wizardWalletData: IWizardWalletData
 }
 
+export interface IReputationOfWalletByCowven {
+  cowvenId: string
+  cowvenAddress: tEthereumAddress
+  reputation: tEthereumAddress
+}
+
 export interface IWizardWalletData {
   wizardWalletAddress: tEthereumAddress
-  genecheezeDaoReputation: string
+  reputationOfWalletByCowven: IReputationOfWalletByCowven[]
 }
 
 export interface IWizardIdWithWallet {
@@ -209,12 +213,37 @@ export class WizardsService extends ContractService implements IWizardsService {
       this.getWizardWalletAddressByWizardId(wizardId),
     ])
 
-    const reputation =
-      wizardWalletAddress !== ADDRESS_0x0
-        ? await daoService.getReputationBalanceOf(wizardWalletAddress)
-        : "0"
+    const allCowvenWithIdAndReputationAddress = (await daoService.getAllCowvensBasicData()).map(
+      cowvenBasicData => [
+        cowvenBasicData.id,
+        cowvenBasicData.reputationAddress,
+        cowvenBasicData.avatarAddress,
+      ],
+    )
+
+    const reputationOfWalletByCowven: IReputationOfWalletByCowven[] = []
+
+    if (wizardWalletAddress !== ADDRESS_0x0) {
+      for (const [
+        cowvenId,
+        reputationAddress,
+        cowvenAddress,
+      ] of allCowvenWithIdAndReputationAddress) {
+        reputationOfWalletByCowven.push({
+          cowvenId,
+          cowvenAddress,
+          reputation: await daoService.getReputationBalanceOf(
+            wizardWalletAddress,
+            reputationAddress,
+          ),
+        })
+      }
+    }
+
     const status =
-      reputation !== "0" ? eWizardStatus.IN_COWVEN : eWizardStatus.FREE
+      reputationOfWalletByCowven.length > 0
+        ? eWizardStatus.IN_COWVEN
+        : eWizardStatus.FREE
 
     return {
       id: wizardId,
@@ -224,10 +253,8 @@ export class WizardsService extends ContractService implements IWizardsService {
       status: status,
       wizardWalletData: {
         wizardWalletAddress: wizardWalletAddress,
-        genecheezeDaoReputation: reputation,
+        reputationOfWalletByCowven,
       },
-      cowvenName: DAOName, // TODO: adapt to multi daos
-      cowvenAddress: daoService.getAvatarAddress(), // TODO: adapt to multidaos
     }
   }
 

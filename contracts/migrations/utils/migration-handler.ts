@@ -40,6 +40,7 @@ import {
   tEthereumAddress,
   IDaoAddresses,
   getPathDeployedDaoContracts,
+  getConfiguration,
 } from "../../server/configuration"
 import {
   tStringCurrencyUnits,
@@ -47,7 +48,12 @@ import {
   stringToBigNumber,
   ADDRESS_0x0,
 } from "../../utils/common-utils"
-import {eProposalDescription, eVote} from "../../services/DaoService"
+import {
+  eProposalDescription,
+  eVote,
+  eGrateType,
+  eGrateStringIndex,
+} from "../../services/DaoService"
 
 export interface MigratorExecutorParams {
   deployMigrationsContract(args?: any[]): Promise<MigrationsInstance>
@@ -104,6 +110,17 @@ export interface MigratorExecutorParams {
     reputationToUse: tStringCurrencyUnits, // If (-1), it will use all the owned reputation
   ): Promise<Truffle.TransactionResponse>
   redeemReputation(proposalId: string): Promise<any>
+  deployNewCowven(
+    cowvenName: string,
+    tokenCowvenname: string,
+    tokenCowvenSymbol: string,
+    description: string,
+    initialFoundersRewards: string[][],
+    grate: eGrateType,
+  ): Promise<Truffle.TransactionResponse>
+  initCowvenSchemes(
+    avatarAddress: tEthereumAddress,
+  ): Promise<Truffle.TransactionResponse>
   accounts: Truffle.Accounts
   network: string
 }
@@ -259,6 +276,12 @@ export const migrationHandler = (
       contractAddress,
     )
 
+  const getDaoCreatorInstance = async (contractAddress?: string) =>
+    await getContractInstance<DaoCreatorInstance>(
+      ContractId.DaoCreator,
+      contractAddress,
+    )
+
   // TODO: review parameters
   const createProposal = async (
     avatarAddress: tEthereumAddress,
@@ -335,6 +358,45 @@ export const migrationHandler = (
     )
   }
 
+  const deployNewCowven = async (
+    cowvenName: string,
+    tokenCowvenname: string,
+    tokenCowvenSymbol: string,
+    description: string,
+    initialFoundersRewards: string[][],
+    grate: eGrateType,
+  ) => {
+    const daoCreatorInstance = await getDaoCreatorInstance(
+      (<IDaoAddresses>require(getPathDeployedDaoContracts(network))).DaoCreator,
+    )
+    return await daoCreatorInstance.forgeOrg(
+      cowvenName,
+      tokenCowvenname,
+      tokenCowvenSymbol,
+      initialFoundersRewards.map(tuple => tuple[0]),
+      initialFoundersRewards.map(tuple => tuple[1]),
+      eGrateStringIndex[grate],
+      description,
+    )
+  }
+
+  // TODO Check possible non-initialization problems with getConfiguration()
+  const initCowvenSchemes = async (avatarAddress: tEthereumAddress) => {
+    const daoCreatorInstance = await getDaoCreatorInstance(
+      (<IDaoAddresses>require(getPathDeployedDaoContracts(network))).DaoCreator,
+    )
+    const {
+      defaultDaoParams: {DefaultSchemes, SchemesParams, DefaultPermissions},
+    } = getConfiguration()
+    return await daoCreatorInstance.setSchemes(
+      avatarAddress,
+      DefaultSchemes,
+      SchemesParams,
+      DefaultPermissions,
+      "",
+    )
+  }
+
   const executorParams: MigratorExecutorParams = {
     accounts,
     network,
@@ -361,6 +423,8 @@ export const migrationHandler = (
     voteProposal,
     voteProposalWithWizardWallet,
     redeemReputation,
+    deployNewCowven,
+    initCowvenSchemes,
   }
   await migrationExecutor(executorParams)
 }
