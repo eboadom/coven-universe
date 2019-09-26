@@ -25,6 +25,10 @@ import {WizardData} from "./wizard-resolver"
 import {IsEthAddress} from "./validators"
 import {EthereumTransactionModel} from "./common-models"
 import {tStringCurrencyUnits} from "../../utils/common-utils"
+import {
+  devFundReputation,
+  devFundTokens,
+} from "../../migrations/data/development-data"
 
 registerEnumType(eGrateType, {
   name: "eGrateType",
@@ -205,6 +209,29 @@ class RedeemReputationInput {
   proposalId: string
 }
 
+// TODO add input for initialFoundersRewards
+@InputType()
+class DeployNewCowvenInput {
+  @Field()
+  @IsEthAddress()
+  sender: tEthereumAddress
+
+  @Field()
+  cowvenName: string
+
+  @Field()
+  tokenCowvenName: string
+
+  @Field()
+  tokenCowvenSymbol: string
+
+  @Field()
+  description: string
+
+  @Field()
+  grate: eGrateType
+}
+
 @Resolver()
 export class DaoResolver {
   private daoService: DaoService
@@ -272,6 +299,27 @@ export class DaoResolver {
       avatarAddress,
       redeemer,
       proposalId,
+    )
+  }
+
+  @Mutation(returns => [EthereumTransactionModel])
+  async deployNewCowven(@Arg("data")
+  {
+    sender,
+    cowvenName,
+    tokenCowvenName,
+    tokenCowvenSymbol,
+    description,
+    grate,
+  }: DeployNewCowvenInput): Promise<EthereumTransactionModel[]> {
+    return await this.daoService.deployNewCowven(
+      sender,
+      cowvenName,
+      tokenCowvenName,
+      tokenCowvenSymbol,
+      description,
+      [[sender, devFundReputation, devFundTokens]],
+      grate,
     )
   }
 }

@@ -182,6 +182,19 @@ export interface IDaoService {
     redeemer: tEthereumAddress,
     proposalId: string,
   ) => Promise<IEthereumTransactionModel[]>
+  deployNewCowven: (
+    sender: tEthereumAddress,
+    cowvenName: string,
+    tokenCowvenname: string,
+    tokenCowvenSymbol: string,
+    description: string,
+    initialFoundersRewards: string[][],
+    grate: eGrateType,
+  ) => Promise<IEthereumTransactionModel[]>
+  initCowvenSchemes: (
+    sender: tEthereumAddress,
+    avatarAddress: tEthereumAddress,
+  ) => Promise<IEthereumTransactionModel[]>
 }
 
 export class DaoService extends ContractService implements IDaoService {
