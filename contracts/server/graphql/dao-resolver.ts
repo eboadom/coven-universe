@@ -232,6 +232,16 @@ class DeployNewCowvenInput {
   grate: eGrateType
 }
 
+@InputType()
+class InitCowvenSchemesInput {
+  @Field()
+  @IsEthAddress()
+  sender: tEthereumAddress
+
+  @Field()
+  avatarAddress: tEthereumAddress
+}
+
 @Resolver()
 export class DaoResolver {
   private daoService: DaoService
@@ -321,5 +331,14 @@ export class DaoResolver {
       [[sender, devFundReputation, devFundTokens]],
       grate,
     )
+  }
+
+  @Mutation(returns => [EthereumTransactionModel])
+  async initCowvenSchemes(@Arg("data")
+  {
+    sender,
+    avatarAddress,
+  }: InitCowvenSchemesInput): Promise<EthereumTransactionModel[]> {
+    return await this.daoService.initCowvenSchemes(sender, avatarAddress)
   }
 }
