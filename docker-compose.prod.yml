@@ -15,7 +15,7 @@ services:
       context: ./client
       dockerfile: Dockerfile-prod
       args:
-        VUE_APP_GRAPHQL_ENDPOINT_URL: "wss://next.cheezedao.com/graphql"
+        VUE_APP_GRAPHQL_ENDPOINT_URL: "wss://cheeze.cheezedao.com/graphql"
         VUE_APP_ETH_NETWORK: "rinkeby"
     networks:
       - overlay
