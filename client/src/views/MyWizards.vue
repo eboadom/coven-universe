@@ -21,9 +21,7 @@
         </div>
         <div class="no-wizards" v-if="!formattedWizards.length">
           <p>
-            It seems you don’t have any Wizards at this sad point in your life.
-            Luckily for you, you can either connect to your wallet and hopefully
-            find a Wizard there, or just mint one.
+            This place is empty as the hole of an Emmental, maybe you should try to add some Magic and some Cheese and see what happens!
           </p>
           <button class="button button-small" @click.prevent="mint">
             Mint Wizard
