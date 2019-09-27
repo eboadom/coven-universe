@@ -151,17 +151,14 @@ export interface IDaoService {
   getAllWizardWalletsMembersOfDao: (
     reputationAddress: tEthereumAddress,
   ) => Promise<IWizardWalletDaoWithReputation[]>
-  getDaoInfo: (
-    cowvenBasicData: ICowvenBasicData,
-    daoAddress?: tEthereumAddress,
-  ) => Promise<ICowvenData>
+  getDaoInfo: (cowvenBasicData: ICowvenBasicData) => Promise<ICowvenData>
   getReputationBalanceOf: (
     address: tEthereumAddress,
     reputationAddress: tEthereumAddress,
   ) => Promise<tStringCurrencyUnits>
-  getAllContributionRewardProposals: () => Promise<
-    IContributionRewardProposalData[]
-  >
+  getAllContributionRewardProposalsByCowven: (
+    avatarAddress: tEthereumAddress,
+  ) => Promise<IContributionRewardProposalData[]>
   // Tx builders
   createProposalForReputationReward: (
     avatarAddress: tEthereumAddress,
@@ -311,18 +308,12 @@ export class DaoService extends ContractService implements IDaoService {
       },
     )
 
-  private getAllNewContributionProposalEvents = async (): Promise<
-    EventData[]
-  > =>
+  private getAllNewContributionProposalEvents = async (
+    avatarAddress: tEthereumAddress,
+  ): Promise<EventData[]> =>
     await this.getContributionRewardContract().getPastEvents(
       eContributionRewardEvent.NewContributionProposal,
-      {fromBlock: 0},
-    )
-
-  private getAllProposalExecutedEvents = async (): Promise<EventData[]> =>
-    await this.getContributionRewardContract().getPastEvents(
-      eContributionRewardEvent.ProposalExecuted,
-      {fromBlock: 0},
+      {fromBlock: 0, filter: {_avatar: avatarAddress}},
     )
 
   private getAllRedeemReputationEvents = async (): Promise<EventData[]> =>
@@ -415,10 +406,12 @@ export class DaoService extends ContractService implements IDaoService {
     }
   }
 
-  getAllContributionRewardProposals = async (): Promise<
-    IContributionRewardProposalData[]
-  > => {
-    const allContributionRewardsProposalEvents = await this.getAllNewContributionProposalEvents()
+  getAllContributionRewardProposalsByCowven = async (
+    avatarAddress: tEthereumAddress,
+  ): Promise<IContributionRewardProposalData[]> => {
+    const allContributionRewardsProposalEvents = await this.getAllNewContributionProposalEvents(
+      avatarAddress,
+    )
     const allWizardWalletsCreated = await new WizardsService().getAllWizardWalletsCreated()
     const allContributionRewardsProposals: IContributionRewardProposalData[] = []
     for (const {returnValues} of allContributionRewardsProposalEvents) {
@@ -534,15 +527,14 @@ export class DaoService extends ContractService implements IDaoService {
 
   getAllDaosInfo = async (): Promise<ICowvenData[]> => {
     const allDaosInfo: ICowvenData[] = []
-    for (const daoId of await this.getAllCowvensBasicData()) {
-      allDaosInfo.push(await this.getDaoInfo(daoId))
+    for (const cowvenBasicData of await this.getAllCowvensBasicData()) {
+      allDaosInfo.push(await this.getDaoInfo(cowvenBasicData))
     }
     return allDaosInfo
   }
 
   getDaoInfo = async (
     cowvenBasicData: ICowvenBasicData,
-    daoAddress?: tEthereumAddress,
   ): Promise<ICowvenData> => {
     const {
       id,
@@ -574,7 +566,9 @@ export class DaoService extends ContractService implements IDaoService {
       wins: 0, // TODO: unmock
       loses: 0, // TODO: unmock
       grate,
-      proposals: await this.getAllContributionRewardProposals(),
+      proposals: await this.getAllContributionRewardProposalsByCowven(
+        avatarAddress,
+      ),
     }
   }
 
