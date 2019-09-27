@@ -6,6 +6,7 @@
         v-for="proposal in proposals"
         :key="proposal.id"
         :proposal="proposal"
+        :avatarAddress="avatarAddress"
         :myWizards="myWizards"
         :onSuccessVote="onSuccessVote"
       />
@@ -36,7 +37,7 @@ import Spell from "../components/Spell";
 
 export default {
   name: "Spells",
-  props: ["proposals", "myWizards", "onSuccessVote"],
+  props: ["proposals", "avatarAddress", "myWizards", "onSuccessVote"],
   components: {
     Spell,
     VuePerfectScrollbar

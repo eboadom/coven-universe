@@ -65,7 +65,7 @@ import { getWeb3 } from "../helpers/web3-helpers";
 
 export default {
   name: "MakeProposal",
-  props: ["members", "onSuccessSubmission"],
+  props: ["members", "avatarAddress", "onSuccessSubmission"],
   data() {
     return {
       valid: true,
@@ -120,6 +120,7 @@ export default {
           mutation: createProposalMutation,
           variables: {
             data: {
+              avatarAddress: this.avatarAddress,
               proposer: window.userWallet,
               beneficiary: this.wizard,
               reputationChange: this.amount,

@@ -70,8 +70,9 @@
           :proposals="cowven.proposals"
           :myWizards="myWizardsInCowven"
           :onSuccessVote="handleSuccessSubmission"
+          :avatarAddress="cowven.avatarAddress"
         />
-        <MakeProposal :members="allWizardWalletsCreated" :onSuccessSubmission="handleSuccessProposalSubmission" v-else />
+        <MakeProposal :members="allWizardWalletsCreated" :onSuccessSubmission="handleSuccessProposalSubmission" :avatarAddress="cowven.avatarAddress" v-else />
       </div>
     </div>
     <v-dialog v-model="dialogProposalSuccess" content-class="thank-dialog">
@@ -151,7 +152,7 @@ export default {
         { text: "Score", value: "score" },
         {
           text: "Reputation",
-          value: "wizardWalletData.genecheezeDaoReputation"
+          value: "currentCowvenReputation"
         },
         { text: "ID", value: "id" }
       ]
@@ -159,12 +160,27 @@ export default {
   },
   computed: {
     cowven() {
-      return this.allDaosInfo.find(item => item.id === this.id);
+      const cowven = this.allDaosInfo.find(item => item.id === this.id);
+      if (cowven) {
+        return {
+          ...cowven,
+          members: cowven.members.map(member => ({
+            ...member,
+            currentCowvenReputation: (
+              member.wizardWalletData.reputationOfWalletByCowven.find(
+                cow => cow.cowvenId === cowven.id
+              ) || { reputation: 0 }
+            ).reputation
+          }))
+        }
+      }
+      return cowven;
     },
     myWizardsInCowven() {
       return this.allWizardsDataByOwner.filter(
-        wizard => wizard.cowvenAddress === this.cowven.avatarAddress &&
-        Number(wizard.wizardWalletData.genecheezeDaoReputation)
+        wizard => wizard.wizardWalletData.reputationOfWalletByCowven.find(
+          cowen => cowen.cowvenId === this.cowven.id && Number(cowen.reputation)
+        )
       )
     }
   },

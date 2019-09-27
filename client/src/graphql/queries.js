@@ -17,33 +17,35 @@ export const allDaosData = gql`
         innatePower
         affinity
         score
-        cowvenName
-        cowvenAddress
         status
         wizardWalletData {
           wizardWalletAddress
-          genecheezeDaoReputation
-        }
-      }
-      proposals {
-        id
-        type
-        description
-        status
-        totalVotes
-        yesVotes
-        noVotes
-        voters {
-          voterAddress
-          voteData {
-            vote
+          reputationOfWalletByCowven {
+            cowvenId
+            cowvenAddress
             reputation
           }
         }
-        reputationReward
-        beneficiary
-        wizardIdBeneficiary
-        executionTime
+      }
+    proposals {
+      id
+      type
+      description
+      status
+      totalVotes
+      yesVotes
+      noVotes
+      voters {
+        voterAddress
+        voteData {
+          vote
+          reputation
+        }
+      }
+      reputationReward
+      beneficiary
+      wizardIdBeneficiary
+      executionTime
       }
     }
   }
@@ -51,18 +53,20 @@ export const allDaosData = gql`
 
 export const allWizardsByUserAddress = gql`
   query AllWizardsByUserAddress($address: String!) {
-    allWizardsDataByOwner(data: { userWallet: $address }) {
+    allWizardsDataByOwner(data: {userWallet: $address}) {
       id
       owner
       innatePower
       affinity
       score
-      cowvenName
-      cowvenAddress
       status
       wizardWalletData {
         wizardWalletAddress
-        genecheezeDaoReputation
+        reputationOfWalletByCowven {
+          cowvenId
+          cowvenAddress
+          reputation
+        }
       }
     }
   }
