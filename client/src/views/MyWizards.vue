@@ -9,7 +9,7 @@
           <button v-if="formattedWizards.length" class="button button-small" @click.prevent="mint" >Mint Wizard</button>
         </div>
         <div class="no-wizards" v-if="!formattedWizards.length">
-          texts texts texts texts texts texts texts texts texts texts texts texts texts texts texts texts texts texts texts texts texts
+          It seems you don’t have any Wizards at this sad point in your life. Luckily for you, you can either connect to your wallet and hopefully find a Wizard there, or just mint one.
           <button class="button button-small" @click.prevent="mint" >Mint Wizard</button>
         </div>
         <v-data-table
