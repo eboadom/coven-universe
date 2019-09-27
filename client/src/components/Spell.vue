@@ -67,7 +67,7 @@ import { getWeb3 } from "../helpers/web3-helpers";
 
 export default {
   name: "Spell",
-  props: ["proposal", "myWizards", "onSuccessVote"],
+  props: ["proposal", "myWizards", "avatarAddress", "onSuccessVote"],
   data() {
     return {
       pendingWizardWallet: '',
@@ -127,6 +127,7 @@ export default {
         mutation: redeemReputation,
         variables: {
           data: {
+            avatarAddress: this.avatarAddress,
             redeemer: window.userWallet,
             proposalId: this.proposal.id
           }

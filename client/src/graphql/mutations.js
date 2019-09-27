@@ -1,5 +1,17 @@
 import gql from "graphql-tag";
 
+export const deployNewCowvenMutation = gql`
+  mutation DeployNewCowven($data: DeployNewCowvenInput!) {
+    deployNewCowven(data: $data) {
+      from
+      to
+      data
+      gas
+      value
+    }
+  }
+`;
+
 export const createProposalMutation = gql`
   mutation CreateProposal($data: ReputationProposalInput!) {
     createProposalForReputationReward(data: $data) {
