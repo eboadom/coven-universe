@@ -125,6 +125,9 @@ p {
   margin: 0 auto;
   overflow-x: hidden;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
   @include respond-to(lg) {
     width: 991px;
   }
@@ -150,6 +153,9 @@ p {
   max-width: 500px;
   .dialog {
     padding: 50px;
+    img {
+      margin: auto;
+    }
     .v-card__text {
       margin: 20px 0 50px;
       padding: 0 !important;

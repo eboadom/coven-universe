@@ -59,3 +59,15 @@ export const redeemReputation = gql`
     }
   }
 `;
+
+export const mintWizard = gql`
+  mutation MintWizard($data: MintWizardInput!) {
+      mintWizard(data: $data) {
+      from
+      to
+      data
+      gas
+      value
+    }
+  }
+`;

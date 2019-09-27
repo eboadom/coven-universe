@@ -1,12 +1,19 @@
 <template>
-  <Preloader v-if="$apollo.queries.allWizardsDataByOwner.loading" />
+  <Preloader v-if="$apollo.queries.allWizardsDataByOwner.loading || $apollo.queries.allDaosInfo.loading" />
   <div v-else>
     <TopNav />
     <div class="my-container">
       <div class="my-wizards">
-        <h1>My Wizards</h1>
-
+        <div class="caption">
+          <h1>My Wizards</h1>
+          <button v-if="formattedWizards.length" class="button button-small" @click.prevent="mint" >Mint Wizard</button>
+        </div>
+        <div class="no-wizards" v-if="!formattedWizards.length">
+          <p>It seems you don’t have any Wizards at this sad point in your life. Luckily for you, you can either connect to your wallet and hopefully find a Wizard there, or just mint one.</p>
+          <button class="button button-small" @click.prevent="mint" >Mint Wizard</button>
+        </div>
         <v-data-table
+          v-else
           :headers="headers"
           :items="formattedWizards"
           :search="search"
@@ -15,6 +22,7 @@
           <template v-slot:item.wizard="{ item }">
             <img
               class="wizard-img"
+              alt=""
               :src="
                 require(`@/assets/${item.affinity.toLowerCase()}-wizard.png`)
               "
@@ -76,8 +84,8 @@
 <script>
 import Preloader from "../components/Preloader.vue";
 import TopNav from "../components/TopNav.vue";
-import { allWizardsByUserAddress } from "../graphql/queries";
-import { createWalletForWizard } from "../graphql/mutations";
+import { allDaosData, allWizardsByUserAddress } from "../graphql/queries";
+import { createWalletForWizard, mintWizard } from "../graphql/mutations";
 import { getWeb3 } from "../helpers/web3-helpers";
 
 export default {
@@ -86,6 +94,9 @@ export default {
     TopNav
   },
   apollo: {
+    allDaosInfo: {
+      query: allDaosData
+    },
     allWizardsDataByOwner: {
       query: allWizardsByUserAddress,
       variables() {
@@ -120,17 +131,40 @@ export default {
   },
   computed: {
     formattedWizards() {
-      return this.allWizardsDataByOwner.map(wizard => ({
-        ...wizard,
-        cowvenName: wizard.cowvenName && wizard.status !== 'FREE' ? wizard.cowvenName : '-',
-        score: wizard.score || '-',
-        reputation: wizard.wizardWalletData.genecheezeDaoReputation === "0" ? "-" : wizard.wizardWalletData.genecheezeDaoReputation
-      }))
+      return this.allWizardsDataByOwner.map(wizard => {
+        let mostReputableCowven = { reputation: "0", cowvenId: "-" };
+        wizard.wizardWalletData.reputationOfWalletByCowven.forEach(cowven => {
+          if(Number(cowven.reputation) > Number(mostReputableCowven.reputation)) {
+            mostReputableCowven = cowven;
+          }
+        });
+        return {
+          ...wizard,
+          cowvenName: mostReputableCowven.cowvenId,
+          score: wizard.score || '-',
+          reputation: mostReputableCowven.reputation !== "0" ? mostReputableCowven.reputation : "-",
+        }
+      })
     }
   },
   methods: {
     openModal() {
       this.dialog = true;
+    },
+    async mint() {
+      const web3 = getWeb3();
+      const {
+        data: { mintWizard: txs }
+      } = await this.$apollo.mutate({
+        mutation: mintWizard,
+        variables: {
+          data: {
+            userWallet: window.userWallet,
+          }
+        }
+      });
+      await web3.eth.sendTransaction(txs[0]);
+      await this.$apollo.queries.allWizardsDataByOwner.refetch();
     },
     async createWallet(e, wizardId) {
       e.preventDefault();
@@ -175,13 +209,32 @@ export default {
 
 .my-wizards {
   width: 100%;
-
-  h1 {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  .caption {
     margin-bottom: 40px;
     text-align: left;
     border-bottom: 1px solid rgba(#000, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    button {
+      margin-bottom: 10px;
+    }
   }
-
+  .no-wizards {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    p {
+      max-width: 50%;
+      margin-bottom: 20px;
+    }
+  }
   .v-data-table {
     background: transparent;
     .wizard-img {
