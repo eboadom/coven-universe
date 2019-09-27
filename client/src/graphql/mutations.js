@@ -62,7 +62,19 @@ export const redeemReputation = gql`
 
 export const mintWizard = gql`
   mutation MintWizard($data: MintWizardInput!) {
-      mintWizard(data: $data) {
+    mintWizard(data: $data) {
+      from
+      to
+      data
+      gas
+      value
+    }
+  }
+`;
+
+export const initCowvenSchemes = gql`
+  mutation InitCowvenSchemes($data: InitCowvenSchemesInput!) {
+    initCowvenSchemes(data: $data) {
       from
       to
       data

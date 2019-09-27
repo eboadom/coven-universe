@@ -92,7 +92,7 @@
 <script>
 import Preloader from "../components/Preloader.vue";
 import TopNav from "../components/TopNav.vue";
-import { deployNewCowvenMutation } from "../graphql/mutations";
+import { deployNewCowvenMutation, initCowvenSchemes } from "../graphql/mutations";
 import { getWeb3 } from "../helpers/web3-helpers";
 import { allDaosData } from "../graphql/queries";
 
@@ -133,7 +133,7 @@ export default {
       const web3 = getWeb3();
       if (this.$refs.form.validate()) {
         const {
-          data: { deployNewCowven: txs }
+          data: { deployNewCowven: txsCowven }
         } = await this.$apollo.mutate({
           mutation: deployNewCowvenMutation,
           variables: {
@@ -147,8 +147,28 @@ export default {
             }
           }
         });
-        await web3.eth.sendTransaction(txs[0]);
+        const txsCowvenPromise = web3.eth.sendTransaction(txsCowven[0]);
+        const txsCowvenReceipt = await new Promise((resolve, reject) =>
+          txsCowvenPromise
+            .on('receipt', receipt => resolve(receipt))
+            .on('error', err => {
+                reject(err);
+            })
+        );
+        console.log('txsCowvenReceipt', txsCowvenReceipt);
+        const {
+          data: { initCowvenSchemes: txsSchema }
+        } = await this.$apollo.mutate({
+          mutation: initCowvenSchemes,
+          variables: {
+            data: {
+              sender: window.userWallet,
+              avatarAddress: txsCowvenReceipt.topics[0]
+            }
+          }
+        });
 
+        await web3.eth.sendTransaction(txsSchema[0]);
         this.dialog = true;
         this.reset();
         await this.$apollo.queries.allDaosInfo.refetch();
