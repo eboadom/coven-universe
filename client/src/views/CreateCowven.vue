@@ -57,7 +57,7 @@
               Start the Ritual
             </button>
           </v-form>
-          <v-dialog v-model="dialog" width="500">
+          <v-dialog v-model="dialog" content-class="thank-dialog">
             <v-card class="dialog">
               <img src="../assets/wheel.svg" alt />
               <h1>Congoudalations!</h1>
@@ -189,7 +189,6 @@ export default {
     .form-container {
       border: 1px solid black;
       padding: 2rem;
-      height: 34rem;
       text-align: center;
       background: white;
 
