@@ -125,6 +125,9 @@ p {
   margin: 0 auto;
   overflow-x: hidden;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
   @include respond-to(lg) {
     width: 991px;
   }

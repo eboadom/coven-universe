@@ -9,7 +9,7 @@
           <button v-if="formattedWizards.length" class="button button-small" @click.prevent="mint" >Mint Wizard</button>
         </div>
         <div class="no-wizards" v-if="!formattedWizards.length">
-          It seems you don’t have any Wizards at this sad point in your life. Luckily for you, you can either connect to your wallet and hopefully find a Wizard there, or just mint one.
+          <p>It seems you don’t have any Wizards at this sad point in your life. Luckily for you, you can either connect to your wallet and hopefully find a Wizard there, or just mint one.</p>
           <button class="button button-small" @click.prevent="mint" >Mint Wizard</button>
         </div>
         <v-data-table
@@ -209,6 +209,9 @@ export default {
 
 .my-wizards {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
   .caption {
     margin-bottom: 40px;
     text-align: left;
@@ -226,6 +229,11 @@ export default {
     align-items: center;
     flex-direction: column;
     justify-content: center;
+    text-align: center;
+    p {
+      max-width: 50%;
+      margin-bottom: 20px;
+    }
   }
   .v-data-table {
     background: transparent;

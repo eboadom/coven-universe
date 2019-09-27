@@ -67,9 +67,18 @@ export default {
   position: relative;
   min-height: 100vh;
   height: auto;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 
   @include respond-to(lg) {
     padding-bottom: 25px;
+  }
+
+  > div {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
   }
 }
 </style>

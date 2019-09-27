@@ -27,7 +27,7 @@
               :search="search"
               :single-expand="true"
               :expanded.sync="expanded"
-              item-key="name"
+              item-key="id"
               show-expand
             >
               <template v-slot:item.grate="{ item }">
@@ -125,17 +125,6 @@ export default {
     redirectToMyCowven(id) {
       this.$router.push({ path: `cowvenhome/${id}` });
     }
-  },
-  mounted() {
-    const trs = Array.from(
-      document.querySelectorAll(".v-data-table__wrapper tr")
-    );
-
-    trs.map(el =>
-      el.addEventListener("click", e => {
-        e.target.parentElement.firstElementChild.firstElementChild.click();
-      })
-    );
   }
 };
 </script>
