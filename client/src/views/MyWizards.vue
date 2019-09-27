@@ -4,9 +4,16 @@
     <TopNav />
     <div class="my-container">
       <div class="my-wizards">
-        <h1>My Wizards</h1>
-
+        <div class="caption">
+          <h1>My Wizards</h1>
+          <button v-if="formattedWizards.length" class="button button-small" @click.prevent="mint" >Mint Wizard</button>
+        </div>
+        <div class="no-wizards" v-if="!formattedWizards.length">
+          texts texts texts texts texts texts texts texts texts texts texts texts texts texts texts texts texts texts texts texts texts
+          <button class="button button-small" @click.prevent="mint" >Mint Wizard</button>
+        </div>
         <v-data-table
+          v-else
           :headers="headers"
           :items="formattedWizards"
           :search="search"
@@ -78,7 +85,7 @@
 import Preloader from "../components/Preloader.vue";
 import TopNav from "../components/TopNav.vue";
 import { allDaosData, allWizardsByUserAddress } from "../graphql/queries";
-import { createWalletForWizard } from "../graphql/mutations";
+import { createWalletForWizard, mintWizard } from "../graphql/mutations";
 import { getWeb3 } from "../helpers/web3-helpers";
 
 export default {
@@ -144,6 +151,21 @@ export default {
     openModal() {
       this.dialog = true;
     },
+    async mint() {
+      const web3 = getWeb3();
+      const {
+        data: { mintWizard: txs }
+      } = await this.$apollo.mutate({
+        mutation: mintWizard,
+        variables: {
+          data: {
+            userWallet: window.userWallet,
+          }
+        }
+      });
+      await web3.eth.sendTransaction(txs[0]);
+      await this.$apollo.queries.allWizardsDataByOwner.refetch();
+    },
     async createWallet(e, wizardId) {
       e.preventDefault();
       const web3 = getWeb3();
@@ -187,13 +209,24 @@ export default {
 
 .my-wizards {
   width: 100%;
-
-  h1 {
+  .caption {
     margin-bottom: 40px;
     text-align: left;
     border-bottom: 1px solid rgba(#000, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    button {
+      margin-bottom: 10px;
+    }
   }
-
+  .no-wizards {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
   .v-data-table {
     background: transparent;
     .wizard-img {
