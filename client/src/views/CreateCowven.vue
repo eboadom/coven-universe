@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <Preloader v-if="$apollo.queries.allDaosInfo.loading" />
+  <div v-else>
     <TopNav />
     <div class="content-container">
       <div class="create-coven">
@@ -24,16 +25,26 @@
               required
             ></v-select>
 
-            <v-select
-              v-model="selectDays"
-              :items="days"
-              :rules="[v => !!v || 'Item is required']"
-              label="Activity"
-              data-vv-name="selectDays"
+            <v-text-field
+              v-model="tokenName"
+              :counter="10"
+              :rules="nameRules"
+              label="Cowven token Name"
+              data-vv-name="tokenName"
               required
-            ></v-select>
+            ></v-text-field>
+
+            <v-text-field
+              v-model="tokenSymbol"
+              :counter="10"
+              :rules="nameRules"
+              label="Cowven token Symbol"
+              data-vv-name="tokenSymbol"
+              required
+            ></v-text-field>
 
             <v-textarea
+              v-model="description"
               label="Cowven Description"
               auto-grow
               outlined
@@ -56,7 +67,7 @@
                 longest</v-card-text
               >
 
-              <router-link :to="{ name: 'cowvenhome' }">
+              <router-link :to="{ name: 'home' }">
                 <button
                   class="button modal-button"
                   color="primary"
@@ -81,11 +92,19 @@
 <script>
 import Preloader from "../components/Preloader.vue";
 import TopNav from "../components/TopNav.vue";
+import { deployNewCowvenMutation } from "../graphql/mutations";
+import { getWeb3 } from "../helpers/web3-helpers";
+import { allDaosData } from "../graphql/queries";
 
 export default {
   components: {
     Preloader,
     TopNav
+  },
+  apollo: {
+    allDaosInfo: {
+      query: allDaosData
+    }
   },
   data: () => ({
     dialog: false,
@@ -95,58 +114,44 @@ export default {
       v => !!v || "Name is required",
       v => (v && v.length <= 10) || "Name must be less than 10 characters"
     ],
-    email: "",
-    emailRules: [
-      v => !!v || "E-mail is required",
-      v => /.+@.+\..+/.test(v) || "E-mail must be valid"
-    ],
     selectGrates: null,
     grates: [
-      "The Grate One of The Balance",
-      "The Grate One of The Ocean",
-      "The Grate One of The Storm",
-      "The Grate One of The Flames"
+      { text: "The Grate One of The Balance", value: "BALANCE" },
+      { text: "The Grate One of The Ocean", value: "OCEAN" },
+      { text: "The Grate One of The Storm", value: "STORM" },
+      { text: "The Grate One of The Flames", value: "FLAME" },
+      { text: "The Grate One of The Mold", value: "MOLD" }
     ],
-    selectDays: null,
-    days: [
-      "1",
-      "2",
-      "3",
-      "4",
-      "5",
-      "6",
-      "7",
-      "8",
-      "9",
-      "10",
-      "11",
-      "12",
-      "13",
-      "14",
-      "15",
-      "16",
-      "17",
-      "18",
-      "19",
-      "20",
-      "21",
-      "22",
-      "23",
-      "24",
-      "25",
-      "26",
-      "27",
-      "28",
-      "29",
-      "30"
-    ]
+    tokenName: "",
+    tokenSymbol: "",
+    description: "",
   }),
 
   methods: {
-    submit() {
+    async submit(e) {
+      e.preventDefault();
+      const web3 = getWeb3();
       if (this.$refs.form.validate()) {
+        const {
+          data: { deployNewCowven: txs }
+        } = await this.$apollo.mutate({
+          mutation: deployNewCowvenMutation,
+          variables: {
+            data: {
+              sender: window.userWallet,
+              cowvenName: this.name,
+              tokenCowvenName: this.tokenName,
+              tokenCowvenSymbol: this.tokenSymbol,
+              description: this.description,
+              grate: this.selectGrates
+            }
+          }
+        });
+        await web3.eth.sendTransaction(txs[0]);
+
         this.dialog = true;
         this.reset();
+        await this.$apollo.queries.allDaosInfo.refetch();
       }
     },
     reset() {
