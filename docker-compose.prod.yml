@@ -21,9 +21,7 @@ services:
       - overlay
       - traefik
     labels:
-      traefik.frontend.rule: "Host:next.cheezedao.com,www.next.cheezedao.com"
-      traefik.frontend.redirect.regex: "^https?://www.next.cheezedao.com/(.*)"
-      traefik.frontend.redirect.replacement: "https://next.cheezedao.com/$${1}"
+      traefik.frontend.rule: "Host:next.cheezedao.com"
       traefik.port: '80'
 
   api:
