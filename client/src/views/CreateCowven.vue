@@ -155,7 +155,8 @@ export default {
                 reject(err);
             })
         );
-        console.log('txsCowvenReceipt', txsCowvenReceipt);
+        const { data: { allDaosInfo } } = await this.$apollo.queries.allDaosInfo.refetch();
+        const createdCowven = allDaosInfo.find(covwen => covwen.id === this.name);
         const {
           data: { initCowvenSchemes: txsSchema }
         } = await this.$apollo.mutate({
@@ -163,15 +164,14 @@ export default {
           variables: {
             data: {
               sender: window.userWallet,
-              avatarAddress: txsCowvenReceipt.topics[0]
+              avatarAddress: createdCowven.avatarAddress
             }
           }
         });
-
         await web3.eth.sendTransaction(txsSchema[0]);
+        await this.$apollo.queries.allDaosInfo.refetch();
         this.dialog = true;
         this.reset();
-        await this.$apollo.queries.allDaosInfo.refetch();
       }
     },
     reset() {
