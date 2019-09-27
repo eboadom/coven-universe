@@ -84,7 +84,7 @@ export const deployDAOMigration = migrationHandler(
       founders,
       initialReputation,
       grate,
-      "GenecheezeDAO, godfather of all cheezorganisations", // TODO put righ description
+      "This is what you get for playing with milk and mold on chain, even Pasteur can't stop us",
     )
     const newAvatarAddress = resTxForgeOrg.logs[0].args._avatar
     const avatarInstance = await getAvatarInstance(newAvatarAddress)
@@ -226,25 +226,6 @@ export const deployDAOMigration = migrationHandler(
     await initConfiguration()
     const wizardsService = new WizardsService()
     const daoService = new DaoService()
-
-    const txResultDeployNewCowven = await deployNewCowven(
-      "SecondCheeze",
-      "SCTK",
-      "Second Cheeze Token",
-      "The second, still important",
-      initialFoundersRewards,
-      eGrateType.FLAME,
-    )
-
-    const allDaosIds = await daoService.getAllCowvensBasicData()
-    console.log(allDaosIds)
-
-    console.log(configuration.defaultDaoParams)
-
-    const txResultInitCowvenSchemes = await initCowvenSchemes(
-      allDaosIds[1].avatarAddress,
-    )
-    console.log(txResultInitCowvenSchemes)
 
     const wizardId1 = 5975
     const wizardId2 = 5976
@@ -457,7 +438,9 @@ export const deployDAOMigration = migrationHandler(
     console.log(allDaosInfo)
     console.log(allDaosInfo[0].members)
 
-    const allContributionRewards = await daoService.getAllContributionRewardProposals()
+    const allContributionRewards = await daoService.getAllContributionRewardProposalsByCowven(
+      allDaosInfo[0].avatarAddress,
+    )
     console.log(allContributionRewards.map(a => a.voters.map(a => a.voteData)))
   },
 )
