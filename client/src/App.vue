@@ -64,6 +64,7 @@ body {
   height: 3rem;
   background: white;
   transition: all 0.2s ease;
+  font-family: codesaver;
 
   a {
     text-decoration: none;

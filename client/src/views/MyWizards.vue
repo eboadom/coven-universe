@@ -1,16 +1,33 @@
 <template>
-  <Preloader v-if="$apollo.queries.allWizardsDataByOwner.loading || $apollo.queries.allDaosInfo.loading" />
+  <Preloader
+    v-if="
+      $apollo.queries.allWizardsDataByOwner.loading ||
+        $apollo.queries.allDaosInfo.loading
+    "
+  />
   <div v-else>
     <TopNav />
     <div class="my-container">
       <div class="my-wizards">
         <div class="caption">
           <h1>My Wizards</h1>
-          <button v-if="formattedWizards.length" class="button button-small" @click.prevent="mint" >Mint Wizard</button>
+          <button
+            v-if="formattedWizards.length"
+            class="button button-small"
+            @click.prevent="mint"
+          >
+            Mint Wizard
+          </button>
         </div>
         <div class="no-wizards" v-if="!formattedWizards.length">
-          <p>It seems you don’t have any Wizards at this sad point in your life. Luckily for you, you can either connect to your wallet and hopefully find a Wizard there, or just mint one.</p>
-          <button class="button button-small" @click.prevent="mint" >Mint Wizard</button>
+          <p>
+            It seems you don’t have any Wizards at this sad point in your life.
+            Luckily for you, you can either connect to your wallet and hopefully
+            find a Wizard there, or just mint one.
+          </p>
+          <button class="button button-small" @click.prevent="mint">
+            Mint Wizard
+          </button>
         </div>
         <v-data-table
           v-else
@@ -134,17 +151,22 @@ export default {
       return this.allWizardsDataByOwner.map(wizard => {
         let mostReputableCowven = { reputation: "0", cowvenId: "-" };
         wizard.wizardWalletData.reputationOfWalletByCowven.forEach(cowven => {
-          if(Number(cowven.reputation) > Number(mostReputableCowven.reputation)) {
+          if (
+            Number(cowven.reputation) > Number(mostReputableCowven.reputation)
+          ) {
             mostReputableCowven = cowven;
           }
         });
         return {
           ...wizard,
           cowvenName: mostReputableCowven.cowvenId,
-          score: wizard.score || '-',
-          reputation: mostReputableCowven.reputation !== "0" ? mostReputableCowven.reputation : "-",
-        }
-      })
+          score: wizard.score || "-",
+          reputation:
+            mostReputableCowven.reputation !== "0"
+              ? mostReputableCowven.reputation
+              : "-"
+        };
+      });
     }
   },
   methods: {
@@ -159,7 +181,7 @@ export default {
         mutation: mintWizard,
         variables: {
           data: {
-            userWallet: window.userWallet,
+            userWallet: window.userWallet
           }
         }
       });
@@ -206,6 +228,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "../style/vars";
+@import "../style/screen-size";
 
 .my-wizards {
   width: 100%;
@@ -219,6 +242,11 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    h1 {
+      height: 40px;
+      display: flex;
+      align-items: center;
+    }
     button {
       margin-bottom: 10px;
     }
@@ -269,6 +297,9 @@ export default {
     &:hover {
       color: $purple;
     }
+  }
+  @include respond-to(sm) {
+    padding-left: 10px;
   }
 }
 </style>
