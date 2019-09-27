@@ -11,12 +11,12 @@ import {
   tStringCurrencyUnits,
   currencyUnitsToDecimals,
   stringToBigNumber,
+  getRandomInt,
 } from "../utils/common-utils"
 import {WizardWalletFactory} from "../types/web3-contracts/WizardWalletFactory"
 import {WizardWallet} from "../types/web3-contracts/WizardWallet"
 import {path as rootPath} from "app-root-path"
 import {DaoService, IMembersDaoWithReputation, eVote} from "./DaoService"
-import {DAOName} from "../migrations/data/development-data"
 import {EventData} from "web3-eth-contract"
 
 export enum eWizardStatus {
@@ -97,6 +97,9 @@ export interface IWizardsService {
     proposalId: string,
     vote: eVote,
     reputationToUse: tStringCurrencyUnits, // If (-1), it will use all the owned reputation
+  ) => Promise<IEthereumTransactionModel[]>
+  mintWizard: (
+    sender: tEthereumAddress, // Sender of the tx and future owner of the wizard
   ) => Promise<IEthereumTransactionModel[]>
 }
 
@@ -302,4 +305,19 @@ export class WizardsService extends ContractService implements IWizardsService {
       }),
     ]
   }
+
+  mintWizard = async (
+    sender: tEthereumAddress, // Sender of the tx and future owner of the wizard
+  ): Promise<IEthereumTransactionModel[]> => [
+    await this.txTo(this.getWizardGuildAddress(), {
+      from: sender,
+      data: this.getWizardGuildContract()
+        .methods.mintWizards(
+          [getRandomInt(0, 2000)],
+          [getRandomInt(0, 4)],
+          sender,
+        )
+        .encodeABI(),
+    }),
+  ]
 }

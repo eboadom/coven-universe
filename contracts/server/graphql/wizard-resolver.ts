@@ -109,6 +109,14 @@ class VoteProposalWithWizardWalletInput {
   reputationToUse: tStringCurrencyUnits
 }
 
+// TODO probably have a generic input for only userWallet
+@InputType()
+class MintWizardInput {
+  @Field()
+  @IsEthAddress()
+  userWallet: tEthereumAddress
+}
+
 @Resolver()
 export class WizardResolver {
   private wizardsService: WizardsService
@@ -154,5 +162,13 @@ export class WizardResolver {
       vote,
       reputationToUse,
     )
+  }
+
+  @Mutation(returns => [EthereumTransactionModel])
+  async mintWizard(@Arg("data")
+  {
+    userWallet,
+  }: MintWizardInput): Promise<EthereumTransactionModel[]> {
+    return await this.wizardsService.mintWizard(userWallet)
   }
 }

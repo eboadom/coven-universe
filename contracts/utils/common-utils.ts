@@ -15,51 +15,12 @@ export const timeBenchmark = async (f: Function): Promise<void> => {
   )
 }
 
-// export const getHttpProviderUrlByNetwork = (
-//   network: EthereumNetwork,
-// ): string | undefined => {
-//   try {
-//     return selectUrlEthereumProviderByNetwork(
-//       network,
-//       process.env.GANACHE_URL,
-//       process.env.URL_ETHEREUM_HTTP_PROVIDER,
-//     )
-//   } catch (error) {
-//     throw new Error(`Errow. Getting HTTP provider, invalid network ${network}`)
-//   }
-// }
-
-// export const getWSProviderUrlByNetwork = (
-//   network: EthereumNetwork,
-// ): string | undefined => {
-//   try {
-//     return selectUrlEthereumProviderByNetwork(
-//       network,
-//       process.env.GANACHE_URL,
-//       process.env.URL_ETHEREUM_WS_PROVIDER,
-//     )
-//   } catch (error) {
-//     throw new Error(`Errow. Getting WS provider, invalid network ${network}`)
-//   }
-// }
-
-// const selectUrlEthereumProviderByNetwork = (
-//   network: EthereumNetwork,
-//   ganacheUrl: string | undefined,
-//   ethereumProviderUrl: string | undefined,
-// ) => {
-//   switch (network) {
-//     case EthereumNetwork.development:
-//       return ganacheUrl
-//     // Mainnet deployment will be done manually, changing
-//     // the ethereumProviderUrl to one of mainnet
-//     case EthereumNetwork.kovan:
-//     case EthereumNetwork.main:
-//       return ethereumProviderUrl
-//     default:
-//       throw new Error()
-//   }
-// }
+// Returns a random number between min (inclusive) and max (exclusive)
+export const getRandomInt = (min: number, max: number) => {
+  min = Math.ceil(min)
+  max = Math.floor(max)
+  return Math.floor(Math.random() * (max - min + 1)) + min
+}
 
 export const writeObjectToFile = async (path: string, obj: object) =>
   await promises.writeFile(path, JSON.stringify(obj))
