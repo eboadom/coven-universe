@@ -1,5 +1,5 @@
 <template>
-  <Preloader v-if="$apollo.queries.allWizardsDataByOwner.loading" />
+  <Preloader v-if="$apollo.queries.allWizardsDataByOwner.loading || $apollo.queries.allDaosInfo.loading" />
   <div v-else>
     <TopNav />
     <div class="my-container">
@@ -15,6 +15,7 @@
           <template v-slot:item.wizard="{ item }">
             <img
               class="wizard-img"
+              alt=""
               :src="
                 require(`@/assets/${item.affinity.toLowerCase()}-wizard.png`)
               "
@@ -76,7 +77,7 @@
 <script>
 import Preloader from "../components/Preloader.vue";
 import TopNav from "../components/TopNav.vue";
-import { allWizardsByUserAddress } from "../graphql/queries";
+import { allDaosData, allWizardsByUserAddress } from "../graphql/queries";
 import { createWalletForWizard } from "../graphql/mutations";
 import { getWeb3 } from "../helpers/web3-helpers";
 
@@ -86,6 +87,9 @@ export default {
     TopNav
   },
   apollo: {
+    allDaosInfo: {
+      query: allDaosData
+    },
     allWizardsDataByOwner: {
       query: allWizardsByUserAddress,
       variables() {
@@ -120,12 +124,20 @@ export default {
   },
   computed: {
     formattedWizards() {
-      return this.allWizardsDataByOwner.map(wizard => ({
-        ...wizard,
-        cowvenName: wizard.cowvenName && wizard.status !== 'FREE' ? wizard.cowvenName : '-',
-        score: wizard.score || '-',
-        reputation: wizard.wizardWalletData.genecheezeDaoReputation === "0" ? "-" : wizard.wizardWalletData.genecheezeDaoReputation
-      }))
+      return this.allWizardsDataByOwner.map(wizard => {
+        let mostReputableCowven = { reputation: "0", cowvenId: "-" };
+        wizard.wizardWalletData.reputationOfWalletByCowven.forEach(cowven => {
+          if(Number(cowven.reputation) > Number(mostReputableCowven.reputation)) {
+            mostReputableCowven = cowven;
+          }
+        });
+        return {
+          ...wizard,
+          cowvenName: mostReputableCowven.cowvenId,
+          score: wizard.score || '-',
+          reputation: mostReputableCowven.reputation !== "0" ? mostReputableCowven.reputation : "-",
+        }
+      })
     }
   },
   methods: {
