@@ -29,9 +29,9 @@ contract DaoCreator {
     mapping(address=>address) public locks;
 
     event NewOrg (
-        address _avatar,
-        string _cowvenId,
-        string _grate,
+        address indexed _avatar,
+        string indexed _cowvenId,
+        string indexed _grate,
         string _cowvenDescription,
         address _reputation,
         address _token
