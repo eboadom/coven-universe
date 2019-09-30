@@ -13461,9 +13461,134 @@
     "name": "solc",
     "version": "0.5.6+commit.b259423e.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "1569865313619": {
+      "events": {
+        "0x91844be4872bbec71676ddd1d7a85222f6e62f10f70887042e501b0a7a5e28f2": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "_avatar",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "_proposalId",
+              "type": "bytes32"
+            },
+            {
+              "indexed": true,
+              "name": "_intVoteInterface",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_gc",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_params",
+              "type": "bytes32"
+            },
+            {
+              "indexed": false,
+              "name": "_voteToRemoveParams",
+              "type": "bytes32"
+            },
+            {
+              "indexed": false,
+              "name": "_descriptionHash",
+              "type": "string"
+            }
+          ],
+          "name": "NewGlobalConstraintsProposal",
+          "type": "event",
+          "signature": "0x91844be4872bbec71676ddd1d7a85222f6e62f10f70887042e501b0a7a5e28f2"
+        },
+        "0x4adc38b95e17c3b3410caa223e957ebc5cfdae71c60f1801e8fd328ca8285813": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "_avatar",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "_proposalId",
+              "type": "bytes32"
+            },
+            {
+              "indexed": true,
+              "name": "_intVoteInterface",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_gc",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_descriptionHash",
+              "type": "string"
+            }
+          ],
+          "name": "RemoveGlobalConstraintsProposal",
+          "type": "event",
+          "signature": "0x4adc38b95e17c3b3410caa223e957ebc5cfdae71c60f1801e8fd328ca8285813"
+        },
+        "0xd2632e80f5364f02aded1c64e8a04637b7c8bb9c2db2bedf4b6ac47c013acbc0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "_avatar",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "_proposalId",
+              "type": "bytes32"
+            },
+            {
+              "indexed": false,
+              "name": "_param",
+              "type": "int256"
+            }
+          ],
+          "name": "ProposalExecuted",
+          "type": "event",
+          "signature": "0xd2632e80f5364f02aded1c64e8a04637b7c8bb9c2db2bedf4b6ac47c013acbc0"
+        },
+        "0x6bc0cb9e9967b59a69ace442598e1df4368d38661bd5c0800fbcbc9fe855fbbe": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "_avatar",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "_proposalId",
+              "type": "bytes32"
+            }
+          ],
+          "name": "ProposalDeleted",
+          "type": "event",
+          "signature": "0x6bc0cb9e9967b59a69ace442598e1df4368d38661bd5c0800fbcbc9fe855fbbe"
+        }
+      },
+      "links": {},
+      "address": "0x672DE2f067a68E867064791681aAb3B41585E271",
+      "transactionHash": "0xb8f1f6c9f12f06280a730ce57e4cd224d00b55e09ca9263bc6432bd34fa022f5"
+    }
+  },
   "schemaVersion": "3.0.14",
-  "updatedAt": "2019-09-27T19:17:02.151Z",
+  "updatedAt": "2019-09-30T17:44:24.086Z",
   "devdoc": {
     "details": "The scheme is used to register or remove new global constraints",
     "methods": {

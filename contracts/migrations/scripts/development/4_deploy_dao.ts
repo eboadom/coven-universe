@@ -223,242 +223,242 @@ export const deployDAOMigration = migrationHandler(
 
     // "Testing" of contribution reward
 
-    await initConfiguration()
-    const wizardsService = new WizardsService()
-    const daoService = new DaoService()
+    // await initConfiguration()
+    // const wizardsService = new WizardsService()
+    // const daoService = new DaoService()
 
-    const txResultDeployNewCowven = await deployNewCowven(
-      "SecondCheeze",
-      "SCTK",
-      "Second Cheeze Token",
-      "The second, still important",
-      initialFoundersRewards,
-      eGrateType.FLAME,
-    )
-
-    const allDaosIds = await daoService.getAllCowvensBasicData()
-    console.log(allDaosIds)
-
-    console.log(configuration.defaultDaoParams)
-
-    const txResultInitCowvenSchemes = await initCowvenSchemes(
-      allDaosIds[1].avatarAddress,
-    )
-    console.log(txResultInitCowvenSchemes)
-
-    const wizardId1 = 5975
-    const wizardId2 = 5976
-    const wizardId3 = 5977
-    const wizardWallet1 = await wizardsService.getWizardWalletAddressByWizardId(
-      wizardId1,
-    )
-    const wizardWallet2 = await wizardsService.getWizardWalletAddressByWizardId(
-      wizardId2,
-    )
-    const wizardWallet3 = await wizardsService.getWizardWalletAddressByWizardId(
-      wizardId3,
-    )
-    console.log("---------------------------------")
-    console.log("----- Initial state Wizards wallets -----")
-    console.log("---------------------------------")
-    console.log(
-      JSON.stringify(
-        (await wizardsService.getWizardData(wizardId1)).wizardWalletData,
-      ),
-    )
-    console.log(
-      JSON.stringify(
-        (await wizardsService.getWizardData(wizardId2)).wizardWalletData,
-      ),
-    )
-    console.log(
-      JSON.stringify(
-        (await wizardsService.getWizardData(wizardId1)).wizardWalletData,
-      ),
-    )
-    console.log()
-    console.log("---------------------------------\n")
-
-    const giveReputationToWizard1ProposalId = (await createProposal(
-      avatarInstance.address,
-      wizardWallet1,
-      "60000",
-    )).logs[0].args._proposalId
-    const giveReputationToWizard2ProposalId = (await createProposal(
-      avatarInstance.address,
-      wizardWallet2,
-      "20000",
-    )).logs[0].args._proposalId
-    const giveReputationToWizard3ProposalId = (await createProposal(
-      avatarInstance.address,
-      wizardWallet3,
-      "10000",
-    )).logs[0].args._proposalId
-    console.log(
-      "Give reputation to Wizard 1 Proposal ID- " +
-        giveReputationToWizard1ProposalId,
-    )
-    console.log(
-      "Give reputation to Wizard 2 Proposal ID- " +
-        giveReputationToWizard2ProposalId,
-    )
-    console.log(
-      "Give reputation to Wizard 3 Proposal ID- " +
-        giveReputationToWizard3ProposalId,
-    )
-
-    await voteProposal(
-      accounts[0],
-      giveReputationToWizard1ProposalId,
-      eVote.YES,
-      "-1",
-    )
-    // await voteProposal(
-    //   accounts[0],
-    //   giveReputationToWizard2ProposalId,
-    //   eVote.YES,
-    //   "1",
+    // const txResultDeployNewCowven = await deployNewCowven(
+    //   "SecondCheeze",
+    //   "SCTK",
+    //   "Second Cheeze Token",
+    //   "The second, still important",
+    //   initialFoundersRewards,
+    //   eGrateType.FLAME,
     // )
-    // await voteProposal(
-    //   accounts[0],
-    //   giveReputationToWizard3ProposalId,
-    //   eVote.YES,
-    //   "-1",
+
+    // const allDaosIds = await daoService.getAllCowvensBasicData()
+    // console.log(allDaosIds)
+
+    // console.log(configuration.defaultDaoParams)
+
+    // const txResultInitCowvenSchemes = await initCowvenSchemes(
+    //   allDaosIds[1].avatarAddress,
     // )
-    await redeemReputation(giveReputationToWizard1ProposalId)
-    // await redeemReputation(giveReputationToWizard2ProposalId)
-    // await redeemReputation(giveReputationToWizard3ProposalId)
+    // console.log(txResultInitCowvenSchemes)
 
-    console.log("---------------------------------")
-    console.log(
-      "----- State Wizards wallets after redeem of first reputation grant-----",
-    )
-    console.log("---------------------------------")
-    console.log(
-      JSON.stringify(
-        (await wizardsService.getWizardData(wizardId1)).wizardWalletData,
-      ),
-    )
-    console.log(
-      JSON.stringify(
-        (await wizardsService.getWizardData(wizardId2)).wizardWalletData,
-      ),
-    )
-    console.log(
-      JSON.stringify(
-        (await wizardsService.getWizardData(wizardId3)).wizardWalletData,
-      ),
-    )
-    console.log()
-    console.log("---------------------------------\n")
+    // const wizardId1 = 5975
+    // const wizardId2 = 5976
+    // const wizardId3 = 5977
+    // const wizardWallet1 = await wizardsService.getWizardWalletAddressByWizardId(
+    //   wizardId1,
+    // )
+    // const wizardWallet2 = await wizardsService.getWizardWalletAddressByWizardId(
+    //   wizardId2,
+    // )
+    // const wizardWallet3 = await wizardsService.getWizardWalletAddressByWizardId(
+    //   wizardId3,
+    // )
+    // console.log("---------------------------------")
+    // console.log("----- Initial state Wizards wallets -----")
+    // console.log("---------------------------------")
+    // console.log(
+    //   JSON.stringify(
+    //     (await wizardsService.getWizardData(wizardId1)).wizardWalletData,
+    //   ),
+    // )
+    // console.log(
+    //   JSON.stringify(
+    //     (await wizardsService.getWizardData(wizardId2)).wizardWalletData,
+    //   ),
+    // )
+    // console.log(
+    //   JSON.stringify(
+    //     (await wizardsService.getWizardData(wizardId1)).wizardWalletData,
+    //   ),
+    // )
+    // console.log()
+    // console.log("---------------------------------\n")
 
-    const slashReputationWizard1ProposalId = (await createProposal(
-      avatarInstance.address,
-      wizardWallet1,
-      "-10000",
-    )).logs[0].args._proposalId
-    // const slashReputationWizard2ProposalId = (await createProposal(
+    // const giveReputationToWizard1ProposalId = (await createProposal(
+    //   avatarInstance.address,
+    //   wizardWallet1,
+    //   "60000",
+    // )).logs[0].args._proposalId
+    // const giveReputationToWizard2ProposalId = (await createProposal(
     //   avatarInstance.address,
     //   wizardWallet2,
-    //   "-10000",
+    //   "20000",
     // )).logs[0].args._proposalId
-    // const slashReputationWizard3ProposalId = (await createProposal(
+    // const giveReputationToWizard3ProposalId = (await createProposal(
     //   avatarInstance.address,
     //   wizardWallet3,
+    //   "10000",
+    // )).logs[0].args._proposalId
+    // console.log(
+    //   "Give reputation to Wizard 1 Proposal ID- " +
+    //     giveReputationToWizard1ProposalId,
+    // )
+    // console.log(
+    //   "Give reputation to Wizard 2 Proposal ID- " +
+    //     giveReputationToWizard2ProposalId,
+    // )
+    // console.log(
+    //   "Give reputation to Wizard 3 Proposal ID- " +
+    //     giveReputationToWizard3ProposalId,
+    // )
+
+    // await voteProposal(
+    //   accounts[0],
+    //   giveReputationToWizard1ProposalId,
+    //   eVote.YES,
+    //   "-1",
+    // )
+    // // await voteProposal(
+    // //   accounts[0],
+    // //   giveReputationToWizard2ProposalId,
+    // //   eVote.YES,
+    // //   "1",
+    // // )
+    // // await voteProposal(
+    // //   accounts[0],
+    // //   giveReputationToWizard3ProposalId,
+    // //   eVote.YES,
+    // //   "-1",
+    // // )
+    // await redeemReputation(giveReputationToWizard1ProposalId)
+    // // await redeemReputation(giveReputationToWizard2ProposalId)
+    // // await redeemReputation(giveReputationToWizard3ProposalId)
+
+    // console.log("---------------------------------")
+    // console.log(
+    //   "----- State Wizards wallets after redeem of first reputation grant-----",
+    // )
+    // console.log("---------------------------------")
+    // console.log(
+    //   JSON.stringify(
+    //     (await wizardsService.getWizardData(wizardId1)).wizardWalletData,
+    //   ),
+    // )
+    // console.log(
+    //   JSON.stringify(
+    //     (await wizardsService.getWizardData(wizardId2)).wizardWalletData,
+    //   ),
+    // )
+    // console.log(
+    //   JSON.stringify(
+    //     (await wizardsService.getWizardData(wizardId3)).wizardWalletData,
+    //   ),
+    // )
+    // console.log()
+    // console.log("---------------------------------\n")
+
+    // const slashReputationWizard1ProposalId = (await createProposal(
+    //   avatarInstance.address,
+    //   wizardWallet1,
     //   "-10000",
     // )).logs[0].args._proposalId
+    // // const slashReputationWizard2ProposalId = (await createProposal(
+    // //   avatarInstance.address,
+    // //   wizardWallet2,
+    // //   "-10000",
+    // // )).logs[0].args._proposalId
+    // // const slashReputationWizard3ProposalId = (await createProposal(
+    // //   avatarInstance.address,
+    // //   wizardWallet3,
+    // //   "-10000",
+    // // )).logs[0].args._proposalId
 
-    console.log(
-      "Slash reputation from Wizard wallet 1 Proposal ID - " +
-        slashReputationWizard1ProposalId,
-    )
     // console.log(
-    //   "Slash reputation from Wizard wallet 2 Proposal ID - " +
-    //     slashReputationWizard2ProposalId,
+    //   "Slash reputation from Wizard wallet 1 Proposal ID - " +
+    //     slashReputationWizard1ProposalId,
     // )
-    // console.log(
-    //   "Slash reputation from Wizard wallet 3 Proposal ID - " +
-    //     slashReputationWizard3ProposalId,
-    // )
+    // // console.log(
+    // //   "Slash reputation from Wizard wallet 2 Proposal ID - " +
+    // //     slashReputationWizard2ProposalId,
+    // // )
+    // // console.log(
+    // //   "Slash reputation from Wizard wallet 3 Proposal ID - " +
+    // //     slashReputationWizard3ProposalId,
+    // // )
 
-    await voteProposalWithWizardWallet(
-      wizardWallet1,
-      slashReputationWizard1ProposalId,
-      eVote.YES,
-      "-1",
-    )
-    // await voteProposal(
-    //   accounts[0],
+    // await voteProposalWithWizardWallet(
+    //   wizardWallet1,
     //   slashReputationWizard1ProposalId,
-    //   eVote.NO,
-    //   "-1",
-    // )
-    // await voteProposal(
-    //   accounts[0],
-    //   slashReputationWizard2ProposalId,
     //   eVote.YES,
     //   "-1",
     // )
-    // await voteProposal(
-    //   accounts[0],
-    //   slashReputationWizard3ProposalId,
-    //   eVote.YES,
-    //   "-1",
-    // )
+    // // await voteProposal(
+    // //   accounts[0],
+    // //   slashReputationWizard1ProposalId,
+    // //   eVote.NO,
+    // //   "-1",
+    // // )
+    // // await voteProposal(
+    // //   accounts[0],
+    // //   slashReputationWizard2ProposalId,
+    // //   eVote.YES,
+    // //   "-1",
+    // // )
+    // // await voteProposal(
+    // //   accounts[0],
+    // //   slashReputationWizard3ProposalId,
+    // //   eVote.YES,
+    // //   "-1",
+    // // )
 
-    // const slashProposalData = await votingMachineInstance.proposals(
-    //   slashReputationProposalId,
-    // )
-    // console.log(slashProposalData);
+    // // const slashProposalData = await votingMachineInstance.proposals(
+    // //   slashReputationProposalId,
+    // // )
+    // // console.log(slashProposalData);
+    // // console.log(
+    // //   (await contributionRewardInstance.organizationsProposals(
+    // //     avatarInstance.address,
+    // //     slashReputationProposalId,
+    // //   ))["1"].toString(),
+    // // )
+
+    // // await redeemReputation(slashReputationWizard1ProposalId)
+    // // await redeemReputation(slashReputationWizard2ProposalId)
+    // // await redeemReputation(slashReputationWizard3ProposalId)
+
+    // console.log("---------------------------------")
     // console.log(
-    //   (await contributionRewardInstance.organizationsProposals(
-    //     avatarInstance.address,
-    //     slashReputationProposalId,
-    //   ))["1"].toString(),
+    //   "----- State Wizards wallets after redeem of slash of reputation-----",
     // )
+    // console.log("---------------------------------")
+    // console.log(JSON.stringify(await wizardsService.getWizardData(wizardId1)))
+    // console.log(JSON.stringify(await wizardsService.getWizardData(wizardId2)))
+    // console.log(JSON.stringify(await wizardsService.getWizardData(wizardId3)))
+    // console.log()
+    // console.log("---------------------------------\n")
 
-    // await redeemReputation(slashReputationWizard1ProposalId)
-    // await redeemReputation(slashReputationWizard2ProposalId)
-    // await redeemReputation(slashReputationWizard3ProposalId)
+    // console.log("---------------------------------")
+    // console.log(`----- Wizards of ${accounts[0]} -----`)
+    // console.log("---------------------------------")
+    // console.log(await wizardsService.getAllWizardsDataByOwner(accounts[0]))
+    // console.log("---------------------------------\n")
 
-    console.log("---------------------------------")
-    console.log(
-      "----- State Wizards wallets after redeem of slash of reputation-----",
-    )
-    console.log("---------------------------------")
-    console.log(JSON.stringify(await wizardsService.getWizardData(wizardId1)))
-    console.log(JSON.stringify(await wizardsService.getWizardData(wizardId2)))
-    console.log(JSON.stringify(await wizardsService.getWizardData(wizardId3)))
-    console.log()
-    console.log("---------------------------------\n")
+    // console.log("----- Wallets in the 'test' -----")
+    // console.log("Account 0 " + accounts[0])
+    // console.log("Wizard 1 wallet " + wizardWallet1)
+    // console.log("Wizard 2 wallet " + wizardWallet2)
+    // console.log("Wizard 3 wallet " + wizardWallet3)
+    // console.log("---------------------------------\n")
 
-    console.log("---------------------------------")
-    console.log(`----- Wizards of ${accounts[0]} -----`)
-    console.log("---------------------------------")
-    console.log(await wizardsService.getAllWizardsDataByOwner(accounts[0]))
-    console.log("---------------------------------\n")
+    // const allDaosInfo = await daoService.getAllDaosInfo()
+    // const allWizardsByOwner = await wizardsService.getAllWizardsDataByOwner(
+    //   accounts[0],
+    // )
+    // const allMembersOfDao = await daoService.getAllMembersOfDao(
+    //   allDaosInfo[0].reputationAddress,
+    // )
+    // console.log(allMembersOfDao)
+    // console.log(allWizardsByOwner)
+    // console.log(allDaosInfo)
+    // console.log(allDaosInfo[0].members)
 
-    console.log("----- Wallets in the 'test' -----")
-    console.log("Account 0 " + accounts[0])
-    console.log("Wizard 1 wallet " + wizardWallet1)
-    console.log("Wizard 2 wallet " + wizardWallet2)
-    console.log("Wizard 3 wallet " + wizardWallet3)
-    console.log("---------------------------------\n")
-
-    const allDaosInfo = await daoService.getAllDaosInfo()
-    const allWizardsByOwner = await wizardsService.getAllWizardsDataByOwner(
-      accounts[0],
-    )
-    const allMembersOfDao = await daoService.getAllMembersOfDao(
-      allDaosInfo[0].reputationAddress,
-    )
-    console.log(allMembersOfDao)
-    console.log(allWizardsByOwner)
-    console.log(allDaosInfo)
-    console.log(allDaosInfo[0].members)
-
-    const allContributionRewards = await daoService.getAllContributionRewardProposals()
-    console.log(allContributionRewards.map(a => a.voters.map(a => a.voteData)))
+    // const allContributionRewards = await daoService.getAllContributionRewardProposals()
+    // console.log(allContributionRewards.map(a => a.voters.map(a => a.voteData)))
   },
 )
 

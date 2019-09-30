@@ -13274,9 +13274,68 @@
     "name": "solc",
     "version": "0.5.6+commit.b259423e.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "1569865313619": {
+      "events": {
+        "0x6998b40f61af95accf14c435f4ac5d85325bdd6b9d41108b09c442c558499d1f": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "name": "_avatar",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "_cowvenId",
+              "type": "string"
+            },
+            {
+              "indexed": true,
+              "name": "_grate",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "name": "_cowvenDescription",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "name": "_reputation",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "name": "_token",
+              "type": "address"
+            }
+          ],
+          "name": "NewOrg",
+          "type": "event",
+          "signature": "0x6998b40f61af95accf14c435f4ac5d85325bdd6b9d41108b09c442c558499d1f"
+        },
+        "0x9007c9042f12be953f7dbe3909f56c3f088e9fe294dbebbef4a67afa63462b6a": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "_avatar",
+              "type": "address"
+            }
+          ],
+          "name": "InitialSchemesSet",
+          "type": "event",
+          "signature": "0x9007c9042f12be953f7dbe3909f56c3f088e9fe294dbebbef4a67afa63462b6a"
+        }
+      },
+      "links": {},
+      "address": "0x3Ab1D82cD596e2389b7628DF346F06fb638102de",
+      "transactionHash": "0xb4bb4031eef1f4c253ec029ee48f5b6ba8c6c94631cdbef21aa597cfa7aae0dd"
+    }
+  },
   "schemaVersion": "3.0.14",
-  "updatedAt": "2019-09-27T19:17:02.428Z",
+  "updatedAt": "2019-09-30T17:44:24.010Z",
   "devdoc": {
     "methods": {
       "addFounders(address,address[],uint256[])": {
