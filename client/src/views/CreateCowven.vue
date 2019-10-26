@@ -25,24 +25,6 @@
               required
             ></v-select>
 
-            <v-text-field
-              v-model="tokenName"
-              :counter="10"
-              :rules="nameRules"
-              label="Cowven token Name"
-              data-vv-name="tokenName"
-              required
-            ></v-text-field>
-
-            <v-text-field
-              v-model="tokenSymbol"
-              :counter="10"
-              :rules="nameRules"
-              label="Cowven token Symbol"
-              data-vv-name="tokenSymbol"
-              required
-            ></v-text-field>
-
             <v-textarea
               v-model="description"
               label="Cowven Description"
@@ -122,8 +104,6 @@ export default {
       { text: "The Grate One of The Flames", value: "FLAME" },
       { text: "The Grate One of The Mold", value: "MOLD" }
     ],
-    tokenName: "",
-    tokenSymbol: "",
     description: "",
   }),
 
@@ -140,8 +120,6 @@ export default {
             data: {
               sender: window.userWallet,
               cowvenName: this.name,
-              tokenCowvenName: this.tokenName,
-              tokenCowvenSymbol: this.tokenSymbol,
               description: this.description,
               grate: this.selectGrates
             }

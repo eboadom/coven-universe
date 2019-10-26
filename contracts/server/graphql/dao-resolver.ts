@@ -24,11 +24,12 @@ import {tEthereumAddress} from "../configuration"
 import {WizardData} from "./wizard-resolver"
 import {IsEthAddress} from "./validators"
 import {EthereumTransactionModel} from "./common-models"
-import {tStringCurrencyUnits} from "../../utils/common-utils"
+import {tStringCurrencyUnits, ADDRESS_0x0} from "../../utils/common-utils"
 import {
   devFundReputation,
   devFundTokens,
 } from "../../migrations/data/development-data"
+import {WizardsService} from "../../services/WizardsService"
 
 registerEnumType(eGrateType, {
   name: "eGrateType",
@@ -220,12 +221,6 @@ class DeployNewCowvenInput {
   cowvenName: string
 
   @Field()
-  tokenCowvenName: string
-
-  @Field()
-  tokenCowvenSymbol: string
-
-  @Field()
   description: string
 
   @Field()
@@ -245,8 +240,10 @@ class InitCowvenSchemesInput {
 @Resolver()
 export class DaoResolver {
   private daoService: DaoService
+  private wizardsService: WizardsService
   constructor() {
     this.daoService = new DaoService()
+    this.wizardsService = new WizardsService()
   }
 
   @Query(returns => [CowvenData])
@@ -312,25 +309,43 @@ export class DaoResolver {
     )
   }
 
+  // TODO change the logic for the minting of initial reputation
+  // The address of the wizard to give reputation should be received as parameter
   @Mutation(returns => [EthereumTransactionModel])
   async deployNewCowven(@Arg("data")
   {
     sender,
     cowvenName,
-    tokenCowvenName,
-    tokenCowvenSymbol,
     description,
     grate,
   }: DeployNewCowvenInput): Promise<EthereumTransactionModel[]> {
-    return await this.daoService.deployNewCowven(
+    const wizardsOfSender = await this.wizardsService.getAllWizardsDataByOwner(
       sender,
-      cowvenName,
-      tokenCowvenName,
-      tokenCowvenSymbol,
-      description,
-      [[sender, devFundReputation, devFundTokens]],
-      grate,
     )
+    if (wizardsOfSender.length > 0) {
+      const firstWizardOfSender = wizardsOfSender[0]
+      if (
+        firstWizardOfSender.wizardWalletData.wizardWalletAddress !== ADDRESS_0x0
+      ) {
+        const firstWizardWalletAddress =
+          firstWizardOfSender.wizardWalletData.wizardWalletAddress
+        return await this.daoService.deployNewCowven(
+          sender,
+          cowvenName,
+          "CHZTK",
+          "CHZTK",
+          description,
+          [[firstWizardWalletAddress, devFundReputation, devFundTokens]], // TODO review. For now the sender re
+          grate,
+        )
+      } else {
+        throw new Error(
+          "Error. The first wizard of the sender doesn't have a wallet",
+        )
+      }
+    } else {
+      throw new Error("Error. The sender doesn't have wizards")
+    }
   }
 
   @Mutation(returns => [EthereumTransactionModel])
