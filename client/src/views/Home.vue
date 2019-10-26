@@ -66,15 +66,7 @@
             <p>
               Create your Cowven! Gather your Wizards homies and rule together the cheesiest Cowven of the hood.
             </p>
-            <button
-              class="button"
-              disabled
-              title="Coming soon"
-              v-if="isProduction"
-            >
-              Create
-            </button>
-            <router-link :to="{ name: 'createcowven' }" v-else>
+            <router-link :to="{ name: 'createcowven' }">
               <button class="button">
                 Create
               </button>
