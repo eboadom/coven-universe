@@ -3,27 +3,19 @@ import {
   DAOName,
   TokenDAOName,
   TokenDAOSymbol,
-  TokenDAOCap,
   quorumVoteRequiredThreshold,
   devFundTokens,
   devFundReputation,
+  genecheezeDaoDescription,
 } from "../../data/development-data"
 import {writeObjectToFile, ADDRESS_0x0} from "../../../utils/common-utils"
 import {
   IDaoAddresses,
   getPathDeployedDaoContracts,
-  initConfiguration,
   getPathDaoDefaultParams,
   IDaoDefaultParams,
-  configuration,
 } from "../../../server/configuration"
-import {WizardsService} from "../../../services/WizardsService"
-import {
-  DaoService,
-  eGrateStringIndex,
-  eGrateType,
-  eVote,
-} from "../../../services/DaoService"
+import {eGrateStringIndex} from "../../../services/DaoService"
 
 export const deployDAOMigration = migrationHandler(
   "Deploy the GeneCheeze Cowven",
@@ -38,14 +30,8 @@ export const deployDAOMigration = migrationHandler(
     deployUpgradeSchemeContract,
     deployGlobalConstraintRegistrarContract,
     deployContributionRewardContract,
-    deployNewCowven,
     getAvatarInstance,
     getControllerInstance,
-    createProposal,
-    voteProposal,
-    voteProposalWithWizardWallet,
-    redeemReputation,
-    initCowvenSchemes,
   }) => {
     // // Factory contract to deploy the organisation's Controller. No owner
     const controllerCreatorInstance = await deployControllerCreatorContract()
@@ -84,7 +70,7 @@ export const deployDAOMigration = migrationHandler(
       founders,
       initialReputation,
       grate,
-      "This is what you get for playing with milk and mold on chain, even Pasteur can't stop us",
+      genecheezeDaoDescription,
     )
     const newAvatarAddress = resTxForgeOrg.logs[0].args._avatar
     const avatarInstance = await getAvatarInstance(newAvatarAddress)
@@ -218,230 +204,11 @@ export const deployDAOMigration = migrationHandler(
       deployedDaoContracts,
     )
 
+    console.log(require(getPathDeployedDaoContracts(network)))
+
     // Persistence in a json file of the default scheme-related params to create new daos
     await writeObjectToFile(getPathDaoDefaultParams(network), daoDefaultParams)
-
-    // "Testing" of contribution reward
-
-    await initConfiguration()
-    const wizardsService = new WizardsService()
-    const daoService = new DaoService()
-
-    const wizardId1 = 5975
-    const wizardId2 = 5976
-    const wizardId3 = 5977
-    const wizardWallet1 = await wizardsService.getWizardWalletAddressByWizardId(
-      wizardId1,
-    )
-    const wizardWallet2 = await wizardsService.getWizardWalletAddressByWizardId(
-      wizardId2,
-    )
-    const wizardWallet3 = await wizardsService.getWizardWalletAddressByWizardId(
-      wizardId3,
-    )
-    console.log("---------------------------------")
-    console.log("----- Initial state Wizards wallets -----")
-    console.log("---------------------------------")
-    console.log(
-      JSON.stringify(
-        (await wizardsService.getWizardData(wizardId1)).wizardWalletData,
-      ),
-    )
-    console.log(
-      JSON.stringify(
-        (await wizardsService.getWizardData(wizardId2)).wizardWalletData,
-      ),
-    )
-    console.log(
-      JSON.stringify(
-        (await wizardsService.getWizardData(wizardId1)).wizardWalletData,
-      ),
-    )
-    console.log()
-    console.log("---------------------------------\n")
-
-    const giveReputationToWizard1ProposalId = (await createProposal(
-      avatarInstance.address,
-      wizardWallet1,
-      "60000",
-    )).logs[0].args._proposalId
-    const giveReputationToWizard2ProposalId = (await createProposal(
-      avatarInstance.address,
-      wizardWallet2,
-      "20000",
-    )).logs[0].args._proposalId
-    const giveReputationToWizard3ProposalId = (await createProposal(
-      avatarInstance.address,
-      wizardWallet3,
-      "10000",
-    )).logs[0].args._proposalId
-    console.log(
-      "Give reputation to Wizard 1 Proposal ID- " +
-        giveReputationToWizard1ProposalId,
-    )
-    console.log(
-      "Give reputation to Wizard 2 Proposal ID- " +
-        giveReputationToWizard2ProposalId,
-    )
-    console.log(
-      "Give reputation to Wizard 3 Proposal ID- " +
-        giveReputationToWizard3ProposalId,
-    )
-
-    await voteProposal(
-      accounts[0],
-      giveReputationToWizard1ProposalId,
-      eVote.YES,
-      "-1",
-    )
-    // await voteProposal(
-    //   accounts[0],
-    //   giveReputationToWizard2ProposalId,
-    //   eVote.YES,
-    //   "1",
-    // )
-    // await voteProposal(
-    //   accounts[0],
-    //   giveReputationToWizard3ProposalId,
-    //   eVote.YES,
-    //   "-1",
-    // )
-    await redeemReputation(giveReputationToWizard1ProposalId)
-    // await redeemReputation(giveReputationToWizard2ProposalId)
-    // await redeemReputation(giveReputationToWizard3ProposalId)
-
-    console.log("---------------------------------")
-    console.log(
-      "----- State Wizards wallets after redeem of first reputation grant-----",
-    )
-    console.log("---------------------------------")
-    console.log(
-      JSON.stringify(
-        (await wizardsService.getWizardData(wizardId1)).wizardWalletData,
-      ),
-    )
-    console.log(
-      JSON.stringify(
-        (await wizardsService.getWizardData(wizardId2)).wizardWalletData,
-      ),
-    )
-    console.log(
-      JSON.stringify(
-        (await wizardsService.getWizardData(wizardId3)).wizardWalletData,
-      ),
-    )
-    console.log()
-    console.log("---------------------------------\n")
-
-    const slashReputationWizard1ProposalId = (await createProposal(
-      avatarInstance.address,
-      wizardWallet1,
-      "-10000",
-    )).logs[0].args._proposalId
-    // const slashReputationWizard2ProposalId = (await createProposal(
-    //   avatarInstance.address,
-    //   wizardWallet2,
-    //   "-10000",
-    // )).logs[0].args._proposalId
-    // const slashReputationWizard3ProposalId = (await createProposal(
-    //   avatarInstance.address,
-    //   wizardWallet3,
-    //   "-10000",
-    // )).logs[0].args._proposalId
-
-    console.log(
-      "Slash reputation from Wizard wallet 1 Proposal ID - " +
-        slashReputationWizard1ProposalId,
-    )
-    // console.log(
-    //   "Slash reputation from Wizard wallet 2 Proposal ID - " +
-    //     slashReputationWizard2ProposalId,
-    // )
-    // console.log(
-    //   "Slash reputation from Wizard wallet 3 Proposal ID - " +
-    //     slashReputationWizard3ProposalId,
-    // )
-
-    await voteProposalWithWizardWallet(
-      wizardWallet1,
-      slashReputationWizard1ProposalId,
-      eVote.YES,
-      "-1",
-    )
-    // await voteProposal(
-    //   accounts[0],
-    //   slashReputationWizard1ProposalId,
-    //   eVote.NO,
-    //   "-1",
-    // )
-    // await voteProposal(
-    //   accounts[0],
-    //   slashReputationWizard2ProposalId,
-    //   eVote.YES,
-    //   "-1",
-    // )
-    // await voteProposal(
-    //   accounts[0],
-    //   slashReputationWizard3ProposalId,
-    //   eVote.YES,
-    //   "-1",
-    // )
-
-    // const slashProposalData = await votingMachineInstance.proposals(
-    //   slashReputationProposalId,
-    // )
-    // console.log(slashProposalData);
-    // console.log(
-    //   (await contributionRewardInstance.organizationsProposals(
-    //     avatarInstance.address,
-    //     slashReputationProposalId,
-    //   ))["1"].toString(),
-    // )
-
-    // await redeemReputation(slashReputationWizard1ProposalId)
-    // await redeemReputation(slashReputationWizard2ProposalId)
-    // await redeemReputation(slashReputationWizard3ProposalId)
-
-    console.log("---------------------------------")
-    console.log(
-      "----- State Wizards wallets after redeem of slash of reputation-----",
-    )
-    console.log("---------------------------------")
-    console.log(JSON.stringify(await wizardsService.getWizardData(wizardId1)))
-    console.log(JSON.stringify(await wizardsService.getWizardData(wizardId2)))
-    console.log(JSON.stringify(await wizardsService.getWizardData(wizardId3)))
-    console.log()
-    console.log("---------------------------------\n")
-
-    console.log("---------------------------------")
-    console.log(`----- Wizards of ${accounts[0]} -----`)
-    console.log("---------------------------------")
-    console.log(await wizardsService.getAllWizardsDataByOwner(accounts[0]))
-    console.log("---------------------------------\n")
-
-    console.log("----- Wallets in the 'test' -----")
-    console.log("Account 0 " + accounts[0])
-    console.log("Wizard 1 wallet " + wizardWallet1)
-    console.log("Wizard 2 wallet " + wizardWallet2)
-    console.log("Wizard 3 wallet " + wizardWallet3)
-    console.log("---------------------------------\n")
-
-    const allDaosInfo = await daoService.getAllDaosInfo()
-    const allWizardsByOwner = await wizardsService.getAllWizardsDataByOwner(
-      accounts[0],
-    )
-    const allMembersOfDao = await daoService.getAllMembersOfDao(
-      allDaosInfo[0].reputationAddress,
-    )
-    console.log(allMembersOfDao)
-    console.log(allWizardsByOwner)
-    console.log(allDaosInfo)
-    console.log(allDaosInfo[0].members)
-
-    const allContributionRewards = await daoService.getAllContributionRewardProposalsByCowven(
-      allDaosInfo[0].avatarAddress,
-    )
-    console.log(allContributionRewards.map(a => a.voters.map(a => a.voteData)))
+    console.log(getPathDaoDefaultParams(network))
   },
 )
 

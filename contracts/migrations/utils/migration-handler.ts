@@ -319,12 +319,18 @@ export const migrationHandler = (
         ? "0"
         : currencyUnitsToDecimals(stringToBigNumber(reputationToUse), 18)
     const quorumVoteInstance = await getQuorumVoteInstance()
-    return await quorumVoteInstance.vote(
-      proposalId,
-      vote,
-      convertedReputation,
-      voter,
-    )
+    try {
+      return await quorumVoteInstance.vote(
+        proposalId,
+        vote,
+        convertedReputation,
+        voter,
+      )
+    } catch (error) {
+      console.log("Error. Voting proposal")
+      console.log(error)
+      throw new Error()
+    }
   }
 
   const voteProposalWithWizardWallet = async (

@@ -23,8 +23,8 @@ x-contract-base: &contract-base
     URL_ETHEREUM_WS_PROVIDER_DEVELOPMENT: "wss://ganache:8545"
     # RINKEBY
     MNEMONIC_TRUFFLE_RINKEBY: ""
-    PK_TRUFFLE_RINKEBY: "34aa87fab8f93fa23b4a730da351f087651cdd36240c098786744d4256026549"
-    HDWALLET_ADDRESS_RINKEBY: "0x09c3d98A0eD16fFFb8bbAf6010F6848700CfEEd9"
+    PK_TRUFFLE_RINKEBY: ""
+    HDWALLET_ADDRESS_RINKEBY: ""
     URL_ETHEREUM_HTTP_PROVIDER_RINKEBY: "https://rinkeby.infura.io/v3/3f9d1321a68b41a092b3b4e404d3e537"
     URL_ETHEREUM_WS_PROVIDER_RINKEBY: "wss://rinkeby.infura.io/v3/3f9d1321a68b41a092b3b4e404d3e537"
     # KOVAN
@@ -48,7 +48,7 @@ services:
 
   ganache:
     image: trufflesuite/ganache-cli
-    command: ["ganache-cli", "--gasLimit", "8000000"] #,"--blockTime", "1"]
+    command: ["ganache-cli", "--gasLimit", "8000000", "--mnemonic", "soldier moment mix trumpet word decline pulp confirm nice tree eyebrow world"] #,"--blockTime", "1"]
     networks:
       - overlay
     ports:

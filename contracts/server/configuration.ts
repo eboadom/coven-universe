@@ -47,9 +47,7 @@ export interface IConfiguration {
 
 export let configuration: IConfiguration
 
-export const initConfiguration = async (
-  ethereumNetwork: string = "development",
-) => {
+export const initConfiguration = async (ethereumNetwork: string) => {
   const httpProvider = new Web3.providers.HttpProvider(<string>(
     process.env[`URL_ETHEREUM_HTTP_PROVIDER_${ethereumNetwork.toUpperCase()}`]
   ))

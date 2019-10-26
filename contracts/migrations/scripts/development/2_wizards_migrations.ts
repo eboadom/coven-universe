@@ -4,10 +4,9 @@ import {
   IWizardsAddresses,
 } from "../../../server/configuration"
 import {writeObjectToFile} from "../../../utils/common-utils"
-import { rinkebyOwnerOfMockWizards } from "../../data/development-data"
 
-export const deployDAOMigration = migrationHandler(
-  "Deploy the initial Coven",
+export const deployTestWizardsMigration = migrationHandler(
+  "Deploy the test wizards",
   artifacts,
   async ({
     accounts,
@@ -16,18 +15,27 @@ export const deployDAOMigration = migrationHandler(
     deployWizardWalletFactory,
     network,
   }) => {
+    const seriesMinter = accounts[0]
+    const reservedWizardsCount = 5974
+    const initialOwner = accounts[0]
+    const wizardIds = [5975, 5976, 5977]
+
     const wizardGuild = await deployWizardGuild()
-    await wizardGuild.openSeries(accounts[0], 5974)
-    await wizardGuild.mintWizards([50, 75, 100, 100, 200, 300, 500], [1, 2, 3, 2, 0, 0,1], rinkebyOwnerOfMockWizards)
+    await wizardGuild.openSeries(seriesMinter, reservedWizardsCount)
+    await wizardGuild.mintWizards(
+      [50, 75, 100, 100],
+      [1, 2, 3, 2],
+      initialOwner,
+    )
     const wizardsERC721AddressesProvider = await deployWizardsERC721AddressesProvider(
       [wizardGuild.address],
     )
     const wizardWalletFactory = await deployWizardWalletFactory([
       wizardsERC721AddressesProvider.address,
     ])
-    await wizardWalletFactory.createWallet(5975)
-    await wizardWalletFactory.createWallet(5976)
-    await wizardWalletFactory.createWallet(5977)
+    for (const id of wizardIds) {
+      await wizardWalletFactory.createWallet(id)
+    }
 
     const deployedWizardsContracts: IWizardsAddresses = {
       WizardGuild: wizardGuild.address,
@@ -43,4 +51,4 @@ export const deployDAOMigration = migrationHandler(
   },
 )
 
-module.exports = deployDAOMigration
+module.exports = deployTestWizardsMigration
