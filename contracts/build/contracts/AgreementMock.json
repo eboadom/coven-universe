@@ -52,22 +52,22 @@
   "metadata": "{\"compiler\":{\"version\":\"0.5.6+commit.b259423e\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"getAgreementHash\",\"outputs\":[{\"name\":\"\",\"type\":\"bytes32\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_agreementHash\",\"type\":\"bytes32\"}],\"name\":\"setAgreementHashTest\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"name\":\"_agreementHash\",\"type\":\"bytes32\"}],\"name\":\"test\",\"outputs\":[{\"name\":\"\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{\"getAgreementHash()\":{\"details\":\"getAgreementHash\",\"return\":\"bytes32 agreementHash\"}}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/src/contracts/arc/test/AgreementMock.sol\":\"AgreementMock\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/src/contracts/arc/schemes/Agreement.sol\":{\"keccak256\":\"0x5c5aae71ecbfc3125cb33d1e5780b0bb9df6e3fabf2c03def44dba2f2375ec8a\",\"urls\":[\"bzzr://484e0d67ab6c9f595e179cc0fda53ef637481570734fa7c7594e5bd5337dafde\"]},\"/src/contracts/arc/test/AgreementMock.sol\":{\"keccak256\":\"0x26d91c5e8c07703132446d2783cb1cb7534e6e1525db140f709aabd5308a38e1\",\"urls\":[\"bzzr://d544a5f435f7a6ebd66dde1bac99b5e95fea6e9c6392c50303beeb99e667b870\"]}},\"version\":1}",
   "bytecode": "0x608060405234801561001057600080fd5b506101c2806100206000396000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c8063696da9211461004657806398d3642e14610060578063993723211461007f575b600080fd5b61004e6100b0565b60408051918252519081900360200190f35b61007d6004803603602081101561007657600080fd5b50356100b6565b005b61009c6004803603602081101561009557600080fd5b50356100c2565b604080519115158252519081900360200190f35b60005490565b6100bf81610111565b50565b600081600054811461010857604051600160e51b62461bcd02815260040180806020018281038252602881526020018061016f6028913960400191505060405180910390fd5b50600192915050565b600054156101695760408051600160e51b62461bcd02815260206004820152601b60248201527f43616e206e6f74207365742061677265656d656e742074776963650000000000604482015290519081900360640190fd5b60005556fe53656e646572206d7573742073656e64207468652072696768742061677265656d656e7448617368a165627a7a723058204ef1ebb4ab06b044371b104564425d86f806ec5280f98888c81769fccf2f8d1a0029",
   "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100415760003560e01c8063696da9211461004657806398d3642e14610060578063993723211461007f575b600080fd5b61004e6100b0565b60408051918252519081900360200190f35b61007d6004803603602081101561007657600080fd5b50356100b6565b005b61009c6004803603602081101561009557600080fd5b50356100c2565b604080519115158252519081900360200190f35b60005490565b6100bf81610111565b50565b600081600054811461010857604051600160e51b62461bcd02815260040180806020018281038252602881526020018061016f6028913960400191505060405180910390fd5b50600192915050565b600054156101695760408051600160e51b62461bcd02815260206004820152601b60248201527f43616e206e6f74207365742061677265656d656e742074776963650000000000604482015290519081900360640190fd5b60005556fe53656e646572206d7573742073656e64207468652072696768742061677265656d656e7448617368a165627a7a723058204ef1ebb4ab06b044371b104564425d86f806ec5280f98888c81769fccf2f8d1a0029",
-  "sourceMap": "62:293:40:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;62:293:40;;;;;;;",
-  "deployedSourceMap": "62:293:40:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;62:293:40;;;;;;;;;;;;;;;;;;;;;;;;;;;;;407:101:25;;;:::i;:::-;;;;;;;;;;;;;;;;105:120:40;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;105:120:40;;:::i;:::-;;231:122;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;231:122:40;;:::i;:::-;;;;;;;;;;;;;;;;;;407:101:25;458:7;488:13;407:101;:::o;105:120:40:-;180:38;203:14;180:22;:38::i;:::-;105:120;:::o;231:122::-;315:4;286:14;243:13:25;;225:14;:31;217:84;;;;-1:-1:-1;;;;;217:84:25;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;342:4:40;;231:122;-1:-1:-1;;231:122:40:o;658:187:25:-;764:1;739:13;:27;731:67;;;;;-1:-1:-1;;;;;731:67:25;;;;;;;;;;;;;;;;;;;;;;;;;;;;808:13;:30;658:187::o",
+  "sourceMap": "62:293:45:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;62:293:45;;;;;;;",
+  "deployedSourceMap": "62:293:45:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;62:293:45;;;;;;;;;;;;;;;;;;;;;;;;;;;;;407:101:30;;;:::i;:::-;;;;;;;;;;;;;;;;105:120:45;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;105:120:45;;:::i;:::-;;231:122;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;231:122:45;;:::i;:::-;;;;;;;;;;;;;;;;;;407:101:30;458:7;488:13;407:101;:::o;105:120:45:-;180:38;203:14;180:22;:38::i;:::-;105:120;:::o;231:122::-;315:4;286:14;243:13:30;;225:14;:31;217:84;;;;-1:-1:-1;;;;;217:84:30;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;342:4:45;;231:122;-1:-1:-1;;231:122:45:o;658:187:30:-;764:1;739:13;:27;731:67;;;;;-1:-1:-1;;;;;731:67:30;;;;;;;;;;;;;;;;;;;;;;;;;;;;808:13;:30;658:187::o",
   "source": "pragma solidity ^0.5.4;\n\nimport \"../schemes/Agreement.sol\";\n\n\ncontract AgreementMock is Agreement {\n\n    function setAgreementHashTest(bytes32 _agreementHash) public\n    {\n        super.setAgreementHash(_agreementHash);\n    }\n\n    function test(bytes32 _agreementHash) public onlyAgree(_agreementHash) view returns(bool)\n    {\n        return true;\n    }\n}\n",
   "sourcePath": "/src/contracts/arc/test/AgreementMock.sol",
   "ast": {
     "absolutePath": "/src/contracts/arc/test/AgreementMock.sol",
     "exportedSymbols": {
       "AgreementMock": [
-        10875
+        11028
       ]
     },
-    "id": 10876,
+    "id": 11029,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 10846,
+        "id": 10999,
         "literals": [
           "solidity",
           "^",
@@ -75,16 +75,16 @@
           ".4"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:23:40"
+        "src": "0:23:45"
       },
       {
         "absolutePath": "/src/contracts/arc/schemes/Agreement.sol",
         "file": "../schemes/Agreement.sol",
-        "id": 10847,
+        "id": 11000,
         "nodeType": "ImportDirective",
-        "scope": 10876,
-        "sourceUnit": 8640,
-        "src": "25:34:40",
+        "scope": 11029,
+        "sourceUnit": 8793,
+        "src": "25:34:45",
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -94,40 +94,40 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 10848,
+              "id": 11001,
               "name": "Agreement",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 8639,
-              "src": "88:9:40",
+              "referencedDeclaration": 8792,
+              "src": "88:9:45",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Agreement_$8639",
+                "typeIdentifier": "t_contract$_Agreement_$8792",
                 "typeString": "contract Agreement"
               }
             },
-            "id": 10849,
+            "id": 11002,
             "nodeType": "InheritanceSpecifier",
-            "src": "88:9:40"
+            "src": "88:9:45"
           }
         ],
         "contractDependencies": [
-          8639
+          8792
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 10875,
+        "id": 11028,
         "linearizedBaseContracts": [
-          10875,
-          8639
+          11028,
+          8792
         ],
         "name": "AgreementMock",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 10860,
+              "id": 11013,
               "nodeType": "Block",
-              "src": "170:55:40",
+              "src": "170:55:45",
               "statements": [
                 {
                   "expression": {
@@ -135,12 +135,12 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 10857,
+                        "id": 11010,
                         "name": "_agreementHash",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 10851,
-                        "src": "203:14:40",
+                        "referencedDeclaration": 11004,
+                        "src": "203:14:45",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes32",
                           "typeString": "bytes32"
@@ -156,32 +156,32 @@
                       ],
                       "expression": {
                         "argumentTypes": null,
-                        "id": 10854,
+                        "id": 11007,
                         "name": "super",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 28946,
-                        "src": "180:5:40",
+                        "referencedDeclaration": 28888,
+                        "src": "180:5:45",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_super$_AgreementMock_$10875",
+                          "typeIdentifier": "t_super$_AgreementMock_$11028",
                           "typeString": "contract super AgreementMock"
                         }
                       },
-                      "id": 10856,
+                      "id": 11009,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
                       "lValueRequested": false,
                       "memberName": "setAgreementHash",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 8638,
-                      "src": "180:22:40",
+                      "referencedDeclaration": 8791,
+                      "src": "180:22:45",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_bytes32_$returns$__$",
                         "typeString": "function (bytes32)"
                       }
                     },
-                    "id": 10858,
+                    "id": 11011,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -189,36 +189,36 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "180:38:40",
+                    "src": "180:38:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 10859,
+                  "id": 11012,
                   "nodeType": "ExpressionStatement",
-                  "src": "180:38:40"
+                  "src": "180:38:45"
                 }
               ]
             },
             "documentation": null,
-            "id": 10861,
+            "id": 11014,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "setAgreementHashTest",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 10852,
+              "id": 11005,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 10851,
+                  "id": 11004,
                   "name": "_agreementHash",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10861,
-                  "src": "135:22:40",
+                  "scope": 11014,
+                  "src": "135:22:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -226,10 +226,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 10850,
+                    "id": 11003,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "135:7:40",
+                    "src": "135:7:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -239,38 +239,38 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "134:24:40"
+              "src": "134:24:45"
             },
             "returnParameters": {
-              "id": 10853,
+              "id": 11006,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "170:0:40"
+              "src": "170:0:45"
             },
-            "scope": 10875,
-            "src": "105:120:40",
+            "scope": 11028,
+            "src": "105:120:45",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 10873,
+              "id": 11026,
               "nodeType": "Block",
-              "src": "325:28:40",
+              "src": "325:28:45",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
                     "hexValue": "74727565",
-                    "id": 10871,
+                    "id": 11024,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
                     "kind": "bool",
                     "lValueRequested": false,
                     "nodeType": "Literal",
-                    "src": "342:4:40",
+                    "src": "342:4:45",
                     "subdenomination": null,
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
@@ -278,15 +278,15 @@
                     },
                     "value": "true"
                   },
-                  "functionReturnParameters": 10870,
-                  "id": 10872,
+                  "functionReturnParameters": 11023,
+                  "id": 11025,
                   "nodeType": "Return",
-                  "src": "335:11:40"
+                  "src": "335:11:45"
                 }
               ]
             },
             "documentation": null,
-            "id": 10874,
+            "id": 11027,
             "implemented": true,
             "kind": "function",
             "modifiers": [
@@ -294,49 +294,49 @@
                 "arguments": [
                   {
                     "argumentTypes": null,
-                    "id": 10866,
+                    "id": 11019,
                     "name": "_agreementHash",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 10863,
-                    "src": "286:14:40",
+                    "referencedDeclaration": 11016,
+                    "src": "286:14:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
                     }
                   }
                 ],
-                "id": 10867,
+                "id": 11020,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 10865,
+                  "id": 11018,
                   "name": "onlyAgree",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 8611,
-                  "src": "276:9:40",
+                  "referencedDeclaration": 8764,
+                  "src": "276:9:45",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$_t_bytes32_$",
                     "typeString": "modifier (bytes32)"
                   }
                 },
                 "nodeType": "ModifierInvocation",
-                "src": "276:25:40"
+                "src": "276:25:45"
               }
             ],
             "name": "test",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 10864,
+              "id": 11017,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 10863,
+                  "id": 11016,
                   "name": "_agreementHash",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10874,
-                  "src": "245:22:40",
+                  "scope": 11027,
+                  "src": "245:22:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -344,10 +344,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 10862,
+                    "id": 11015,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "245:7:40",
+                    "src": "245:7:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -357,19 +357,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "244:24:40"
+              "src": "244:24:45"
             },
             "returnParameters": {
-              "id": 10870,
+              "id": 11023,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 10869,
+                  "id": 11022,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10874,
-                  "src": "315:4:40",
+                  "scope": 11027,
+                  "src": "315:4:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -377,10 +377,10 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 10868,
+                    "id": 11021,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
-                    "src": "315:4:40",
+                    "src": "315:4:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
@@ -390,33 +390,33 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "314:6:40"
+              "src": "314:6:45"
             },
-            "scope": 10875,
-            "src": "231:122:40",
+            "scope": 11028,
+            "src": "231:122:45",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 10876,
-        "src": "62:293:40"
+        "scope": 11029,
+        "src": "62:293:45"
       }
     ],
-    "src": "0:356:40"
+    "src": "0:356:45"
   },
   "legacyAST": {
     "absolutePath": "/src/contracts/arc/test/AgreementMock.sol",
     "exportedSymbols": {
       "AgreementMock": [
-        10875
+        11028
       ]
     },
-    "id": 10876,
+    "id": 11029,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 10846,
+        "id": 10999,
         "literals": [
           "solidity",
           "^",
@@ -424,16 +424,16 @@
           ".4"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:23:40"
+        "src": "0:23:45"
       },
       {
         "absolutePath": "/src/contracts/arc/schemes/Agreement.sol",
         "file": "../schemes/Agreement.sol",
-        "id": 10847,
+        "id": 11000,
         "nodeType": "ImportDirective",
-        "scope": 10876,
-        "sourceUnit": 8640,
-        "src": "25:34:40",
+        "scope": 11029,
+        "sourceUnit": 8793,
+        "src": "25:34:45",
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -443,40 +443,40 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 10848,
+              "id": 11001,
               "name": "Agreement",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 8639,
-              "src": "88:9:40",
+              "referencedDeclaration": 8792,
+              "src": "88:9:45",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Agreement_$8639",
+                "typeIdentifier": "t_contract$_Agreement_$8792",
                 "typeString": "contract Agreement"
               }
             },
-            "id": 10849,
+            "id": 11002,
             "nodeType": "InheritanceSpecifier",
-            "src": "88:9:40"
+            "src": "88:9:45"
           }
         ],
         "contractDependencies": [
-          8639
+          8792
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 10875,
+        "id": 11028,
         "linearizedBaseContracts": [
-          10875,
-          8639
+          11028,
+          8792
         ],
         "name": "AgreementMock",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 10860,
+              "id": 11013,
               "nodeType": "Block",
-              "src": "170:55:40",
+              "src": "170:55:45",
               "statements": [
                 {
                   "expression": {
@@ -484,12 +484,12 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 10857,
+                        "id": 11010,
                         "name": "_agreementHash",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 10851,
-                        "src": "203:14:40",
+                        "referencedDeclaration": 11004,
+                        "src": "203:14:45",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes32",
                           "typeString": "bytes32"
@@ -505,32 +505,32 @@
                       ],
                       "expression": {
                         "argumentTypes": null,
-                        "id": 10854,
+                        "id": 11007,
                         "name": "super",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 28946,
-                        "src": "180:5:40",
+                        "referencedDeclaration": 28888,
+                        "src": "180:5:45",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_super$_AgreementMock_$10875",
+                          "typeIdentifier": "t_super$_AgreementMock_$11028",
                           "typeString": "contract super AgreementMock"
                         }
                       },
-                      "id": 10856,
+                      "id": 11009,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
                       "lValueRequested": false,
                       "memberName": "setAgreementHash",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 8638,
-                      "src": "180:22:40",
+                      "referencedDeclaration": 8791,
+                      "src": "180:22:45",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_bytes32_$returns$__$",
                         "typeString": "function (bytes32)"
                       }
                     },
-                    "id": 10858,
+                    "id": 11011,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -538,36 +538,36 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "180:38:40",
+                    "src": "180:38:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 10859,
+                  "id": 11012,
                   "nodeType": "ExpressionStatement",
-                  "src": "180:38:40"
+                  "src": "180:38:45"
                 }
               ]
             },
             "documentation": null,
-            "id": 10861,
+            "id": 11014,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "setAgreementHashTest",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 10852,
+              "id": 11005,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 10851,
+                  "id": 11004,
                   "name": "_agreementHash",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10861,
-                  "src": "135:22:40",
+                  "scope": 11014,
+                  "src": "135:22:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -575,10 +575,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 10850,
+                    "id": 11003,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "135:7:40",
+                    "src": "135:7:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -588,38 +588,38 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "134:24:40"
+              "src": "134:24:45"
             },
             "returnParameters": {
-              "id": 10853,
+              "id": 11006,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "170:0:40"
+              "src": "170:0:45"
             },
-            "scope": 10875,
-            "src": "105:120:40",
+            "scope": 11028,
+            "src": "105:120:45",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 10873,
+              "id": 11026,
               "nodeType": "Block",
-              "src": "325:28:40",
+              "src": "325:28:45",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
                     "hexValue": "74727565",
-                    "id": 10871,
+                    "id": 11024,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
                     "kind": "bool",
                     "lValueRequested": false,
                     "nodeType": "Literal",
-                    "src": "342:4:40",
+                    "src": "342:4:45",
                     "subdenomination": null,
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
@@ -627,15 +627,15 @@
                     },
                     "value": "true"
                   },
-                  "functionReturnParameters": 10870,
-                  "id": 10872,
+                  "functionReturnParameters": 11023,
+                  "id": 11025,
                   "nodeType": "Return",
-                  "src": "335:11:40"
+                  "src": "335:11:45"
                 }
               ]
             },
             "documentation": null,
-            "id": 10874,
+            "id": 11027,
             "implemented": true,
             "kind": "function",
             "modifiers": [
@@ -643,49 +643,49 @@
                 "arguments": [
                   {
                     "argumentTypes": null,
-                    "id": 10866,
+                    "id": 11019,
                     "name": "_agreementHash",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 10863,
-                    "src": "286:14:40",
+                    "referencedDeclaration": 11016,
+                    "src": "286:14:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
                     }
                   }
                 ],
-                "id": 10867,
+                "id": 11020,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 10865,
+                  "id": 11018,
                   "name": "onlyAgree",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 8611,
-                  "src": "276:9:40",
+                  "referencedDeclaration": 8764,
+                  "src": "276:9:45",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$_t_bytes32_$",
                     "typeString": "modifier (bytes32)"
                   }
                 },
                 "nodeType": "ModifierInvocation",
-                "src": "276:25:40"
+                "src": "276:25:45"
               }
             ],
             "name": "test",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 10864,
+              "id": 11017,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 10863,
+                  "id": 11016,
                   "name": "_agreementHash",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10874,
-                  "src": "245:22:40",
+                  "scope": 11027,
+                  "src": "245:22:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -693,10 +693,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 10862,
+                    "id": 11015,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "245:7:40",
+                    "src": "245:7:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -706,19 +706,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "244:24:40"
+              "src": "244:24:45"
             },
             "returnParameters": {
-              "id": 10870,
+              "id": 11023,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 10869,
+                  "id": 11022,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 10874,
-                  "src": "315:4:40",
+                  "scope": 11027,
+                  "src": "315:4:45",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -726,10 +726,10 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 10868,
+                    "id": 11021,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
-                    "src": "315:4:40",
+                    "src": "315:4:45",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
@@ -739,20 +739,20 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "314:6:40"
+              "src": "314:6:45"
             },
-            "scope": 10875,
-            "src": "231:122:40",
+            "scope": 11028,
+            "src": "231:122:45",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 10876,
-        "src": "62:293:40"
+        "scope": 11029,
+        "src": "62:293:45"
       }
     ],
-    "src": "0:356:40"
+    "src": "0:356:45"
   },
   "compiler": {
     "name": "solc",
@@ -760,7 +760,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.14",
-  "updatedAt": "2019-10-26T14:18:18.712Z",
+  "updatedAt": "2019-10-27T20:10:40.585Z",
   "devdoc": {
     "methods": {
       "getAgreementHash()": {

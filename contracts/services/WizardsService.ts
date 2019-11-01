@@ -13,11 +13,11 @@ import {
   stringToBigNumber,
   getRandomInt,
 } from "../utils/common-utils"
-import {WizardWalletFactory} from "../types/web3-contracts/WizardWalletFactory"
-import {WizardWallet} from "../types/web3-contracts/WizardWallet"
 import {path as rootPath} from "app-root-path"
 import {DaoService, IMembersDaoWithReputation, eVote} from "./DaoService"
 import {EventData} from "web3-eth-contract"
+import {AssetWalletFactory} from "../types/web3-contracts/AssetWalletFactory"
+import {AssetWallet} from "../types/web3-contracts/AssetWallet"
 
 export enum eWizardStatus {
   IN_COWVEN = "IN_COWVEN",
@@ -35,8 +35,8 @@ export enum eWizardGuildEvent {
   Transfer = "Transfer",
 }
 
-export enum eWizardWalletFactoryEvent {
-  WizardWalletCreated = "WizardWalletCreated",
+export enum eAssetWalletFactoryEvent {
+  AssetWalletCreated = "AssetWalletCreated",
 }
 
 export const wizardAffinities = [
@@ -109,19 +109,16 @@ export class WizardsService extends ContractService implements IWizardsService {
     require(`${rootPath}/build/contracts/WizardGuild.json`).abi
 
   private getWizardWalletABI = (): any[] =>
-    require(`${rootPath}/build/contracts/WizardWallet.json`).abi
+    require(`${rootPath}/build/contracts/AssetWallet.json`).abi
 
-  private getWizardWalletFactoryABI = (): any[] =>
-    require(`${rootPath}/build/contracts/WizardWalletFactory.json`).abi
+  private getAssetWalletFactoryABI = (): any[] =>
+    require(`${rootPath}/build/contracts/AssetWalletFactory.json`).abi
 
   private getWizardGuildAddress = (): tEthereumAddress =>
     getConfiguration().addresses.WizardGuild
 
-  private getWizardWalletFactoryAddress = (): tEthereumAddress =>
-    getConfiguration().addresses.WizardWalletFactory
-
-  private getWizardsERC721AddressesProviderAddress = (): tEthereumAddress =>
-    getConfiguration().addresses.WizardsERC721AddressesProvider
+  private getAssetWalletFactoryAddress = (): tEthereumAddress =>
+    getConfiguration().addresses.AssetWalletFactory
 
   private getWizardGuildContract = (
     web3ProviderType: EWeb3ProviderType = EWeb3ProviderType.HTTP,
@@ -132,32 +129,32 @@ export class WizardsService extends ContractService implements IWizardsService {
       this.getWizardGuildAddress(),
     )
 
-  private getWizardWalletFactoryContract = (
+  private getAssetWalletFactoryContract = (
     web3ProviderType: EWeb3ProviderType = EWeb3ProviderType.HTTP,
   ) =>
-    this.getContractByWeb3ProviderType<WizardWalletFactory>(
+    this.getContractByWeb3ProviderType<AssetWalletFactory>(
       web3ProviderType,
-      this.getWizardWalletFactoryABI(),
-      this.getWizardWalletFactoryAddress(),
+      this.getAssetWalletFactoryABI(),
+      this.getAssetWalletFactoryAddress(),
     )
 
   private getWizardWalletContract = (
     wizardWalletAddress: tEthereumAddress,
     web3ProviderType: EWeb3ProviderType = EWeb3ProviderType.HTTP,
   ) =>
-    this.getContractByWeb3ProviderType<WizardWallet>(
+    this.getContractByWeb3ProviderType<AssetWallet>(
       web3ProviderType,
       this.getWizardWalletABI(),
       wizardWalletAddress,
     )
 
   getAllWizardWalletsCreated = async (): Promise<IWizardIdWithWallet[]> =>
-    (await this.getWizardWalletFactoryContract().getPastEvents(
-      eWizardWalletFactoryEvent.WizardWalletCreated,
+    (await this.getAssetWalletFactoryContract().getPastEvents(
+      eAssetWalletFactoryEvent.AssetWalletCreated,
       {fromBlock: 0},
     )).map(eventData => ({
-      wizardId: bnToBigNumber(eventData.returnValues.wizardId).toFixed(),
-      wizardWallet: eventData.returnValues.wizardWallet,
+      wizardId: bnToBigNumber(eventData.returnValues.id).toFixed(),
+      wizardWallet: eventData.returnValues.wallet,
     }))
 
   getAllTransferEventsOfWizards = async (): Promise<EventData[]> =>
@@ -264,17 +261,17 @@ export class WizardsService extends ContractService implements IWizardsService {
   getWizardWalletAddressByWizardId = async (
     wizardId: number,
   ): Promise<tEthereumAddress> =>
-    await this.getWizardWalletFactoryContract()
-      .methods.wizardsWallets(wizardId)
+    await this.getAssetWalletFactoryContract()
+      .methods.assetsWallets(wizardId)
       .call()
 
   createWalletForWizard = async (
     userWallet: tEthereumAddress,
     wizardId: number,
   ): Promise<IEthereumTransactionModel> =>
-    await this.txTo(this.getWizardWalletFactoryAddress(), {
+    await this.txTo(this.getAssetWalletFactoryAddress(), {
       from: userWallet,
-      data: this.getWizardWalletFactoryContract()
+      data: this.getAssetWalletFactoryContract()
         .methods.createWallet(wizardId)
         .encodeABI(),
     })
@@ -295,11 +292,12 @@ export class WizardsService extends ContractService implements IWizardsService {
       await this.txTo(wizardWallet, {
         from: sender,
         data: this.getWizardWalletContract(wizardWallet)
-          .methods.voteProposal(
-            new DaoService().getQuorumVoteAddress(),
-            proposalId,
-            vote,
-            convertedReputation,
+          .methods.genericCall(
+            "TODO",
+            // new DaoService().getQuorumVoteAddress(),
+            // proposalId,
+            // vote,
+            // convertedReputation,
           )
           .encodeABI(),
       }),

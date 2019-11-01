@@ -21,6 +21,13 @@ declare global {
         name: "ARCVotingMachineCallbacksMock"
       ): TruffleContracts.ARCVotingMachineCallbacksMockContract;
       require(
+        name: "AssetsRegistriesRegistry"
+      ): TruffleContracts.AssetsRegistriesRegistryContract;
+      require(name: "AssetWallet"): TruffleContracts.AssetWalletContract;
+      require(
+        name: "AssetWalletFactory"
+      ): TruffleContracts.AssetWalletFactoryContract;
+      require(
         name: "Auction4Reputation"
       ): TruffleContracts.Auction4ReputationContract;
       require(name: "Avatar"): TruffleContracts.AvatarContract;
@@ -47,6 +54,15 @@ declare global {
       require(name: "ERC20"): TruffleContracts.ERC20Contract;
       require(name: "ERC20Burnable"): TruffleContracts.ERC20BurnableContract;
       require(name: "ERC20Mock"): TruffleContracts.ERC20MockContract;
+      require(
+        name: "ERC721Receivable"
+      ): TruffleContracts.ERC721ReceivableContract;
+      require(
+        name: "ERC721ReceiverDraft"
+      ): TruffleContracts.ERC721ReceiverDraftContract;
+      require(
+        name: "ERC721ReceiverFinal"
+      ): TruffleContracts.ERC721ReceiverFinalContract;
       require(name: "ERC827"): TruffleContracts.ERC827Contract;
       require(name: "ERC827Token"): TruffleContracts.ERC827TokenContract;
       require(
@@ -81,6 +97,9 @@ declare global {
       require(
         name: "GlobalConstraintRegistrar"
       ): TruffleContracts.GlobalConstraintRegistrarContract;
+      require(
+        name: "IAssetsRegistriesRegistry"
+      ): TruffleContracts.IAssetsRegistriesRegistryContract;
       require(name: "IERC165"): TruffleContracts.IERC165Contract;
       require(name: "IERC20"): TruffleContracts.IERC20Contract;
       require(name: "IERC721"): TruffleContracts.IERC721Contract;
@@ -90,6 +109,7 @@ declare global {
       require(
         name: "IntVoteInterface"
       ): TruffleContracts.IntVoteInterfaceContract;
+      require(name: "IOwnedAsset"): TruffleContracts.IOwnedAssetContract;
       require(
         name: "Locking4Reputation"
       ): TruffleContracts.Locking4ReputationContract;
@@ -155,13 +175,6 @@ declare global {
       require(
         name: "WizardPresaleNFT"
       ): TruffleContracts.WizardPresaleNFTContract;
-      require(
-        name: "WizardsERC721AddressesProvider"
-      ): TruffleContracts.WizardsERC721AddressesProviderContract;
-      require(name: "WizardWallet"): TruffleContracts.WizardWalletContract;
-      require(
-        name: "WizardWalletFactory"
-      ): TruffleContracts.WizardWalletFactoryContract;
     }
   }
 }

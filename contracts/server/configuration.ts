@@ -14,8 +14,8 @@ export const getPathDaoDefaultParams = (ethereumNetwork: string) =>
   `${rootPath}/migrations/data/default-dao-params-${ethereumNetwork}.json`
 
 export interface IWizardsAddresses {
-  WizardWalletFactory: tEthereumAddress
-  WizardsERC721AddressesProvider: tEthereumAddress
+  AssetWalletFactory: tEthereumAddress
+  AssetsRegistriesRegistry: tEthereumAddress
   WizardGuild: tEthereumAddress
 }
 

@@ -1,4 +1,5 @@
 import {
+  AssetsRegistriesRegistryContract,
   MigrationsInstance,
   MigrationsContract,
   ControllerCreatorInstance,
@@ -20,14 +21,13 @@ import {
   AvatarInstance,
   ControllerInstance,
   ReputationInstance,
-  WizardsERC721AddressesProviderContract,
-  WizardsERC721AddressesProviderInstance,
-  WizardWalletFactoryContract,
-  WizardWalletFactoryInstance,
-  WizardWalletContract,
-  WizardWalletInstance,
+  AssetWalletContract,
+  AssetWalletInstance,
   WizardGuildContract,
   WizardGuildInstance,
+  AssetsRegistriesRegistryInstance,
+  AssetWalletFactoryInstance,
+  AssetWalletFactoryContract,
 } from "../../types/truffle-contracts"
 import {
   setupMigrationEnv,
@@ -72,11 +72,11 @@ export interface MigratorExecutorParams {
     args?: any[],
   ): Promise<GlobalConstraintRegistrarInstance>
   deployWizardGuild(args?: any[]): Promise<WizardGuildInstance>
-  deployWizardsERC721AddressesProvider(
+  deployAssetsRegistriesRegistry(
     args?: any[],
-  ): Promise<WizardsERC721AddressesProviderInstance>
-  deployWizardWalletFactory(args?: any[]): Promise<WizardWalletFactoryInstance>
-  deployWizardWallet(args?: any[]): Promise<WizardWalletInstance>
+  ): Promise<AssetsRegistriesRegistryInstance>
+  deployAssetWalletFactory(args?: any[]): Promise<AssetWalletFactoryInstance>
+  deployAssetWallet(args?: any[]): Promise<AssetWalletInstance>
   linkLibraryToContract(
     libraryId: LibraryId,
     contractId: ContractId | LibraryId,
@@ -84,9 +84,7 @@ export interface MigratorExecutorParams {
   getAvatarInstance(contractAddress: string): Promise<AvatarInstance>
   getControllerInstance(contractAddress?: string): Promise<ControllerInstance>
   getReputationInstance(contractAddress?: string): Promise<ReputationInstance>
-  getWizardWalletInstance(
-    contractAddress?: string,
-  ): Promise<WizardWalletInstance>
+  getAssetWalletInstance(contractAddress?: string): Promise<AssetWalletInstance>
   getContractInstance<ContractInstance>(
     contractId: ContractId,
     contractAddress?: string,
@@ -217,21 +215,21 @@ export const migrationHandler = (
       ContributionRewardInstance
     >(ContractId.ContributionReward, args)
 
-  const deployWizardsERC721AddressesProvider = async (args?: any[]) =>
+  const deployAssetsRegistriesRegistry = async (args?: any[]) =>
     await deployContract<
-      WizardsERC721AddressesProviderContract,
-      WizardsERC721AddressesProviderInstance
-    >(ContractId.WizardsERC721AddressesProvider, args)
+      AssetsRegistriesRegistryContract,
+      AssetsRegistriesRegistryInstance
+    >(ContractId.AssetsRegistriesRegistry, args)
 
-  const deployWizardWalletFactory = async (args?: any[]) =>
+  const deployAssetWalletFactory = async (args?: any[]) =>
     await deployContract<
-      WizardWalletFactoryContract,
-      WizardWalletFactoryInstance
-    >(ContractId.WizardWalletFactory, args)
+      AssetWalletFactoryContract,
+      AssetWalletFactoryInstance
+    >(ContractId.AssetWalletFactory, args)
 
-  const deployWizardWallet = async (args?: any[]) =>
-    await deployContract<WizardWalletContract, WizardWalletInstance>(
-      ContractId.WizardWallet,
+  const deployAssetWallet = async (args?: any[]) =>
+    await deployContract<AssetWalletContract, AssetWalletInstance>(
+      ContractId.AssetWallet,
       args,
     )
 
@@ -270,9 +268,9 @@ export const migrationHandler = (
       contractAddress,
     )
 
-  const getWizardWalletInstance = async (contractAddress?: string) =>
-    await getContractInstance<WizardWalletInstance>(
-      ContractId.WizardWallet,
+  const getAssetWalletInstance = async (contractAddress?: string) =>
+    await getContractInstance<AssetWalletInstance>(
+      ContractId.AssetWallet,
       contractAddress,
     )
 
@@ -343,13 +341,15 @@ export const migrationHandler = (
       reputationToUse === "-1"
         ? "0"
         : currencyUnitsToDecimals(stringToBigNumber(reputationToUse), 18)
-    const wizardWalletInstance = await getWizardWalletInstance(wizardWallet)
+    const wizardWalletInstance = await getAssetWalletInstance(wizardWallet)
     const votingMachine = await getQuorumVoteInstance()
-    return await wizardWalletInstance.voteProposal(
-      votingMachine.address,
-      proposalId,
-      vote,
-      convertedReputation,
+    // TODO review to encode the correct data
+    return await wizardWalletInstance.genericCall(
+      "TODO",
+      // votingMachine.address,
+      // proposalId,
+      // vote,
+      // convertedReputation,
     )
   }
 
@@ -416,15 +416,15 @@ export const migrationHandler = (
     deployGlobalConstraintRegistrarContract,
     deployContributionRewardContract,
     deployWizardGuild,
-    deployWizardsERC721AddressesProvider,
-    deployWizardWalletFactory,
-    deployWizardWallet,
+    deployAssetsRegistriesRegistry,
+    deployAssetWalletFactory,
+    deployAssetWallet,
     linkLibraryToContract,
     getContractInstance,
     getAvatarInstance,
     getReputationInstance,
     getControllerInstance,
-    getWizardWalletInstance,
+    getAssetWalletInstance,
     createProposal,
     voteProposal,
     voteProposalWithWizardWallet,

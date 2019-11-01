@@ -52,6 +52,31 @@ export interface ARCVotingMachineCallbacksMockContract
   ): Promise<ARCVotingMachineCallbacksMockInstance>;
 }
 
+export interface AssetsRegistriesRegistryContract
+  extends Truffle.Contract<AssetsRegistriesRegistryInstance> {
+  "new"(
+    meta?: Truffle.TransactionDetails
+  ): Promise<AssetsRegistriesRegistryInstance>;
+}
+
+export interface AssetWalletContract
+  extends Truffle.Contract<AssetWalletInstance> {
+  "new"(
+    _assetWalletFactory: string | BigNumber,
+    _assetId: number | BigNumber | string,
+    meta?: Truffle.TransactionDetails
+  ): Promise<AssetWalletInstance>;
+}
+
+export interface AssetWalletFactoryContract
+  extends Truffle.Contract<AssetWalletFactoryInstance> {
+  "new"(
+    _assetsRegistriesRegistry: string | BigNumber,
+    _assetsRegistryId: string,
+    meta?: Truffle.TransactionDetails
+  ): Promise<AssetWalletFactoryInstance>;
+}
+
 export interface Auction4ReputationContract
   extends Truffle.Contract<Auction4ReputationInstance> {
   "new"(meta?: Truffle.TransactionDetails): Promise<Auction4ReputationInstance>;
@@ -151,6 +176,25 @@ export interface ERC20MockContract extends Truffle.Contract<ERC20MockInstance> {
   ): Promise<ERC20MockInstance>;
 }
 
+export interface ERC721ReceivableContract
+  extends Truffle.Contract<ERC721ReceivableInstance> {
+  "new"(meta?: Truffle.TransactionDetails): Promise<ERC721ReceivableInstance>;
+}
+
+export interface ERC721ReceiverDraftContract
+  extends Truffle.Contract<ERC721ReceiverDraftInstance> {
+  "new"(
+    meta?: Truffle.TransactionDetails
+  ): Promise<ERC721ReceiverDraftInstance>;
+}
+
+export interface ERC721ReceiverFinalContract
+  extends Truffle.Contract<ERC721ReceiverFinalInstance> {
+  "new"(
+    meta?: Truffle.TransactionDetails
+  ): Promise<ERC721ReceiverFinalInstance>;
+}
+
 export interface ERC827Contract extends Truffle.Contract<ERC827Instance> {
   "new"(meta?: Truffle.TransactionDetails): Promise<ERC827Instance>;
 }
@@ -246,6 +290,13 @@ export interface GlobalConstraintRegistrarContract
   ): Promise<GlobalConstraintRegistrarInstance>;
 }
 
+export interface IAssetsRegistriesRegistryContract
+  extends Truffle.Contract<IAssetsRegistriesRegistryInstance> {
+  "new"(
+    meta?: Truffle.TransactionDetails
+  ): Promise<IAssetsRegistriesRegistryInstance>;
+}
+
 export interface IERC165Contract extends Truffle.Contract<IERC165Instance> {
   "new"(meta?: Truffle.TransactionDetails): Promise<IERC165Instance>;
 }
@@ -266,6 +317,11 @@ export interface IERC721ReceiverContract
 export interface IntVoteInterfaceContract
   extends Truffle.Contract<IntVoteInterfaceInstance> {
   "new"(meta?: Truffle.TransactionDetails): Promise<IntVoteInterfaceInstance>;
+}
+
+export interface IOwnedAssetContract
+  extends Truffle.Contract<IOwnedAssetInstance> {
+  "new"(meta?: Truffle.TransactionDetails): Promise<IOwnedAssetInstance>;
 }
 
 export interface Locking4ReputationContract
@@ -461,31 +517,6 @@ export interface WizardPresaleInterfaceContract
 export interface WizardPresaleNFTContract
   extends Truffle.Contract<WizardPresaleNFTInstance> {
   "new"(meta?: Truffle.TransactionDetails): Promise<WizardPresaleNFTInstance>;
-}
-
-export interface WizardsERC721AddressesProviderContract
-  extends Truffle.Contract<WizardsERC721AddressesProviderInstance> {
-  "new"(
-    _wizardsERC721ContractAddress: string | BigNumber,
-    meta?: Truffle.TransactionDetails
-  ): Promise<WizardsERC721AddressesProviderInstance>;
-}
-
-export interface WizardWalletContract
-  extends Truffle.Contract<WizardWalletInstance> {
-  "new"(
-    _wizardWalletFactory: string | BigNumber,
-    _wizardId: number | BigNumber | string,
-    meta?: Truffle.TransactionDetails
-  ): Promise<WizardWalletInstance>;
-}
-
-export interface WizardWalletFactoryContract
-  extends Truffle.Contract<WizardWalletFactoryInstance> {
-  "new"(
-    _wizardsERC721AddressesProvider: string | BigNumber,
-    meta?: Truffle.TransactionDetails
-  ): Promise<WizardWalletFactoryInstance>;
 }
 
 export interface AbsoluteVoteInstance extends Truffle.ContractInstance {
@@ -1236,6 +1267,189 @@ export interface ARCVotingMachineCallbacksMockInstance
       txDetails?: Truffle.TransactionDetails
     ): Promise<number>;
   };
+}
+
+export interface AssetsRegistriesRegistryInstance
+  extends Truffle.ContractInstance {
+  getAssetsRegistryAddress(
+    _assetRegistryId: string | BigNumber,
+    txDetails?: Truffle.TransactionDetails
+  ): Promise<string>;
+
+  renounceOwnership: {
+    (txDetails?: Truffle.TransactionDetails): Promise<
+      Truffle.TransactionResponse
+    >;
+    call(txDetails?: Truffle.TransactionDetails): Promise<void>;
+    sendTransaction(txDetails?: Truffle.TransactionDetails): Promise<string>;
+    estimateGas(txDetails?: Truffle.TransactionDetails): Promise<number>;
+  };
+
+  transferOwnership: {
+    (
+      newOwner: string | BigNumber,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<Truffle.TransactionResponse>;
+    call(
+      newOwner: string | BigNumber,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<void>;
+    sendTransaction(
+      newOwner: string | BigNumber,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    estimateGas(
+      newOwner: string | BigNumber,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<number>;
+  };
+
+  setAssetsRegistryAddress: {
+    (
+      _assetRegistryId: string | BigNumber,
+      _assetRegistryAddress: string | BigNumber,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<Truffle.TransactionResponse>;
+    call(
+      _assetRegistryId: string | BigNumber,
+      _assetRegistryAddress: string | BigNumber,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<boolean>;
+    sendTransaction(
+      _assetRegistryId: string | BigNumber,
+      _assetRegistryAddress: string | BigNumber,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    estimateGas(
+      _assetRegistryId: string | BigNumber,
+      _assetRegistryAddress: string | BigNumber,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<number>;
+  };
+
+  owner(txDetails?: Truffle.TransactionDetails): Promise<string>;
+  isOwner(txDetails?: Truffle.TransactionDetails): Promise<boolean>;
+}
+
+export interface AssetWalletInstance extends Truffle.ContractInstance {
+  onERC721Received: {
+    (
+      _operator: string | BigNumber,
+      _from: string | BigNumber,
+      _tokenId: number | BigNumber | string,
+      _data: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<Truffle.TransactionResponse>;
+    call(
+      _operator: string | BigNumber,
+      _from: string | BigNumber,
+      _tokenId: number | BigNumber | string,
+      _data: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    sendTransaction(
+      _operator: string | BigNumber,
+      _from: string | BigNumber,
+      _tokenId: number | BigNumber | string,
+      _data: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    estimateGas(
+      _operator: string | BigNumber,
+      _from: string | BigNumber,
+      _tokenId: number | BigNumber | string,
+      _data: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<number>;
+  };
+
+  genericCall: {
+    (data: string, txDetails?: Truffle.TransactionDetails): Promise<
+      Truffle.TransactionResponse
+    >;
+    call(data: string, txDetails?: Truffle.TransactionDetails): Promise<void>;
+    sendTransaction(
+      data: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    estimateGas(
+      data: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<number>;
+  };
+
+  assetOwned(txDetails?: Truffle.TransactionDetails): Promise<BigNumber>;
+  assetWalletFactory(txDetails?: Truffle.TransactionDetails): Promise<string>;
+}
+
+export interface AssetWalletFactoryInstance extends Truffle.ContractInstance {
+  assetsWallets(
+    arg0: number | BigNumber | string,
+    txDetails?: Truffle.TransactionDetails
+  ): Promise<string>;
+
+  renounceOwnership: {
+    (txDetails?: Truffle.TransactionDetails): Promise<
+      Truffle.TransactionResponse
+    >;
+    call(txDetails?: Truffle.TransactionDetails): Promise<void>;
+    sendTransaction(txDetails?: Truffle.TransactionDetails): Promise<string>;
+    estimateGas(txDetails?: Truffle.TransactionDetails): Promise<number>;
+  };
+
+  transferOwnership: {
+    (
+      newOwner: string | BigNumber,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<Truffle.TransactionResponse>;
+    call(
+      newOwner: string | BigNumber,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<void>;
+    sendTransaction(
+      newOwner: string | BigNumber,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    estimateGas(
+      newOwner: string | BigNumber,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<number>;
+  };
+
+  getAssetsRegistry: {
+    (txDetails?: Truffle.TransactionDetails): Promise<
+      Truffle.TransactionResponse
+    >;
+    call(txDetails?: Truffle.TransactionDetails): Promise<string>;
+    sendTransaction(txDetails?: Truffle.TransactionDetails): Promise<string>;
+    estimateGas(txDetails?: Truffle.TransactionDetails): Promise<number>;
+  };
+
+  createWallet: {
+    (
+      _assetId: number | BigNumber | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<Truffle.TransactionResponse>;
+    call(
+      _assetId: number | BigNumber | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<boolean>;
+    sendTransaction(
+      _assetId: number | BigNumber | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    estimateGas(
+      _assetId: number | BigNumber | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<number>;
+  };
+
+  assetsRegistriesRegistry(
+    txDetails?: Truffle.TransactionDetails
+  ): Promise<string>;
+  assetsRegistryIdHash(txDetails?: Truffle.TransactionDetails): Promise<string>;
+  owner(txDetails?: Truffle.TransactionDetails): Promise<string>;
+  isOwner(txDetails?: Truffle.TransactionDetails): Promise<boolean>;
 }
 
 export interface Auction4ReputationInstance extends Truffle.ContractInstance {
@@ -3800,6 +4014,101 @@ export interface ERC20MockInstance extends Truffle.ContractInstance {
   };
 
   totalSupply(txDetails?: Truffle.TransactionDetails): Promise<BigNumber>;
+}
+
+export interface ERC721ReceivableInstance extends Truffle.ContractInstance {
+  onERC721Received: {
+    (
+      _operator: string | BigNumber,
+      _from: string | BigNumber,
+      _tokenId: number | BigNumber | string,
+      _data: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<Truffle.TransactionResponse>;
+    call(
+      _operator: string | BigNumber,
+      _from: string | BigNumber,
+      _tokenId: number | BigNumber | string,
+      _data: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    sendTransaction(
+      _operator: string | BigNumber,
+      _from: string | BigNumber,
+      _tokenId: number | BigNumber | string,
+      _data: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    estimateGas(
+      _operator: string | BigNumber,
+      _from: string | BigNumber,
+      _tokenId: number | BigNumber | string,
+      _data: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<number>;
+  };
+}
+
+export interface ERC721ReceiverDraftInstance extends Truffle.ContractInstance {
+  onERC721Received: {
+    (
+      _from: string | BigNumber,
+      _tokenId: number | BigNumber | string,
+      data: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<Truffle.TransactionResponse>;
+    call(
+      _from: string | BigNumber,
+      _tokenId: number | BigNumber | string,
+      data: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    sendTransaction(
+      _from: string | BigNumber,
+      _tokenId: number | BigNumber | string,
+      data: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    estimateGas(
+      _from: string | BigNumber,
+      _tokenId: number | BigNumber | string,
+      data: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<number>;
+  };
+}
+
+export interface ERC721ReceiverFinalInstance extends Truffle.ContractInstance {
+  onERC721Received: {
+    (
+      _operator: string | BigNumber,
+      _from: string | BigNumber,
+      _tokenId: number | BigNumber | string,
+      _data: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<Truffle.TransactionResponse>;
+    call(
+      _operator: string | BigNumber,
+      _from: string | BigNumber,
+      _tokenId: number | BigNumber | string,
+      _data: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    sendTransaction(
+      _operator: string | BigNumber,
+      _from: string | BigNumber,
+      _tokenId: number | BigNumber | string,
+      _data: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    estimateGas(
+      _operator: string | BigNumber,
+      _from: string | BigNumber,
+      _tokenId: number | BigNumber | string,
+      _data: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<number>;
+  };
 }
 
 export interface ERC827Instance extends Truffle.ContractInstance {
@@ -6510,6 +6819,37 @@ export interface GlobalConstraintRegistrarInstance
   };
 }
 
+export interface IAssetsRegistriesRegistryInstance
+  extends Truffle.ContractInstance {
+  getAssetsRegistryAddress(
+    _assetRegistryId: string | BigNumber,
+    txDetails?: Truffle.TransactionDetails
+  ): Promise<string>;
+
+  setAssetsRegistryAddress: {
+    (
+      _assetRegistryId: string | BigNumber,
+      _assetRegistryAddress: string | BigNumber,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<Truffle.TransactionResponse>;
+    call(
+      _assetRegistryId: string | BigNumber,
+      _assetRegistryAddress: string | BigNumber,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<boolean>;
+    sendTransaction(
+      _assetRegistryId: string | BigNumber,
+      _assetRegistryAddress: string | BigNumber,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    estimateGas(
+      _assetRegistryId: string | BigNumber,
+      _assetRegistryAddress: string | BigNumber,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<number>;
+  };
+}
+
 export interface IERC165Instance extends Truffle.ContractInstance {
   supportsInterface(
     interfaceId: string | BigNumber,
@@ -6869,6 +7209,13 @@ export interface IntVoteInterfaceInstance extends Truffle.ContractInstance {
   };
 
   isAbstainAllow(txDetails?: Truffle.TransactionDetails): Promise<boolean>;
+}
+
+export interface IOwnedAssetInstance extends Truffle.ContractInstance {
+  ownerOf(
+    assetId: number | BigNumber | string,
+    txDetails?: Truffle.TransactionDetails
+  ): Promise<string>;
 }
 
 export interface Locking4ReputationInstance extends Truffle.ContractInstance {
@@ -11157,154 +11504,4 @@ export interface WizardPresaleNFTInstance extends Truffle.ContractInstance {
       txDetails?: Truffle.TransactionDetails
     ): Promise<number>;
   };
-}
-
-export interface WizardsERC721AddressesProviderInstance
-  extends Truffle.ContractInstance {
-  setWizardsERC721Address: {
-    (
-      _wizardsERC721ContractAddress: string | BigNumber,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<Truffle.TransactionResponse>;
-    call(
-      _wizardsERC721ContractAddress: string | BigNumber,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<void>;
-    sendTransaction(
-      _wizardsERC721ContractAddress: string | BigNumber,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<string>;
-    estimateGas(
-      _wizardsERC721ContractAddress: string | BigNumber,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<number>;
-  };
-
-  wizardsERC721Address(txDetails?: Truffle.TransactionDetails): Promise<string>;
-}
-
-export interface WizardWalletInstance extends Truffle.ContractInstance {
-  voteProposal: {
-    (
-      _votingMachine: string | BigNumber,
-      _proposalId: string | BigNumber,
-      _vote: number | BigNumber | string,
-      _reputationToUse: number | BigNumber | string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<Truffle.TransactionResponse>;
-    call(
-      _votingMachine: string | BigNumber,
-      _proposalId: string | BigNumber,
-      _vote: number | BigNumber | string,
-      _reputationToUse: number | BigNumber | string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<void>;
-    sendTransaction(
-      _votingMachine: string | BigNumber,
-      _proposalId: string | BigNumber,
-      _vote: number | BigNumber | string,
-      _reputationToUse: number | BigNumber | string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<string>;
-    estimateGas(
-      _votingMachine: string | BigNumber,
-      _proposalId: string | BigNumber,
-      _vote: number | BigNumber | string,
-      _reputationToUse: number | BigNumber | string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<number>;
-  };
-
-  withdrawEthFunds: {
-    (txDetails?: Truffle.TransactionDetails): Promise<
-      Truffle.TransactionResponse
-    >;
-    call(txDetails?: Truffle.TransactionDetails): Promise<void>;
-    sendTransaction(txDetails?: Truffle.TransactionDetails): Promise<string>;
-    estimateGas(txDetails?: Truffle.TransactionDetails): Promise<number>;
-  };
-
-  transferERC20: {
-    (
-      _erc20Address: string | BigNumber,
-      _recipient: string | BigNumber,
-      _amount: number | BigNumber | string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<Truffle.TransactionResponse>;
-    call(
-      _erc20Address: string | BigNumber,
-      _recipient: string | BigNumber,
-      _amount: number | BigNumber | string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<void>;
-    sendTransaction(
-      _erc20Address: string | BigNumber,
-      _recipient: string | BigNumber,
-      _amount: number | BigNumber | string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<string>;
-    estimateGas(
-      _erc20Address: string | BigNumber,
-      _recipient: string | BigNumber,
-      _amount: number | BigNumber | string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<number>;
-  };
-
-  transfer: {
-    (
-      _erc20Address: string | BigNumber,
-      _recipient: string | BigNumber,
-      _amount: number | BigNumber | string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<Truffle.TransactionResponse>;
-    call(
-      _erc20Address: string | BigNumber,
-      _recipient: string | BigNumber,
-      _amount: number | BigNumber | string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<void>;
-    sendTransaction(
-      _erc20Address: string | BigNumber,
-      _recipient: string | BigNumber,
-      _amount: number | BigNumber | string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<string>;
-    estimateGas(
-      _erc20Address: string | BigNumber,
-      _recipient: string | BigNumber,
-      _amount: number | BigNumber | string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<number>;
-  };
-}
-
-export interface WizardWalletFactoryInstance extends Truffle.ContractInstance {
-  wizardsWallets(
-    arg0: number | BigNumber | string,
-    txDetails?: Truffle.TransactionDetails
-  ): Promise<string>;
-
-  createWallet: {
-    (
-      _wizardId: number | BigNumber | string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<Truffle.TransactionResponse>;
-    call(
-      _wizardId: number | BigNumber | string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<void>;
-    sendTransaction(
-      _wizardId: number | BigNumber | string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<string>;
-    estimateGas(
-      _wizardId: number | BigNumber | string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<number>;
-  };
-
-  wizardsERC721AddressesProvider(
-    txDetails?: Truffle.TransactionDetails
-  ): Promise<string>;
 }

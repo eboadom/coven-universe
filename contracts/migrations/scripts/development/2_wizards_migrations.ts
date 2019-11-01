@@ -4,6 +4,8 @@ import {
   IWizardsAddresses,
 } from "../../../server/configuration"
 import {writeObjectToFile} from "../../../utils/common-utils"
+import {cheezeWizardsId} from "../../data/development-data"
+import {ethers} from "ethers"
 
 export const deployTestWizardsMigration = migrationHandler(
   "Deploy the test wizards",
@@ -11,8 +13,8 @@ export const deployTestWizardsMigration = migrationHandler(
   async ({
     accounts,
     deployWizardGuild,
-    deployWizardsERC721AddressesProvider,
-    deployWizardWalletFactory,
+    deployAssetsRegistriesRegistry,
+    deployAssetWalletFactory,
     network,
   }) => {
     const seriesMinter = accounts[0]
@@ -27,20 +29,25 @@ export const deployTestWizardsMigration = migrationHandler(
       [1, 2, 3, 2],
       initialOwner,
     )
-    const wizardsERC721AddressesProvider = await deployWizardsERC721AddressesProvider(
-      [wizardGuild.address],
+    const assetsRegistriesRegistry = await deployAssetsRegistriesRegistry([
+      wizardGuild.address,
+    ])
+    await assetsRegistriesRegistry.setAssetsRegistryAddress(
+      ethers.utils.keccak256(cheezeWizardsId),
+      wizardGuild.address,
     )
-    const wizardWalletFactory = await deployWizardWalletFactory([
-      wizardsERC721AddressesProvider.address,
+    const assetWalletFactory = await deployAssetWalletFactory([
+      assetsRegistriesRegistry.address,
+      ethers.utils.keccak256(cheezeWizardsId),
     ])
     for (const id of wizardIds) {
-      await wizardWalletFactory.createWallet(id)
+      await assetWalletFactory.createWallet(id)
     }
 
     const deployedWizardsContracts: IWizardsAddresses = {
       WizardGuild: wizardGuild.address,
-      WizardsERC721AddressesProvider: wizardsERC721AddressesProvider.address,
-      WizardWalletFactory: wizardWalletFactory.address,
+      AssetsRegistriesRegistry: assetsRegistriesRegistry.address,
+      AssetWalletFactory: assetsRegistriesRegistry.address,
     }
 
     // Persistence in a json file of the addresses of contracts deployed by other contracts
