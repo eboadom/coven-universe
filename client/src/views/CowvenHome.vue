@@ -34,7 +34,7 @@
 
         <div class="link-wrapper">
           <span class="change-link" @click="showNewSpellForm">
-            <span v-if="!showCreateProposal">Submit new proposals</span>
+            <span v-if="!showCreateProposal">Submit new proposal</span>
             <span v-else>Active Proposals</span>
           </span>
         </div>
@@ -65,7 +65,7 @@
           </v-card>
         </div>
 
-        <Spells
+        <Proposals
           v-if="!showCreateProposal"
           :proposals="cowven.proposals"
           :myWizards="myWizardsInCowven"
@@ -101,7 +101,7 @@
 <script>
 import Preloader from "../components/Preloader.vue";
 import TopNav from "../components/TopNav.vue";
-import Spells from "../components/Spells.vue";
+import Proposals from "../components/Proposals.vue";
 import MakeProposal from "../components/MakeProposal.vue";
 import { allDaosData, allWizardsByUserAddress, allWizardWalletsCreated } from "../graphql/queries";
 
@@ -110,7 +110,7 @@ export default {
   components: {
     Preloader,
     TopNav,
-    Spells,
+    Proposals,
     MakeProposal
   },
   apollo: {

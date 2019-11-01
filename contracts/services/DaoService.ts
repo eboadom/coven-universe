@@ -432,7 +432,19 @@ export class DaoService extends ContractService implements IDaoService {
         executionTime: 0, // TODO unmock
       })
     }
-    return allContributionRewardsProposals
+    return allContributionRewardsProposals.sort(((a, b) => {
+      const pendingProposals = ['Voting', 'Redeemable'];
+      if(pendingProposals.includes(a.status) && pendingProposals.includes(b.status)) {
+        return 0;
+      }
+      if(pendingProposals.includes(a.status)) {
+        return -1;
+      }
+      if(pendingProposals.includes(b.status)) {
+        return 1;
+      }
+      return 0
+    }));
   }
 
   // All the ethereum addresses which currenctly hold reputation with their reputation

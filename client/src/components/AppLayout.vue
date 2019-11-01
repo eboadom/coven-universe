@@ -24,7 +24,7 @@ export default {
   data() {
     return {
       loading: true,
-      dapperAvailable: false,
+      web3Available: false,
       dapperUnlocked: false
     };
   },
@@ -33,7 +33,7 @@ export default {
       this.loading = true;
       if (typeof window.ethereum !== "undefined") {
         const web3 = getWeb3();
-        this.dapperAvailable = true;
+        this.web3Available = true;
         const currentNetwork = await web3.eth.net.getNetworkType();
         if(process.env.VUE_APP_ETH_NETWORK  === currentNetwork) {
           try {

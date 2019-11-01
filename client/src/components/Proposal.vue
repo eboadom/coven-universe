@@ -66,7 +66,7 @@
 import { getWeb3 } from "../helpers/web3-helpers";
 
 export default {
-  name: "Spell",
+  name: "Proposal",
   props: ["proposal", "myWizards", "avatarAddress", "onSuccessVote"],
   data() {
     return {
@@ -110,7 +110,7 @@ export default {
             voter: this.pendingWizardWallet,
             proposalId: this.proposal.id,
             vote: Number(this.pendingVote),
-            reputationToUse: "-1",
+            reputationToUse: "-1", // TODO: unmock
           }
         }
       });
@@ -135,6 +135,7 @@ export default {
       });
       const web3 = getWeb3();
       await web3.eth.sendTransaction(txs[0]);
+      await this.onSuccessVote();
     }
   }
 };

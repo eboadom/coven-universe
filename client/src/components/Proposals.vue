@@ -2,7 +2,7 @@
   <div class="spell-proposals">
     <h2>Proposals</h2>
     <VuePerfectScrollbar class="proposals-inner" v-once :settings="settings">
-      <Spell
+      <Proposal
         v-for="proposal in proposals"
         :key="proposal.id"
         :proposal="proposal"
@@ -33,13 +33,13 @@
 
 <script>
 import VuePerfectScrollbar from "vue-perfect-scrollbar";
-import Spell from "../components/Spell";
+import Proposal from "./Proposal";
 
 export default {
-  name: "Spells",
+  name: "Proposals",
   props: ["proposals", "avatarAddress", "myWizards", "onSuccessVote"],
   components: {
-    Spell,
+    Proposal,
     VuePerfectScrollbar
   },
   data() {

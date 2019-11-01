@@ -19,29 +19,20 @@
             <v-select
               v-model="selectGrates"
               :items="grates"
-              :rules="[v => !!v || 'Item is required']"
+              :rules="[v => !!v || 'Grate is required']"
               label="Choose your Grate One"
               data-vv-name="selectGrates"
               required
             ></v-select>
 
-            <v-text-field
-              v-model="tokenName"
-              :counter="10"
-              :rules="nameRules"
-              label="Cowven token Name"
-              data-vv-name="tokenName"
+            <v-select
+              v-model="selectWizard"
+              :items="wizards"
+              :rules="[v => !!v || 'Wizard is required']"
+              label="Choose your Wizard"
+              data-vv-name="selectWizard"
               required
-            ></v-text-field>
-
-            <v-text-field
-              v-model="tokenSymbol"
-              :counter="10"
-              :rules="nameRules"
-              label="Cowven token Symbol"
-              data-vv-name="tokenSymbol"
-              required
-            ></v-text-field>
+            ></v-select>
 
             <v-textarea
               v-model="description"
@@ -94,7 +85,7 @@ import Preloader from "../components/Preloader.vue";
 import TopNav from "../components/TopNav.vue";
 import { deployNewCowvenMutation, initCowvenSchemes } from "../graphql/mutations";
 import { getWeb3 } from "../helpers/web3-helpers";
-import { allDaosData } from "../graphql/queries";
+import { allDaosData, allWizardsByUserAddress } from "../graphql/queries";
 
 export default {
   components: {
@@ -104,7 +95,15 @@ export default {
   apollo: {
     allDaosInfo: {
       query: allDaosData
-    }
+    },
+    allWizardsDataByOwner: {
+      query: allWizardsByUserAddress,
+      variables() {
+        return {
+          address: window.userWallet
+        };
+      }
+    },
   },
   data: () => ({
     dialog: false,
@@ -122,10 +121,26 @@ export default {
       { text: "The Grate One of The Flames", value: "FLAME" },
       { text: "The Grate One of The Mold", value: "MOLD" }
     ],
-    tokenName: "",
-    tokenSymbol: "",
+    selectWizard: null,
+    tokenName: "some",
+    tokenSymbol: "one",
     description: "",
+    allWizardsDataByOwner: null
   }),
+  computed: {
+    wizards() {
+      console.log('allWizardsDataByOwner', this.allWizardsDataByOwner);
+      return this.allWizardsDataByOwner.map(wizard => {
+        const {id, wizardWalletData} = wizard;
+        const disabled = wizardWalletData.wizardWalletAddress === '0x0000000000000000000000000000000000000000';
+        return {
+          disabled,
+          text: `${id}${disabled ? ' - to activate - create a RepBag' : ''}`,
+          value: id
+        };
+      })
+    }
+  },
 
   methods: {
     async submit(e) {

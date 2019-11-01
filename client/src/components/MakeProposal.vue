@@ -9,6 +9,7 @@
             :items="proposal"
             :item-disabled="checkSelectOptionDisabled"
             :rules="[v => !!v || 'Proposal type is required']"
+            @change="() => $refs.form.validate()"
             label="Choose your proposal type"
             required
           ></v-select>
@@ -47,7 +48,7 @@
 
         <v-text-field
           v-model="amount"
-          :rules="[v => !!v || 'Reputation amount is required']"
+          :rules="[reputationAmountValidation]"
           label="Reputation amount"
           type="number"
           required
@@ -89,7 +90,7 @@ export default {
       ],
       proposal: [
         {"disabled": false, "text" : "Reputation reward", "value": "Reputation reward"},
-        {"disabled": true, "text" : "TODO: Remove reputation", "value": "TODO: Remove reputation"},
+        {"disabled": false, "text" : "Remove reputation", "value": "Remove reputation"},
         {"disabled": true, "text" : "TODO: Change Grate", "value": "TODO: Change Grate"},
         {"disabled": true, "text" : "TODO: Kick Wizard", "value": "TODO: Kick Wizard"},
       ],
@@ -107,6 +108,16 @@ export default {
     }
   },
   methods: {
+    reputationAmountValidation(value) {
+      if (!value) {
+        return 'Reputation amount is required'
+      } else if (value < 0 && this.spell === 'Reputation reward') {
+        return 'Should be positive number'
+      } else if (value > 0 && this.spell === 'Remove reputation') {
+        return 'Should be negative number'
+      }
+      return true;
+    },
     checkSelectOptionDisabled(item) {
       return item.disabled;
     },
