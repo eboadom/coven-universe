@@ -42,16 +42,17 @@
     </template>
     <template v-else>
       <h3>Time to decide!</h3>
-      <v-form>
+      <v-form ref="form" v-model="valid" lazy-validation>
         <v-select
           v-model="pendingWizardWallet"
           :items="notVotedWizards.map(v => ({text: v.id, value: v.wizardWalletData.wizardWalletAddress}))"
           :rules="[v => !!v || 'Wizard ID is required']"
+          data-vv-name="pendingWizardWallet"
           label="Choose a Wizard"
           required
         />
         <p>
-          <button class="button" @click.prevent="handleVoteSubmit">Let's vote!</button>
+          <button class="button" type="submit" @click.prevent="handleVoteSubmit">Let's vote!</button>
         </p>
         <p>
           <button class="button" @click.prevent="toggleVoteForm">Next time</button>
@@ -70,6 +71,7 @@ export default {
   props: ["proposal", "myWizards", "avatarAddress", "onSuccessVote"],
   data() {
     return {
+      valid: false,
       pendingWizardWallet: '',
       showVoteForm: false,
       pendingVote: '',
@@ -99,6 +101,10 @@ export default {
       this.showVoteForm = !this.showVoteForm;
     },
     async handleVoteSubmit() {
+      console.log('this.$refs.form.validate()', this.$refs.form.validate());
+      if (!this.$refs.form.validate()) {
+        return false;
+      }
       const web3 = getWeb3();
       const {
         data: { voteProposal: txs }
