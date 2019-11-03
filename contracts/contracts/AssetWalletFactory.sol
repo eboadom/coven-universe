@@ -29,14 +29,14 @@ contract AssetWalletFactory is Ownable {
     /// @notice Simple initialization of the assetsRegistriesRegistry and assetsRegistryIdHash
     /// @param _assetsRegistriesRegistry the address of the smart contract implementing the
     /// IAssetsRegistriesRegistry interface
-    /// @param _assetsRegistryId the bytes identifier of the particular assets registry of this
+    /// @param _assetsRegistryIdHash the hashed identifier of the particular assets registry of this
     /// factory
-    constructor(address _assetsRegistriesRegistry, bytes memory _assetsRegistryId) public {
+    constructor(address _assetsRegistriesRegistry, bytes32 _assetsRegistryIdHash) public {
         assetsRegistriesRegistry = IAssetsRegistriesRegistry(_assetsRegistriesRegistry);
-        assetsRegistryIdHash = keccak256(_assetsRegistryId);
+        assetsRegistryIdHash = _assetsRegistryIdHash;
     }
 
-    function getAssetsRegistry() public returns(address) {
+    function getAssetsRegistry() public view returns(address) {
         return assetsRegistriesRegistry.getAssetsRegistryAddress(assetsRegistryIdHash);
     }
 

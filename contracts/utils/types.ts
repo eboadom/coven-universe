@@ -12,9 +12,10 @@ export const enum ContractId {
   Controller = "Controller",
   Reputation = "Reputation",
   WizardGuild = "WizardGuild",
-  WizardsERC721AddressesProvider = "WizardsERC721AddressesProvider",
-  WizardWalletFactory = "WizardWalletFactory",
-  WizardWallet = "WizardWallet",
+  AssetsRegistriesRegistry = "AssetsRegistriesRegistry",
+  AssetWalletFactory = "AssetWalletFactory",
+  AssetWallet = "AssetWallet",
+  TestContract = "TestContract"
 }
 
 export const enum LibraryId {}

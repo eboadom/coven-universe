@@ -15,7 +15,7 @@ export class AssetsRegistriesRegistry extends Contract {
   );
   methods: {
     getAssetsRegistryAddress(
-      _assetRegistryId: string | number[]
+      _hashedAssetRegistryId: string | number[]
     ): TransactionObject<string>;
 
     renounceOwnership(): TransactionObject<void>;
@@ -23,7 +23,7 @@ export class AssetsRegistriesRegistry extends Contract {
     transferOwnership(newOwner: string): TransactionObject<void>;
 
     setAssetsRegistryAddress(
-      _assetRegistryId: string | number[],
+      _hashedAssetRegistryId: string | number[],
       _assetRegistryAddress: string
     ): TransactionObject<boolean>;
 
@@ -32,7 +32,7 @@ export class AssetsRegistriesRegistry extends Contract {
   };
   events: {
     AssetsRegistryUpdated: ContractEvent<{
-      id: string;
+      hashedAssetRegistryId: string;
       updatedAddress: string;
       0: string;
       1: string;

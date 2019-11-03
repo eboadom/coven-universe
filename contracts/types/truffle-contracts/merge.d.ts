@@ -147,6 +147,7 @@ declare global {
         name: "SchemeRegistrar"
       ): TruffleContracts.SchemeRegistrarContract;
       require(name: "SignalScheme"): TruffleContracts.SignalSchemeContract;
+      require(name: "TestContract"): TruffleContracts.TestContractContract;
       require(name: "TokenCapGC"): TruffleContracts.TokenCapGCContract;
       require(name: "UController"): TruffleContracts.UControllerContract;
       require(

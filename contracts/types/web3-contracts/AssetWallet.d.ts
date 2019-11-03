@@ -21,17 +21,22 @@ export class AssetWallet extends Contract {
       _data: string | number[]
     ): TransactionObject<string>;
 
-    genericCall(data: string | number[]): TransactionObject<void>;
+    genericCall(
+      _to: string,
+      _gas: number | string,
+      _value: number | string,
+      _encodedFunction: string | number[]
+    ): TransactionObject<boolean>;
 
     assetOwned(): TransactionObject<BN>;
     assetWalletFactory(): TransactionObject<string>;
   };
   events: {
     GenericCallSuccess: ContractEvent<{
-      result: BN;
-      numOperations: BN;
-      0: BN;
-      1: BN;
+      result: string;
+      success: boolean;
+      0: string;
+      1: boolean;
     }>;
     ReceivedEth: ContractEvent<{
       sender: string;

@@ -241,7 +241,7 @@ export class DaoService extends ContractService implements IDaoService {
       this.getContributionRewardAddress(),
     )
 
-  private getQuorumVoteContract = (
+  public getQuorumVoteContract = (
     web3ProviderType: EWeb3ProviderType = EWeb3ProviderType.HTTP,
   ) =>
     this.getContractByWeb3ProviderType<QuorumVote>(
@@ -634,6 +634,7 @@ export class DaoService extends ContractService implements IDaoService {
     ]
   }
 
+  // TODO check it. The redeem can be done directly from any address, but still
   redeemReputation = async (
     avatarAddress: tEthereumAddress,
     redeemer: tEthereumAddress,

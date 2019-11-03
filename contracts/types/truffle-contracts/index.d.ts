@@ -72,7 +72,7 @@ export interface AssetWalletFactoryContract
   extends Truffle.Contract<AssetWalletFactoryInstance> {
   "new"(
     _assetsRegistriesRegistry: string | BigNumber,
-    _assetsRegistryId: string,
+    _assetsRegistryIdHash: string | BigNumber,
     meta?: Truffle.TransactionDetails
   ): Promise<AssetWalletFactoryInstance>;
 }
@@ -430,6 +430,11 @@ export interface SchemeRegistrarContract
 export interface SignalSchemeContract
   extends Truffle.Contract<SignalSchemeInstance> {
   "new"(meta?: Truffle.TransactionDetails): Promise<SignalSchemeInstance>;
+}
+
+export interface TestContractContract
+  extends Truffle.Contract<TestContractInstance> {
+  "new"(meta?: Truffle.TransactionDetails): Promise<TestContractInstance>;
 }
 
 export interface TokenCapGCContract
@@ -1272,7 +1277,7 @@ export interface ARCVotingMachineCallbacksMockInstance
 export interface AssetsRegistriesRegistryInstance
   extends Truffle.ContractInstance {
   getAssetsRegistryAddress(
-    _assetRegistryId: string | BigNumber,
+    _hashedAssetRegistryId: string | BigNumber,
     txDetails?: Truffle.TransactionDetails
   ): Promise<string>;
 
@@ -1306,22 +1311,22 @@ export interface AssetsRegistriesRegistryInstance
 
   setAssetsRegistryAddress: {
     (
-      _assetRegistryId: string | BigNumber,
+      _hashedAssetRegistryId: string | BigNumber,
       _assetRegistryAddress: string | BigNumber,
       txDetails?: Truffle.TransactionDetails
     ): Promise<Truffle.TransactionResponse>;
     call(
-      _assetRegistryId: string | BigNumber,
+      _hashedAssetRegistryId: string | BigNumber,
       _assetRegistryAddress: string | BigNumber,
       txDetails?: Truffle.TransactionDetails
     ): Promise<boolean>;
     sendTransaction(
-      _assetRegistryId: string | BigNumber,
+      _hashedAssetRegistryId: string | BigNumber,
       _assetRegistryAddress: string | BigNumber,
       txDetails?: Truffle.TransactionDetails
     ): Promise<string>;
     estimateGas(
-      _assetRegistryId: string | BigNumber,
+      _hashedAssetRegistryId: string | BigNumber,
       _assetRegistryAddress: string | BigNumber,
       txDetails?: Truffle.TransactionDetails
     ): Promise<number>;
@@ -1364,16 +1369,32 @@ export interface AssetWalletInstance extends Truffle.ContractInstance {
   };
 
   genericCall: {
-    (data: string, txDetails?: Truffle.TransactionDetails): Promise<
-      Truffle.TransactionResponse
-    >;
-    call(data: string, txDetails?: Truffle.TransactionDetails): Promise<void>;
+    (
+      _to: string | BigNumber,
+      _gas: number | BigNumber | string,
+      _value: number | BigNumber | string,
+      _encodedFunction: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<Truffle.TransactionResponse>;
+    call(
+      _to: string | BigNumber,
+      _gas: number | BigNumber | string,
+      _value: number | BigNumber | string,
+      _encodedFunction: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<boolean>;
     sendTransaction(
-      data: string,
+      _to: string | BigNumber,
+      _gas: number | BigNumber | string,
+      _value: number | BigNumber | string,
+      _encodedFunction: string,
       txDetails?: Truffle.TransactionDetails
     ): Promise<string>;
     estimateGas(
-      data: string,
+      _to: string | BigNumber,
+      _gas: number | BigNumber | string,
+      _value: number | BigNumber | string,
+      _encodedFunction: string,
       txDetails?: Truffle.TransactionDetails
     ): Promise<number>;
   };
@@ -1416,15 +1437,6 @@ export interface AssetWalletFactoryInstance extends Truffle.ContractInstance {
     ): Promise<number>;
   };
 
-  getAssetsRegistry: {
-    (txDetails?: Truffle.TransactionDetails): Promise<
-      Truffle.TransactionResponse
-    >;
-    call(txDetails?: Truffle.TransactionDetails): Promise<string>;
-    sendTransaction(txDetails?: Truffle.TransactionDetails): Promise<string>;
-    estimateGas(txDetails?: Truffle.TransactionDetails): Promise<number>;
-  };
-
   createWallet: {
     (
       _assetId: number | BigNumber | string,
@@ -1450,6 +1462,7 @@ export interface AssetWalletFactoryInstance extends Truffle.ContractInstance {
   assetsRegistryIdHash(txDetails?: Truffle.TransactionDetails): Promise<string>;
   owner(txDetails?: Truffle.TransactionDetails): Promise<string>;
   isOwner(txDetails?: Truffle.TransactionDetails): Promise<boolean>;
+  getAssetsRegistry(txDetails?: Truffle.TransactionDetails): Promise<string>;
 }
 
 export interface Auction4ReputationInstance extends Truffle.ContractInstance {
@@ -6822,28 +6835,28 @@ export interface GlobalConstraintRegistrarInstance
 export interface IAssetsRegistriesRegistryInstance
   extends Truffle.ContractInstance {
   getAssetsRegistryAddress(
-    _assetRegistryId: string | BigNumber,
+    _hashedAssetRegistryId: string | BigNumber,
     txDetails?: Truffle.TransactionDetails
   ): Promise<string>;
 
   setAssetsRegistryAddress: {
     (
-      _assetRegistryId: string | BigNumber,
+      _hashedAssetRegistryId: string | BigNumber,
       _assetRegistryAddress: string | BigNumber,
       txDetails?: Truffle.TransactionDetails
     ): Promise<Truffle.TransactionResponse>;
     call(
-      _assetRegistryId: string | BigNumber,
+      _hashedAssetRegistryId: string | BigNumber,
       _assetRegistryAddress: string | BigNumber,
       txDetails?: Truffle.TransactionDetails
     ): Promise<boolean>;
     sendTransaction(
-      _assetRegistryId: string | BigNumber,
+      _hashedAssetRegistryId: string | BigNumber,
       _assetRegistryAddress: string | BigNumber,
       txDetails?: Truffle.TransactionDetails
     ): Promise<string>;
     estimateGas(
-      _assetRegistryId: string | BigNumber,
+      _hashedAssetRegistryId: string | BigNumber,
       _assetRegistryAddress: string | BigNumber,
       txDetails?: Truffle.TransactionDetails
     ): Promise<number>;
@@ -8845,6 +8858,25 @@ export interface SignalSchemeInstance extends Truffle.ContractInstance {
       txDetails?: Truffle.TransactionDetails
     ): Promise<number>;
   };
+}
+
+export interface TestContractInstance extends Truffle.ContractInstance {
+  randomFunctionWithArg(
+    _value: number | BigNumber | string,
+    txDetails?: Truffle.TransactionDetails
+  ): Promise<BigNumber>;
+
+  randomFunction: {
+    (txDetails?: Truffle.TransactionDetails): Promise<
+      Truffle.TransactionResponse
+    >;
+    call(txDetails?: Truffle.TransactionDetails): Promise<boolean>;
+    sendTransaction(txDetails?: Truffle.TransactionDetails): Promise<string>;
+    estimateGas(txDetails?: Truffle.TransactionDetails): Promise<number>;
+  };
+
+  testValue(txDetails?: Truffle.TransactionDetails): Promise<BigNumber>;
+  revertingFunction(txDetails?: Truffle.TransactionDetails): Promise<boolean>;
 }
 
 export interface TokenCapGCInstance extends Truffle.ContractInstance {

@@ -28,6 +28,8 @@ import {
   AssetsRegistriesRegistryInstance,
   AssetWalletFactoryInstance,
   AssetWalletFactoryContract,
+  TestContractContract,
+  TestContractInstance,
 } from "../../types/truffle-contracts"
 import {
   setupMigrationEnv,
@@ -77,6 +79,7 @@ export interface MigratorExecutorParams {
   ): Promise<AssetsRegistriesRegistryInstance>
   deployAssetWalletFactory(args?: any[]): Promise<AssetWalletFactoryInstance>
   deployAssetWallet(args?: any[]): Promise<AssetWalletInstance>
+  deployTestContract(args?: any[]): Promise<TestContractInstance>
   linkLibraryToContract(
     libraryId: LibraryId,
     contractId: ContractId | LibraryId,
@@ -233,6 +236,12 @@ export const migrationHandler = (
       args,
     )
 
+  const deployTestContract = async (args?: any[]) =>
+    await deployContract<TestContractContract, TestContractInstance>(
+      ContractId.TestContract,
+      args,
+    )
+
   const deployWizardGuild = async (args?: any[]) =>
     await deployContract<WizardGuildContract, WizardGuildInstance>(
       ContractId.WizardGuild,
@@ -343,13 +352,16 @@ export const migrationHandler = (
         : currencyUnitsToDecimals(stringToBigNumber(reputationToUse), 18)
     const wizardWalletInstance = await getAssetWalletInstance(wizardWallet)
     const votingMachine = await getQuorumVoteInstance()
-    // TODO review to encode the correct data
+
     return await wizardWalletInstance.genericCall(
-      "TODO",
-      // votingMachine.address,
-      // proposalId,
-      // vote,
-      // convertedReputation,
+      votingMachine.address,
+      await votingMachine.contract.methods
+        .vote(proposalId, vote, convertedReputation, wizardWallet)
+        .estimateGas(),
+      0,
+      votingMachine.contract.methods
+        .vote(proposalId, vote, convertedReputation, wizardWallet)
+        .encodeABI(),
     )
   }
 
@@ -419,6 +431,7 @@ export const migrationHandler = (
     deployAssetsRegistriesRegistry,
     deployAssetWalletFactory,
     deployAssetWallet,
+    deployTestContract,
     linkLibraryToContract,
     getContractInstance,
     getAvatarInstance,

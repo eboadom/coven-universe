@@ -261,7 +261,7 @@ export class WizardsService extends ContractService implements IWizardsService {
   getWizardWalletAddressByWizardId = async (
     wizardId: number,
   ): Promise<tEthereumAddress> =>
-    await this.getAssetWalletFactoryContract()
+  await this.getAssetWalletFactoryContract()
       .methods.assetsWallets(wizardId)
       .call()
 
@@ -288,16 +288,26 @@ export class WizardsService extends ContractService implements IWizardsService {
         ? "0"
         : currencyUnitsToDecimals(stringToBigNumber(reputationToUse), 18)
 
+    const daoService = new DaoService()
+
+    const voteEstimatedGas = await daoService
+      .getQuorumVoteContract()
+      .methods.vote(proposalId, vote, convertedReputation, sender)
+      .estimateGas()
+    const encodedFuntion = daoService
+      .getQuorumVoteContract()
+      .methods.vote(proposalId, vote, convertedReputation, sender)
+      .encodeABI()
+
     return [
       await this.txTo(wizardWallet, {
         from: sender,
         data: this.getWizardWalletContract(wizardWallet)
           .methods.genericCall(
-            "TODO",
-            // new DaoService().getQuorumVoteAddress(),
-            // proposalId,
-            // vote,
-            // convertedReputation,
+            daoService.getQuorumVoteAddress(),
+            voteEstimatedGas,
+            0,
+            encodedFuntion,
           )
           .encodeABI(),
       }),

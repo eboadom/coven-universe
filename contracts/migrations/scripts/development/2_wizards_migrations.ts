@@ -8,7 +8,7 @@ import {cheezeWizardsId} from "../../data/development-data"
 import {ethers} from "ethers"
 
 export const deployTestWizardsMigration = migrationHandler(
-  "Deploy the test wizards",
+  "Wizards deployments migration",
   artifacts,
   async ({
     accounts,
@@ -21,6 +21,9 @@ export const deployTestWizardsMigration = migrationHandler(
     const reservedWizardsCount = 5974
     const initialOwner = accounts[0]
     const wizardIds = [5975, 5976, 5977]
+    const hashedId = ethers.utils.keccak256(
+      ethers.utils.toUtf8Bytes(cheezeWizardsId),
+    )
 
     const wizardGuild = await deployWizardGuild()
     await wizardGuild.openSeries(seriesMinter, reservedWizardsCount)
@@ -29,25 +32,31 @@ export const deployTestWizardsMigration = migrationHandler(
       [1, 2, 3, 2],
       initialOwner,
     )
+
     const assetsRegistriesRegistry = await deployAssetsRegistriesRegistry([
       wizardGuild.address,
     ])
     await assetsRegistriesRegistry.setAssetsRegistryAddress(
-      ethers.utils.keccak256(cheezeWizardsId),
+      hashedId,
       wizardGuild.address,
     )
+
     const assetWalletFactory = await deployAssetWalletFactory([
       assetsRegistriesRegistry.address,
-      ethers.utils.keccak256(cheezeWizardsId),
+      hashedId,
     ])
+
+    const wizardsWallets = []
     for (const id of wizardIds) {
-      await assetWalletFactory.createWallet(id)
+      const wizardWalletAddress = (await assetWalletFactory.createWallet(id))
+        .logs[0].args.wallet
+      wizardsWallets.push(wizardWalletAddress)
     }
 
     const deployedWizardsContracts: IWizardsAddresses = {
       WizardGuild: wizardGuild.address,
       AssetsRegistriesRegistry: assetsRegistriesRegistry.address,
-      AssetWalletFactory: assetsRegistriesRegistry.address,
+      AssetWalletFactory: assetWalletFactory.address,
     }
 
     // Persistence in a json file of the addresses of contracts deployed by other contracts

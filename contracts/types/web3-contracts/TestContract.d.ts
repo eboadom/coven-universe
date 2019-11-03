@@ -7,21 +7,19 @@ import {EventLog} from "web3-core";
 import {EventEmitter} from "events";
 import {Callback, TransactionObject, ContractEvent} from "./types";
 
-export class IAssetsRegistriesRegistry extends Contract {
+export class TestContract extends Contract {
   constructor(
     jsonInterface: any[],
     address?: string,
     options?: ContractOptions
   );
   methods: {
-    getAssetsRegistryAddress(
-      _hashedAssetRegistryId: string | number[]
-    ): TransactionObject<string>;
+    randomFunctionWithArg(_value: number | string): TransactionObject<BN>;
 
-    setAssetsRegistryAddress(
-      _hashedAssetRegistryId: string | number[],
-      _assetRegistryAddress: string
-    ): TransactionObject<boolean>;
+    randomFunction(): TransactionObject<boolean>;
+
+    testValue(): TransactionObject<BN>;
+    revertingFunction(): TransactionObject<boolean>;
   };
   events: {
     allEvents: (

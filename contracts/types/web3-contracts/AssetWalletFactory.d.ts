@@ -20,14 +20,13 @@ export class AssetWalletFactory extends Contract {
 
     transferOwnership(newOwner: string): TransactionObject<void>;
 
-    getAssetsRegistry(): TransactionObject<string>;
-
     createWallet(_assetId: number | string): TransactionObject<boolean>;
 
     assetsRegistriesRegistry(): TransactionObject<string>;
     assetsRegistryIdHash(): TransactionObject<string>;
     owner(): TransactionObject<string>;
     isOwner(): TransactionObject<boolean>;
+    getAssetsRegistry(): TransactionObject<string>;
   };
   events: {
     AssetWalletCreated: ContractEvent<{
