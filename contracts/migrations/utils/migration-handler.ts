@@ -6,8 +6,6 @@ import {
   ControllerCreatorContract,
   DaoCreatorInstance,
   DaoCreatorContract,
-  AbsoluteVoteInstance,
-  AbsoluteVoteContract,
   QuorumVoteInstance,
   QuorumVoteContract,
   SchemeRegistrarInstance,
@@ -64,7 +62,6 @@ export interface MigratorExecutorParams {
     args?: any[],
   ): Promise<ControllerCreatorInstance>
   deployDaoCreatorContract(args?: any[]): Promise<DaoCreatorInstance>
-  deployAbsoluteVoteContract(args?: any[]): Promise<AbsoluteVoteInstance>
   deployQuorumVoteContract(args?: any[]): Promise<QuorumVoteInstance>
   deploySchemeRegistrarContract(args?: any[]): Promise<SchemeRegistrarInstance>
   deployUpgradeSchemeContract(args?: any[]): Promise<UpgradeSchemeInstance>
@@ -116,9 +113,7 @@ export interface MigratorExecutorParams {
     cowvenName: string,
     tokenCowvenname: string,
     tokenCowvenSymbol: string,
-    description: string,
     initialFoundersRewards: string[][],
-    grate: eGrateType,
   ): Promise<Truffle.TransactionResponse>
   initCowvenSchemes(
     avatarAddress: tEthereumAddress,
@@ -183,12 +178,6 @@ export const migrationHandler = (
   const deployDaoCreatorContract = async (args?: any[]) =>
     await deployContract<DaoCreatorContract, DaoCreatorInstance>(
       ContractId.DaoCreator,
-      args,
-    )
-
-  const deployAbsoluteVoteContract = async (args?: any[]) =>
-    await deployContract<AbsoluteVoteContract, AbsoluteVoteInstance>(
-      ContractId.AbsoluteVote,
       args,
     )
 
@@ -384,9 +373,7 @@ export const migrationHandler = (
     cowvenName: string,
     tokenCowvenname: string,
     tokenCowvenSymbol: string,
-    description: string,
     initialFoundersRewards: string[][],
-    grate: eGrateType,
   ) => {
     const daoCreatorInstance = await getDaoCreatorInstance(
       (<IDaoAddresses>require(getPathDeployedDaoContracts(network))).DaoCreator,
@@ -396,9 +383,10 @@ export const migrationHandler = (
       tokenCowvenname,
       tokenCowvenSymbol,
       initialFoundersRewards.map(tuple => tuple[0]),
+      initialFoundersRewards.map(tuple => tuple[2]),
       initialFoundersRewards.map(tuple => tuple[1]),
-      eGrateStringIndex[grate],
-      description,
+      ADDRESS_0x0,
+      0,
     )
   }
 
@@ -434,7 +422,6 @@ export const migrationHandler = (
     deployMigrationsContract,
     deployControllerCreatorContract,
     deployDaoCreatorContract,
-    deployAbsoluteVoteContract,
     deployQuorumVoteContract,
     deploySchemeRegistrarContract,
     deployUpgradeSchemeContract,

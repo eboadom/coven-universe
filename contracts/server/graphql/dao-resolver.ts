@@ -220,12 +220,6 @@ class DeployNewCowvenInput {
 
   @Field()
   cowvenName: string
-
-  @Field()
-  description: string
-
-  @Field()
-  grate: eGrateType
 }
 
 @InputType()
@@ -326,8 +320,6 @@ export class DaoResolver {
   {
     sender,
     cowvenName,
-    description,
-    grate,
   }: DeployNewCowvenInput): Promise<EthereumTransactionModel[]> {
     const wizardsOfSender = await this.wizardsService.getAllWizardsDataByOwner(
       sender,
@@ -344,9 +336,7 @@ export class DaoResolver {
           cowvenName,
           "CHZTK",
           "CHZTK",
-          description,
-          [[firstWizardWalletAddress, devFundReputation, devFundTokens]], // TODO review. For now the sender re
-          grate,
+          [[firstWizardWalletAddress, devFundReputation, devFundTokens]], // TODO review. For now the sender receives reputation and token
         )
       } else {
         throw new Error(

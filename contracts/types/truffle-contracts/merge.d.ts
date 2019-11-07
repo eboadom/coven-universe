@@ -9,17 +9,7 @@ declare global {
   namespace Truffle {
     interface Artifacts {
       require(name: "AbsoluteVote"): TruffleContracts.AbsoluteVoteContract;
-      require(
-        name: "AbsoluteVoteExecuteMock"
-      ): TruffleContracts.AbsoluteVoteExecuteMockContract;
       require(name: "AccessControl"): TruffleContracts.AccessControlContract;
-      require(name: "ActionMock"): TruffleContracts.ActionMockContract;
-      require(name: "Agreement"): TruffleContracts.AgreementContract;
-      require(name: "AgreementMock"): TruffleContracts.AgreementMockContract;
-      require(name: "ARCDebug"): TruffleContracts.ARCDebugContract;
-      require(
-        name: "ARCVotingMachineCallbacksMock"
-      ): TruffleContracts.ARCVotingMachineCallbacksMockContract;
       require(
         name: "AssetsRegistriesRegistry"
       ): TruffleContracts.AssetsRegistriesRegistryContract;
@@ -27,11 +17,7 @@ declare global {
       require(
         name: "AssetWalletFactory"
       ): TruffleContracts.AssetWalletFactoryContract;
-      require(
-        name: "Auction4Reputation"
-      ): TruffleContracts.Auction4ReputationContract;
       require(name: "Avatar"): TruffleContracts.AvatarContract;
-      require(name: "BadERC20"): TruffleContracts.BadERC20Contract;
       require(
         name: "ContributionReward"
       ): TruffleContracts.ContributionRewardContract;
@@ -42,10 +28,8 @@ declare global {
       require(
         name: "ControllerInterface"
       ): TruffleContracts.ControllerInterfaceContract;
-      require(name: "CurveInterface"): TruffleContracts.CurveInterfaceContract;
       require(name: "DaoCreator"): TruffleContracts.DaoCreatorContract;
       require(name: "DAOToken"): TruffleContracts.DAOTokenContract;
-      require(name: "Debug"): TruffleContracts.DebugContract;
       require(name: "ERC165"): TruffleContracts.ERC165Contract;
       require(name: "ERC1654"): TruffleContracts.ERC1654Contract;
       require(
@@ -53,7 +37,6 @@ declare global {
       ): TruffleContracts.ERC165InterfaceContract;
       require(name: "ERC20"): TruffleContracts.ERC20Contract;
       require(name: "ERC20Burnable"): TruffleContracts.ERC20BurnableContract;
-      require(name: "ERC20Mock"): TruffleContracts.ERC20MockContract;
       require(
         name: "ERC721Receivable"
       ): TruffleContracts.ERC721ReceivableContract;
@@ -63,37 +46,16 @@ declare global {
       require(
         name: "ERC721ReceiverFinal"
       ): TruffleContracts.ERC721ReceiverFinalContract;
-      require(name: "ERC827"): TruffleContracts.ERC827Contract;
-      require(name: "ERC827Token"): TruffleContracts.ERC827TokenContract;
-      require(
-        name: "ERC827TokenMock"
-      ): TruffleContracts.ERC827TokenMockContract;
-      require(
-        name: "ExternalLocking4Reputation"
-      ): TruffleContracts.ExternalLocking4ReputationContract;
-      require(
-        name: "ExternalTokenLockerMock"
-      ): TruffleContracts.ExternalTokenLockerMockContract;
-      require(
-        name: "FixedReputationAllocation"
-      ): TruffleContracts.FixedReputationAllocationContract;
-      require(name: "Forwarder"): TruffleContracts.ForwarderContract;
       require(name: "GenericScheme"): TruffleContracts.GenericSchemeContract;
       require(
         name: "GenesisProtocol"
       ): TruffleContracts.GenesisProtocolContract;
-      require(
-        name: "GenesisProtocolCallbacksMock"
-      ): TruffleContracts.GenesisProtocolCallbacksMockContract;
       require(
         name: "GenesisProtocolLogic"
       ): TruffleContracts.GenesisProtocolLogicContract;
       require(
         name: "GlobalConstraintInterface"
       ): TruffleContracts.GlobalConstraintInterfaceContract;
-      require(
-        name: "GlobalConstraintMock"
-      ): TruffleContracts.GlobalConstraintMockContract;
       require(
         name: "GlobalConstraintRegistrar"
       ): TruffleContracts.GlobalConstraintRegistrarContract;
@@ -110,60 +72,25 @@ declare global {
         name: "IntVoteInterface"
       ): TruffleContracts.IntVoteInterfaceContract;
       require(name: "IOwnedAsset"): TruffleContracts.IOwnedAssetContract;
-      require(
-        name: "Locking4Reputation"
-      ): TruffleContracts.Locking4ReputationContract;
-      require(
-        name: "LockingEth4Reputation"
-      ): TruffleContracts.LockingEth4ReputationContract;
-      require(
-        name: "LockingToken4Reputation"
-      ): TruffleContracts.LockingToken4ReputationContract;
       require(name: "Migrations"): TruffleContracts.MigrationsContract;
-      require(
-        name: "OrganizationRegister"
-      ): TruffleContracts.OrganizationRegisterContract;
       require(name: "Ownable"): TruffleContracts.OwnableContract;
-      require(name: "PolkaCurve"): TruffleContracts.PolkaCurveContract;
-      require(
-        name: "PriceOracleInterface"
-      ): TruffleContracts.PriceOracleInterfaceContract;
-      require(
-        name: "PriceOracleMock"
-      ): TruffleContracts.PriceOracleMockContract;
       require(
         name: "ProposalExecuteInterface"
       ): TruffleContracts.ProposalExecuteInterfaceContract;
       require(name: "QuorumVote"): TruffleContracts.QuorumVoteContract;
-      require(name: "RealMathTester"): TruffleContracts.RealMathTesterContract;
-      require(name: "Redeemer"): TruffleContracts.RedeemerContract;
-      require(name: "RepAllocation"): TruffleContracts.RepAllocationContract;
       require(name: "Reputation"): TruffleContracts.ReputationContract;
-      require(
-        name: "ReputationFromToken"
-      ): TruffleContracts.ReputationFromTokenContract;
-      require(name: "SafeERC20Mock"): TruffleContracts.SafeERC20MockContract;
       require(
         name: "SchemeRegistrar"
       ): TruffleContracts.SchemeRegistrarContract;
-      require(name: "SignalScheme"): TruffleContracts.SignalSchemeContract;
       require(name: "TestContract"): TruffleContracts.TestContractContract;
-      require(name: "TokenCapGC"): TruffleContracts.TokenCapGCContract;
       require(name: "UController"): TruffleContracts.UControllerContract;
-      require(
-        name: "UniversalSchemeMock"
-      ): TruffleContracts.UniversalSchemeMockContract;
       require(name: "UpgradeScheme"): TruffleContracts.UpgradeSchemeContract;
-      require(
-        name: "VoteInOrganizationScheme"
-      ): TruffleContracts.VoteInOrganizationSchemeContract;
       require(
         name: "VotingMachineCallbacks"
       ): TruffleContracts.VotingMachineCallbacksContract;
       require(
         name: "VotingMachineCallbacksInterface"
       ): TruffleContracts.VotingMachineCallbacksInterfaceContract;
-      require(name: "Wallet"): TruffleContracts.WalletContract;
       require(name: "WizardGuild"): TruffleContracts.WizardGuildContract;
       require(
         name: "WizardGuildInterface"

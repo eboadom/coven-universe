@@ -193,9 +193,7 @@ export interface IDaoService {
     cowvenName: string,
     tokenCowvenname: string,
     tokenCowvenSymbol: string,
-    description: string,
     initialFoundersRewards: string[][],
-    grate: eGrateType,
   ) => Promise<IEthereumTransactionModel[]>
   initCowvenSchemes: (
     sender: tEthereumAddress,
@@ -687,9 +685,7 @@ export class DaoService extends ContractService implements IDaoService {
     cowvenName: string,
     tokenCowvenname: string,
     tokenCowvenSymbol: string,
-    description: string,
     initialFoundersRewards: string[][],
-    grate: eGrateType,
   ): Promise<IEthereumTransactionModel[]> => [
     await this.txTo(this.getDaoCreatorAddress(), {
       from: sender,
@@ -699,9 +695,10 @@ export class DaoService extends ContractService implements IDaoService {
           tokenCowvenname,
           tokenCowvenSymbol,
           initialFoundersRewards.map(tuple => tuple[0]),
+          initialFoundersRewards.map(tuple => tuple[2]),
           initialFoundersRewards.map(tuple => tuple[1]),
-          eGrateStringIndex[grate],
-          description,
+          ADDRESS_0x0,
+          0,
         )
         .encodeABI(),
     }),

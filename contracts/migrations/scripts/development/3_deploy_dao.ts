@@ -69,9 +69,10 @@ export const deployDAOMigration = migrationHandler(
       TokenDAOName,
       TokenDAOSymbol,
       founders,
+      initialTokens,
       initialReputation,
-      grate,
-      genecheezeDaoDescription,
+      ADDRESS_0x0,
+      0,
     )
     const newAvatarAddress = resTxForgeOrg.logs[0].args._avatar
     const avatarInstance = await getAvatarInstance(newAvatarAddress)

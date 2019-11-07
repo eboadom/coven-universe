@@ -45,15 +45,13 @@ export const cowvensInteractionsMigration = migrationHandler(
 
     await deployNewCowven(
       "SecondCheeze",
-      "SCTK",
       "Second Cheeze Token",
-      "The second, still important",
+      "SCTK",
       initialFoundersRewards,
-      eGrateType.FLAME,
     )
 
     const allDaosBasicData = await daoService.getAllCowvensBasicData()
-    
+
     console.log(allDaosBasicData)
 
     const txResultInitCowvenSchemes = await initCowvenSchemes(

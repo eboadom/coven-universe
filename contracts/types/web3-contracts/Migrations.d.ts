@@ -16,10 +16,10 @@ export class Migrations extends Contract {
   methods: {
     setCompleted(completed: number | string): TransactionObject<void>;
 
-    upgrade(newAddress: string): TransactionObject<void>;
+    upgrade(new_address: string): TransactionObject<void>;
 
+    last_completed_migration(): TransactionObject<BN>;
     owner(): TransactionObject<string>;
-    lastCompletedMigration(): TransactionObject<BN>;
   };
   events: {
     allEvents: (
