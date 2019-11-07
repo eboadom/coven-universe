@@ -3,7 +3,6 @@ export const enum ContractId {
   ControllerCreator = "ControllerCreator",
   DaoCreator = "DaoCreator",
   Avatar = "Avatar",
-  AbsoluteVote = "AbsoluteVote",
   QuorumVote = "QuorumVote",
   SchemeRegistrar = "SchemeRegistrar",
   UpgradeScheme = "UpgradeScheme",
