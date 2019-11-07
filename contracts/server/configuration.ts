@@ -4,6 +4,8 @@ import {path as rootPath} from "app-root-path"
 export type tEthereumAddress = string
 export type tGetConfiguration = () => IConfiguration
 
+export const METADATA_SEPARATOR = "{{{";
+
 export const getPathDeployedWizardsContracts = (ethereumNetwork: string) =>
   `${rootPath}/migrations/data/wizards-${ethereumNetwork}-addresses.json`
 

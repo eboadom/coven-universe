@@ -3,7 +3,11 @@ import {
   EWeb3ProviderType,
   IEthereumTransactionModel,
 } from "./ContractService"
-import {tEthereumAddress, getConfiguration} from "../server/configuration"
+import {
+  tEthereumAddress,
+  getConfiguration,
+  METADATA_SEPARATOR,
+} from "../server/configuration"
 import {
   bnToBigNumber,
   tStringCurrencyUnits,
@@ -26,6 +30,7 @@ import {
   IWizardWalletDaoWithReputation,
 } from "./WizardsService"
 import {DaoCreator} from "../types/web3-contracts/DaoCreator"
+import {Avatar} from "../types/web3-contracts/Avatar"
 
 export enum eVote {
   ABSTAIN = 0,
@@ -72,6 +77,10 @@ export enum eQuorumVoteEvents {
 
 export enum eDaoCreatorEvents {
   NewOrg = "NewOrg",
+}
+
+export enum eAvatarEvents {
+  MetaData = "MetaData",
 }
 
 export enum eProposalDescription {
@@ -191,6 +200,9 @@ export interface IDaoService {
   initCowvenSchemes: (
     sender: tEthereumAddress,
     avatarAddress: tEthereumAddress,
+    cowvenName: string,
+    grate: eGrateStringIndex,
+    description: string,
   ) => Promise<IEthereumTransactionModel[]>
 }
 
@@ -212,6 +224,9 @@ export class DaoService extends ContractService implements IDaoService {
   private getDaoCreatorABI = (): any[] =>
     require(`${rootPath}/build/contracts/DaoCreator.json`).abi
 
+  private getAvatarABI = (): any[] =>
+    require(`${rootPath}/build/contracts/Avatar.json`).abi
+
   // ADDRESSES
 
   private getDaoCreatorAddress = (): tEthereumAddress =>
@@ -229,6 +244,16 @@ export class DaoService extends ContractService implements IDaoService {
     this.getContractByWeb3ProviderType<Reputation>(
       web3ProviderType,
       this.getReputationABI(),
+      address,
+    )
+
+  private getAvatarContract = (
+    address: tEthereumAddress,
+    web3ProviderType: EWeb3ProviderType = EWeb3ProviderType.HTTP,
+  ) =>
+    this.getContractByWeb3ProviderType<Avatar>(
+      web3ProviderType,
+      this.getAvatarABI(),
       address,
     )
 
@@ -501,28 +526,37 @@ export class DaoService extends ContractService implements IDaoService {
   }
 
   getAllCowvensBasicData = async (): Promise<ICowvenBasicData[]> => {
-    return (await (await this.getDaoCreatorContract()).getPastEvents(
+    const allAvatarAddressesCreated: tEthereumAddress[] = (await (await this.getDaoCreatorContract()).getPastEvents(
       eDaoCreatorEvents.NewOrg,
       {fromBlock: 0},
-    )).map(
-      ({
-        returnValues: {
-          _cowvenId,
-          _avatar,
-          _grate,
-          _cowvenDescription,
-          _reputation,
-          _token,
-        },
-      }: EventData) => ({
-        id: _cowvenId,
-        avatarAddress: _avatar,
-        grate: <eGrateType>getKeyByValue(eGrateStringIndex, _grate),
-        description: _cowvenDescription,
-        reputationAddress: _reputation,
-        tokenAddress: _token,
-      }),
-    )
+    )).map(({returnValues}: EventData) => returnValues._avatar)
+
+    const cowvensBasicData: ICowvenBasicData[] = []
+    for (const avatarAddress of allAvatarAddressesCreated) {
+      cowvensBasicData.push(
+        (await (await this.getAvatarContract(avatarAddress)).getPastEvents(
+          eAvatarEvents.MetaData,
+          {fromBlock: 0},
+        )).map(({returnValues: {_metaData}}: EventData) => {
+          const splittedMetadata: string[] = (<string>_metaData).split(
+            METADATA_SEPARATOR,
+          )
+
+          return {
+            id: splittedMetadata && splittedMetadata[0],
+            avatarAddress,
+            grate:
+              splittedMetadata &&
+              <eGrateType>getKeyByValue(eGrateStringIndex, splittedMetadata[1]),
+            description: splittedMetadata && splittedMetadata[2],
+            reputationAddress: splittedMetadata && splittedMetadata[3],
+            tokenAddress: splittedMetadata && splittedMetadata[4],
+          }
+        })[0] || {avatarAddress},
+      )
+    }
+
+    return cowvensBasicData
   }
 
   getAllDaosInfo = async (): Promise<ICowvenData[]> => {
@@ -676,10 +710,19 @@ export class DaoService extends ContractService implements IDaoService {
   initCowvenSchemes = async (
     sender: tEthereumAddress,
     avatarAddress: tEthereumAddress,
+    cowvenName: string,
+    grate: eGrateStringIndex,
+    description: string,
   ): Promise<IEthereumTransactionModel[]> => {
     const {
       defaultDaoParams: {DefaultSchemes, SchemesParams, DefaultPermissions},
     } = getConfiguration()
+
+    const avatarInstance = this.getAvatarContract(avatarAddress)
+    const reputationAddress = await avatarInstance.methods
+      .nativeReputation()
+      .call()
+    const nativeTokenAddress = await avatarInstance.methods.nativeToken().call()
 
     return [
       await this.txTo(this.getDaoCreatorAddress(), {
@@ -690,7 +733,7 @@ export class DaoService extends ContractService implements IDaoService {
             DefaultSchemes,
             SchemesParams,
             DefaultPermissions,
-            "",
+            `${cowvenName}${METADATA_SEPARATOR}${grate}${METADATA_SEPARATOR}${description}${METADATA_SEPARATOR}${reputationAddress}${METADATA_SEPARATOR}${nativeTokenAddress}`,
           )
           .encodeABI(),
       }),

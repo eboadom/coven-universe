@@ -43,6 +43,7 @@ import {
   IDaoAddresses,
   getPathDeployedDaoContracts,
   getConfiguration,
+  METADATA_SEPARATOR,
 } from "../../server/configuration"
 import {
   tStringCurrencyUnits,
@@ -121,6 +122,9 @@ export interface MigratorExecutorParams {
   ): Promise<Truffle.TransactionResponse>
   initCowvenSchemes(
     avatarAddress: tEthereumAddress,
+    cowvenName: string,
+    grate: eGrateStringIndex,
+    description: string,
   ): Promise<Truffle.TransactionResponse>
   accounts: Truffle.Accounts
   network: string
@@ -399,19 +403,28 @@ export const migrationHandler = (
   }
 
   // TODO Check possible non-initialization problems with getConfiguration()
-  const initCowvenSchemes = async (avatarAddress: tEthereumAddress) => {
+  const initCowvenSchemes = async (
+    avatarAddress: tEthereumAddress,
+    cowvenName: string,
+    grate: eGrateStringIndex,
+    description: string,
+  ) => {
     const daoCreatorInstance = await getDaoCreatorInstance(
       (<IDaoAddresses>require(getPathDeployedDaoContracts(network))).DaoCreator,
     )
     const {
       defaultDaoParams: {DefaultSchemes, SchemesParams, DefaultPermissions},
     } = getConfiguration()
+
+    const avatarInstance = await getAvatarInstance(avatarAddress)
+    const reputationAddress: tEthereumAddress = await avatarInstance.nativeReputation()
+    const nativeTokenAddress: tEthereumAddress = await avatarInstance.nativeToken()
     return await daoCreatorInstance.setSchemes(
       avatarAddress,
       DefaultSchemes,
       SchemesParams,
       DefaultPermissions,
-      "",
+      `${cowvenName}${METADATA_SEPARATOR}${grate}${METADATA_SEPARATOR}${description}${METADATA_SEPARATOR}${reputationAddress}${METADATA_SEPARATOR}${nativeTokenAddress}`,
     )
   }
 

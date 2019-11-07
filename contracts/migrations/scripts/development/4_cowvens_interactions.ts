@@ -1,7 +1,12 @@
 import {migrationHandler} from "../../utils/migration-handler"
 import {initConfiguration, configuration} from "../../../server/configuration"
 import {WizardsService} from "../../../services/WizardsService"
-import {DaoService, eVote, eGrateType} from "../../../services/DaoService"
+import {
+  DaoService,
+  eVote,
+  eGrateType,
+  eGrateStringIndex,
+} from "../../../services/DaoService"
 import {devFundReputation, devFundTokens} from "../../data/development-data"
 
 export const cowvensInteractionsMigration = migrationHandler(
@@ -48,11 +53,14 @@ export const cowvensInteractionsMigration = migrationHandler(
     )
 
     const allDaosBasicData = await daoService.getAllCowvensBasicData()
-
+    
     console.log(allDaosBasicData)
 
     const txResultInitCowvenSchemes = await initCowvenSchemes(
       allDaosBasicData[1].avatarAddress,
+      "SecondCheeze",
+      eGrateStringIndex.FLAME,
+      "The second, still important",
     )
 
     console.log(txResultInitCowvenSchemes)

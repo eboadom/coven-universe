@@ -19,6 +19,7 @@ import {
   eProposalStatus,
   IVoterData,
   IVoteData,
+  eGrateStringIndex,
 } from "../../services/DaoService"
 import {tEthereumAddress} from "../configuration"
 import {WizardData} from "./wizard-resolver"
@@ -235,6 +236,15 @@ class InitCowvenSchemesInput {
 
   @Field()
   avatarAddress: tEthereumAddress
+
+  @Field()
+  cowvenName: string
+
+  @Field()
+  description: string
+
+  @Field()
+  grate: eGrateType
 }
 
 @Resolver()
@@ -353,7 +363,16 @@ export class DaoResolver {
   {
     sender,
     avatarAddress,
+    cowvenName,
+    description,
+    grate,
   }: InitCowvenSchemesInput): Promise<EthereumTransactionModel[]> {
-    return await this.daoService.initCowvenSchemes(sender, avatarAddress)
+    return await this.daoService.initCowvenSchemes(
+      sender,
+      avatarAddress,
+      cowvenName,
+      eGrateStringIndex[grate],
+      description,
+    )
   }
 }

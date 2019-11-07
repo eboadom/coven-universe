@@ -14,6 +14,7 @@ import {
   getPathDeployedDaoContracts,
   getPathDaoDefaultParams,
   IDaoDefaultParams,
+  METADATA_SEPARATOR,
 } from "../../../server/configuration"
 import {eGrateStringIndex} from "../../../services/DaoService"
 
@@ -167,20 +168,20 @@ export const deployDAOMigration = migrationHandler(
     //          the organization avatar
     const permissions = ["0x0000001F", "0x00000005", "0x0000000a", "0x00000001"]
 
+    const controllerInstance = await getControllerInstance(
+      await avatarInstance.owner(),
+    )
+    const daoTokenAddress = await controllerInstance.nativeToken()
+    const reputationAddress = await controllerInstance.nativeReputation()
+
     // Setting of the initial schemes on the Controller through the DaoCreator
     const resSetSchemesTx = await daoCreatorInstance.setSchemes(
       avatarInstance.address,
       schemes,
       schemesParams,
       permissions,
-      "metaData",
+      `${DAOName}${METADATA_SEPARATOR}${grate}${METADATA_SEPARATOR}${genecheezeDaoDescription}${METADATA_SEPARATOR}${reputationAddress}${METADATA_SEPARATOR}${daoTokenAddress}`,
     )
-
-    const controllerInstance = await getControllerInstance(
-      await avatarInstance.owner(),
-    )
-    const daoTokenAddress = await controllerInstance.nativeToken()
-    const reputationAddress = await controllerInstance.nativeReputation()
 
     const deployedDaoContracts: IDaoAddresses = {
       DaoCreator: daoCreatorInstance.address,
