@@ -261,7 +261,7 @@ export class WizardsService extends ContractService implements IWizardsService {
   getWizardWalletAddressByWizardId = async (
     wizardId: number,
   ): Promise<tEthereumAddress> =>
-  await this.getAssetWalletFactoryContract()
+    await this.getAssetWalletFactoryContract()
       .methods.assetsWallets(wizardId)
       .call()
 

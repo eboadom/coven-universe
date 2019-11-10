@@ -28,6 +28,8 @@ import {
   AssetWalletFactoryContract,
   TestContractContract,
   TestContractInstance,
+  AtomicDaoCreatorInstance,
+  AtomicDaoCreatorContract,
 } from "../../types/truffle-contracts"
 import {
   setupMigrationEnv,
@@ -78,6 +80,11 @@ export interface MigratorExecutorParams {
   deployAssetWalletFactory(args?: any[]): Promise<AssetWalletFactoryInstance>
   deployAssetWallet(args?: any[]): Promise<AssetWalletInstance>
   deployTestContract(args?: any[]): Promise<TestContractInstance>
+  deployAtomicDaoCreator([daoCreator, orgName, metaData]: [
+    tEthereumAddress[],
+    string,
+    string,
+  ]): Promise<AtomicDaoCreatorInstance>
   linkLibraryToContract(
     libraryId: LibraryId,
     contractId: ContractId | LibraryId,
@@ -86,6 +93,9 @@ export interface MigratorExecutorParams {
   getControllerInstance(contractAddress?: string): Promise<ControllerInstance>
   getReputationInstance(contractAddress?: string): Promise<ReputationInstance>
   getAssetWalletInstance(contractAddress?: string): Promise<AssetWalletInstance>
+  getAtomicDaoCreatorInstance(
+    contractAddress?: string,
+  ): Promise<AtomicDaoCreatorInstance>
   getContractInstance<ContractInstance>(
     contractId: ContractId,
     contractAddress?: string,
@@ -223,6 +233,16 @@ export const migrationHandler = (
       AssetWalletFactoryInstance
     >(ContractId.AssetWalletFactory, args)
 
+  const deployAtomicDaoCreator = async ([daoCreator, orgName, metaData]: [
+    tEthereumAddress[],
+    string,
+    string,
+  ]) =>
+    await deployContract<AtomicDaoCreatorContract, AtomicDaoCreatorInstance>(
+      ContractId.AtomicDaoCreator,
+      [daoCreator, orgName, metaData],
+    )
+
   const deployAssetWallet = async (args?: any[]) =>
     await deployContract<AssetWalletContract, AssetWalletInstance>(
       ContractId.AssetWallet,
@@ -282,6 +302,12 @@ export const migrationHandler = (
       contractAddress,
     )
 
+  const getAtomicDaoCreatorInstance = async (contractAddress?: string) =>
+    await getContractInstance<AtomicDaoCreatorInstance>(
+      ContractId.AtomicDaoCreator,
+      contractAddress,
+    )
+
   // TODO: review parameters
   const createProposal = async (
     avatarAddress: tEthereumAddress,
@@ -289,7 +315,10 @@ export const migrationHandler = (
     reputationChange: tStringCurrencyUnits,
     daoTokenChange?: tStringCurrencyUnits,
   ) => {
-    const contributionRewardInstance = await getContributionRewardInstance()
+    console.log(await (await getAtomicDaoCreatorInstance()).avatar())
+    const contributionRewardInstance = await getContributionRewardInstance(
+      await (await getAtomicDaoCreatorInstance()).contributionReward()
+    )
     return await contributionRewardInstance.proposeContributionReward(
       avatarAddress,
       eProposalDescription.MINT_REPUTATION,
@@ -318,7 +347,11 @@ export const migrationHandler = (
       reputationToUse === "-1"
         ? "0"
         : currencyUnitsToDecimals(stringToBigNumber(reputationToUse), 18)
-    const quorumVoteInstance = await getQuorumVoteInstance()
+    const quorumVoteInstance = await getQuorumVoteInstance(
+      await (await getAtomicDaoCreatorInstance()).votingMachine()
+    )
+
+    console.log(await (await getAtomicDaoCreatorInstance()).votingMachine())
     try {
       return await quorumVoteInstance.vote(
         proposalId,
@@ -432,12 +465,14 @@ export const migrationHandler = (
     deployAssetWalletFactory,
     deployAssetWallet,
     deployTestContract,
+    deployAtomicDaoCreator,
     linkLibraryToContract,
     getContractInstance,
     getAvatarInstance,
     getReputationInstance,
     getControllerInstance,
     getAssetWalletInstance,
+    getAtomicDaoCreatorInstance,
     createProposal,
     voteProposal,
     voteProposalWithWizardWallet,

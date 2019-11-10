@@ -14,7 +14,8 @@ export const enum ContractId {
   AssetsRegistriesRegistry = "AssetsRegistriesRegistry",
   AssetWalletFactory = "AssetWalletFactory",
   AssetWallet = "AssetWallet",
-  TestContract = "TestContract"
+  TestContract = "TestContract",
+  AtomicDaoCreator = "AtomicDaoCreator",
 }
 
 export const enum LibraryId {}

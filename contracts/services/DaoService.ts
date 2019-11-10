@@ -531,8 +531,11 @@ export class DaoService extends ContractService implements IDaoService {
 
     const cowvensBasicData: ICowvenBasicData[] = []
     for (const avatarAddress of allAvatarAddressesCreated) {
+      const avatarInstance = await this.getAvatarContract(avatarAddress)
+      const reputationAddress = await avatarInstance.methods.nativeReputation().call()
+      const tokenAddress = await avatarInstance.methods.nativeToken().call()
       cowvensBasicData.push(
-        (await (await this.getAvatarContract(avatarAddress)).getPastEvents(
+        (await (avatarInstance).getPastEvents(
           eAvatarEvents.MetaData,
           {fromBlock: 0},
         )).map(({returnValues: {_metaData}}: EventData) => {
@@ -547,8 +550,8 @@ export class DaoService extends ContractService implements IDaoService {
               splittedMetadata &&
               <eGrateType>getKeyByValue(eGrateStringIndex, splittedMetadata[1]),
             description: splittedMetadata && splittedMetadata[2],
-            reputationAddress: splittedMetadata && splittedMetadata[3],
-            tokenAddress: splittedMetadata && splittedMetadata[4],
+            reputationAddress: splittedMetadata && reputationAddress,
+            tokenAddress: splittedMetadata && tokenAddress,
           }
         })[0] || {avatarAddress},
       )

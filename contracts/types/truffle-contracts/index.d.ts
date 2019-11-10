@@ -43,6 +43,16 @@ export interface AssetWalletFactoryContract
   ): Promise<AssetWalletFactoryInstance>;
 }
 
+export interface AtomicDaoCreatorContract
+  extends Truffle.Contract<AtomicDaoCreatorInstance> {
+  "new"(
+    _contracts: (string | BigNumber)[],
+    _orgName: string,
+    _metaData: string,
+    meta?: Truffle.TransactionDetails
+  ): Promise<AtomicDaoCreatorInstance>;
+}
+
 export interface AvatarContract extends Truffle.Contract<AvatarInstance> {
   "new"(
     _orgName: string,
@@ -734,6 +744,43 @@ export interface AssetWalletFactoryInstance extends Truffle.ContractInstance {
   owner(txDetails?: Truffle.TransactionDetails): Promise<string>;
   isOwner(txDetails?: Truffle.TransactionDetails): Promise<boolean>;
   getAssetsRegistry(txDetails?: Truffle.TransactionDetails): Promise<string>;
+}
+
+export interface AtomicDaoCreatorInstance extends Truffle.ContractInstance {
+  internalCreateDao: {
+    (
+      _orgName: string,
+      _metaData: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<Truffle.TransactionResponse>;
+    call(
+      _orgName: string,
+      _metaData: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    sendTransaction(
+      _orgName: string,
+      _metaData: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    estimateGas(
+      _orgName: string,
+      _metaData: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<number>;
+  };
+
+  daoCreator(txDetails?: Truffle.TransactionDetails): Promise<string>;
+  defaultTokenName(txDetails?: Truffle.TransactionDetails): Promise<string>;
+  contributionReward(txDetails?: Truffle.TransactionDetails): Promise<string>;
+  votingMachine(txDetails?: Truffle.TransactionDetails): Promise<string>;
+  schemeRegistrar(txDetails?: Truffle.TransactionDetails): Promise<string>;
+  upgradeScheme(txDetails?: Truffle.TransactionDetails): Promise<string>;
+  avatar(txDetails?: Truffle.TransactionDetails): Promise<string>;
+  defaultTokenSymbol(txDetails?: Truffle.TransactionDetails): Promise<string>;
+  globalConstraintRegistrar(
+    txDetails?: Truffle.TransactionDetails
+  ): Promise<string>;
 }
 
 export interface AvatarInstance extends Truffle.ContractInstance {

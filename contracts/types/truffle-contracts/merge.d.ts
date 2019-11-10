@@ -17,6 +17,9 @@ declare global {
       require(
         name: "AssetWalletFactory"
       ): TruffleContracts.AssetWalletFactoryContract;
+      require(
+        name: "AtomicDaoCreator"
+      ): TruffleContracts.AtomicDaoCreatorContract;
       require(name: "Avatar"): TruffleContracts.AvatarContract;
       require(
         name: "ContributionReward"

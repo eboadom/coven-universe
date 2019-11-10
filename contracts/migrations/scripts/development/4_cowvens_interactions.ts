@@ -1,12 +1,7 @@
 import {migrationHandler} from "../../utils/migration-handler"
 import {initConfiguration, configuration} from "../../../server/configuration"
 import {WizardsService} from "../../../services/WizardsService"
-import {
-  DaoService,
-  eVote,
-  eGrateType,
-  eGrateStringIndex,
-} from "../../../services/DaoService"
+import {DaoService, eVote} from "../../../services/DaoService"
 import {devFundReputation, devFundTokens} from "../../data/development-data"
 
 export const cowvensInteractionsMigration = migrationHandler(
@@ -18,8 +13,6 @@ export const cowvensInteractionsMigration = migrationHandler(
     voteProposal,
     redeemReputation,
     voteProposalWithWizardWallet,
-    deployNewCowven,
-    initCowvenSchemes,
     network,
   }) => {
     await initConfiguration(network)
@@ -43,25 +36,25 @@ export const cowvensInteractionsMigration = migrationHandler(
       [devWalletAddress, devFundReputation, devFundTokens],
     ]
 
-    await deployNewCowven(
-      "SecondCheeze",
-      "Second Cheeze Token",
-      "SCTK",
-      initialFoundersRewards,
-    )
+    // await deployNewCowven(
+    //   "SecondCheeze",
+    //   "Second Cheeze Token",
+    //   "SCTK",
+    //   initialFoundersRewards,
+    // )
 
     const allDaosBasicData = await daoService.getAllCowvensBasicData()
 
     console.log(allDaosBasicData)
 
-    const txResultInitCowvenSchemes = await initCowvenSchemes(
-      allDaosBasicData[1].avatarAddress,
-      "SecondCheeze",
-      eGrateStringIndex.FLAME,
-      "The second, still important",
-    )
+    // const txResultInitCowvenSchemes = await initCowvenSchemes(
+    //   allDaosBasicData[1].avatarAddress,
+    //   "SecondCheeze",
+    //   eGrateStringIndex.FLAME,
+    //   "The second, still important",
+    // )
 
-    console.log(txResultInitCowvenSchemes)
+    // console.log(txResultInitCowvenSchemes)
 
     let wizardsWallets = []
     for (const id of wizardIds) {
@@ -92,6 +85,7 @@ export const cowvensInteractionsMigration = migrationHandler(
       eVote.YES,
       "-1",
     )
+
     // await voteProposal(
     //   accounts[0],
     //   giveReputationToWizard2ProposalId,
