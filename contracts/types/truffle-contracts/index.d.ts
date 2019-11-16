@@ -47,8 +47,6 @@ export interface AtomicDaoCreatorContract
   extends Truffle.Contract<AtomicDaoCreatorInstance> {
   "new"(
     _contracts: (string | BigNumber)[],
-    _orgName: string,
-    _metaData: string,
     meta?: Truffle.TransactionDetails
   ): Promise<AtomicDaoCreatorInstance>;
 }
@@ -747,6 +745,137 @@ export interface AssetWalletFactoryInstance extends Truffle.ContractInstance {
 }
 
 export interface AtomicDaoCreatorInstance extends Truffle.ContractInstance {
+  renounceOwnership: {
+    (txDetails?: Truffle.TransactionDetails): Promise<
+      Truffle.TransactionResponse
+    >;
+    call(txDetails?: Truffle.TransactionDetails): Promise<void>;
+    sendTransaction(txDetails?: Truffle.TransactionDetails): Promise<string>;
+    estimateGas(txDetails?: Truffle.TransactionDetails): Promise<number>;
+  };
+
+  transferOwnership: {
+    (
+      newOwner: string | BigNumber,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<Truffle.TransactionResponse>;
+    call(
+      newOwner: string | BigNumber,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<void>;
+    sendTransaction(
+      newOwner: string | BigNumber,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    estimateGas(
+      newOwner: string | BigNumber,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<number>;
+  };
+
+  setupNativeTokenRefs: {
+    (
+      _tokenSymbol: string,
+      _tokenName: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<Truffle.TransactionResponse>;
+    call(
+      _tokenSymbol: string,
+      _tokenName: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<void>;
+    sendTransaction(
+      _tokenSymbol: string,
+      _tokenName: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    estimateGas(
+      _tokenSymbol: string,
+      _tokenName: string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<number>;
+  };
+
+  setupQuorumPrecReq: {
+    (
+      _precReq: number | BigNumber | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<Truffle.TransactionResponse>;
+    call(
+      _precReq: number | BigNumber | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<void>;
+    sendTransaction(
+      _precReq: number | BigNumber | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    estimateGas(
+      _precReq: number | BigNumber | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<number>;
+  };
+
+  setupBootstrapContracts: {
+    (
+      _bootstrapContracts: (string | BigNumber)[],
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<Truffle.TransactionResponse>;
+    call(
+      _bootstrapContracts: (string | BigNumber)[],
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<void>;
+    sendTransaction(
+      _bootstrapContracts: (string | BigNumber)[],
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    estimateGas(
+      _bootstrapContracts: (string | BigNumber)[],
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<number>;
+  };
+
+  setupFoundersRewards: {
+    (
+      _reputationAmount: number | BigNumber | string,
+      _tokenAmount: number | BigNumber | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<Truffle.TransactionResponse>;
+    call(
+      _reputationAmount: number | BigNumber | string,
+      _tokenAmount: number | BigNumber | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<void>;
+    sendTransaction(
+      _reputationAmount: number | BigNumber | string,
+      _tokenAmount: number | BigNumber | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    estimateGas(
+      _reputationAmount: number | BigNumber | string,
+      _tokenAmount: number | BigNumber | string,
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<number>;
+  };
+
+  setupSchemesPermissions: {
+    (
+      _permissions: (string | BigNumber)[],
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<Truffle.TransactionResponse>;
+    call(
+      _permissions: (string | BigNumber)[],
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<void>;
+    sendTransaction(
+      _permissions: (string | BigNumber)[],
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<string>;
+    estimateGas(
+      _permissions: (string | BigNumber)[],
+      txDetails?: Truffle.TransactionDetails
+    ): Promise<number>;
+  };
+
   internalCreateDao: {
     (
       _orgName: string,
@@ -776,11 +905,13 @@ export interface AtomicDaoCreatorInstance extends Truffle.ContractInstance {
   votingMachine(txDetails?: Truffle.TransactionDetails): Promise<string>;
   schemeRegistrar(txDetails?: Truffle.TransactionDetails): Promise<string>;
   upgradeScheme(txDetails?: Truffle.TransactionDetails): Promise<string>;
-  avatar(txDetails?: Truffle.TransactionDetails): Promise<string>;
   defaultTokenSymbol(txDetails?: Truffle.TransactionDetails): Promise<string>;
   globalConstraintRegistrar(
     txDetails?: Truffle.TransactionDetails
   ): Promise<string>;
+  owner(txDetails?: Truffle.TransactionDetails): Promise<string>;
+  isOwner(txDetails?: Truffle.TransactionDetails): Promise<boolean>;
+  quorumPrecReq(txDetails?: Truffle.TransactionDetails): Promise<BigNumber>;
 }
 
 export interface AvatarInstance extends Truffle.ContractInstance {

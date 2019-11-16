@@ -1,4 +1,4 @@
-import {migrationHandler} from "../../utils/migration-handler"
+import { migrationHandler } from "../../utils/migration-handler"
 import {
   DAOName,
   TokenDAOName,
@@ -8,7 +8,7 @@ import {
   devFundReputation,
   genecheezeDaoDescription,
 } from "../../data/development-data"
-import {writeObjectToFile, ADDRESS_0x0} from "../../../utils/common-utils"
+import { writeObjectToFile, ADDRESS_0x0 } from "../../../utils/common-utils"
 import {
   IDaoAddresses,
   getPathDeployedDaoContracts,
@@ -16,7 +16,7 @@ import {
   IDaoDefaultParams,
   METADATA_SEPARATOR,
 } from "../../../server/configuration"
-import {eGrateStringIndex} from "../../../services/DaoService"
+import { eGrateStringIndex } from "../../../services/DaoService"
 
 export const deployDAOMigration = migrationHandler(
   "Deploy the GeneCheeze Cowven",
@@ -192,20 +192,17 @@ export const deployDAOMigration = migrationHandler(
         schemeRegistrarInstance.address,
         globalConstraintRegistarInstance.address,
         upgradeSchemeInstance.address,
-        contributionRewardInstance.address
+        contributionRewardInstance.address,
       ],
-      DAOName,
-      // `${DAOName}${METADATA_SEPARATOR}${grate}${METADATA_SEPARATOR}${genecheezeDaoDescription}${METADATA_SEPARATOR}${reputationAddress}${METADATA_SEPARATOR}${daoTokenAddress}`,
-      `${DAOName}${METADATA_SEPARATOR}${grate}${METADATA_SEPARATOR}${genecheezeDaoDescription}${METADATA_SEPARATOR}`,
     ])
     //  atomicDaoCreatorInstance. deployAtomicDaoCreator([daoCreatorInstance.address, DAOName, `${DAOName}${METADATA_SEPARATOR}${grate}${METADATA_SEPARATOR}${genecheezeDaoDescription}${METADATA_SEPARATOR}${reputationAddress}${METADATA_SEPARATOR}${daoTokenAddress}`])
-    await atomicDaoCreatorInstance.internalCreateDao(
+    const resCreateDaoTx = await atomicDaoCreatorInstance.internalCreateDao(
       DAOName,
       // `${DAOName}${METADATA_SEPARATOR}${grate}${METADATA_SEPARATOR}${genecheezeDaoDescription}${METADATA_SEPARATOR}${reputationAddress}${METADATA_SEPARATOR}${daoTokenAddress}`,
       `${DAOName}${METADATA_SEPARATOR}${grate}${METADATA_SEPARATOR}${genecheezeDaoDescription}${METADATA_SEPARATOR}`,
     )
 
-      const avatarInstance = await getAvatarInstance(await atomicDaoCreatorInstance.avatar())
+      const avatarInstance = await getAvatarInstance(resCreateDaoTx.logs[resCreateDaoTx.logs.length-1].args.avatar)
 
     const deployedDaoContracts: IDaoAddresses = {
       DaoCreator: daoCreatorInstance.address,

@@ -9,43 +9,110 @@ import "@daostack/arc/contracts/universalSchemes/GlobalConstraintRegistrar.sol";
 import "@daostack/arc/contracts/universalSchemes/UpgradeScheme.sol";
 import "@daostack/arc/contracts/universalSchemes/ContributionReward.sol";
 
-contract AtomicDaoCreator {
+contract AtomicDaoCreator is Ownable {
 
     Factories.DaoCreator public daoCreator;
 
-    uint256[] foundersInitialTokens;
-    uint256[] foundersInitialReputation;
     address[] founders;
+    uint256[] foundersInitialReputation;
+    uint256[] foundersInitialTokens;
+
     address[] schemes;
     bytes32[] schemesParams;
     bytes4[] permissions;
-    string public defaultTokenSymbol= "CTKN";
-    string public defaultTokenName = "CTKN";
+
+    string public defaultTokenSymbol = "ADTK1";
+    string public defaultTokenName = "ADTK1";
+    uint256 public quorumPrecReq = 30;
+
     address public votingMachine;
     address public schemeRegistrar;
     address public globalConstraintRegistrar;
     address public upgradeScheme;
     address public contributionReward;
-    address public avatar;
 
-    constructor(address[] memory _contracts, string memory _orgName, string memory _metaData) public {
-        daoCreator = Factories.DaoCreator(_contracts[0]);
-        votingMachine = _contracts[1];
-        schemeRegistrar = _contracts[2];
-        globalConstraintRegistrar = _contracts[3];
-        upgradeScheme = _contracts[4];
-        contributionReward = _contracts[5];
-        foundersInitialTokens.push(100000 ether);
-        foundersInitialReputation.push(100000 ether);
-        founders.push(msg.sender);
+    event DaoCreated(address indexed avatar, address indexed summoner, address contributionReward, address votingMachine);
 
-        permissions.push(0x0000001F);
-        permissions.push(0x0000001F);
-        permissions.push(0x0000000a);
-        permissions.push(0x00000001);
+    constructor(address[] memory _contracts) public {
+        setupBootstrapContracts(_contracts);
+        setupFoundersRewards(100000 ether, 100000 ether);
+        setupSchemesPermissions([bytes4(0x0000001F), bytes4(0x0000001F), bytes4(0x0000000a), bytes4(0x00000001)]);
+    }
+
+    function setupNativeTokenRefs(string memory _tokenSymbol, string memory _tokenName) public onlyOwner {
+        defaultTokenSymbol = _tokenSymbol;
+        defaultTokenName = _tokenName;
+    }
+
+    function setupQuorumPrecReq(uint256 _precReq) public onlyOwner {
+        quorumPrecReq = _precReq;
+    }
+
+    function setupBootstrapContracts(address[] memory _bootstrapContracts) public onlyOwner {
+        daoCreator = Factories.DaoCreator(_bootstrapContracts[0]);
+        votingMachine = _bootstrapContracts[1];
+        schemeRegistrar = _bootstrapContracts[2];
+        globalConstraintRegistrar = _bootstrapContracts[3];
+        upgradeScheme = _bootstrapContracts[4];
+        contributionReward = _bootstrapContracts[5];
+
+        // Set up of schemes and schemesParams
+        {
+            QuorumVote _quorumVote = QuorumVote(votingMachine);
+            SchemeRegistrar _schemeRegistrar = SchemeRegistrar(schemeRegistrar);
+            GlobalConstraintRegistrar _globalConstraintRegistrar = GlobalConstraintRegistrar(globalConstraintRegistrar);
+            UpgradeScheme _upgradeScheme = UpgradeScheme(upgradeScheme);
+            ContributionReward _contributionReward = ContributionReward(contributionReward);
+            bytes32 _voteParamHash = _quorumVote.getParametersHash(quorumPrecReq, address(0));
+            _quorumVote.setParameters(quorumPrecReq, address(0));
+            _schemeRegistrar.setParameters(_voteParamHash, _voteParamHash, _quorumVote);
+            bytes32 _srParamsHash = _schemeRegistrar.getParametersHash(_voteParamHash, _voteParamHash, _quorumVote);
+            _globalConstraintRegistrar.setParameters(_voteParamHash, _quorumVote);
+            bytes32 _gcParamsHash = _globalConstraintRegistrar.getParametersHash(_voteParamHash, _quorumVote);
+            _upgradeScheme.setParameters(_voteParamHash, _quorumVote);
+            bytes32 _usParamsHash = _upgradeScheme.getParametersHash(_voteParamHash, _quorumVote);
+            _contributionReward.setParameters(_voteParamHash, _quorumVote);
+            bytes32 _crParamsHash = _contributionReward.getParametersHash(_voteParamHash, _quorumVote);
+            schemes.push(schemeRegistrar);
+            schemes.push(address(globalConstraintRegistrar));
+            schemes.push(address(upgradeScheme));
+            schemes.push(address(contributionReward));
+            schemesParams.push(_srParamsHash);
+            schemesParams.push(_gcParamsHash);
+            schemesParams.push(_usParamsHash);
+            schemesParams.push(_crParamsHash);
+        }
+    }
+
+    function setupFoundersRewards(uint256 _reputationAmount, uint256 _tokenAmount) public onlyOwner {
+        if (foundersInitialTokens.length > 0) {
+            delete foundersInitialTokens[foundersInitialTokens.length-1];
+            foundersInitialTokens.length--;
+            delete foundersInitialReputation[foundersInitialReputation.length-1];
+            foundersInitialReputation.length--;
+        }
+
+        foundersInitialTokens.push(_tokenAmount);
+        foundersInitialReputation.push(_reputationAmount);
+    }
+
+    function setupSchemesPermissions(bytes4[4] memory _permissions) public onlyOwner {
+        if (permissions.length > 0) {
+            for(uint256 i = permissions.length-1; i >= 0; i--) {
+                delete permissions[i];
+                permissions.length--;
+            }
+        }
+        permissions.push(_permissions[0]);
+        permissions.push(_permissions[1]);
+        permissions.push(_permissions[2]);
+        permissions.push(_permissions[3]);
     }
 
     function internalCreateDao(string calldata _orgName, string calldata _metaData) external returns(address) {
+        // The founder will receive the initial reputation and native tokens
+        founders.push(msg.sender);
+
         address payable _avatar = address(uint160(daoCreator.forgeOrg(
             _orgName,
             "CTKN",
@@ -56,34 +123,6 @@ contract AtomicDaoCreator {
             UController(address(0)),
             0)));
 
-            avatar = _avatar;
-
-            {
-                QuorumVote _quorumVote = QuorumVote(votingMachine);
-                SchemeRegistrar _schemeRegistrar = SchemeRegistrar(schemeRegistrar);
-                GlobalConstraintRegistrar _globalConstraintRegistrar = GlobalConstraintRegistrar(globalConstraintRegistrar);
-                UpgradeScheme _upgradeScheme = UpgradeScheme(upgradeScheme);
-                ContributionReward _contributionReward = ContributionReward(contributionReward);
-                bytes32 _voteParamHash = _quorumVote.getParametersHash(30, address(0));
-                _quorumVote.setParameters(30, address(0));
-                _schemeRegistrar.setParameters(_voteParamHash, _voteParamHash, _quorumVote);
-                bytes32 _srParamsHash = _schemeRegistrar.getParametersHash(_voteParamHash, _voteParamHash, _quorumVote);
-                _globalConstraintRegistrar.setParameters(_voteParamHash, _quorumVote);
-                bytes32 _gcParamsHash = _globalConstraintRegistrar.getParametersHash(_voteParamHash, _quorumVote);
-                _upgradeScheme.setParameters(_voteParamHash, _quorumVote);
-                bytes32 _usParamsHash = _upgradeScheme.getParametersHash(_voteParamHash, _quorumVote);
-                _contributionReward.setParameters(_voteParamHash, _quorumVote);
-                bytes32 _crParamsHash = _contributionReward.getParametersHash(_voteParamHash, _quorumVote);
-                schemes.push(schemeRegistrar);
-                schemes.push(address(globalConstraintRegistrar));
-                schemes.push(address(upgradeScheme));
-                schemes.push(address(contributionReward));
-                schemesParams.push(_srParamsHash);
-                schemesParams.push(_gcParamsHash);
-                schemesParams.push(_usParamsHash);
-                schemesParams.push(_crParamsHash);
-            }
-
         daoCreator.setSchemes(
             Avatar(_avatar),
             schemes,
@@ -91,6 +130,12 @@ contract AtomicDaoCreator {
             permissions,
             _metaData
         );
+
+        // Removal of the founder from the storage dynamic array, as for the next dao, a new one will be needed
+        delete founders[founders.length-1];
+        founders.length--;
+
+        emit DaoCreated(_avatar, msg.sender, contributionReward, votingMachine);
 
         return _avatar;
     }

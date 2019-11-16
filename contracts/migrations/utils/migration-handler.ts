@@ -37,7 +37,7 @@ import {
   linkLibraryToContractTruffle,
   getTruffleContractInstance,
 } from "../../utils/truffle/truffle-helpers"
-import {ContractId, LibraryId} from "../../utils/types"
+import { ContractId, LibraryId } from "../../utils/types"
 import {
   tEthereumAddress,
   IDaoAddresses,
@@ -80,11 +80,9 @@ export interface MigratorExecutorParams {
   deployAssetWalletFactory(args?: any[]): Promise<AssetWalletFactoryInstance>
   deployAssetWallet(args?: any[]): Promise<AssetWalletInstance>
   deployTestContract(args?: any[]): Promise<TestContractInstance>
-  deployAtomicDaoCreator([daoCreator, orgName, metaData]: [
-    tEthereumAddress[],
-    string,
-    string,
-  ]): Promise<AtomicDaoCreatorInstance>
+  deployAtomicDaoCreator([staticContracts]: [tEthereumAddress[]]): Promise<
+    AtomicDaoCreatorInstance
+  >
   linkLibraryToContract(
     libraryId: LibraryId,
     contractId: ContractId | LibraryId,
@@ -233,14 +231,12 @@ export const migrationHandler = (
       AssetWalletFactoryInstance
     >(ContractId.AssetWalletFactory, args)
 
-  const deployAtomicDaoCreator = async ([daoCreator, orgName, metaData]: [
+  const deployAtomicDaoCreator = async ([staticContracts]: [
     tEthereumAddress[],
-    string,
-    string,
   ]) =>
     await deployContract<AtomicDaoCreatorContract, AtomicDaoCreatorInstance>(
       ContractId.AtomicDaoCreator,
-      [daoCreator, orgName, metaData],
+      [staticContracts],
     )
 
   const deployAssetWallet = async (args?: any[]) =>
@@ -315,9 +311,8 @@ export const migrationHandler = (
     reputationChange: tStringCurrencyUnits,
     daoTokenChange?: tStringCurrencyUnits,
   ) => {
-    console.log(await (await getAtomicDaoCreatorInstance()).avatar())
     const contributionRewardInstance = await getContributionRewardInstance(
-      await (await getAtomicDaoCreatorInstance()).contributionReward()
+      await (await getAtomicDaoCreatorInstance()).contributionReward(),
     )
     return await contributionRewardInstance.proposeContributionReward(
       avatarAddress,
@@ -348,7 +343,7 @@ export const migrationHandler = (
         ? "0"
         : currencyUnitsToDecimals(stringToBigNumber(reputationToUse), 18)
     const quorumVoteInstance = await getQuorumVoteInstance(
-      await (await getAtomicDaoCreatorInstance()).votingMachine()
+      await (await getAtomicDaoCreatorInstance()).votingMachine(),
     )
 
     console.log(await (await getAtomicDaoCreatorInstance()).votingMachine())
@@ -434,7 +429,7 @@ export const migrationHandler = (
       (<IDaoAddresses>require(getPathDeployedDaoContracts(network))).DaoCreator,
     )
     const {
-      defaultDaoParams: {DefaultSchemes, SchemesParams, DefaultPermissions},
+      defaultDaoParams: { DefaultSchemes, SchemesParams, DefaultPermissions },
     } = getConfiguration()
 
     const avatarInstance = await getAvatarInstance(avatarAddress)

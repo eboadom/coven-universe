@@ -81,14 +81,14 @@
     "absolutePath": "@daostack/arc/contracts/globalConstraints/GlobalConstraintInterface.sol",
     "exportedSymbols": {
       "GlobalConstraintInterface": [
-        8732
+        8913
       ]
     },
-    "id": 8733,
+    "id": 8914,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 8700,
+        "id": 8881,
         "literals": [
           "solidity",
           "^",
@@ -104,31 +104,31 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 8732,
+        "id": 8913,
         "linearizedBaseContracts": [
-          8732
+          8913
         ],
         "name": "GlobalConstraintInterface",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "canonicalName": "GlobalConstraintInterface.CallPhase",
-            "id": 8704,
+            "id": 8885,
             "members": [
               {
-                "id": 8701,
+                "id": 8882,
                 "name": "Pre",
                 "nodeType": "EnumValue",
                 "src": "85:3:28"
               },
               {
-                "id": 8702,
+                "id": 8883,
                 "name": "Post",
                 "nodeType": "EnumValue",
                 "src": "90:4:28"
               },
               {
-                "id": 8703,
+                "id": 8884,
                 "name": "PreAndPost",
                 "nodeType": "EnumValue",
                 "src": "96:10:28"
@@ -141,22 +141,22 @@
           {
             "body": null,
             "documentation": null,
-            "id": 8715,
+            "id": 8896,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "pre",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 8711,
+              "id": 8892,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8706,
+                  "id": 8887,
                   "name": "_scheme",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8715,
+                  "scope": 8896,
                   "src": "128:15:28",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -165,7 +165,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 8705,
+                    "id": 8886,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "128:7:28",
@@ -180,10 +180,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 8708,
+                  "id": 8889,
                   "name": "_params",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8715,
+                  "scope": 8896,
                   "src": "145:15:28",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -192,7 +192,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 8707,
+                    "id": 8888,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "145:7:28",
@@ -206,10 +206,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 8710,
+                  "id": 8891,
                   "name": "_method",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8715,
+                  "scope": 8896,
                   "src": "162:15:28",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -218,7 +218,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 8709,
+                    "id": 8890,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "162:7:28",
@@ -234,15 +234,15 @@
               "src": "126:53:28"
             },
             "returnParameters": {
-              "id": 8714,
+              "id": 8895,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8713,
+                  "id": 8894,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8715,
+                  "scope": 8896,
                   "src": "195:4:28",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -251,7 +251,7 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 8712,
+                    "id": 8893,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
                     "src": "195:4:28",
@@ -266,7 +266,7 @@
               ],
               "src": "194:6:28"
             },
-            "scope": 8732,
+            "scope": 8913,
             "src": "114:87:28",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -275,22 +275,22 @@
           {
             "body": null,
             "documentation": null,
-            "id": 8726,
+            "id": 8907,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "post",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 8722,
+              "id": 8903,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8717,
+                  "id": 8898,
                   "name": "_scheme",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8726,
+                  "scope": 8907,
                   "src": "221:15:28",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -299,7 +299,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 8716,
+                    "id": 8897,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "221:7:28",
@@ -314,10 +314,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 8719,
+                  "id": 8900,
                   "name": "_params",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8726,
+                  "scope": 8907,
                   "src": "238:15:28",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -326,7 +326,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 8718,
+                    "id": 8899,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "238:7:28",
@@ -340,10 +340,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 8721,
+                  "id": 8902,
                   "name": "_method",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8726,
+                  "scope": 8907,
                   "src": "255:15:28",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -352,7 +352,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 8720,
+                    "id": 8901,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "255:7:28",
@@ -368,15 +368,15 @@
               "src": "219:53:28"
             },
             "returnParameters": {
-              "id": 8725,
+              "id": 8906,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8724,
+                  "id": 8905,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8726,
+                  "scope": 8907,
                   "src": "288:4:28",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -385,7 +385,7 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 8723,
+                    "id": 8904,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
                     "src": "288:4:28",
@@ -400,7 +400,7 @@
               ],
               "src": "287:6:28"
             },
-            "scope": 8732,
+            "scope": 8913,
             "src": "206:88:28",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -409,44 +409,44 @@
           {
             "body": null,
             "documentation": "@dev when return if this globalConstraints is pre, post or both.\n@return CallPhase enum indication  Pre, Post or PreAndPost.",
-            "id": 8731,
+            "id": 8912,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "when",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 8727,
+              "id": 8908,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "467:2:28"
             },
             "returnParameters": {
-              "id": 8730,
+              "id": 8911,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8729,
+                  "id": 8910,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8731,
+                  "scope": 8912,
                   "src": "485:9:28",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_CallPhase_$8704",
+                    "typeIdentifier": "t_enum$_CallPhase_$8885",
                     "typeString": "enum GlobalConstraintInterface.CallPhase"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 8728,
+                    "id": 8909,
                     "name": "CallPhase",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 8704,
+                    "referencedDeclaration": 8885,
                     "src": "485:9:28",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_CallPhase_$8704",
+                      "typeIdentifier": "t_enum$_CallPhase_$8885",
                       "typeString": "enum GlobalConstraintInterface.CallPhase"
                     }
                   },
@@ -456,14 +456,14 @@
               ],
               "src": "484:11:28"
             },
-            "scope": 8732,
+            "scope": 8913,
             "src": "454:42:28",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 8733,
+        "scope": 8914,
         "src": "26:472:28"
       }
     ],
@@ -473,14 +473,14 @@
     "absolutePath": "@daostack/arc/contracts/globalConstraints/GlobalConstraintInterface.sol",
     "exportedSymbols": {
       "GlobalConstraintInterface": [
-        8732
+        8913
       ]
     },
-    "id": 8733,
+    "id": 8914,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 8700,
+        "id": 8881,
         "literals": [
           "solidity",
           "^",
@@ -496,31 +496,31 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 8732,
+        "id": 8913,
         "linearizedBaseContracts": [
-          8732
+          8913
         ],
         "name": "GlobalConstraintInterface",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "canonicalName": "GlobalConstraintInterface.CallPhase",
-            "id": 8704,
+            "id": 8885,
             "members": [
               {
-                "id": 8701,
+                "id": 8882,
                 "name": "Pre",
                 "nodeType": "EnumValue",
                 "src": "85:3:28"
               },
               {
-                "id": 8702,
+                "id": 8883,
                 "name": "Post",
                 "nodeType": "EnumValue",
                 "src": "90:4:28"
               },
               {
-                "id": 8703,
+                "id": 8884,
                 "name": "PreAndPost",
                 "nodeType": "EnumValue",
                 "src": "96:10:28"
@@ -533,22 +533,22 @@
           {
             "body": null,
             "documentation": null,
-            "id": 8715,
+            "id": 8896,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "pre",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 8711,
+              "id": 8892,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8706,
+                  "id": 8887,
                   "name": "_scheme",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8715,
+                  "scope": 8896,
                   "src": "128:15:28",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -557,7 +557,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 8705,
+                    "id": 8886,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "128:7:28",
@@ -572,10 +572,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 8708,
+                  "id": 8889,
                   "name": "_params",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8715,
+                  "scope": 8896,
                   "src": "145:15:28",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -584,7 +584,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 8707,
+                    "id": 8888,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "145:7:28",
@@ -598,10 +598,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 8710,
+                  "id": 8891,
                   "name": "_method",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8715,
+                  "scope": 8896,
                   "src": "162:15:28",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -610,7 +610,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 8709,
+                    "id": 8890,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "162:7:28",
@@ -626,15 +626,15 @@
               "src": "126:53:28"
             },
             "returnParameters": {
-              "id": 8714,
+              "id": 8895,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8713,
+                  "id": 8894,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8715,
+                  "scope": 8896,
                   "src": "195:4:28",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -643,7 +643,7 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 8712,
+                    "id": 8893,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
                     "src": "195:4:28",
@@ -658,7 +658,7 @@
               ],
               "src": "194:6:28"
             },
-            "scope": 8732,
+            "scope": 8913,
             "src": "114:87:28",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -667,22 +667,22 @@
           {
             "body": null,
             "documentation": null,
-            "id": 8726,
+            "id": 8907,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "post",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 8722,
+              "id": 8903,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8717,
+                  "id": 8898,
                   "name": "_scheme",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8726,
+                  "scope": 8907,
                   "src": "221:15:28",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -691,7 +691,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 8716,
+                    "id": 8897,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "221:7:28",
@@ -706,10 +706,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 8719,
+                  "id": 8900,
                   "name": "_params",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8726,
+                  "scope": 8907,
                   "src": "238:15:28",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -718,7 +718,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 8718,
+                    "id": 8899,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "238:7:28",
@@ -732,10 +732,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 8721,
+                  "id": 8902,
                   "name": "_method",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8726,
+                  "scope": 8907,
                   "src": "255:15:28",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -744,7 +744,7 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 8720,
+                    "id": 8901,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
                     "src": "255:7:28",
@@ -760,15 +760,15 @@
               "src": "219:53:28"
             },
             "returnParameters": {
-              "id": 8725,
+              "id": 8906,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8724,
+                  "id": 8905,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8726,
+                  "scope": 8907,
                   "src": "288:4:28",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -777,7 +777,7 @@
                     "typeString": "bool"
                   },
                   "typeName": {
-                    "id": 8723,
+                    "id": 8904,
                     "name": "bool",
                     "nodeType": "ElementaryTypeName",
                     "src": "288:4:28",
@@ -792,7 +792,7 @@
               ],
               "src": "287:6:28"
             },
-            "scope": 8732,
+            "scope": 8913,
             "src": "206:88:28",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -801,44 +801,44 @@
           {
             "body": null,
             "documentation": "@dev when return if this globalConstraints is pre, post or both.\n@return CallPhase enum indication  Pre, Post or PreAndPost.",
-            "id": 8731,
+            "id": 8912,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "when",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 8727,
+              "id": 8908,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "467:2:28"
             },
             "returnParameters": {
-              "id": 8730,
+              "id": 8911,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8729,
+                  "id": 8910,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8731,
+                  "scope": 8912,
                   "src": "485:9:28",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_CallPhase_$8704",
+                    "typeIdentifier": "t_enum$_CallPhase_$8885",
                     "typeString": "enum GlobalConstraintInterface.CallPhase"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 8728,
+                    "id": 8909,
                     "name": "CallPhase",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 8704,
+                    "referencedDeclaration": 8885,
                     "src": "485:9:28",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_enum$_CallPhase_$8704",
+                      "typeIdentifier": "t_enum$_CallPhase_$8885",
                       "typeString": "enum GlobalConstraintInterface.CallPhase"
                     }
                   },
@@ -848,14 +848,14 @@
               ],
               "src": "484:11:28"
             },
-            "scope": 8732,
+            "scope": 8913,
             "src": "454:42:28",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 8733,
+        "scope": 8914,
         "src": "26:472:28"
       }
     ],
@@ -867,7 +867,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.14",
-  "updatedAt": "2019-11-10T03:28:43.297Z",
+  "updatedAt": "2019-11-16T19:29:45.857Z",
   "devdoc": {
     "methods": {
       "when()": {
