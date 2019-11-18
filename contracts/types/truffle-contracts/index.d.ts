@@ -773,29 +773,6 @@ export interface AtomicDaoCreatorInstance extends Truffle.ContractInstance {
     ): Promise<number>;
   };
 
-  setupNativeTokenRefs: {
-    (
-      _tokenSymbol: string,
-      _tokenName: string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<Truffle.TransactionResponse>;
-    call(
-      _tokenSymbol: string,
-      _tokenName: string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<void>;
-    sendTransaction(
-      _tokenSymbol: string,
-      _tokenName: string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<string>;
-    estimateGas(
-      _tokenSymbol: string,
-      _tokenName: string,
-      txDetails?: Truffle.TransactionDetails
-    ): Promise<number>;
-  };
-
   setupQuorumPrecReq: {
     (
       _precReq: number | BigNumber | string,
@@ -900,12 +877,10 @@ export interface AtomicDaoCreatorInstance extends Truffle.ContractInstance {
   };
 
   daoCreator(txDetails?: Truffle.TransactionDetails): Promise<string>;
-  defaultTokenName(txDetails?: Truffle.TransactionDetails): Promise<string>;
   contributionReward(txDetails?: Truffle.TransactionDetails): Promise<string>;
   votingMachine(txDetails?: Truffle.TransactionDetails): Promise<string>;
   schemeRegistrar(txDetails?: Truffle.TransactionDetails): Promise<string>;
   upgradeScheme(txDetails?: Truffle.TransactionDetails): Promise<string>;
-  defaultTokenSymbol(txDetails?: Truffle.TransactionDetails): Promise<string>;
   globalConstraintRegistrar(
     txDetails?: Truffle.TransactionDetails
   ): Promise<string>;

@@ -21,8 +21,6 @@ contract AtomicDaoCreator is Ownable {
     bytes32[] schemesParams;
     bytes4[] permissions;
 
-    string public defaultTokenSymbol = "ADTK1";
-    string public defaultTokenName = "ADTK1";
     uint256 public quorumPrecReq = 30;
 
     address public votingMachine;
@@ -31,7 +29,24 @@ contract AtomicDaoCreator is Ownable {
     address public upgradeScheme;
     address public contributionReward;
 
-    event DaoCreated(address indexed avatar, address indexed summoner, address contributionReward, address votingMachine);
+
+    event DaoCreated(address indexed avatar, address indexed summoner);
+    event NewQuorumPrecReq(uint256 precReq);
+    event NewBasicContracts(
+        address daoCreator,
+        address votingMachine,
+        address schemeRegistrar,
+        address globalConstraintRegistrar,
+        address upgradeScheme,
+        address contributionReward
+    );
+    event NewFoundersRewards(uint256 reputationAmount, uint256 nativeTokenAmount);
+    event NewSchemesPermissions(
+        bytes4 schemeRegistrarPerm,
+        bytes4 globalContraintRegistrarPerm,
+        bytes4 schemeUpgradePerm,
+        bytes4 contributionRewardPerm
+    );
 
     constructor(address[] memory _contracts) public {
         setupBootstrapContracts(_contracts);
@@ -39,13 +54,9 @@ contract AtomicDaoCreator is Ownable {
         setupSchemesPermissions([bytes4(0x0000001F), bytes4(0x0000001F), bytes4(0x0000000a), bytes4(0x00000001)]);
     }
 
-    function setupNativeTokenRefs(string memory _tokenSymbol, string memory _tokenName) public onlyOwner {
-        defaultTokenSymbol = _tokenSymbol;
-        defaultTokenName = _tokenName;
-    }
-
     function setupQuorumPrecReq(uint256 _precReq) public onlyOwner {
         quorumPrecReq = _precReq;
+        emit NewQuorumPrecReq(_precReq);
     }
 
     function setupBootstrapContracts(address[] memory _bootstrapContracts) public onlyOwner {
@@ -82,6 +93,14 @@ contract AtomicDaoCreator is Ownable {
             schemesParams.push(_usParamsHash);
             schemesParams.push(_crParamsHash);
         }
+        emit NewBasicContracts(
+            _bootstrapContracts[0],
+            votingMachine,
+            schemeRegistrar,
+            globalConstraintRegistrar,
+            upgradeScheme,
+            contributionReward
+        );
     }
 
     function setupFoundersRewards(uint256 _reputationAmount, uint256 _tokenAmount) public onlyOwner {
@@ -94,6 +113,7 @@ contract AtomicDaoCreator is Ownable {
 
         foundersInitialTokens.push(_tokenAmount);
         foundersInitialReputation.push(_reputationAmount);
+        emit NewFoundersRewards(_reputationAmount, _tokenAmount);
     }
 
     function setupSchemesPermissions(bytes4[4] memory _permissions) public onlyOwner {
@@ -107,6 +127,7 @@ contract AtomicDaoCreator is Ownable {
         permissions.push(_permissions[1]);
         permissions.push(_permissions[2]);
         permissions.push(_permissions[3]);
+        emit NewSchemesPermissions(_permissions[0], _permissions[1], _permissions[2], _permissions[3]);
     }
 
     function internalCreateDao(string calldata _orgName, string calldata _metaData) external returns(address) {
@@ -115,8 +136,8 @@ contract AtomicDaoCreator is Ownable {
 
         address payable _avatar = address(uint160(daoCreator.forgeOrg(
             _orgName,
-            "CTKN",
-            "CTKN",
+            "ADTK",
+            "ADTK",
             founders,
             foundersInitialTokens,
             foundersInitialReputation,
@@ -135,7 +156,7 @@ contract AtomicDaoCreator is Ownable {
         delete founders[founders.length-1];
         founders.length--;
 
-        emit DaoCreated(_avatar, msg.sender, contributionReward, votingMachine);
+        emit DaoCreated(_avatar, msg.sender);
 
         return _avatar;
     }
