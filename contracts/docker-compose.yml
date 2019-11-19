@@ -6,6 +6,19 @@ networks:
 volumes:
   redis_data:
     driver: local
+  graph_pg_data:
+    driver: local
+  graph_ipfs_data:
+    driver: local
+
+x-graph-pg-base: &graph-pg-base
+  POSTGRES_USER: graph-node
+  POSTGRES_PASSWORD: let-me-in
+  POSTGRES_DB: graph-node
+  postgres_user: graph-node
+  postgres_pass: let-me-in
+  postgres_db: graph-node
+
 
 x-contract-base: &contract-base
   image: node:12
@@ -62,3 +75,39 @@ services:
       - type: volume
         source: redis_data
         target: /data
+
+  graph-node:
+    image: graphprotocol/graph-node
+    ports:
+      - "8000:8000"
+      - "8001:8001"
+      - "8020:8020"
+    networks:
+      - overlay
+    environment:
+      <<: *graph-pg-base
+      postgres_host: "graph-postgres:5432"
+      ipfs: "graph-ipfs:5001"
+      ethereum: "mainnet:http://ganache:8545"
+      RUST_LOG: "info"
+
+  graph-ipfs:
+    image: ipfs/go-ipfs
+    networks:
+      - overlay
+    volumes:
+      - type: volume
+        source: graph_ipfs_data
+        target: /data/ipfs
+
+  graph-postgres:
+    image: postgres
+    command: ["postgres", "-cshared_preload_libraries=pg_stat_statements"]
+    networks:
+      - overlay
+    environment:
+      <<: *graph-pg-base
+    volumes:
+      - type: volume
+        source: graph_pg_data
+        target: /var/lib/postgresql/data

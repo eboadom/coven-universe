@@ -1,0 +1,97 @@
+type Player @entity {
+  """Player address"""
+  id: ID!
+  wizards: [Wizard!]!
+}
+type WizardCowvenReputation @entity {
+  """Wallet address + reputation address"""
+  id: ID!
+  wizardWallet: WizardWallet
+  reputation: Reputation!
+  amount: BigInt!
+}
+
+type WizardWallet @entity {
+  """Wallet address"""
+  id: ID!
+  wizard: Wizard!
+  proposals: [Proposal!]!
+  votes: [ProposalVote!]!
+  reputation: [WizardCowvenReputation!]!
+}
+
+type Wizard @entity {
+  """Wizard id"""
+  id: ID!
+  affinity: Int!
+  innatePower: BigInt!
+  player: Player!
+  wallet: WizardWallet!
+  wins: Int!
+  loses: Int!
+}
+
+type Reputation @entity {
+  """Reputation contract address"""
+  id: ID!
+  cowven: Cowven!
+  totalReputationSupply: BigInt!
+  wallets: [WizardCowvenReputation!]!
+}
+
+type Cowven @entity{
+  """Avatar address"""
+  id: ID!
+  name: String!
+  description: String!
+  grate: String!
+  reputationAddress: Bytes!
+  tokenAddress: Bytes!
+  reputationAddress: String!
+  createdAtTimestamp: Int!
+  createdAtBlock: BigInt!
+  lastUpdateTimestamp: Int!
+  ethBalance: BigDecimal!
+  reputation: Reputation!
+  proposals: [Proposal!]!
+  wins: Int!
+  loses: Int!
+  #creators: [Bytes!] TODO: tbd
+}
+
+type ProposalVote @entity {
+  """proposal id + wizard wallet"""
+  id: ID!
+  proposal: Proposal!
+  wizardWallet: WizardWallet!
+  reputation: BigInt!
+  agreed: Boolean!
+  createdAtTimestamp: Int!
+}
+
+type Proposal @entity {
+  """contributionId"""
+  id: ID!
+  isActive: Boolean!
+  isSuccessed: Boolean!
+  isRedeemed: Boolean!
+  cowven: Cowven!
+  beneficiary: WizardWallet!
+  description: String!
+  reputationChange: BigInt!
+  votesPro: BigInt!
+  votesContra: BigInt!
+  reputationPro: BigInt!
+  reputationContra: BigInt!
+  #rewards: TODO: TBD
+  createdAtTimestamp: Int!
+  createdAtBlock: BigInt!
+  executedAtTimestamp: Int
+  executedAtBlock: BigInt
+  votes: [ProposalVote!]!
+}
+
+type DaoCreator @entity {
+  id: ID!
+  cowvens: [Cowven!]!
+}

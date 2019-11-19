@@ -1,0 +1,160 @@
+specVersion: 0.0.2
+description: Cheeze dao subgraph for cheeeze
+repository: https://github.com/graphprotocol/cheeze-dao
+schema:
+  file: ./thegraph/schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: WizardGuild
+    network: mainnet
+    source:
+      address: '0xa882e9fc97de24Bd413105B65361d5E17c53b160'
+      abi: WizardGuild
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - User
+        - Wizard
+      abis:
+        - name: WizardGuild
+          file: ./build/contracts/WizardGuild.json
+      eventHandlers:
+        - event: WizardConjured(uint256,uint8,uint256)
+          handler: handleWizardConjured
+        - event: WizardAffinityAssigned(uint256,uint8)
+          handler: handleWizardAffinityAssigned
+        - event: Transfer(address,address,uint256)
+          handler: handleTransfer
+      file: ./thegraph/mapping/wizard-guild.ts
+  - kind: ethereum/contract
+    name: DaoCreator
+    network: mainnet
+    source:
+      address: '0xa882e9fc97de24Bd413105B65361d5E17c53b160'
+      abi: DaoCreator
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - DaoCreator
+        - Cowven
+      abis:
+        - name: DaoCreator
+          file: ./build/contracts/DaoCreator.json
+      eventHandlers:
+        - event: NewOrg(address)
+          handler: handleNewOrg
+        - event: InitialSchemesSet(address)
+          handler: handleInitialSchemesSet
+      file: ./thegraph/mapping/dao-creator.ts
+templates:
+  - kind: ethereum/contract
+    name: Avatar
+    network: mainnet
+    source:
+      abi: Avatar
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - Cowven
+      abis:
+        - name: Avatar
+          file: ./build/contracts/Avatar.json
+      eventHandlers:
+        - event: MetaData(string)
+          handler: handleMetaData
+        - event: ReceiveEther(indexed address,uint256)
+          handler: handleReceiveEther
+        - event: SendEther(uint256,indexed address)
+          handler: handleSendEther
+      file: ./thegraph/mapping/avatar.ts
+  - kind: ethereum/contract
+    name: AssetWalletFactory
+    network: mainnet
+    source:
+      abi: AssetWalletFactory
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - WizardWallet
+        - Wizard
+      abis:
+        - name: AssetWalletFactory
+          file: ./build/contracts/AssetWalletFactory.json
+      eventHandlers:
+        - event: AssetWalletCreated(indexed uint256,indexed address)
+          handler: handleAssetWalletCreated
+      file: ./thegraph/mapping/wizard-wallet.ts
+  - kind: ethereum/contract
+    name: Reputation
+    network: mainnet
+    source:
+      abi: Reputation
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - Reputation
+        - WizardWallet
+        - WizardCowvenReputation
+      abis:
+        - name: Reputation
+          file: ./build/contracts/Reputation.json
+      eventHandlers:
+        - event: Mint(indexed address,uint256)
+          handler: handleMint
+        - event: Burn(indexed address,uint256)
+          handler: handleBurn
+      file: ./thegraph/mapping/reputation.ts
+
+  - kind: ethereum/contract
+    name: ContributionReward
+    network: mainnet
+    source:
+      abi: ContributionReward
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - Reputation
+      abis:
+        - name: ContributionReward
+          file: ./build/contracts/ContributionReward.json
+      eventHandlers:
+        - event: NewContributionProposal(indexed address,indexed bytes32,indexed address,string,int256,uint256[5],address,address)
+          handler: handleNewContributionProposal
+        - event: ProposalExecuted(indexed address,indexed bytes32,int256)
+          handler: handleProposalExecuted
+        - event: RedeemReputation(indexed address,indexed bytes32,indexed address,int256)
+          handler: handleRedeemReputation
+      file: ./thegraph/mapping/contribution-reward.ts
+
+  - kind: ethereum/contract
+    name: QuorumVote
+    network: mainnet
+    source:
+      abi: QuorumVote
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - Reputation
+      abis:
+        - name: QuorumVote
+          file: ./build/contracts/QuorumVote.json
+      eventHandlers:
+        - event: CancelVoting(indexed bytes32,indexed address,indexed address)
+          handler: handleCancelVoting
+        - event: VoteProposal(indexed bytes32,indexed address,indexed address,uint256,uint256)
+          handler: handleVoteProposal
+      file: ./thegraph/mapping/quorum-vote.ts

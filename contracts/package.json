@@ -36,7 +36,13 @@
     "sys:start-dev-container": "tail -f /dev/null",
     "prettier": "prettier --write ./contracts/*.sol",
     "sys:start-api-server": "npm i && nodemon",
-    "sys:start-prod-api-server": "ts-node ./server/api.ts"
+    "sys:start-prod-api-server": "ts-node ./server/api.ts",
+    "graph:create": "graph create kyzia551/coven-universe --node https://api.thegraph.com/deploy/",
+    "graph:create-local": "graph create kyzia551/coven-universe --node http://graph-node:8020",
+    "graph:codegen": "graph codegen --output-dir ./thegraph/generated",
+    "graph:build": "graph build",
+    "graph:deploy": "graph deploy kyzia551/coven-universe --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/",
+    "graph:deploy-local": "graph deploy kyzia551/coven-universe --ipfs http://graph-ipfs:5001 --node http://graph-node:8020"
   },
   "author": "CheezeDAO",
   "contributors": [
@@ -102,6 +108,13 @@
     "xhr2": "0.2.0",
     "ethers": "4.0.38",
     "solc": "0.5.6"
+  },
+  "devDependencies": {
+    "@graphprotocol/graph-cli": "^0.16.0",
+    "@graphprotocol/graph-ts": "^0.16.0",
+    "tslint": "^5.12.1",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-plugin-prettier": "^2.0.1"
   },
   "husky": {
     "hooks": {

@@ -15,7 +15,12 @@
     "emitDecoratorMetadata": true,
 //    "forceConsistentCasingInFileNames": true,
     "typeRoots": ["./node_modules/@types", "./types"],
-    "types": ["node", "truffle-contracts"]
+    "types": ["node", "truffle-contracts"],
+    "plugins": [
+      {
+        "name": "typescript-tslint-plugin"
+      }
+    ]
   },
   "include": ["**/*.ts"],
   "exclude": ["node_modules", "build", "dist"]
