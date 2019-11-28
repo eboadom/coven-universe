@@ -30,7 +30,14 @@ contract AtomicDaoCreator is Ownable {
     address public contributionReward;
 
 
-    event DaoCreated(address indexed avatar, address indexed summoner);
+    event DaoCreated(
+        address indexed avatar,
+        address indexed summoner,
+        address indexed reputation,
+        address daoToken,
+        string daoName,
+        string metaData
+    );
     event NewQuorumPrecReq(uint256 precReq);
     event NewBasicContracts(
         address daoCreator,
@@ -130,7 +137,7 @@ contract AtomicDaoCreator is Ownable {
         emit NewSchemesPermissions(_permissions[0], _permissions[1], _permissions[2], _permissions[3]);
     }
 
-    function internalCreateDao(string calldata _orgName, string calldata _metaData) external returns(address) {
+    function createDao(string calldata _orgName, string calldata _metaData) external returns(address) {
         // The founder will receive the initial reputation and native tokens
         founders.push(msg.sender);
 
@@ -156,7 +163,13 @@ contract AtomicDaoCreator is Ownable {
         delete founders[founders.length-1];
         founders.length--;
 
-        emit DaoCreated(_avatar, msg.sender);
+        emit DaoCreated(
+            _avatar,
+            msg.sender,
+            address(Avatar(_avatar).nativeReputation()),
+            address(Avatar(_avatar).nativeToken()),
+            Avatar(_avatar).orgName(),
+            _metaData);
 
         return _avatar;
     }

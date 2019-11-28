@@ -853,7 +853,7 @@ export interface AtomicDaoCreatorInstance extends Truffle.ContractInstance {
     ): Promise<number>;
   };
 
-  internalCreateDao: {
+  createDao: {
     (
       _orgName: string,
       _metaData: string,
